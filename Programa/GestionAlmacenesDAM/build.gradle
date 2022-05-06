@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+
 }
 
 group 'com.dam'
@@ -24,8 +25,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.dam.gestionalmacenesdam'
-    mainClass = 'com.dam.gestionalmacenesdam.HelloApplication'
+    mainModule = 'com.dam.gestionalmacendam'
+    mainClass = 'com.dam.gestionalmacendam.HelloApplication'
 }
 
 javafx {
@@ -34,16 +35,19 @@ javafx {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.4.0'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.4.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.4.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.4.0'
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.9'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+
 }
 
 test {
