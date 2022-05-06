@@ -1,12 +1,11 @@
-module com.dam.gestionalmacenesdam {
+module com.dam.gestionalmacendam {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
-    requires lombok;
-    requires org.mybatis;
     requires java.sql;
+    requires static lombok;
 
-    opens com.dam to javafx.fxml;
-    exports com.dam;
+    opens com.dam.gestionalmacendam to javafx.fxml;
+    exports com.dam.gestionalmacendam;
 }
