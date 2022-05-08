@@ -43,6 +43,8 @@ dependencies {
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.9'
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    implementation 'com.google.code.gson:gson:2.9.0'
+
 
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'

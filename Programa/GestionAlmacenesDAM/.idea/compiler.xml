@@ -14,4 +14,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="gestionalmacendam.main" options="--add-exports java.xml/com.sun.org.apache.xpath.internal.objects=com.dam.gestionalmacendam" />
+    </option>
+  </component>
 </project>
