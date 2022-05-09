@@ -1,10 +1,10 @@
-package com.dam.gestionalmacendam.repositories.Orders;
+package com.dam.gestionalmacendam.repositories.Recepcions;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
-import com.dam.gestionalmacendam.repositories.CRUDRepository;
+import com.dam.gestionalmacendam.models.Reception;
+import com.dam.gestionalmacendam.repositories.Orders.OrderInterface;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
@@ -13,18 +13,18 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
 
-public class OrderRepository implements OrderInterface {
-    private static OrderRepository instance;
+public class ReceptionRepository implements ReceptionInterface {
+    private static ReceptionRepository instance;
     private final DataBaseManager dataBaseManager;
 
 
-    private OrderRepository(DataBaseManager dataBaseManager) {
+    private ReceptionRepository(DataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
 
-    public static OrderRepository getInstance(){
+    public static ReceptionRepository getInstance(){
         if(instance==null){
-            instance = new OrderRepository (DataBaseManager.getInstance());
+            instance = new ReceptionRepository(DataBaseManager.getInstance());
         }
         return instance;
     }
@@ -32,82 +32,52 @@ public class OrderRepository implements OrderInterface {
     @Override
     public ObservableList findAll() throws SQLException {
         dataBaseManager.open();
-        String query = "select * from Order";
+        String query = "select * from Reception";
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
-        ObservableList listOrder = null;
+        ObservableList listReception = null;
         if (result.next()){
-            StringProperty OIC = new SimpleStringProperty(result.getString("OIC"));
-            StringProperty customerCIC =  new SimpleStringProperty(result.getString("customerCIC "));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("price"));;
-            StringProperty methodPayTemporal = new SimpleStringProperty(result.getString("methodPay"));
+            StringProperty RIC = new SimpleStringProperty(result.getString("RIC"));
+            StringProperty supliersIC =  new SimpleStringProperty(result.getString("Suplier "));
+            StringProperty carrier= new SimpleStringProperty(result.getString("Carrier"));
+            DoubleProperty cost = new SimpleDoubleProperty(result.getDouble("Cost"));
 
-            ObjectProperty<Pay> methodPay = transformMetodetails(methodPayTemporal);
-
-            Order order = new Order(OIC, customerCIC, price, methodPay);
-            listOrder.add(order);
+            Reception reception = new Reception(RIC, supliersIC, carrier, cost);
+            listReception.add(reception);
         }
         dataBaseManager.close();
-        return listOrder;
+        return listReception;
     }
 
-    private ObjectProperty<Pay> transformMetodetails(StringProperty methodPayTemporal) {
-        ObjectProperty<Pay> pay ;
-        if(methodPayTemporal.equals("CARD")){
-            pay =new SimpleObjectProperty(Pay.CARD);
-        }else{
-            pay = new SimpleObjectProperty( Pay.PAYPAL);
-        }
-        return pay;
-    }
 
     @Override
     public Optional save(Object entity) throws SQLException {
-        Order Order = ((Order)entity);
+        Reception reception = ((Reception)entity);
         dataBaseManager.open();
-        String query = "Insert into Order values (?, ?, ?, ?);";
+        String query = "Insert into Reception values (?, ?, ?, ?);";
         Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                Order.getOIC(),
-                Order.getCustomerCIC(),
-                Order.getPrice(),
-                Order.getMethodPay()
+                reception.getRIC(),
+                reception.getSupplierSIC(),
+                reception.getCarrier(),
+                reception.getCost()
         );
         dataBaseManager.close();
         return resultado ;
     }
 
-    @Override
-    public Optional update(Object o, Object entity) throws SQLException {
-        Order order = ((Order)entity);
-        dataBaseManager.open();
-        String query = "Update Order set CustomerCIC = ?, Price = ? , MethodPay = ? where  OIC = ? ;";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                order.getCustomerCIC(),
-                order.getPrice(),
-                order.getMethodPay(),
-                entity);
-        dataBaseManager.close();
 
-        return resultado ;
-    }
 
-    @Override
-    public Optional searchByUuid(Object identifier) throws SQLException {
-        dataBaseManager.open();
-        String query = "select * from Order where OIC = ?;";
-        ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<Order> order = null;
-        if (result.next()){
-            StringProperty uuid = new SimpleStringProperty(result.getString("UUID"));
-            StringProperty customerCIC =  new SimpleStringProperty(result.getString("customer"));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("price"));;
-            StringProperty methodPay =new SimpleStringProperty(result.getString("methodPay"));
+    //@Override
+    // public Optional update(Object o, Object entity) throws SQLException {
+    //    Reception reception= ((Reception)entity);
+    //    dataBaseManager.open();
+    //    String query = "Update Reception set SupplierSIC = ?, Carrier = ? , cost = ? where  RIC = ? ;";
+    //    Optional<ResultSet> resultado = dataBaseManager.insert(query,
+    //            reception.getSupplierSIC(),
+    //            reception.getCarrier(),
+    //            reception.getCost(),
+    //            entity);
+    //    dataBaseManager.close();
 
-            ObjectProperty<Pay> methodPayFinal = transformMetodetails(methodPay);
-
-            order = Optional.of(new Order(uuid, customerCIC, price, methodPayFinal));
-
-        }
-        dataBaseManager.close();
-        return order;
-    }
+    //    return resultado ;
+    //}
 }

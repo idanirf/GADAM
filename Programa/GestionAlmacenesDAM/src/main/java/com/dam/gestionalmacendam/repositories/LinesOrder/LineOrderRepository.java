@@ -1,17 +1,13 @@
-package com.dam.gestionalmacendam.repositories.LinesPay;
+package com.dam.gestionalmacendam.repositories.LinesOrder;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineOrder;
-import com.dam.gestionalmacendam.models.Order;
-import com.dam.gestionalmacendam.models.Pay;
-import com.dam.gestionalmacendam.models.Reception;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
-import java.util.UUID;
 
 public class LineOrderRepository implements LineOrderInterface {
     private static LineOrderRepository instance;
@@ -35,12 +31,12 @@ public class LineOrderRepository implements LineOrderInterface {
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
         ObservableList listLineOrder = null;
         if (result.next()){
-            StringProperty OLIC = new SimpleStringProperty(result.getString("RIC"));
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("suplierSIC"));
+            StringProperty OLIC = new SimpleStringProperty(result.getString("OLIC"));
+            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
-            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("cost"));;
-            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("cost"));;
-            StringProperty belongsOrder = new SimpleStringProperty(result.getString("carrier"));
+            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
+            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
+            StringProperty belongsOrder = new SimpleStringProperty(result.getString("belongsOrder"));
 
             LineOrder lineOrder = new LineOrder(OLIC, articlePIC, load, unitPrice, totalPrice, belongsOrder);
             listLineOrder.add(lineOrder);
@@ -68,25 +64,21 @@ public class LineOrderRepository implements LineOrderInterface {
 
     @Override
     public Optional update(Object o, Object entity) throws SQLException {
-        Order order = ((Order)entity);
+        LineOrder lineOrder = ((LineOrder)entity);
         dataBaseManager.open();
-        String query = "Update LineOrder set CustomerCIC = ?, Price = ? , MethodPay = ? where  OIC = ? ;";
+        String query = "Update LineOrder set articleº = ? , load = ? " +
+                ", unitPrice = ?, totalPrice = ?, belongsOrder = ? where  OLIC = ? ;";
         Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                order.getCustomerCIC(),
-                order.getPrice(),
-                order.getMethodPay().toString(),
-                order.getOIC());
-
+                lineOrder.getOLIC(),
+                lineOrder.getArticle(),
+                lineOrder.getLoad(),
+                lineOrder.getUnitPrice(),
+                lineOrder.getTotalPrice(),
+                lineOrder.getBelongsOrder());
         dataBaseManager.close();
 
         return resultado ;
     }
-    private StringProperty  OLIC = new SimpleStringProperty(UUID.randomUUID().toString());
-    private StringProperty article;
-    private IntegerProperty load;
-    private DoubleProperty unitPrice;
-    private DoubleProperty totalPrice;
-    private StringProperty belongsOrder;
 
 
     @Override
@@ -97,7 +89,7 @@ public class LineOrderRepository implements LineOrderInterface {
         Optional<LineOrder> lineOrder = null;
         if (result.next()){
             StringProperty OLIC = new SimpleStringProperty(result.getString("OLIC"));
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articlePIC"));
+            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
             DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
             DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
@@ -111,14 +103,14 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public Optional searchByUuidPay(Object identifier) throws SQLException {
+    public Optional searchByUuidOrder(Object identifier) throws SQLException {
         dataBaseManager.open();
         String query = "select * from LineOrder where belongOrder = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
         Optional<LineOrder> lineOrder = null;
         if (result.next()){
             StringProperty OLIC = new SimpleStringProperty(result.getString("OLIC"));
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articlePIC"));
+            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
             DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
             DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
