@@ -36,7 +36,7 @@ public class HelloApplication extends Application {
            e.printStackTrace();
        }
         //launch();
-//        checkServer();
+        checkServer();
     }
 
     private static void checkServer() {
