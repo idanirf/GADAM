@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Builder
 public class Customer extends User {
     private final UUID CIC = UUID.randomUUID();
     private String name;

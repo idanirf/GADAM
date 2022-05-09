@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
 public class Article {
     private final UUID PIC = UUID.fromString(UUID.randomUUID().toString());
     private String article;

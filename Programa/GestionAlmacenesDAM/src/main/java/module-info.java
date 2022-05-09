@@ -9,4 +9,6 @@ module com.dam.gestionalmacendam {
 
     opens com.dam.gestionalmacendam to javafx.fxml;
     exports com.dam.gestionalmacendam;
+
 }
+

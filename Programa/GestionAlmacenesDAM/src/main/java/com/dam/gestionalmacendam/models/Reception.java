@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
 public class Reception {
     private final UUID RIC = UUID.randomUUID();
     private Supplier supplier;

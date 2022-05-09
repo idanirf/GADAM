@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
 public class Supplier {
     private String SIC = UUID.randomUUID().toString();
     private StringProperty nameSupplier;

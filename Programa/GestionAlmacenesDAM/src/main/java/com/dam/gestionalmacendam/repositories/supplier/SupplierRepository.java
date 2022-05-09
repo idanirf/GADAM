@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.sun.org.apache.xpath.internal.objects.XObjectFactory.create;
 
 public class SupplierRepository implements ICRUDSupplier {
     private static SupplierRepository instance;
@@ -35,7 +34,7 @@ public class SupplierRepository implements ICRUDSupplier {
         String sql = "SELECT * FROM Supplier";
         bbdd.open();
         ResultSet resultado = bbdd.select(sql).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo" +
-                "los datos"));
+                " los datos"));
         repository.clear();
         while (resultado.next()){
             repository.add(
@@ -49,21 +48,10 @@ public class SupplierRepository implements ICRUDSupplier {
             );
         }
         bbdd.close();
-        if (repository.isEmpty()){
-            initData();
-        }
         return repository;
     }
 
-    private void initData() {
-        if (repository.isEmpty()){
-            create(new Supplier(UUID.randomUUID().toString(), "APPLE", "CL Madrid N14",
-                    "69871236", "factory.spain@apple.com" ));
-            create(new Supplier(UUID.randomUUID().toString(), "SAMSUNG", "CL Leganés N1",
-                    "602147852", "factory.spain@samsung.com" ));
-            create(new Supplier(UUID.randomUUID().toString(), "NIKE", "CL Zapatilla N12",
-                    "602147852", "factory.spain@nike.com" ));
-        }
+    public void initData() {
     }
 
     @Override
@@ -84,14 +72,8 @@ public class SupplierRepository implements ICRUDSupplier {
         return Optional.of(supplier);
     }
 
-    //todo sí queremos recargar datos en memoria de programa
-    public void reload() throws SQLException, IOException, ClassNotFoundException {
-    }
-
     public Supplier findByUUID(UUID SIC)throws SQLException{
         return repository.stream().filter(supplier -> supplier.getSIC().equals(SIC)).findFirst().orElseThrow(
                 ()-> new SQLException("No existe ningún proveedor con ese SIC"));
     }
-
-
 }

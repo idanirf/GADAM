@@ -15,7 +15,7 @@ public class StorageBackupJsonFile implements IStorageBackup {
 
     private final Path currentRelativePath = Paths.get("");
     private final String ruta = currentRelativePath.toAbsolutePath().toString();
-    private final String dir = ruta + File.separator + "data";
+    private final String dir = ruta + File.separator + "BACKUP";
     private final String backupFile = dir + File.separator + "backup.json";
 
 
@@ -61,6 +61,7 @@ public class StorageBackupJsonFile implements IStorageBackup {
         }
         return result;
     }
+
 
     @Override
     public Backup load() {

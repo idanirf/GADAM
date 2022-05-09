@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
 public class LineOrder {
     private final UUID OLIC = UUID.randomUUID();
     private Article article;

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Builder
 public class Employee extends User {
     private final UUID EIC = UUID.randomUUID();
     private String name;

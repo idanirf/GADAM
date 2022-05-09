@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
 public class LineReception {
     private final UUID RLIC = UUID.randomUUID();
     private Article article;
