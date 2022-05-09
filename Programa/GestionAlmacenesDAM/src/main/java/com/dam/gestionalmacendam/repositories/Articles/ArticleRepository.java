@@ -19,7 +19,8 @@ public class ArticleRepository implements ArticleInterface{
         this.dataBaseManager = databaseManager;
     }
 
-    public ArticleRepository getInstance(DataBaseManager dataBaseManager){
+
+    public static ArticleRepository getInstance(DataBaseManager dataBaseManager){
         if(instance ==null){
             instance = new ArticleRepository(dataBaseManager);
         }

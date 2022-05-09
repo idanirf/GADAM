@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
+
 public class Supplier {
     private final UUID SIC = UUID.randomUUID();
     private String nameSupplier;

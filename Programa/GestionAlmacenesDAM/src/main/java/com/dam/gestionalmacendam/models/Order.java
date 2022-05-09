@@ -11,7 +11,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
+
 @AllArgsConstructor
 public class Order {
     private StringProperty OIC = new SimpleStringProperty(UUID.randomUUID().toString()) ;

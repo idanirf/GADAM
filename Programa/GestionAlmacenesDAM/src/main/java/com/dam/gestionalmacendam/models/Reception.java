@@ -10,7 +10,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
+
 @AllArgsConstructor
 public class Reception {
     private StringProperty  RIC = new SimpleStringProperty(UUID.randomUUID().toString());

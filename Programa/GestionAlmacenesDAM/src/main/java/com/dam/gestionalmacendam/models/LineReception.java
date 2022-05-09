@@ -11,7 +11,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Builder
+
 @AllArgsConstructor
 public class LineReception {
     private StringProperty  RLIC = new SimpleStringProperty(UUID.randomUUID().toString());
