@@ -1,16 +1,24 @@
 package com.dam.gestionalmacendam.models;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
+
+@AllArgsConstructor
 public class LineOrder {
-    private final UUID OLIC = UUID.randomUUID();
-    private Article article;
-    private int load;
-    private Double unitPrice;
-    private Double totalPrice;
+    private StringProperty OLIC = new SimpleStringProperty(UUID.randomUUID().toString());
+    private StringProperty article;
+    private IntegerProperty load;
+    private DoubleProperty unitPrice;
+    private DoubleProperty totalPrice;
+    private StringProperty belongsOrder;
 
     @Override
     public String toString() {
@@ -20,6 +28,7 @@ public class LineOrder {
                 ", load=" + load +
                 ", unitPrice=" + unitPrice +
                 ", totalPrice=" + totalPrice +
+                ", belongsOrder=" + belongsOrder +
                 '}';
     }
 }
