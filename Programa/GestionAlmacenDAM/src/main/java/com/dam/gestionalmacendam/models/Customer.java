@@ -30,10 +30,11 @@ public class Customer extends User {
         this.email=new SimpleStringProperty(email);
         this.photo=new SimpleStringProperty(photo);
         this.createdAt=new SimpleObjectProperty<LocalDateTime>(createdAt);
-
-
     }
 
+    public String getCIC() {
+        return CIC;
+    }
     public String getName() {
         return name.get();
     }
