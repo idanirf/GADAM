@@ -3,6 +3,7 @@ package com.dam.gestionalmacendam.repositories.Articles;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Article;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
@@ -26,11 +27,11 @@ public class ArticleRepository implements ArticleInterface{
     }
 
     @Override
-    public Optional searchByName(Object name) throws SQLException {
+    public Optional<Article> searchByName(Object name) throws SQLException {
         dataBaseManager.open();
         String query = "select * from Article where article = ?";
         ResultSet result = dataBaseManager.select(query, name).orElseThrow(SQLException::new);
-        Optional<Article> article = null;
+        Optional<Article> article;
         if (result.next()){
             StringProperty PIC = new SimpleStringProperty(result.getString("PIC"));
             StringProperty articleName =  new SimpleStringProperty(result.getString("article"));
@@ -42,6 +43,8 @@ public class ArticleRepository implements ArticleInterface{
 
             article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
 
+        }else{
+            article = null;
         }
         dataBaseManager.close();
         return article;
@@ -70,9 +73,9 @@ public class ArticleRepository implements ArticleInterface{
     }
 
     @Override
-    public ObservableList findAll() throws SQLException {
+    public ObservableList<Article> findAll() throws SQLException {
         dataBaseManager.open();
-        ObservableList articles = null;
+        ObservableList articles = FXCollections.observableArrayList();
         String querry = "Select * from Article";
         ResultSet result = dataBaseManager.select(querry).orElseThrow(SQLException::new);
         while(result.next()){
