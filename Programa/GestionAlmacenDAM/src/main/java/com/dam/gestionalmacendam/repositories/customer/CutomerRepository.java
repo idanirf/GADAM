@@ -71,7 +71,6 @@ public class CutomerRepository implements ICustomerRepository{
         return Optional.of(customer);
     }
 
-
     @Override
     public Customer findByUUID(UUID uuid) throws SQLException {
         return repository.stream().filter(customer -> customer.getCIC().equals(uuid)).findFirst().orElseThrow(()-> new SQLException("No existe el cliente con el UUID: "+ uuid));

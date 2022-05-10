@@ -19,11 +19,11 @@ public class SupplierRepository implements ICRUDSupplier {
         //Constructor vacío
     }
 
-    public static SupplierRepository getInstance(DataBaseManager instance) {
-        if (SupplierRepository.instance == null) {
-            SupplierRepository.instance = new SupplierRepository();
+    public static SupplierRepository getInstance() {
+        if (instance == null) {
+            instance = new SupplierRepository();
         }
-        return SupplierRepository.instance;
+        return instance;
     }
 
     @Override
@@ -50,8 +50,9 @@ public class SupplierRepository implements ICRUDSupplier {
 
     @Override
     public Optional<Supplier> save(Supplier supplier) throws SQLException {
-        String sql = "INSERT INTO Supplier (nameSupplier, direction, telephoneNumber, email)";
+        String sql = "INSERT INTO Supplier (SIC, nameSupplier, direction, telephoneNumber, email) VALUES (?, ?, ?, ?, ?)";
         bbdd.open();
+        System.out.println("bbdd abierta");
         bbdd.insert(sql, supplier.getSIC(), supplier.getNameSupplier(), supplier.getDirection(), supplier.getTelephoneNumber(), supplier.getEmail());
         bbdd.close();
         return Optional.of(supplier);

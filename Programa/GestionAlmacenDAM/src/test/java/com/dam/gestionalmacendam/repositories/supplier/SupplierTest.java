@@ -2,35 +2,35 @@ package com.dam.gestionalmacendam.repositories.supplier;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Supplier;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SupplierTest {
-    SupplierRepository supplierRepository = SupplierRepository.getInstance(DataBaseManager.getInstance());
+    DataBaseManager bbdd = DataBaseManager.getInstance();
+    SupplierRepository supplierRepository = SupplierRepository.getInstance();
+    Supplier supplierTest = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,","Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
 
-    Supplier supplierTest = new Supplier("MADER", "Calle Madera Nº23 Valencia", "632000888", "mader.spain@mader.com");
+    @BeforeAll
+    void setUp() throws Exception {
+        supplierRepository.save(supplierTest);
+    }
 
     @Test
     void findAll() throws SQLException {
         var list1 = supplierRepository.findAll();
-        supplierRepository.save(supplierTest);
-        var list2 = supplierRepository.findAll();
-
         assertAll(
-                () -> assertEquals(list1.size(), 0),
-                () -> assertEquals(list2.size(), 1),
-                () -> assertEquals(list2.get(0).getSIC(), supplierTest.getSIC()),
-                () -> assertEquals(list2.get(0).getNameSupplier(), supplierTest.getNameSupplier()),
-                () -> assertEquals(list2.get(0).getDirection(), supplierTest.getDirection()),
-                () -> assertEquals(list2.get(0).getTelephoneNumber(), supplierTest.getTelephoneNumber()),
-                () -> assertEquals(list2.get(0).getEmail(), supplierTest.getEmail())
+                () -> assertEquals(list1.size(), 2),
+                () -> assertTrue(list1.contains(list1)),
+                () -> assertEquals(list1.get(1).getNameSupplier(), supplierTest.getNameSupplier())
         );
     }
 

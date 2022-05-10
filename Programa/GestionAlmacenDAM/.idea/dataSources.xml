@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="BaseGADAM.db" uuid="b1f61a1c-b6bc-4f2a-a43f-a7a3043ad504">
+    <data-source source="LOCAL" name="BaseGADAM.db" uuid="2728ae55-7864-4a9d-8e42-ac7371462f46">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

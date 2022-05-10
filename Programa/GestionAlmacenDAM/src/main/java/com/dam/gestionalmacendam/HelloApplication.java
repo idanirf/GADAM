@@ -2,7 +2,9 @@ package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Customer;
+import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.customer.CutomerRepository;
+import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,6 +37,14 @@ public class HelloApplication extends Application {
        }catch(SQLException e){
            e.printStackTrace();
        }
+
+        SupplierRepository supplierRepository = SupplierRepository.getInstance();
+        Supplier supplier = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,","Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
+        try{
+            supplierRepository.save(supplier);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         //launch();
         checkServer();
     }
