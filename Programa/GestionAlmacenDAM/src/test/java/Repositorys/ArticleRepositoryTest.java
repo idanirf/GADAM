@@ -22,13 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArticleRepositoryTest {
       ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-      Article a = new Article(
-            new SimpleStringProperty("Armario"),
-            new SimpleStringProperty("grande"),
-            new SimpleStringProperty("sala a"),
-            new SimpleDoubleProperty(35.50D),
-            new SimpleIntegerProperty(5),
-            new SimpleBooleanProperty(false));
+      Article a = new Article("Prueva1","grande","sala a",35.50D,5,false);
 
     @BeforeAll
      void initDataTest(){
@@ -60,13 +54,12 @@ public class ArticleRepositoryTest {
      * @Test buscar un Article del repositorio por el nombre del articulo repositorio
      */
     @Test
-    void searchByNameTest() throws SQLException {
+    void findByNameTest() throws SQLException {
         //todo hacer
-        Optional<Article> res = repository.shearchByUuid(a.getPIC());
-        Optional<Article> res2 = repository.searchByName(a.getArticle());
+        Optional<Article> res = repository.findByName(a.getArticle().toString());
         assertAll(
-                () -> assertTrue(res.isPresent()),
-                () -> assertEquals(res,res2)
+                () -> assertNotNull(res.get()),
+                () -> assertTrue(res.get().getPIC().toString().equalsIgnoreCase( a.getPIC().toString()))
         );
     }
 
@@ -78,14 +71,13 @@ public class ArticleRepositoryTest {
     void searchByUuidTest() throws SQLException {
         //todo hacer no funciona
 
-        Optional<Article> res = (Optional<Article>) repository.shearchByUuid(a.getPIC());
-        Optional<Article> res2 = (Optional<Article>) repository.shearchByUuid(a.getPIC());
+        Optional<Article> res = (Optional<Article>) repository.findByUuid(a.getPIC().toString());
+        Optional<Article> res2 = (Optional<Article>) repository.findByUuid(a.getPIC().toString());
         assertAll(
 
                 () -> assertTrue(res.isPresent()),
-                () -> assertEquals(res,res2),
-                () -> assertEquals(res,res2),
-                () -> assertTrue((BooleanSupplier) res.get().getPIC().isEqualTo( res2.get().getPIC()))
+                () -> assertTrue(res.get().getArticle().toString().equalsIgnoreCase(res2.get().getArticle().toString())),
+                () -> assertTrue( res.get().getPIC().toString().equalsIgnoreCase( res2.get().getPIC().toString()))
                 );
 
     }
@@ -98,18 +90,12 @@ public class ArticleRepositoryTest {
     void saveTest() throws SQLException {
         //todo SI funciona
 
-        Article b = new Article(
-                new SimpleStringProperty("Armario"),
-                new SimpleStringProperty("grande"),
-                new SimpleStringProperty("sala a"),
-                new SimpleDoubleProperty(35.50D),
-                new SimpleIntegerProperty(5),
-                new SimpleBooleanProperty(false));
+        Article b = new Article("Prueva2","grande","sala a",35.50D,5,false);
 
             repository.save(b);
 
         assertAll(
-                () -> assertTrue(repository.shearchByUuid(b.getPIC()).isPresent())
+                () -> assertTrue(repository.findByUuid(b.getPIC().toString()).isPresent())
         );
     }
 
@@ -118,13 +104,11 @@ public class ArticleRepositoryTest {
      */
     @Test
     void updateTest() throws SQLException {
-        //todo SI funciona
-
 
         a.setArticle(new SimpleStringProperty("mesita"));
-        repository.update(a.getPIC(), a);
+        repository.update(a.getPIC().toString(), a);
         assertAll(
-                () -> assertTrue(repository.shearchByUuid(a.getPIC()).isPresent())
+                () -> assertTrue(repository.findByUuid(a.getPIC().toString()).isPresent())
 
         );
     }

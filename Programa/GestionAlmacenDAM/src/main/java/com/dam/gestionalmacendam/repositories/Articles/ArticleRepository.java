@@ -27,41 +27,41 @@ public class ArticleRepository implements ArticleInterface{
     }
 
     @Override
-    public Optional<Article> searchByName(Object name) throws SQLException {
+    public Optional<Article> findByName(String name) throws SQLException {
         dataBaseManager.open();
-        String query = "select * from Article where article = ?";
+        String query = "select * from Article where article = ? ";
         ResultSet result = dataBaseManager.select(query, name).orElseThrow(SQLException::new);
-        Optional<Article> article = null;
+        Article article = null;
         if (result.next()){
-            StringProperty PIC = new SimpleStringProperty(result.getString("PIC"));
-            StringProperty articleName =  new SimpleStringProperty(result.getString("article"));
-            StringProperty description = new SimpleStringProperty(result.getString("description"));
-            StringProperty location = new SimpleStringProperty(result.getString("location"));
-            IntegerProperty stock = new SimpleIntegerProperty(result.getInt("stock"));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("price"));;
-            BooleanProperty isActive = new SimpleBooleanProperty(result.getBoolean("isActive"));
-
-            article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
+            article = new Article(
+                    result.getString("PIC"),
+                    result.getString("article"),
+                    result.getString("description"),
+                    result.getString("location"),
+                    result.getDouble("price"),
+                    result.getInt("stock"),
+                    result.getBoolean("isActive"));
 
         }
         dataBaseManager.close();
-        return article;
+        return Optional.of(article);
     }
 
+
     @Override
-    public Optional shearchByUuid(Object identifier) throws SQLException {
+    public Optional<Article> findByUuid(String identifier) throws SQLException {
         dataBaseManager.open();
-        String query = "select * from Article where PIC = ?";
+        String query = "select * from Article where PIC = ? ";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<Article> article = null;
+        Optional<Article> article = Optional.empty();
         if (result.next()){
-            StringProperty PIC = new SimpleStringProperty(result.getString("PIC"));
-            StringProperty articleName =  new SimpleStringProperty(result.getString("article"));
-            StringProperty description = new SimpleStringProperty(result.getString("description"));
-            StringProperty location = new SimpleStringProperty(result.getString("location"));
-            IntegerProperty stock = new SimpleIntegerProperty(result.getInt("stock"));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("price"));;
-            BooleanProperty isActive = new SimpleBooleanProperty(result.getBoolean("isActive"));
+            String PIC = result.getString("PIC");
+            String articleName =  result.getString("article");
+            String description = result.getString("description");
+            String location = result.getString("location");
+            int stock = result.getInt("stock");
+            Double price = result.getDouble("price");;
+            Boolean isActive = result.getBoolean("isActive");
 
             article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
 
@@ -77,13 +77,13 @@ public class ArticleRepository implements ArticleInterface{
         String querry = "Select * from Article";
         ResultSet result = dataBaseManager.select(querry).orElseThrow(SQLException::new);
         while(result.next()){
-            StringProperty PIC = new SimpleStringProperty(result.getString("PIC"));
-            StringProperty articleName =  new SimpleStringProperty(result.getString("article"));
-            StringProperty description = new SimpleStringProperty(result.getString("description"));
-            StringProperty location = new SimpleStringProperty(result.getString("location"));
-            IntegerProperty stock = new SimpleIntegerProperty(result.getInt("stock"));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("price"));;
-            BooleanProperty isActive = new SimpleBooleanProperty(result.getBoolean("isActive"));
+            String PIC = result.getString("PIC");
+            String articleName =  result.getString("article");
+            String description = result.getString("description");
+            String location = result.getString("location");
+            int stock = result.getInt("stock");
+            Double price = result.getDouble("price");;
+            Boolean isActive = result.getBoolean("isActive");
 
             Optional<Article> article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
 
@@ -94,31 +94,36 @@ public class ArticleRepository implements ArticleInterface{
     }
 
     @Override
-    public Optional save(Object entity) throws SQLException {
+    public Optional save(Article entity) throws SQLException {
         dataBaseManager.open();
         Article a = ((Article)entity) ;
         String query = " insert into Article (PIC, article, description, location, stock, price, isActive) " +
                 "values(?, ?, ?, ?, ?, ?, ?) ;";
-        ResultSet result = dataBaseManager.insert(query, a.getPIC(), a.getArticle(), a.getDescription(),
-                a.getLocation(), a.getStock(), a.getPrice(), a.getIsActive()).orElseThrow(SQLException::new);
+        ResultSet result = dataBaseManager.insert(query, a.getPIC().toString(), a.getArticle().toString(), a.getDescription().toString(),
+                a.getLocation().toString(), a.getStock().intValue(), a.getPrice().doubleValue(),
+                a.getIsActive().toString()).orElseThrow(SQLException::new);
         dataBaseManager.close();
-
+        // todo no se si fallará el string del boolean
         return Optional.of(result);
     }
+
+
 
     @Override
-    public Optional update(Object o, Object entity) throws SQLException {
+    public Optional <Article>update( String entity, Article o) throws SQLException {
         //todo modificar todo
         dataBaseManager.open();
-        Article a = ((Article)entity) ;
+
         String query = " update Article set article = ?, description= ?, location=?, stock=?, price=?," +
                 " isActive = ? where PIC = ? ;";
-        int result = dataBaseManager.update(query, a.getArticle(), a.getDescription(),
-                a.getLocation(), a.getStock(), a.getPrice(), a.getIsActive(), a.getPIC());
+        int result = dataBaseManager.update(query, o.getArticle().toString(), o.getDescription().toString(),
+                o.getLocation().toString(), o.getStock().intValue(), o.getPrice().doubleValue(), o.getIsActive().toString()
+                , entity);
         dataBaseManager.close();
 
-        return Optional.of(result);
+        return Optional.of(o);
     }
+
 
 
 }

@@ -82,7 +82,7 @@ public class LineOrderRepository implements LineOrderInterface {
 
 
     @Override
-    public Optional shearchByUuid(Object identifier) throws SQLException {
+    public Optional findByUuid(Object identifier) throws SQLException {
         dataBaseManager.open();
         String query = "select * from LineOrder where OLIC = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);

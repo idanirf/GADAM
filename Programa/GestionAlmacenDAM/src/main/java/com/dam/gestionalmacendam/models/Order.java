@@ -1,35 +1,43 @@
 package com.dam.gestionalmacendam.models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.UUID;
 
-@Data
+
 
 @AllArgsConstructor
+@Data
 public class Order {
-    private StringProperty OIC = new SimpleStringProperty(UUID.randomUUID().toString()) ;
-    private StringProperty customerCIC;
+    private String OIC = UUID.randomUUID().toString();
+    private ObjectProperty<Object> customer;
     private DoubleProperty price;
-    private ObjectProperty<Pay> methodPay;
+    private ObjectProperty methodPay;
 
+    public Order() {
+    }
 
-    public Order(StringProperty customerCIC, DoubleProperty price, ObjectProperty<Pay> methodPay) {
-        this.customerCIC = customerCIC;
-        this.price = price;
-        this.methodPay = methodPay;
+    public Order(Object customer, double price, Object methodPay) {
+        this.OIC = OIC;
+        this.customer = new SimpleObjectProperty(customer);
+        this.price = new SimpleDoubleProperty(price);
+        this.methodPay = new SimpleObjectProperty(methodPay);
+    }
+
+    public Order(String OIC, Object customer, double price, Object methodPay) {
+        this.OIC = OIC;
+        this.customer = new SimpleObjectProperty(customer);
+        this.price = new SimpleDoubleProperty(price);
+        this.methodPay = new SimpleObjectProperty(methodPay);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "OIC=" + OIC +
-                ", customer=" + customerCIC +
+                ", customer=" + customer +
                 ", price=" + price +
                 ", methodPay=" + methodPay +
                 '}';

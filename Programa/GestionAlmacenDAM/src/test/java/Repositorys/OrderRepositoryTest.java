@@ -21,9 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderRepositoryTest {
 
         OrderRepository repository= OrderRepository.getInstance(DataBaseManager.getInstance());
-        Order o = new Order(new SimpleStringProperty("pagador"),
-                new SimpleDoubleProperty(34.54D),
-                new SimpleObjectProperty(Pay.PAYPAL));
+        Order o = new Order("pagador", 34.54D, Pay.PAYPAL);
 
         @BeforeAll
         void initDataTest(){
@@ -59,14 +57,13 @@ public class OrderRepositoryTest {
         void searchByUuidTest() throws SQLException {
             //todo hacer no funciona
 
-            Optional<Order> res = (Optional<Order>) repository.shearchByUuid(o.getOIC());
-            Optional<Order> res2 = (Optional<Order>) repository.shearchByUuid(o.getOIC());
+            Order res =repository.findByUUID(o.getOIC());
+            Order res2 = repository.findByUUID(o.getOIC());
             assertAll(
 
-                    () -> assertTrue(res.isPresent()),
-                    () -> assertEquals(res,res2),
-                    () -> assertEquals(res,res2),
-                    () -> assertTrue((BooleanSupplier) res.get().getOIC().isEqualTo( res2.get().getOIC()))
+                    () -> assertNotNull(res),
+                    () -> assertTrue(res.getMethodPay().toString().equalsIgnoreCase(res2.getMethodPay().toString())),
+                    () -> assertTrue(res.getOIC().toString().equalsIgnoreCase(res2.getOIC().toString()))
             );
 
         }
@@ -79,13 +76,11 @@ public class OrderRepositoryTest {
         void saveTest() throws SQLException {
             //todo SI funciona
 
-            Order b = new Order( new SimpleStringProperty("pagadorPrueva 2"),
-                    new SimpleDoubleProperty(50.0D),
-                    new SimpleObjectProperty(Pay.PAYPAL));
+            Order b = new Order(   "pagadorPrueva 2",50.0D,Pay.PAYPAL);
 
             repository.save(b);
             assertAll(
-                    () -> assertTrue(repository.shearchByUuid(b.getOIC()).isPresent())
+                    () -> assertNotNull(repository.findByUUID(b.getOIC()))
             );
         }
 
@@ -94,13 +89,13 @@ public class OrderRepositoryTest {
          */
         @Test
         void updateTest() throws SQLException {
-            //todo SI funciona
+
 
 
             o.setMethodPay(new SimpleObjectProperty<Pay>(Pay.CARD));
             repository.update(o.getOIC(), o);
             assertAll(
-                    () -> assertTrue(repository.shearchByUuid(o.getOIC()).isPresent())
+                    () -> assertNotNull(repository.findByUUID(o.getOIC()))
 
             );
         }

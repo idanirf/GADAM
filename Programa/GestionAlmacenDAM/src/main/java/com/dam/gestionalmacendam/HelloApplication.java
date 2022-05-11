@@ -1,9 +1,11 @@
 package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.models.Article;
 import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
+import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.customer.CutomerRepository;
 import javafx.application.Application;
@@ -41,61 +43,87 @@ public class HelloApplication extends Application {
            e.printStackTrace();
        }
         //launch();
-       //checkServer();
+       checkServer();
        probarrepositorioAza();
     }
 
     private static void probarrepositorioAza() {
         probarOrder();
+        probarArticle();
 
 
 
+    }
+
+    private static void probarArticle() {
+        System.out.println("Probamos el repositorio de aza");
+        ArticleRepository o = ArticleRepository.getInstance(DataBaseManager.getInstance());
+        System.out.println("creando Article");
+        Article o1 = new Article("Article 1","descripcion1", "arriva", 8D,8, true);
+
+
+        try{
+            System.out.println("salvando Article");
+            Optional<Article> o2 = o.save(o1);
+            System.out.println(o2);
+
+            System.out.println("encontrando una por name");
+            Optional<Article> o4 = o.findByName(o2.get().getArticle().toString());
+            System.out.println(o4);
+
+            System.out.println("encontrando una por uuid");
+            Optional<Article> o3 = o.findByUuid(o2.get().getPIC().toString());
+            System.out.println(o3);
+
+
+
+            System.out.println("encontrando todas Article");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
+
+
+
+
+
+
+            System.out.println("todas las pruevas realizadas");
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("no se ha podido hacer algo");
+        }
     }
 
     private static void probarOrder() {
         System.out.println("Probamos el repositorio de aza");
         OrderRepository o = OrderRepository.getInstance(DataBaseManager.getInstance());
         System.out.println("creando order");
-        Optional<Order> o1 = Optional.of(new Order(new SimpleStringProperty("customer1"),
-                new SimpleDoubleProperty(50.40D)
-                ,new SimpleObjectProperty<Pay>( Pay.PAYPAL)));
-        System.out.println(o1);
+        Order o1 = new Order("customer1", 50.40D, Pay.PAYPAL);
 
-        System.out.println("salvando order");
+
         try{
-            o.save(o1.get());
-            System.out.println("salbado");
+            System.out.println("salvando order");
+            Optional<Order> o2 = o.save(o1);
+            System.out.println(o2);
+
+            System.out.println("encontrando todas order");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
+
+            System.out.println("encontrando una por uuid");
+            Order o3 = o.findByUUID(o2.get().getOIC());
+            System.out.println(o3);
+
+
+
+
+            System.out.println("todas las pruevas realizadas");
         }catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("no salbado");
+            System.out.println("no se ha podido hacer algo");
         }
 
-        System.out.println("find all order");
-        try{
-            ObservableList<Order> listao = o.findAll();
-            System.out.println("encontrados");
-        }catch (SQLException e) {
-            System.out.println("no encontrados");
-        }
-        o1.get().setMethodPay(new SimpleObjectProperty<Pay>(Pay.CARD));
 
-        System.out.println("update order");
-        try{
-            o.update(o1,o1.get().getOIC());
-            System.out.println("update realizado order");
-            System.out.println(o1);
-        }catch (SQLException e) {
-            System.out.println("no update realizado");
-        }
 
-        System.out.println("find by uuid");
-        try{
-            Optional<Order> o2 = o.shearchByUuid(o1.get().getOIC());
-            System.out.println("find realizado order");
-            System.out.println(o2);
-        }catch (SQLException e) {
-            System.out.println("no find realizado");
-        }
 
 
 
@@ -110,7 +138,7 @@ public class HelloApplication extends Application {
             if (rs.get().next()) {
                 controller.close();
                 System.out.println("Conexión con la Base de Datos realizada con éxito");
-                System.exit(1);
+               // System.exit(1);
             }
         } catch (SQLException e) {
             System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());

@@ -14,26 +14,27 @@ public class Article {
     private IntegerProperty stock;
     private BooleanProperty isActive;
 
-    public Article(StringProperty article, StringProperty description, StringProperty location,
-                   DoubleProperty price, IntegerProperty stock, BooleanProperty isActive) {
+    public Article(String article, String description, String location,
+                   Double price, Integer  stock, Boolean  isActive) {
         this.PIC = new SimpleStringProperty(UUID.randomUUID().toString());
-        this.article = article;
-        this.description = description;
-        this.location = location;
-        this.price = price;
-        this.stock = stock;
-        this.isActive = isActive;
+        this.article =new SimpleStringProperty(article);
+        this.description = new SimpleStringProperty(description);
+        this.location = new SimpleStringProperty(location);
+        this.price = new SimpleDoubleProperty(price) ;
+        this.stock = new SimpleIntegerProperty(stock);
+        this.isActive = new SimpleBooleanProperty(isActive);;
     }
-    public Article(StringProperty PIC , StringProperty article, StringProperty description, StringProperty location,
-                   DoubleProperty price, IntegerProperty stock, BooleanProperty isActive) {
-        this.PIC = PIC;
-        this.article = article;
-        this.description = description;
-        this.location = location;
-        this.price = price;
-        this.stock = stock;
-        this.isActive = isActive;
+    public Article(String PIC ,String article, String description, String location,
+                   Double price, Integer  stock, Boolean  isActive) {
+        this.PIC = new SimpleStringProperty(PIC);
+        this.article =new SimpleStringProperty(article);
+        this.description = new SimpleStringProperty(description);
+        this.location = new SimpleStringProperty(location);
+        this.price = new SimpleDoubleProperty(price) ;
+        this.stock = new SimpleIntegerProperty(stock);
+        this.isActive = new SimpleBooleanProperty(isActive);;
     }
+
     @Override
     public String toString() {
         return "Products{" +

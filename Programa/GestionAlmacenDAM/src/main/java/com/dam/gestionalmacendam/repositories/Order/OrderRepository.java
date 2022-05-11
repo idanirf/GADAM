@@ -4,107 +4,93 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class OrderRepository implements OrderInterface {
-    private static OrderRepository instance;
-    private final DataBaseManager dataBaseManager;
 
 
-    private OrderRepository(DataBaseManager dataBaseManager) {
-        this.dataBaseManager = dataBaseManager;
-    }
+    public class OrderRepository implements ICRUDOrder {
+        private static OrderRepository instance;
+        private final ObservableList<Order> repository = FXCollections.observableArrayList();
+        DataBaseManager bbdd = DataBaseManager.getInstance();
 
-    public static OrderRepository getInstance(DataBaseManager instance){
-        if(OrderRepository.instance ==null){
-            OrderRepository.instance = new OrderRepository (DataBaseManager.getInstance());
+
+        public static OrderRepository getInstance(DataBaseManager instance) {
+            if (OrderRepository.instance == null) {
+                OrderRepository.instance = new OrderRepository();
+            }
+            return OrderRepository.instance;
         }
-        return OrderRepository.instance;
-    }
-
-    @Override
-    public ObservableList findAll() throws SQLException {
-        dataBaseManager.open();
-        String query = "select * from Order";
-        ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
-        ObservableList listOrder = null;
-        if (result.next()){
-            StringProperty OIC = new SimpleStringProperty(result.getString("OIC"));
-            StringProperty customerCIC =  new SimpleStringProperty(result.getString("Customer "));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("Price"));;
-            StringProperty methodPayTemporal = new SimpleStringProperty(result.getString("Pay"));
-
-            ObjectProperty<Pay> methodPay = transformMetodetails(methodPayTemporal);
-
-            Order order = new Order(OIC, customerCIC, price, methodPay);
-            listOrder.add(order);
+        @Override
+        public ObservableList<Order> findAll() throws SQLException {
+            String sql = "SELECT * FROM \"Order\"";
+            bbdd.open();
+            ResultSet resultado = bbdd.select(sql).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo los datos"));
+            repository.clear();
+            while(resultado.next()){
+                repository.add(
+                        new Order(
+                                resultado.getString("OIC"),
+                                resultado.getObject("Customer"),
+                                resultado.getDouble("price"),
+                                resultado.getObject("Pay")
+                        )
+                );
+            }
+            bbdd.close();
+            return  repository;
         }
-        dataBaseManager.close();
-        return listOrder;
-    }
 
-    private ObjectProperty<Pay> transformMetodetails(StringProperty methodPayTemporal) {
-        ObjectProperty<Pay> pay ;
-        if(methodPayTemporal.equals("CARD")){
-            pay =new SimpleObjectProperty(Pay.CARD);
-        }else{
-            pay = new SimpleObjectProperty( Pay.PAYPAL);
+        @Override
+        public Optional<Order> save(Order order) throws SQLException {
+            String sql = "INSERT INTO \"Order\" (OIC, Customer, Price, Pay) values (?, ?, ?, ?);";
+            bbdd.open();
+            System.out.println("BBDD abierta");
+
+            bbdd.insert(sql, order.getOIC(), order.getCustomer().toString(),
+                order.getPrice().doubleValue(), order.getMethodPay().toString());
+
+
+            bbdd.close();
+            return Optional.of(order);
         }
-        return pay;
-    }
 
-    @Override
-    public Optional save(Object entity) throws SQLException {
-        Order order = ((Order)entity);
-        dataBaseManager.open();
-        String query = "Insert into Order values (?, ?, ?,?)";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                order.getOIC(),
-                order.getCustomerCIC(),
-                order.getPrice(),
-                order.getMethodPay()
-        );
-        dataBaseManager.close();
-        return resultado ;
-    }
-
-    @Override
-    public Optional update(Object o, Object entity) throws SQLException {
-        Order order = ((Order)entity);
-        dataBaseManager.open();
-        String query = "Update Order set Customer = ?, Price = ? , Pay = ? where  OIC = ? ;";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                order.getCustomerCIC(),
-                order.getPrice(),
-                order.getMethodPay(),
-                entity);
-        dataBaseManager.close();
-
-        return resultado ;
-    }
-
-    @Override
-    public Optional shearchByUuid(Object identifier) throws SQLException {
-        dataBaseManager.open();
-        String query = "select * from Order where OIC = ?;";
-        ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<Order> order = null;
-        if (result.next()){
-            StringProperty uuid = new SimpleStringProperty(result.getString("OIC"));
-            StringProperty customerCIC =  new SimpleStringProperty(result.getString("Customer"));
-            DoubleProperty price = new SimpleDoubleProperty(result.getDouble("Price"));;
-            StringProperty methodPay =new SimpleStringProperty(result.getString("Pay"));
-
-            ObjectProperty<Pay> methodPayFinal = transformMetodetails(methodPay);
-
-            order = Optional.of(new Order(uuid, customerCIC, price, methodPayFinal));
-
+        @Override
+        public Optional<Order> update(String uuid, Order order) throws SQLException {
+            int i = repository.indexOf(order);
+            String sql = "UPDATE \"Order\" SET OIC = ?, Customer = ?, Price = ?, Pay = ? WHERE OIC = ?";
+            bbdd.open();
+            bbdd.update(sql, order.getCustomer(), order.getPrice(), order.getMethodPay(),uuid);
+            return Optional.of(order);
         }
-        dataBaseManager.close();
-        return order;
+
+        private ObjectProperty<Pay> transformMetodetails(StringProperty methodPayTemporal) {
+            ObjectProperty<Pay> pay ;
+            if(methodPayTemporal.equals("CARD")){
+                pay =new SimpleObjectProperty(Pay.CARD);
+            }else{
+                pay = new SimpleObjectProperty( Pay.PAYPAL);
+            }
+            return pay;
+        }
+
+        public Order findByUUID(String OIC) throws SQLException {
+            String sql = "SELECT * FROM \"Order\" where OIC = ?";
+            bbdd.open();
+            ResultSet resultado = bbdd.select(sql, OIC).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo los datos"));
+            Order o = null;
+            if(resultado.next()){
+
+                o= new Order(resultado.getString("OIC"),
+                                resultado.getObject("Customer"),
+                                resultado.getDouble("price"),
+                                resultado.getObject("Pay"));
+            }
+            bbdd.close();
+            return o ;
+        }
     }
-}
