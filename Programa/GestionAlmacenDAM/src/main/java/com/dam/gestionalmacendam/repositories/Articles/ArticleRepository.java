@@ -31,7 +31,7 @@ public class ArticleRepository implements ArticleInterface{
         dataBaseManager.open();
         String query = "select * from Article where article = ?";
         ResultSet result = dataBaseManager.select(query, name).orElseThrow(SQLException::new);
-        Optional<Article> article;
+        Optional<Article> article = null;
         if (result.next()){
             StringProperty PIC = new SimpleStringProperty(result.getString("PIC"));
             StringProperty articleName =  new SimpleStringProperty(result.getString("article"));
@@ -43,8 +43,6 @@ public class ArticleRepository implements ArticleInterface{
 
             article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
 
-        }else{
-            article = null;
         }
         dataBaseManager.close();
         return article;

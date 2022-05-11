@@ -19,11 +19,11 @@ public class OrderRepository implements OrderInterface {
         this.dataBaseManager = dataBaseManager;
     }
 
-    public static OrderRepository getInstance(){
-        if(instance==null){
-            instance = new OrderRepository (DataBaseManager.getInstance());
+    public static OrderRepository getInstance(DataBaseManager instance){
+        if(OrderRepository.instance ==null){
+            OrderRepository.instance = new OrderRepository (DataBaseManager.getInstance());
         }
-        return instance;
+        return OrderRepository.instance;
     }
 
     @Override
@@ -59,14 +59,14 @@ public class OrderRepository implements OrderInterface {
 
     @Override
     public Optional save(Object entity) throws SQLException {
-        Order Order = ((Order)entity);
+        Order order = ((Order)entity);
         dataBaseManager.open();
-        String query = "Insert into Order values (?, ?, ?, ?);";
+        String query = "Insert into Order values (?, ?, ?,?)";
         Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                Order.getOIC(),
-                Order.getCustomerCIC(),
-                Order.getPrice(),
-                Order.getMethodPay()
+                order.getOIC(),
+                order.getCustomerCIC(),
+                order.getPrice(),
+                order.getMethodPay()
         );
         dataBaseManager.close();
         return resultado ;

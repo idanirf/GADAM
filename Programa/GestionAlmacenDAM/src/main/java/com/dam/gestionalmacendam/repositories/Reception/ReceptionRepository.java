@@ -21,11 +21,11 @@ public class ReceptionRepository implements ReceptionInterface {
         this.dataBaseManager = dataBaseManager;
     }
 
-    public static ReceptionRepository getInstance(){
-        if(instance==null){
-            instance = new ReceptionRepository(DataBaseManager.getInstance());
+    public static ReceptionRepository getInstance(DataBaseManager instance){
+        if(ReceptionRepository.instance ==null){
+            ReceptionRepository.instance = new ReceptionRepository(DataBaseManager.getInstance());
         }
-        return instance;
+        return ReceptionRepository.instance;
     }
 
     @Override

@@ -33,21 +33,25 @@ CREATE TABLE IF NOT EXISTS "Employee" (
                                          PRIMARY KEY("EIC"));
 
 CREATE TABLE IF NOT EXISTS "LineOrder" (
-                                         "OLIC" TEXT  NOT NULL,
-                                         "articleº" TEXT NOT NULL,
-                                         "load" INTEGER NOT NULL,
-                                         "unitPrice" REAL NOT NULL,
-                                         "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("OLIC"));
-
+                                           "OLIC" TEXT  NOT NULL,
+                                           "articleº" TEXT NOT NULL,
+                                           "load" INTEGER NOT NULL,
+                                           "unitPrice" REAL NOT NULL,
+                                           "totalPrice" REAL NOT NULL,
+                                           "BelongsOrder" TEXT NOT NULL,
+                                           PRIMARY KEY("OLIC"),
+                                           FOREIGN KEY ("BelongsOrder") REFERENCES "Order" ("OIC")
+);
 CREATE TABLE IF NOT EXISTS "LineReception" (
-                                          "RLIC" TEXT  NOT NULL,
-                                         "articleº" TEXT NOT NULL,
-                                         "load" INTEGER NOT NULL,
-                                         "unitPrice" REAL NOT NULL,
-                                         "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("RLIC")
-                                           );
+                                               "RLIC" TEXT  NOT NULL,
+                                               "articleº" TEXT NOT NULL,
+                                               "load" INTEGER NOT NULL,
+                                               "unitPrice" REAL NOT NULL,
+                                               "totalPrice" REAL NOT NULL,
+                                               "BelongsReception" TEXT NOT NULL,
+                                               PRIMARY KEY("RLIC"),
+                                               FOREIGN KEY("BelongsReception") REFERENCES Reception ("RIC")
+);
 
 CREATE TABLE IF NOT EXISTS "Order" (
                                          "OIC" TEXT  NOT NULL,
