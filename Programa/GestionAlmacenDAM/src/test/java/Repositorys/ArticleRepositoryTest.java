@@ -57,9 +57,10 @@ public class ArticleRepositoryTest {
     void findByNameTest() throws SQLException {
         //todo hacer
         Optional<Article> res = repository.findByName(a.getArticle().toString());
+        Optional<Article> res1 = repository.findByUuid(a.getPIC().toString());
         assertAll(
                 () -> assertNotNull(res.get()),
-                () -> assertTrue(res.get().getPIC().toString().equalsIgnoreCase( a.getPIC().toString()))
+                () ->  assertTrue( res.get().getPIC().toString().equalsIgnoreCase( res1.get().getPIC().toString()))
         );
     }
 

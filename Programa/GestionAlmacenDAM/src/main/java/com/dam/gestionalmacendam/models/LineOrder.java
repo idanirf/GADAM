@@ -1,9 +1,6 @@
 package com.dam.gestionalmacendam.models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,12 +10,40 @@ import java.util.UUID;
 
 @AllArgsConstructor
 public class LineOrder {
-    private StringProperty OLIC = new SimpleStringProperty(UUID.randomUUID().toString());
+    private StringProperty OLIC;
     private StringProperty article;
     private IntegerProperty load;
     private DoubleProperty unitPrice;
     private DoubleProperty totalPrice;
     private StringProperty belongsOrder;
+
+    public double getTotalPrice() {
+        return (load.intValue())*(unitPrice.doubleValue());
+    }
+
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
+    }
+
+    public LineOrder(String OLIC, String article, Integer load,
+                     Double unitPrice,  String belongsOrder) {
+        this.OLIC = new SimpleStringProperty(OLIC);
+        this.article = new SimpleStringProperty(article);
+        this.load = new SimpleIntegerProperty(load);
+        this.unitPrice = new SimpleDoubleProperty(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty(unitPrice * load);
+        this.belongsOrder = new SimpleStringProperty(belongsOrder);
+    }
+
+    public LineOrder( String article, Integer load,
+                     Double unitPrice,  String belongsOrder) {
+        this.OLIC = new SimpleStringProperty(UUID.randomUUID().toString());
+        this.article = new SimpleStringProperty(article);
+        this.load = new SimpleIntegerProperty(load);
+        this.unitPrice = new SimpleDoubleProperty(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty(unitPrice * load);
+        this.belongsOrder = new SimpleStringProperty(belongsOrder);
+    }
 
     @Override
     public String toString() {

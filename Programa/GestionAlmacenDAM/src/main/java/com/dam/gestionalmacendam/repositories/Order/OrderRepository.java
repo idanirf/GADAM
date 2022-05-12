@@ -52,8 +52,7 @@ import java.util.Optional;
             System.out.println("BBDD abierta");
 
             bbdd.insert(sql, order.getOIC(), order.getCustomer().toString(),
-                order.getPrice().doubleValue(), order.getMethodPay().toString());
-
+                    order.getPrice().doubleValue(), order.getMethodPay().toString());
 
             bbdd.close();
             return Optional.of(order);

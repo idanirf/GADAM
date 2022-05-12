@@ -21,5 +21,21 @@ import java.util.function.BooleanSupplier;
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ReceptionRepositoryTest {
+    ReceptionRepository repository= ReceptionRepository.getInstance(DataBaseManager.getInstance());
+    Reception o = new Reception("ReceptionTest", "ReceptionTest",55D );
+
+    @BeforeAll
+    void initDataTest(){
+
+        try{
+            repository.save(o);
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println("objeto ya en el repositorio");
+        }
+    }
+
+
+
 
 }

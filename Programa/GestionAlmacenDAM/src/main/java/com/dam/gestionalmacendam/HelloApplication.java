@@ -1,12 +1,11 @@
 package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.Article;
-import com.dam.gestionalmacendam.models.Customer;
-import com.dam.gestionalmacendam.models.Order;
-import com.dam.gestionalmacendam.models.Pay;
+import com.dam.gestionalmacendam.models.*;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
+import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
+import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 import com.dam.gestionalmacendam.repositories.customer.CutomerRepository;
 import javafx.application.Application;
 import javafx.beans.property.*;
@@ -48,11 +47,94 @@ public class HelloApplication extends Application {
     }
 
     private static void probarrepositorioAza() {
-        probarOrder();
-        probarArticle();
+        //probarReception();  //todo funciona los test encargado jeremy
+        //probarOrder();
+        //probarArticle();
+        probarLineOrder();    //todo me falta line order
+        //probarLineReception   //todo me falta lineReception
 
 
 
+        //todo me falta LineReception
+
+    }
+
+    private static void probarReception() {
+        System.out.println("Probamos el repositorio de aza");
+        ReceptionRepository o = ReceptionRepository.getInstance(DataBaseManager.getInstance());
+        System.out.println("creando Reception");
+
+        try{
+
+            System.out.println("encontrando todas Reception");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
+
+            System.out.println("salvando Reception");
+            Optional<Reception> o1 = o.save( new Reception("Reception 1","Reception 1",1D));
+            System.out.println(o1);
+
+
+
+
+            System.out.println("todas las pruevas realizadas");
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("no se ha podido hacer algo");
+        }
+    }
+    private static void probarLineReception() {
+        System.out.println("Probamos el repositorio de aza");
+        LineOrderRepository o = LineOrderRepository.getInstance(DataBaseManager.getInstance());
+        System.out.println("creando LineOrder");
+        LineOrder o1 = new LineOrder("LineOrderPrueva", 30, 30D, "no pertenece a nada" );
+
+        try{
+            System.out.println("salvando Lineorder");
+            Optional<LineOrder> o2 = o.save(o1);
+            System.out.println(o2);
+
+            System.out.println("encontrando todas LIneorder");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
+
+            System.out.println("encontrando una por uuid");
+            Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC());
+            System.out.println(o3);
+
+
+            System.out.println("todas las pruevas realizadas");
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("no se ha podido hacer algo");
+        }
+    }
+
+    private static void probarLineOrder() {
+        System.out.println("Probamos el repositorio de aza");
+        LineOrderRepository o = LineOrderRepository.getInstance(DataBaseManager.getInstance());
+        System.out.println("creando LineOrder");
+        LineOrder o1 = new LineOrder("LineOrderPrueva",3, 30D, 30D, "no pertenece a nada" );
+
+        try{
+            System.out.println("salvando Lineorder");
+            Optional<LineOrder> o2 = o.save(o1);
+            System.out.println(o2);
+
+            System.out.println("encontrando todas LIneorder");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
+
+            System.out.println("encontrando una por uuid");
+            Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC());
+            System.out.println(o3);
+
+
+            System.out.println("todas las pruevas realizadas");
+        }catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("no se ha podido hacer algo");
+        }
     }
 
     private static void probarArticle() {
@@ -66,6 +148,7 @@ public class HelloApplication extends Application {
             System.out.println("salvando Article");
             Optional<Article> o2 = o.save(o1);
             System.out.println(o2);
+
 
             System.out.println("encontrando una por name");
             Optional<Article> o4 = o.findByName(o2.get().getArticle().toString());

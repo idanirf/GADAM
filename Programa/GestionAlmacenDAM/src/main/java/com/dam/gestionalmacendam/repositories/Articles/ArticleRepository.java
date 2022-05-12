@@ -1,8 +1,8 @@
 package com.dam.gestionalmacendam.repositories.Articles;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+
 import com.dam.gestionalmacendam.models.Article;
-import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,9 +28,10 @@ public class ArticleRepository implements ArticleInterface{
 
     @Override
     public Optional<Article> findByName(String name) throws SQLException {
+        //todo no funciona y no se porque
         dataBaseManager.open();
         String query = "select * from Article where article = ? ";
-        ResultSet result = dataBaseManager.select(query, name).orElseThrow(SQLException::new);
+        ResultSet result = dataBaseManager.select(query, name).get();
         Article article = null;
         if (result.next()){
             article = new Article(
@@ -49,26 +50,25 @@ public class ArticleRepository implements ArticleInterface{
 
 
     @Override
-    public Optional<Article> findByUuid(String identifier) throws SQLException {
-        dataBaseManager.open();
+    public Optional<Article> findByUuid(String PIC) throws SQLException {
         String query = "select * from Article where PIC = ? ";
-        ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<Article> article = Optional.empty();
+        dataBaseManager.open();
+        ResultSet result = dataBaseManager.select(query, PIC).orElseThrow(SQLException::new);
+        Article article = null;
         if (result.next()){
-            String PIC = result.getString("PIC");
-            String articleName =  result.getString("article");
-            String description = result.getString("description");
-            String location = result.getString("location");
-            int stock = result.getInt("stock");
-            Double price = result.getDouble("price");;
-            Boolean isActive = result.getBoolean("isActive");
-
-            article = Optional.of(new Article(PIC, articleName, description, location,  price, stock, isActive));
+            article = new Article( result.getString("PIC"),
+                    result.getString("article"),
+                    result.getString("description"),
+                    result.getString("location"),
+                    result.getDouble("price"),
+                    result.getInt("stock"),
+                    result.getBoolean("isActive"));
 
         }
         dataBaseManager.close();
-        return article;
+        return Optional.of(article);
     }
+
 
     @Override
     public ObservableList<Article> findAll() throws SQLException {
@@ -104,7 +104,7 @@ public class ArticleRepository implements ArticleInterface{
                 a.getIsActive().toString()).orElseThrow(SQLException::new);
         dataBaseManager.close();
         // todo no se si fallará el string del boolean
-        return Optional.of(result);
+        return Optional.of(entity);
     }
 
 

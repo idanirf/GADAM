@@ -1,6 +1,7 @@
 package com.dam.gestionalmacendam.models;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 public class Reception {
-    private StringProperty RIC = new SimpleStringProperty(UUID.randomUUID().toString());
+    private StringProperty RIC;
     private StringProperty supplierSIC;
     private StringProperty carrier;
     private DoubleProperty cost;
@@ -27,9 +28,17 @@ public class Reception {
                 '}';
     }
 
-    public Reception(StringProperty supplierSIC, StringProperty carrier, DoubleProperty cost) {
-        this.supplierSIC = supplierSIC;
-        this.carrier = carrier;
-        this.cost = cost;
+    public Reception( String uuid,String supplierSIC , String carrier, Double cost) {
+        this.RIC = new SimpleStringProperty(uuid);
+        this.supplierSIC = new SimpleStringProperty(supplierSIC);
+        this.carrier = new SimpleStringProperty(carrier);
+        this.cost = new SimpleDoubleProperty(cost);
     }
+    public Reception(String supplierSIC, String carrier, Double cost) {
+        this.RIC = new SimpleStringProperty(UUID.randomUUID().toString());
+        this.supplierSIC = new SimpleStringProperty(supplierSIC);
+        this.carrier = new SimpleStringProperty(carrier);
+        this.cost = new SimpleDoubleProperty(cost);
+    }
+
 }
