@@ -17,8 +17,15 @@ public class LineOrder {
     private DoubleProperty totalPrice;
     private StringProperty belongsOrder;
 
-    public double getTotalPrice() {
-        return (load.intValue())*(unitPrice.doubleValue());
+    public void setLoad(int load) {
+        this.load.set(load);
+
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice.set(unitPrice);
+        this.totalPrice= new SimpleDoubleProperty((this.load.intValue())*(this.unitPrice.doubleValue()));
+
     }
 
     public DoubleProperty totalPriceProperty() {

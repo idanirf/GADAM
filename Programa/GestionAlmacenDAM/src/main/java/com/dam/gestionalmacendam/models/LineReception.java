@@ -1,9 +1,6 @@
 package com.dam.gestionalmacendam.models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,20 +10,38 @@ import java.util.UUID;
 
 @AllArgsConstructor
 public class LineReception {    // todo hecho
-    private StringProperty RLIC = new SimpleStringProperty(UUID.randomUUID().toString());
+    private StringProperty RLIC;
     private StringProperty articlePIC;
     private IntegerProperty load;
     private DoubleProperty unitPrice;
     private DoubleProperty totalPrice;
     private StringProperty belongsRecepcion;
 
-    public LineReception(StringProperty articlePIC, IntegerProperty load, DoubleProperty unitPrice,
-                         DoubleProperty totalPrice, StringProperty belongsRecepcion) {
-        this.articlePIC = articlePIC;
-        this.load = load;
-        this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
-        this.belongsRecepcion = belongsRecepcion;
+    public LineReception(String articlePIC, Integer load, Double unitPrice,String belongsRecepcion) {
+        this.RLIC =new SimpleStringProperty(UUID.randomUUID().toString());
+        this.articlePIC = new SimpleStringProperty(articlePIC);
+        this.load = new SimpleIntegerProperty(load);
+        this.unitPrice = new SimpleDoubleProperty(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty(unitPrice*load);
+        this.belongsRecepcion = new SimpleStringProperty(belongsRecepcion);
+    }
+    public LineReception(String rlic, String articlePIC, Integer load, Double unitPrice,String belongsRecepcion) {
+        this.RLIC = new SimpleStringProperty(rlic);
+        this.articlePIC = new SimpleStringProperty(articlePIC);
+        this.load = new SimpleIntegerProperty(load);
+        this.unitPrice = new SimpleDoubleProperty(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty(unitPrice*load);
+        this.belongsRecepcion = new SimpleStringProperty(belongsRecepcion);
+    }
+
+    public void setLoad(int load) {
+        this.load.set(load);
+        this.totalPrice = new SimpleDoubleProperty(this.load.intValue()*this.unitPrice.doubleValue());
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice.set(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty(this.load.intValue()*this.unitPrice.doubleValue());
     }
 
     @Override

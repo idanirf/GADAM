@@ -1,8 +1,10 @@
 package com.dam.gestionalmacendam.repositories.LineReception;
 
+import javafx.collections.ObservableList;
+
 import java.sql.SQLException;
 import java.util.Optional;
 
 interface SerachByReceptionsBelong <T,ID> {
-    Optional<T> SerachByReceptionsBelong(ID identifier) throws SQLException;
+    ObservableList<T> SerachByReceptionsBelong(ID identifier) throws SQLException;
 }

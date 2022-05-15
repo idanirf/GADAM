@@ -83,7 +83,6 @@ import java.util.Optional;
             ResultSet resultado = bbdd.select(sql, OIC).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo los datos"));
             Order o = null;
             if(resultado.next()){
-
                 o= new Order(resultado.getString("OIC"),
                                 resultado.getObject("Customer"),
                                 resultado.getDouble("price"),

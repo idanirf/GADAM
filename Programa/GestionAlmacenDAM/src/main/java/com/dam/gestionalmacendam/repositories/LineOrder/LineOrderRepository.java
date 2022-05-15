@@ -2,7 +2,6 @@ package com.dam.gestionalmacendam.repositories.LineOrder;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineOrder;
-import com.dam.gestionalmacendam.models.Order;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,33 +51,36 @@ public class LineOrderRepository implements LineOrderInterface {
     public Optional save(Object entity) throws SQLException {
         LineOrder lineOrder = ((LineOrder)entity);
         dataBaseManager.open();
-        String query = "Insert into LineOrder values (?, ?, ?, ?, ?, ?);";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
+        String query = "Insert into LineOrder (OLIC, articleº, load, unitPrice, totalPrice, BelongsOrder) " +
+                "values (?, ?, ?, ?, ?, ?);";
+        ResultSet resultado = dataBaseManager.insert(query,
                 lineOrder.getOLIC().toString(),
                 lineOrder.getArticle().toString(),
                 lineOrder.getLoad().intValue(),
                 lineOrder.getUnitPrice().doubleValue(),
+                lineOrder.getTotalPrice().doubleValue(),
                 lineOrder.getBelongsOrder().toString()
-        );
+        ).orElseThrow(SQLException::new);
         dataBaseManager.close();
-        return Optional.of(entity) ;
+        return Optional.of(lineOrder) ;
     }
 
     @Override
-    public Optional update(Object o, Object entity) throws SQLException {
-        LineOrder lineOrder = ((LineOrder)entity);
+    public Optional update(Object olic, Object lineOrde) throws SQLException {
+        LineOrder lineOrder = ((LineOrder)lineOrde);
         dataBaseManager.open();
         String query = "Update LineOrder set articleº = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, belongsOrder = ? where  OLIC = ? ;";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
+        int resultado = dataBaseManager.update(query,
                 lineOrder.getOLIC().toString(),
                 lineOrder.getArticle().toString(),
                 lineOrder.getLoad().intValue(),
                 lineOrder.getUnitPrice().doubleValue(),
-                lineOrder.getBelongsOrder().toString());
+                lineOrder.getBelongsOrder().toString(),
+                olic);
         dataBaseManager.close();
 
-        return resultado ;
+        return Optional.of(resultado) ;
     }
 
     @Override
@@ -100,20 +102,24 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public Optional searchByUuidOrder(Object identifier) throws SQLException {
+    public ObservableList searchByUuidOrder(Object identifier) throws SQLException {
         dataBaseManager.open();
-        String query = "select * from LineOrder where belongOrder = ?";
+        String query = "select * from LineOrder where belongsOrder = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<LineOrder> lineOrder = null;
-        if (result.next()){
-            lineOrder = Optional.of(new LineOrder( result.getString("OLIC"),
-                    result.getString("articleº"),
-                    result.getInt("load"),
-                    result.getDouble("unitPrice"),
-                    result.getString("belongsOrder")));
+        repository.clear();
+        while (result.next()){
+            StringProperty OLIC = new SimpleStringProperty(result.getString("OLIC"));
+            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
+            IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
+            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
+            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
+            StringProperty belongsOrder = new SimpleStringProperty(result.getString("belongsOrder"));
 
+            LineOrder lineOrder = new LineOrder(OLIC, articlePIC, load, unitPrice, totalPrice, belongsOrder);
+           repository.add(lineOrder);
         }
         dataBaseManager.close();
-        return lineOrder;
+        return repository;
+
     }
 }

@@ -1,8 +1,10 @@
 package com.dam.gestionalmacendam.repositories.LineReception;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.models.LineReception;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
@@ -13,16 +15,17 @@ public class LineReceptionRepository  implements LineReceptionInterface{
 
     private static LineReceptionRepository instance;
     private final DataBaseManager dataBaseManager;
+    private  ObservableList<LineReception> repository = FXCollections.observableArrayList();
 
     private LineReceptionRepository(DataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
 
-    public static LineReceptionRepository getInstance(){
-        if(instance==null){
-            instance = new LineReceptionRepository(DataBaseManager.getInstance());
+    public static LineReceptionRepository getInstance(DataBaseManager instance){
+        if(LineReceptionRepository.instance ==null){
+            LineReceptionRepository.instance = new LineReceptionRepository(DataBaseManager.getInstance());
         }
-        return instance;
+        return LineReceptionRepository.instance;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class LineReceptionRepository  implements LineReceptionInterface{
         dataBaseManager.open();
         String query = "select * from LineReception";
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
-        ObservableList listLineReception = null;
+        repository.clear();
         if (result.next()){
             StringProperty RLIC = new SimpleStringProperty(result.getString("RLIC"));
             StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
@@ -40,10 +43,10 @@ public class LineReceptionRepository  implements LineReceptionInterface{
             StringProperty belongsRecepcion = new SimpleStringProperty(result.getString("belongsReception"));
 
             LineReception lineReception = new LineReception(RLIC, articlePIC, load, unitPrice, totalPrice, belongsRecepcion);
-            listLineReception.add(lineReception);
+            repository.add(lineReception);
         }
         dataBaseManager.close();
-        return listLineReception;
+        return repository;
     }
 
     @Override
@@ -51,16 +54,16 @@ public class LineReceptionRepository  implements LineReceptionInterface{
         LineReception lineReception = ((LineReception)entity);
         dataBaseManager.open();
         String query = "Insert into LineReception values (?, ?, ?, ?, ?, ?);";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
+       ResultSet resultado = dataBaseManager.insert(query,
                 lineReception.getRLIC(),
                 lineReception.getArticlePIC(),
                 lineReception.getLoad(),
                 lineReception.getUnitPrice(),
                 lineReception.getTotalPrice(),
                 lineReception.getBelongsRecepcion()
-        );
+        ).orElseThrow(SQLException::new);
         dataBaseManager.close();
-        return resultado ;
+        return Optional.of(entity) ;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class LineReceptionRepository  implements LineReceptionInterface{
         dataBaseManager.open();
         String query = "Update LineReception set articleº = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, belongsReception = ? where  RLIC = ? ;";
-        Optional<ResultSet> resultado = dataBaseManager.insert(query,
+        int resultado = dataBaseManager.update(query,
                 lineReception.getRLIC(),
                 lineReception.getArticlePIC(),
                 lineReception.getLoad(),
@@ -78,27 +81,27 @@ public class LineReceptionRepository  implements LineReceptionInterface{
                 lineReception.getBelongsRecepcion());
         dataBaseManager.close();
 
-        return resultado ;
+        return  Optional.of(resultado);
     }
 
     @Override
-    public Optional SerachByReceptionsBelong(Object identifier) throws SQLException {
+    public ObservableList SerachByReceptionsBelong(Object identifier) throws SQLException {
+        repository.clear();
         dataBaseManager.open();
-        String query = "select * from LineReception where RILC = ?";
+        String query = "select * from LineReception where belongsReception = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        Optional<LineReception> lineReception= null;
-        if (result.next()){
+        while (result.next()){
             StringProperty RLIC = new SimpleStringProperty(result.getString("RLIC"));
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articlePIC"));
+            StringProperty articlePIC =  new SimpleStringProperty(result.getString("articleº"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
             DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
             DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
-            StringProperty belongsRecepcion = new SimpleStringProperty(result.getString("belongsRecepcion"));
+            StringProperty belongsRecepcion = new SimpleStringProperty(result.getString("belongsReception"));
 
-            lineReception = Optional.of(new LineReception(RLIC, articlePIC, load, unitPrice, totalPrice, belongsRecepcion));
-
+            LineReception lineReception = new LineReception(RLIC, articlePIC, load, unitPrice, totalPrice, belongsRecepcion);
+            repository.add(lineReception);
         }
         dataBaseManager.close();
-        return lineReception;
+        return repository;
     }
 }
