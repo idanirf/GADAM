@@ -72,7 +72,8 @@ public class SupplierRepository implements ICRUDSupplier {
     }
 
     public Supplier findByUUID(String SIC) throws SQLException {
-        return repository.stream().filter(supplier -> supplier.getSIC().equals(SIC)).findFirst().orElseThrow(
+        var resultado = findAll();
+        return resultado.stream().filter(supplier -> supplier.getSIC().equals(SIC)).findFirst().orElseThrow(
                 () -> new SQLException("No existe ningún proveedor con ese SIC"));
     }
 }

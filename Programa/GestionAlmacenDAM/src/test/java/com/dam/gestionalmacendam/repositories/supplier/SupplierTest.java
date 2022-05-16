@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SupplierTest {
@@ -39,13 +40,18 @@ public class SupplierTest {
 
     @Test
     void findaByUUID() throws SQLException {
-       var resultado = supplierRepository.save(supplierTest);
-        assertAll(
-                () -> assertTrue(resultado.isPresent()),
-                () -> assertEquals(resultado.get().getSIC(), supplierTest.getSIC()),
-                () -> assertEquals(resultado.get().getNameSupplier(), supplierTest.getNameSupplier()),
-                () -> assertTrue(resultado.get().toString().equals(supplierTest.toString()))
+            supplierRepository.save(supplierTest);
+       var res = supplierRepository.findByUUID(supplierTest.getSIC());
+                assertAll(
+                        () -> assertEquals(res.getSIC(), supplierTest.getSIC()),
+                        ()-> assertEquals(res.getSIC(), supplierTest.getSIC())
         );
+    }
+
+    @Test
+    void findByUUIDNoExists() throws SQLException {
+        Exception thrown = assertThrows(Exception.class,()-> supplierRepository.findByUUID("1"));
+        assertTrue(thrown.getMessage().contains("No existe ningún proveedor con ese SIC"));
     }
 
     @Test

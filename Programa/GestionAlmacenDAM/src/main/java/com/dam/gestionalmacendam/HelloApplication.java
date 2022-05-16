@@ -27,7 +27,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         CutomerRepository repo = CutomerRepository.getInstance();
         Customer custo = new Customer(UUID.randomUUID().toString(), "pepe","ramos", "1","avaux","3332211",
                 "ramos@gmail.com", "x", LocalDateTime.now());
@@ -45,6 +45,8 @@ public class HelloApplication extends Application {
         }catch (SQLException e){
             e.printStackTrace();
         }
+
+       supplierRepository.update("b67f14ff-ece6-4c64-93aa-4a2ca12d19df",);
         //launch();
         checkServer();
     }
