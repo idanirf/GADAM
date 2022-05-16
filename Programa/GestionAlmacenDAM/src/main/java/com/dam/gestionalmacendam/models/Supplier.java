@@ -15,9 +15,6 @@ public class Supplier {
     private StringProperty telephoneNumber;
     private StringProperty email;
 
-    public Supplier() {
-        //this(null, null, null, null);
-    }
 
     public Supplier(String nameSupplier, String direction, String telephonNumber, String email) {
         this.SIC = SIC;

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Optional;
+import java.util.UUID;
 
 
 public class SupplierRepository implements ICRUDSupplier {
@@ -64,16 +65,19 @@ public class SupplierRepository implements ICRUDSupplier {
 
     @Override
     public Optional<Supplier> update(String uuid, Supplier supplier) throws SQLException {
-        int i = repository.indexOf(supplier);
+        var c = findByUUID(uuid.toString());
+        int index = repository.indexOf(c);
         String sql = "UPDATE Supplier SET nameSupplier = ?, direction = ?, telephoneNumber = ?, email = ? WHERE SIC = ?";
         bbdd.open();
-        bbdd.update(sql, supplier.getNameSupplier(), supplier.getDirection(), supplier.getTelephoneNumber(), supplier.getEmail());
+        bbdd.update(sql, supplier.getNameSupplier(), supplier.getDirection(), supplier.getTelephoneNumber(), supplier.getEmail(), uuid);
+        bbdd.close();
+        repository.set(index, supplier);
         return Optional.of(supplier);
     }
 
-    public Supplier findByUUID(String SIC) throws SQLException {
+    public Supplier findByUUID(String uuid) throws SQLException {
         var resultado = findAll();
-        return resultado.stream().filter(supplier -> supplier.getSIC().equals(SIC)).findFirst().orElseThrow(
+        return resultado.stream().filter(supplier -> supplier.getSIC().equals(uuid)).findFirst().orElseThrow(
                 () -> new SQLException("No existe ningún proveedor con ese SIC"));
     }
 }

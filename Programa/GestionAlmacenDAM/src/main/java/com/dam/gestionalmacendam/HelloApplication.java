@@ -39,14 +39,15 @@ public class HelloApplication extends Application {
        }
 
         SupplierRepository supplierRepository = SupplierRepository.getInstance(DataBaseManager.getInstance());
-        Supplier supplier = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,","Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
-        try{
-            supplierRepository.save(supplier);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-       supplierRepository.update("b67f14ff-ece6-4c64-93aa-4a2ca12d19df",);
+        var supplier1 = new Supplier(UUID.randomUUID().toString(), "NOVATABLA S.L,","Calle MDZ N12", "678908765",
+                "novatabla.mad@novatabla.es");
+        supplierRepository.save(supplier1);
+        System.out.println("Viejo: " + supplier1);
+        supplier1.setDirection("LA NUEVA CALLE");
+        supplier1.setTelephoneNumber("657908654");
+        supplier1.setEmail("lanuevacalle@mesatabla.com");
+        supplierRepository.update(supplier1.getSIC(),supplier1);
+        System.out.println("Nuevo: " + supplierRepository.findByUUID(supplier1.getSIC()));
         //launch();
         checkServer();
     }
