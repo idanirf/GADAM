@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArticleRepositoryTest {
       ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-      Article a = new Article("Prueva1","grande","sala a",35.50D,5,false);
+      Article a = new Article("delete","Prueva1","grande","sala a",35.50D,5,false);
 
     @BeforeAll
      void initDataTest(){
@@ -33,6 +34,15 @@ public class ArticleRepositoryTest {
             e.printStackTrace();
             System.out.println("objeto ya en el repositorio");
         }
+    }
+
+    @BeforeEach
+    void setDown() throws SQLException {
+        var db = repository.getDb();
+        String query = "DELETE FROM Article WHERE PIC =?";
+        db.open();
+        db.delete(query, a.getPIC());
+        db.close();
     }
 
 
@@ -60,7 +70,7 @@ public class ArticleRepositoryTest {
         Optional<Article> res1 = repository.findByUuid(a.getPIC().toString());
         assertAll(
                 () -> assertNotNull(res.get()),
-                () ->  assertTrue( res.get().getPIC().toString().equalsIgnoreCase( res1.get().getPIC().toString()))
+                () ->  assertTrue( res.get().getArticle().toString().equalsIgnoreCase( res1.get().getArticle().toString()))
         );
     }
 
@@ -91,7 +101,7 @@ public class ArticleRepositoryTest {
     void saveTest() throws SQLException {
         //todo SI funciona
 
-        Article b = new Article("Prueva2","grande","sala a",35.50D,5,false);
+        Article b = new Article("delete","Prueva2","grande","sala a",35.50D,5,false);
 
             repository.save(b);
 

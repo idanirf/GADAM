@@ -18,7 +18,9 @@ import java.util.Optional;
         private final ObservableList<Order> repository = FXCollections.observableArrayList();
         DataBaseManager bbdd = DataBaseManager.getInstance();
 
-
+        public DataBaseManager getDb(){
+            return bbdd;
+        }
         public static OrderRepository getInstance(DataBaseManager instance) {
             if (OrderRepository.instance == null) {
                 OrderRepository.instance = new OrderRepository();

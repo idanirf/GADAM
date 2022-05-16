@@ -10,13 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class LineOrderRepository implements LineOrderInterface {
+public class LineOrderRepository implements LineOrderInterface<LineOrder,String> {
     private static LineOrderRepository instance;
     private final DataBaseManager dataBaseManager;
     private final ObservableList<LineOrder> repository = FXCollections.observableArrayList();
 
     private LineOrderRepository(DataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
+    }
+
+    public DataBaseManager getDb(){
+        return dataBaseManager;
     }
 
     public static LineOrderRepository getInstance(DataBaseManager instance){
@@ -48,7 +52,7 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public Optional save(Object entity) throws SQLException {
+    public Optional save(LineOrder entity) throws SQLException {
         LineOrder lineOrder = ((LineOrder)entity);
         dataBaseManager.open();
         String query = "Insert into LineOrder (OLIC, articleº, load, unitPrice, totalPrice, BelongsOrder) " +
@@ -66,13 +70,11 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public Optional update(Object olic, Object lineOrde) throws SQLException {
-        LineOrder lineOrder = ((LineOrder)lineOrde);
+    public Optional update(String olic,  LineOrder lineOrder) throws SQLException {
         dataBaseManager.open();
         String query = "Update LineOrder set articleº = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, belongsOrder = ? where  OLIC = ? ;";
         int resultado = dataBaseManager.update(query,
-                lineOrder.getOLIC().toString(),
                 lineOrder.getArticle().toString(),
                 lineOrder.getLoad().intValue(),
                 lineOrder.getUnitPrice().doubleValue(),
@@ -84,7 +86,7 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public Optional findByUuid(Object identifier) throws SQLException {
+    public Optional findByUuid(String identifier) throws SQLException {
         dataBaseManager.open();
         String query = "select * from LineOrder where OLIC = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
@@ -102,7 +104,7 @@ public class LineOrderRepository implements LineOrderInterface {
     }
 
     @Override
-    public ObservableList searchByUuidOrder(Object identifier) throws SQLException {
+    public ObservableList searchByUuidOrder(String identifier) throws SQLException {
         dataBaseManager.open();
         String query = "select * from LineOrder where belongsOrder = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);

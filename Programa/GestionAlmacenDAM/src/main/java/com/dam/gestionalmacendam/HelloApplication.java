@@ -7,7 +7,7 @@ import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
-import com.dam.gestionalmacendam.repositories.customer.CutomerRepository;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -32,15 +32,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        CutomerRepository repo = CutomerRepository.getInstance();
-        Customer custo = new Customer(UUID.randomUUID().toString(), "pepe","ramos", "1","avaux","3332211",
-                "ramos@gmail.com", "x", LocalDateTime.now());
 
-       try {
-           repo.save(custo);
-       }catch(SQLException e){
-           e.printStackTrace();
-       }
         //launch();
        checkServer();
        probarrepositorioAza();
@@ -48,10 +40,10 @@ public class HelloApplication extends Application {
 
     private static void probarrepositorioAza() {
         //probarReception();  //todo funciona los test encargado jeremy
-        //probarOrder();
-        //probarArticle();
-        //probarLineOrder();    //todo funciona excepto update
-        probarLineReception();   // todo funciona excepto update y test
+       // probarOrder();
+       // probarArticle();
+        probarLineOrder();    //todo falta test de update
+       // probarLineReception();
 
 
 
@@ -100,12 +92,12 @@ public class HelloApplication extends Application {
             System.out.println(lista);
 
             System.out.println("encontrando una por uuid  belongs ");
-            ObservableList o3 = o.SerachByReceptionsBelong(o2.get().getBelongsRecepcion());
+            ObservableList o3 = o.SerachByReceptionsBelong(o2.get().getBelongsRecepcion().toString());
             System.out.println(o3);
 
             System.out.println("update una LineReception");
-            o2.get().setLoad(20);
-            Optional<Integer> i = o.update(o2.get().getRLIC(), o2);
+            o1.setLoad(20);
+            Optional<Integer> i = o.update(o2.get().getRLIC().toString(), o1);
             System.out.println(o2);
             System.out.println("cargado" + i);
 
@@ -134,21 +126,21 @@ public class HelloApplication extends Application {
             Optional<LineOrder> o2 = o.save(o1);
              System.out.println(o2);
 
-            //System.out.println("encontrando todas LIneorder");
-            //ObservableList lista = o.findAll();
-            //System.out.println(lista);
+            System.out.println("encontrando todas LIneorder");
+            ObservableList lista = o.findAll();
+            System.out.println(lista);
 
-            //System.out.println("encontrando una por uuid");
-            //Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC());
-            //System.out.println(o3);
+            System.out.println("encontrando una por uuid");
+            Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC().toString());
+            System.out.println(o3);
 
-            //System.out.println("encontrando una por uuid  belongs ");
-            //ObservableList o4 = o.searchByUuidOrder(o2.get().getBelongsOrder());
-            //System.out.println(o4);
+            System.out.println("encontrando una por uuid  belongs ");
+            ObservableList o4 = o.searchByUuidOrder(o2.get().getBelongsOrder().toString());
+            System.out.println(o4);
 
             System.out.println("update una LineOrder");
-            o2.get().setLoad(20);
-            Optional<Integer> i = o.update(o2.get().getOLIC(), o2);
+            o1.setLoad(20);
+            Optional<Integer> i = o.update(o2.get().getOLIC().toString(), o1);
             System.out.println(o2);
             System.out.println("cargado" + i);
 

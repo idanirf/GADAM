@@ -9,6 +9,7 @@ import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderRepositoryTest {
 
         OrderRepository repository= OrderRepository.getInstance(DataBaseManager.getInstance());
-        Order o = new Order("pagador", 34.54D, Pay.PAYPAL);
+        Order o = new Order("delete","pagador", 34.54D, Pay.PAYPAL);
 
         @BeforeAll
         void initDataTest(){
@@ -33,6 +34,15 @@ public class OrderRepositoryTest {
                 System.out.println("objeto ya en el repositorio");
             }
         }
+
+        @BeforeEach
+     void setDown() throws SQLException {
+        var db = repository.getDb();
+        String query = "DELETE FROM Order WHERE OIC=?";
+        db.open();
+        db.delete(query, o.getOIC());
+        db.close();
+    }
 
 
         /**

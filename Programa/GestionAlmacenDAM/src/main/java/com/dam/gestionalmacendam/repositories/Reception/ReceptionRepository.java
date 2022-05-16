@@ -25,6 +25,10 @@ public class ReceptionRepository implements ReceptionInterface {
         this.dataBaseManager = dataBaseManager;
     }
 
+    public DataBaseManager getDb(){
+        return dataBaseManager;
+    }
+
     public static ReceptionRepository getInstance(DataBaseManager instance) {
         if (ReceptionRepository.instance == null) {
             ReceptionRepository.instance = new ReceptionRepository(DataBaseManager.getInstance());

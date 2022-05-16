@@ -21,6 +21,10 @@ public class LineReceptionRepository  implements LineReceptionInterface{
         this.dataBaseManager = dataBaseManager;
     }
 
+    public DataBaseManager getDb(){
+        return dataBaseManager;
+    }
+
     public static LineReceptionRepository getInstance(DataBaseManager instance){
         if(LineReceptionRepository.instance ==null){
             LineReceptionRepository.instance = new LineReceptionRepository(DataBaseManager.getInstance());
@@ -50,7 +54,7 @@ public class LineReceptionRepository  implements LineReceptionInterface{
     }
 
     @Override
-    public Optional save(Object entity) throws SQLException {
+    public Optional save(LineReception entity) throws SQLException {
         LineReception lineReception = ((LineReception)entity);
         dataBaseManager.open();
         String query = "Insert into LineReception values (?, ?, ?, ?, ?, ?);";
@@ -67,8 +71,8 @@ public class LineReceptionRepository  implements LineReceptionInterface{
     }
 
     @Override
-    public Optional update(Object o, Object entity) throws SQLException {
-        LineReception lineReception = ((LineReception)entity);
+    public Optional update(String o, LineReception lineReception) throws SQLException {
+
         dataBaseManager.open();
         String query = "Update LineReception set articleº = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, belongsReception = ? where  RLIC = ? ;";
@@ -85,7 +89,7 @@ public class LineReceptionRepository  implements LineReceptionInterface{
     }
 
     @Override
-    public ObservableList SerachByReceptionsBelong(Object identifier) throws SQLException {
+    public ObservableList SerachByReceptionsBelong(String identifier) throws SQLException {
         repository.clear();
         dataBaseManager.open();
         String query = "select * from LineReception where belongsReception = ?";
