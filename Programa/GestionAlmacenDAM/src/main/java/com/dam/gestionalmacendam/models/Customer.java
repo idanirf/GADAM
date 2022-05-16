@@ -30,6 +30,8 @@ public class Customer extends User {
         this.email=new SimpleStringProperty(email);
         this.photo=new SimpleStringProperty(photo);
         this.createdAt=new SimpleObjectProperty<LocalDateTime>(createdAt);
+
+
     }
 
     public String getCIC() {

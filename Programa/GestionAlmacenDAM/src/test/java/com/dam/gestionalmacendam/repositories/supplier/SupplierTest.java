@@ -2,10 +2,7 @@ package com.dam.gestionalmacendam.repositories.supplier;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Supplier;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -15,63 +12,62 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SupplierTest {
-    DataBaseManager bbdd = DataBaseManager.getInstance();
-    SupplierRepository supplierRepository = SupplierRepository.getInstance();
-    Supplier supplierTest = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,","Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
+    SupplierRepository supplierRepository = SupplierRepository.getInstance(DataBaseManager.getInstance());
+    Supplier supplierTest = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,",
+            "Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
 
-    @BeforeAll
-    void setUp() throws Exception {
-        supplierRepository.save(supplierTest);
-    }
+        @BeforeEach
+        void setDown() throws SQLException {
+            var db = supplierRepository.getBbdd();
+            String query = "DELETE FROM SUPPLIER WHERE nameSupplier=?";
+            db.open();
+            db.delete(query, supplierTest.getNameSupplier());
+            db.close();
+        }
+
 
     @Test
     void findAll() throws SQLException {
+            supplierRepository.save(supplierTest);
         var list1 = supplierRepository.findAll();
         assertAll(
-                () -> assertEquals(list1.size(), 2),
-                () -> assertTrue(list1.contains(list1)),
-                () -> assertEquals(list1.get(1).getNameSupplier(), supplierTest.getNameSupplier())
+                () -> assertEquals(list1.size(), 1),
+                () -> assertEquals(list1.get(0).getSIC(), supplierTest.getSIC()),
+                ()-> assertEquals(list1.get(0).getNameSupplier(), supplierTest.getNameSupplier())
         );
     }
 
     @Test
-    void findaBySIC() throws SQLException {
-        Optional<Supplier> supplierOptional = Optional.ofNullable((supplierRepository.findByUUID(supplierTest.getSIC())));
+    void findaByUUID() throws SQLException {
+       var resultado = supplierRepository.save(supplierTest);
         assertAll(
-                () -> assertTrue(supplierOptional.isPresent()),
-                () -> assertEquals(supplierOptional.get().getSIC(), supplierTest.getSIC()),
-                () -> assertEquals(supplierOptional.get().getNameSupplier(), supplierTest.getNameSupplier()),
-                () -> assertTrue(supplierOptional.get().toString().equals(supplierTest.toString()))
+                () -> assertTrue(resultado.isPresent()),
+                () -> assertEquals(resultado.get().getSIC(), supplierTest.getSIC()),
+                () -> assertEquals(resultado.get().getNameSupplier(), supplierTest.getNameSupplier()),
+                () -> assertTrue(resultado.get().toString().equals(supplierTest.toString()))
         );
     }
 
     @Test
     void save() throws SQLException {
-        Supplier supplier = new Supplier("MALTABLE", "Calle Tabla Madera Nº20 Malaga", "685140838", "maltale.spain@maltable.com");
-        var resultado = supplierRepository.save(supplier).get();
-
-        Optional<Supplier> supplierOptional = Optional.ofNullable(supplierRepository.findByUUID(resultado.getSIC()));
+        var resultado = supplierRepository.save(supplierTest);
         assertAll(
-                () -> assertEquals(resultado.getSIC(), supplier.getSIC()),
-                () -> assertEquals(resultado.getNameSupplier(), supplier.getNameSupplier()),
-                () -> assertTrue(supplierOptional.isPresent())
+                () -> assertEquals(resultado.get().getNameSupplier(), supplierTest.getNameSupplier()),
+                () -> assertTrue(resultado.isPresent())
         );
     }
 
     @Test
     void update() throws SQLException {
-        supplierTest.setNameSupplier("SILLAFACTORY");
+            supplierRepository.save(supplierTest);
         supplierTest.setDirection("Calle Madrid N18 Madrid");
         supplierTest.setTelephoneNumber("605203547");
         supplierTest.setEmail("sillafactory.spain@sillafactory.com");
+        var resultado = supplierRepository.update(supplierTest.getSIC(), supplierTest);
 
-        var resultado = supplierRepository.update(supplierTest.getSIC(), supplierTest).get();
-        Optional<Supplier> supplierOptional = Optional.ofNullable(supplierRepository.findByUUID(resultado.getSIC()));
         assertAll(
-                () -> assertEquals(resultado.getSIC(), supplierTest.getSIC()),
-                () -> assertEquals(resultado.getNameSupplier(), supplierTest.getNameSupplier()),
-                () -> assertFalse(supplierOptional.isPresent())
+                () -> assertEquals(resultado.get().getDirection(), supplierTest.getDirection()),
+                () -> assertTrue(resultado.isPresent())
         );
     }
-
 }

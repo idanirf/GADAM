@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Optional;
 
 
@@ -15,15 +16,18 @@ public class SupplierRepository implements ICRUDSupplier {
     private final ObservableList<Supplier> repository = FXCollections.observableArrayList();
     DataBaseManager bbdd = DataBaseManager.getInstance();
 
+    public DataBaseManager getBbdd(){
+        return bbdd;
+    }
     private SupplierRepository() {
         //Constructor vacío
     }
 
-    public static SupplierRepository getInstance() {
-        if (instance == null) {
-            instance = new SupplierRepository();
+    public static SupplierRepository getInstance(DataBaseManager instance) {
+        if (SupplierRepository.instance == null) {
+            SupplierRepository.instance = new SupplierRepository();
         }
-        return instance;
+        return SupplierRepository.instance;
     }
 
     @Override

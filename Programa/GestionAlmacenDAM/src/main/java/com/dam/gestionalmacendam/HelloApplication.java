@@ -2,11 +2,8 @@ package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Customer;
-import com.dam.gestionalmacendam.models.Order;
-import com.dam.gestionalmacendam.models.Pay;
 import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.customer.CutomerRepository;
-import com.dam.gestionalmacendam.repositories.order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +17,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.dam.gestionalmacendam.models.Pay.PAYPAL;
-
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,7 +28,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-       CutomerRepository repo = CutomerRepository.getInstance();
+        CutomerRepository repo = CutomerRepository.getInstance();
         Customer custo = new Customer(UUID.randomUUID().toString(), "pepe","ramos", "1","avaux","3332211",
                 "ramos@gmail.com", "x", LocalDateTime.now());
 
@@ -43,23 +38,13 @@ public class HelloApplication extends Application {
            e.printStackTrace();
        }
 
-        SupplierRepository supplierRepository = SupplierRepository.getInstance();
+        SupplierRepository supplierRepository = SupplierRepository.getInstance(DataBaseManager.getInstance());
         Supplier supplier = new Supplier(UUID.randomUUID().toString(), "MESATABLA S,L,","Calle Valencia N12", "678908765", "mesatabala.valencia@mesatabla.com");
         try{
             supplierRepository.save(supplier);
         }catch (SQLException e){
             e.printStackTrace();
         }
-
-        OrderRepository orderRepository = OrderRepository.getInstance();
-        Order order = new Order(UUID.randomUUID().toString(), "DANI RODRÍGUEZ", 12.00, "paypal");
-        try {
-            orderRepository.save(order);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-
         //launch();
         checkServer();
     }
@@ -79,7 +64,5 @@ public class HelloApplication extends Application {
             System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
             System.exit(1);
         }
-
     }
-
 }
