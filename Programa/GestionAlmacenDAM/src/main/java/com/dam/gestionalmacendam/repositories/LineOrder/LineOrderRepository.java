@@ -1,6 +1,7 @@
 package com.dam.gestionalmacendam.repositories.LineOrder;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.models.Article;
 import com.dam.gestionalmacendam.models.LineOrder;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -72,16 +73,16 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
     @Override
     public Optional update(String olic,  LineOrder lineOrder) throws SQLException {
         dataBaseManager.open();
-        String query = "Update LineOrder set articleº = ? , load = ? " +
-                ", unitPrice = ?, totalPrice = ?, belongsOrder = ? where  OLIC = ? ;";
+        String query = "Update LineOrder set articleº = ? ,  load = ? " +
+                ", unitPrice = ?, totalPrice = ?, BelongsOrder = ? where  OLIC = ? ;";
         int resultado = dataBaseManager.update(query,
                 lineOrder.getArticle().toString(),
                 lineOrder.getLoad().intValue(),
                 lineOrder.getUnitPrice().doubleValue(),
+                lineOrder.getTotalPrice().doubleValue(),
                 lineOrder.getBelongsOrder().toString(),
                 olic);
         dataBaseManager.close();
-
         return Optional.of(resultado) ;
     }
 

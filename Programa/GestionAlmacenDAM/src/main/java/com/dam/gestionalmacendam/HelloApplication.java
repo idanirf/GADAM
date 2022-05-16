@@ -9,6 +9,8 @@ import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,19 +37,16 @@ public class HelloApplication extends Application {
 
         //launch();
        checkServer();
-       probarrepositorioAza();
+       //probarrepositorioAza();
     }
 
     private static void probarrepositorioAza() {
-        //probarReception();  //todo funciona los test encargado jeremy
-       // probarOrder();
-       // probarArticle();
-        probarLineOrder();    //todo falta test de update
-       // probarLineReception();
+        //probarReception();  ok
+       // probarOrder();     ok
+       // probarArticle(); ok
+        //probarLineOrder();    ok
+       // probarLineReception(); ok
 
-
-
-        //todo me falta LineReception
 
     }
 
@@ -96,10 +95,12 @@ public class HelloApplication extends Application {
             System.out.println(o3);
 
             System.out.println("update una LineReception");
-            o1.setLoad(20);
-            Optional<Integer> i = o.update(o2.get().getRLIC().toString(), o1);
-            System.out.println(o2);
+            System.out.println("antigulo" + o1);
+            o1.setLoad(123);
+            o1.setBelongsRecepcion(new SimpleStringProperty("tutifruti"));
+            Optional<Integer> i = o.update(o1.getRLIC().toString(), o1);
             System.out.println("cargado" + i);
+            System.out.println("nuevo" + o.SerachByReceptionsBelong(o1.getBelongsRecepcion().toString()));
 
 
 
@@ -139,10 +140,12 @@ public class HelloApplication extends Application {
             System.out.println(o4);
 
             System.out.println("update una LineOrder");
-            o1.setLoad(20);
-            Optional<Integer> i = o.update(o2.get().getOLIC().toString(), o1);
-            System.out.println(o2);
-            System.out.println("cargado" + i);
+            System.out.println("original");
+            System.out.println(o1);
+            o1.setLoad(121);
+            Optional<Integer> i = o.update(o1.getOLIC().toString(), o1);
+            System.out.println("cargado" + i );
+            System.out.println(o.findByUuid(o1.getOLIC().toString()));
 
 
 
@@ -174,6 +177,14 @@ public class HelloApplication extends Application {
             System.out.println("encontrando una por uuid");
             Optional<Article> o3 = o.findByUuid(o2.get().getPIC().toString());
             System.out.println(o3);
+
+            System.out.println("update una Article");
+            System.out.println("antiguo");
+            System.out.println(o1);
+            o1.setArticle(new SimpleStringProperty("si"));
+            Optional<Integer> i = o.update(o1.getPIC().toString(), o1);
+            System.out.println(o.findByUuid(o1.getPIC().toString()));
+            System.out.println("cargado" + o1);
 
 
 
@@ -212,6 +223,12 @@ public class HelloApplication extends Application {
             System.out.println("encontrando una por uuid");
             Order o3 = o.findByUUID(o2.get().getOIC());
             System.out.println(o3);
+
+            System.out.println("update order una por uuid");
+            System.out.println("antiguo" +o3);
+            o3.setPrice(new SimpleDoubleProperty(11.1D));
+            o.update(o3.getOIC().toString(), o3);
+            System.out.println(o.findByUUID(o3.getOIC().toString()));
 
 
 

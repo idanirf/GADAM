@@ -61,12 +61,16 @@ import java.util.Optional;
         }
 
         @Override
-        public Optional<Order> update(String uuid, Order order) throws SQLException {
+        public Optional<Integer> update(String uuid, Order order) throws SQLException {
             int i = repository.indexOf(order);
-            String sql = "UPDATE \"Order\" SET OIC = ?, Customer = ?, Price = ?, Pay = ? WHERE OIC = ?";
+            String sql = "UPDATE \"Order\" SET Customer = ?, Price = ?, Pay = ? WHERE OIC = ? ";
             bbdd.open();
-            bbdd.update(sql, order.getCustomer(), order.getPrice(), order.getMethodPay(),uuid);
-            return Optional.of(order);
+            int updates = bbdd.update(sql,
+                    order.getCustomer().toString(),
+                    order.getPrice().doubleValue(),
+                    order.getMethodPay().toString(),
+                    uuid);
+            return Optional.of(updates);
         }
 
         private ObjectProperty<Pay> transformMetodetails(StringProperty methodPayTemporal) {

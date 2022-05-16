@@ -113,18 +113,15 @@ public class ArticleRepository implements ArticleInterface{
 
 
     @Override
-    public Optional <Article>update( String entity, Article o) throws SQLException {
-        //todo modificar todo
+    public Optional<Integer> update( String entity, Article o) throws SQLException {
         dataBaseManager.open();
-
         String query = " update Article set article = ?, description= ?, location=?, stock=?, price=?," +
                 " isActive = ? where PIC = ? ;";
         int result = dataBaseManager.update(query, o.getArticle().toString(), o.getDescription().toString(),
                 o.getLocation().toString(), o.getStock().intValue(), o.getPrice().doubleValue(), o.getIsActive().toString()
                 , entity);
         dataBaseManager.close();
-
-        return Optional.of(o);
+        return Optional.of(result);
     }
 
 

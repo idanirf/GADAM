@@ -11,5 +11,6 @@ public interface CRUDRepository<T, ID> {
 
     Optional<T> save(T entity) throws SQLException;
 
-    Optional<T> update(ID id, T entity) throws SQLException;
+    Optional<Integer> update(ID id, T entity) throws SQLException;
+    //todo cambiado porque tiene que devolver un int
 }

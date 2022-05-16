@@ -71,18 +71,18 @@ public class LineReceptionRepository  implements LineReceptionInterface{
     }
 
     @Override
-    public Optional update(String o, LineReception lineReception) throws SQLException {
+    public Optional update(String rlic, LineReception lineReception) throws SQLException {
 
         dataBaseManager.open();
         String query = "Update LineReception set articleº = ? , load = ? " +
-                ", unitPrice = ?, totalPrice = ?, belongsReception = ? where  RLIC = ? ;";
+                ", unitPrice = ?, totalPrice = ?, BelongsReception = ? where  RLIC = ? ;";
         int resultado = dataBaseManager.update(query,
-                lineReception.getRLIC(),
-                lineReception.getArticlePIC(),
-                lineReception.getLoad(),
-                lineReception.getUnitPrice(),
-                lineReception.getTotalPrice(),
-                lineReception.getBelongsRecepcion());
+                lineReception.getArticlePIC().toString(),
+                lineReception.getLoad().intValue(),
+                lineReception.getUnitPrice().doubleValue(),
+                lineReception.getTotalPrice().doubleValue(),
+                lineReception.getBelongsRecepcion().toString(),
+                rlic);
         dataBaseManager.close();
 
         return  Optional.of(resultado);
