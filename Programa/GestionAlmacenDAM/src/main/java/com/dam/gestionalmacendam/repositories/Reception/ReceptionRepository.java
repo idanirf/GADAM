@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ReceptionRepository implements ReceptionInterface {
+public class ReceptionRepository implements ReceptionInterface<Reception, String> {
     private static ReceptionRepository instance;
     private final ObservableList<Reception> repository = FXCollections.observableArrayList();
     private final DataBaseManager dataBaseManager;
@@ -59,19 +59,20 @@ public class ReceptionRepository implements ReceptionInterface {
     }
 
 
+
+
     @Override
-    public Optional save(Object entity) throws SQLException {
-        Reception reception = ((Reception) entity);
+    public Optional<Reception> save(Reception reception) throws SQLException {
         dataBaseManager.open();
         String query = "Insert into Reception(RIC, Supplier, Carrier, Cost) values (?, ?, ?, ?);";
         Optional<ResultSet> resultado = dataBaseManager.insert(query,
-                reception.getRIC().toString(),
-                reception.getSupplierSIC().toString(),
-                reception.getCarrier().toString(),
-                reception.getCost().doubleValue()
+                reception.getRIC().get(),
+                reception.getSupplierSIC().get(),
+                reception.getCarrier().get(),
+                reception.getCost().get()
         );
         dataBaseManager.close();
-        return resultado;
+        return Optional.of(reception);
     }
 
 

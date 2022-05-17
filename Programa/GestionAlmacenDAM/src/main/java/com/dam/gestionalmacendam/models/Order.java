@@ -11,24 +11,24 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 public class Order {
-    private String OIC = UUID.randomUUID().toString();
-    private ObjectProperty<Object> customer;
+    private StringProperty OIC ;
+    private StringProperty customer;
     private DoubleProperty price;
-    private ObjectProperty methodPay;
+    private ObjectProperty<Pay> methodPay;
 
     public Order() {
     }
 
-    public Order(Object customer, double price, Object methodPay) {
-        this.OIC = OIC;
-        this.customer = new SimpleObjectProperty(customer);
+    public Order(String customer, double price, Object methodPay) {
+        this.OIC = new SimpleStringProperty(UUID.randomUUID().toString());
+        this.customer = new SimpleStringProperty(customer);
         this.price = new SimpleDoubleProperty(price);
         this.methodPay = new SimpleObjectProperty(methodPay);
     }
 
-    public Order(String OIC, Object customer, double price, Object methodPay) {
-        this.OIC = OIC;
-        this.customer = new SimpleObjectProperty(customer);
+    public Order(String OIC, String customer, double price, Object methodPay) {
+        this.OIC = new SimpleStringProperty(OIC);
+        this.customer = new SimpleStringProperty(customer);
         this.price = new SimpleDoubleProperty(price);
         this.methodPay = new SimpleObjectProperty(methodPay);
     }

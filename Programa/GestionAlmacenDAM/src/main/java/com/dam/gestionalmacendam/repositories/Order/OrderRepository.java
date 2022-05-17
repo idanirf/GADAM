@@ -37,7 +37,7 @@ import java.util.Optional;
                 repository.add(
                         new Order(
                                 resultado.getString("OIC"),
-                                resultado.getObject("Customer"),
+                                resultado.getString("Customer"),
                                 resultado.getDouble("price"),
                                 resultado.getObject("Pay")
                         )
@@ -53,8 +53,10 @@ import java.util.Optional;
             bbdd.open();
             System.out.println("BBDD abierta");
 
-            bbdd.insert(sql, order.getOIC(), order.getCustomer().toString(),
-                    order.getPrice().doubleValue(), order.getMethodPay().toString());
+            bbdd.insert(sql, order.getOIC().get(),
+                    order.getCustomer().get(),
+                    order.getPrice().get(),
+                    order.getMethodPay().get().toString());
 
             bbdd.close();
             return Optional.of(order);
@@ -66,9 +68,9 @@ import java.util.Optional;
             String sql = "UPDATE \"Order\" SET Customer = ?, Price = ?, Pay = ? WHERE OIC = ? ";
             bbdd.open();
             int updates = bbdd.update(sql,
-                    order.getCustomer().toString(),
-                    order.getPrice().doubleValue(),
-                    order.getMethodPay().toString(),
+                    order.getCustomer().get(),
+                    order.getPrice().get(),
+                    order.getMethodPay().get(),
                     uuid);
             return Optional.of(updates);
         }
@@ -90,7 +92,7 @@ import java.util.Optional;
             Order o = null;
             if(resultado.next()){
                 o= new Order(resultado.getString("OIC"),
-                                resultado.getObject("Customer"),
+                                resultado.getString("Customer"),
                                 resultado.getDouble("price"),
                                 resultado.getObject("Pay"));
             }

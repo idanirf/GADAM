@@ -102,9 +102,10 @@ public class ArticleRepository implements ArticleInterface{
         Article a = ((Article)entity) ;
         String query = " insert into Article (PIC, article, description, location, stock, price, isActive) " +
                 "values(?, ?, ?, ?, ?, ?, ?) ;";
-        ResultSet result = dataBaseManager.insert(query, a.getPIC().toString(), a.getArticle().toString(), a.getDescription().toString(),
-                a.getLocation().toString(), a.getStock().intValue(), a.getPrice().doubleValue(),
-                a.getIsActive().toString()).orElseThrow(SQLException::new);
+        ResultSet result = dataBaseManager.insert(query, a.getPIC().get(),
+                a.getArticle().get(), a.getDescription().get(),
+                a.getLocation().get(), a.getStock().get(), a.getPrice().get(),
+                a.getIsActive().get()).orElseThrow(SQLException::new);
         dataBaseManager.close();
         // todo no se si fallará el string del boolean
         return Optional.of(entity);
@@ -117,8 +118,8 @@ public class ArticleRepository implements ArticleInterface{
         dataBaseManager.open();
         String query = " update Article set article = ?, description= ?, location=?, stock=?, price=?," +
                 " isActive = ? where PIC = ? ;";
-        int result = dataBaseManager.update(query, o.getArticle().toString(), o.getDescription().toString(),
-                o.getLocation().toString(), o.getStock().intValue(), o.getPrice().doubleValue(), o.getIsActive().toString()
+        int result = dataBaseManager.update(query, o.getArticle().get(), o.getDescription().get(),
+                o.getLocation().get(), o.getStock().get(), o.getPrice().get(), o.getIsActive().get()
                 , entity);
         dataBaseManager.close();
         return Optional.of(result);

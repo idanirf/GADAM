@@ -5,8 +5,8 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public interface ReceptionInterface <T , ID>{
-    ObservableList<T> findAll() throws SQLException;
+public interface ReceptionInterface <Reception , String>{
+    ObservableList<Reception> findAll() throws SQLException;
 
-    Optional<T> save(T entity) throws SQLException;
+    Optional<Reception> save(Reception entity) throws SQLException;
 }

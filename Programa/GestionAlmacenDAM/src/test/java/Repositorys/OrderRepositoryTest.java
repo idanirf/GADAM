@@ -8,10 +8,7 @@ import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -24,7 +21,7 @@ public class OrderRepositoryTest {
         OrderRepository repository= OrderRepository.getInstance(DataBaseManager.getInstance());
         Order o = new Order("delete","pagador", 34.54D, Pay.PAYPAL);
 
-        @BeforeAll
+        @BeforeEach
         void initDataTest(){
 
             try{
@@ -35,12 +32,12 @@ public class OrderRepositoryTest {
             }
         }
 
-        @BeforeEach
+        @AfterEach
      void setDown() throws SQLException {
         var db = repository.getDb();
-        String query = "DELETE FROM Order WHERE OIC=?";
+        String query = "DELETE FROM \"Order\" WHERE OIC=?";
         db.open();
-        db.delete(query, o.getOIC());
+        db.delete(query, o.getOIC().get());
         db.close();
     }
 
@@ -67,8 +64,8 @@ public class OrderRepositoryTest {
         void searchByUuidTest() throws SQLException {
             //todo hacer no funciona
 
-            Order res =repository.findByUUID(o.getOIC());
-            Order res2 = repository.findByUUID(o.getOIC());
+            Order res =repository.findByUUID(o.getOIC().get());
+            Order res2 = repository.findByUUID(o.getOIC().get());
             assertAll(
 
                     () -> assertNotNull(res),
@@ -84,13 +81,9 @@ public class OrderRepositoryTest {
          */
         @Test
         void saveTest() throws SQLException {
-            //todo SI funciona
 
-            Order b = new Order(   "pagadorPrueva 2",50.0D,Pay.PAYPAL);
-
-            repository.save(b);
             assertAll(
-                    () -> assertNotNull(repository.findByUUID(b.getOIC()))
+                    () -> assertNotNull(repository.findByUUID(o.getOIC().get()))
             );
         }
 
@@ -103,9 +96,9 @@ public class OrderRepositoryTest {
 
 
             o.setMethodPay(new SimpleObjectProperty<Pay>(Pay.CARD));
-            repository.update(o.getOIC(), o);
+            repository.update(o.getOIC().get(), o);
             assertAll(
-                    () -> assertNotNull(repository.findByUUID(o.getOIC()))
+                    () -> assertNotNull(repository.findByUUID(o.getOIC().get()))
 
             );
         }

@@ -28,8 +28,8 @@ public class Reception {
                 '}';
     }
 
-    public Reception( String uuid,String supplierSIC , String carrier, Double cost) {
-        this.RIC = new SimpleStringProperty(uuid);
+    public Reception( String ric,String supplierSIC , String carrier, Double cost) {
+        this.RIC = new SimpleStringProperty(ric);
         this.supplierSIC = new SimpleStringProperty(supplierSIC);
         this.carrier = new SimpleStringProperty(carrier);
         this.cost = new SimpleDoubleProperty(cost);

@@ -59,12 +59,12 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         String query = "Insert into LineOrder (OLIC, articleº, load, unitPrice, totalPrice, BelongsOrder) " +
                 "values (?, ?, ?, ?, ?, ?);";
         ResultSet resultado = dataBaseManager.insert(query,
-                lineOrder.getOLIC().toString(),
-                lineOrder.getArticle().toString(),
-                lineOrder.getLoad().intValue(),
-                lineOrder.getUnitPrice().doubleValue(),
-                lineOrder.getTotalPrice().doubleValue(),
-                lineOrder.getBelongsOrder().toString()
+                lineOrder.getOLIC().get(),
+                lineOrder.getArticle().get(),
+                lineOrder.getLoad().get(),
+                lineOrder.getUnitPrice().get(),
+                lineOrder.getTotalPrice().get(),
+                lineOrder.getBelongsOrder().get()
         ).orElseThrow(SQLException::new);
         dataBaseManager.close();
         return Optional.of(lineOrder) ;
@@ -76,11 +76,11 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         String query = "Update LineOrder set articleº = ? ,  load = ? " +
                 ", unitPrice = ?, totalPrice = ?, BelongsOrder = ? where  OLIC = ? ;";
         int resultado = dataBaseManager.update(query,
-                lineOrder.getArticle().toString(),
-                lineOrder.getLoad().intValue(),
-                lineOrder.getUnitPrice().doubleValue(),
-                lineOrder.getTotalPrice().doubleValue(),
-                lineOrder.getBelongsOrder().toString(),
+                lineOrder.getArticle().get(),
+                lineOrder.getLoad().get(),
+                lineOrder.getUnitPrice().get(),
+                lineOrder.getTotalPrice().get(),
+                lineOrder.getBelongsOrder().get(),
                 olic);
         dataBaseManager.close();
         return Optional.of(resultado) ;

@@ -37,15 +37,15 @@ public class HelloApplication extends Application {
 
         //launch();
        checkServer();
-       //probarrepositorioAza();
+       probarrepositorioAza();
     }
 
     private static void probarrepositorioAza() {
-        //probarReception();  ok
-       // probarOrder();     ok
-       // probarArticle(); ok
-        //probarLineOrder();    ok
-       // probarLineReception(); ok
+        //probarReception();
+       probarOrder();
+        //probarArticle();
+       // probarLineOrder();
+        //probarLineReception();
 
 
     }
@@ -91,16 +91,16 @@ public class HelloApplication extends Application {
             System.out.println(lista);
 
             System.out.println("encontrando una por uuid  belongs ");
-            ObservableList o3 = o.SerachByReceptionsBelong(o2.get().getBelongsRecepcion().toString());
+            ObservableList o3 = o.SerachByReceptionsBelong(o2.get().getBelongsRecepcion().get());
             System.out.println(o3);
 
             System.out.println("update una LineReception");
             System.out.println("antigulo" + o1);
             o1.setLoad(123);
             o1.setBelongsRecepcion(new SimpleStringProperty("tutifruti"));
-            Optional<Integer> i = o.update(o1.getRLIC().toString(), o1);
+            Optional<Integer> i = o.update(o1.getRLIC().get(), o1);
             System.out.println("cargado" + i);
-            System.out.println("nuevo" + o.SerachByReceptionsBelong(o1.getBelongsRecepcion().toString()));
+            System.out.println("nuevo" + o.SerachByReceptionsBelong(o1.getBelongsRecepcion().get()));
 
 
 
@@ -132,20 +132,20 @@ public class HelloApplication extends Application {
             System.out.println(lista);
 
             System.out.println("encontrando una por uuid");
-            Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC().toString());
+            Optional<LineOrder> o3 = o.findByUuid(o2.get().getOLIC().get());
             System.out.println(o3);
 
             System.out.println("encontrando una por uuid  belongs ");
-            ObservableList o4 = o.searchByUuidOrder(o2.get().getBelongsOrder().toString());
+            ObservableList o4 = o.searchByUuidOrder(o2.get().getBelongsOrder().get());
             System.out.println(o4);
 
             System.out.println("update una LineOrder");
             System.out.println("original");
             System.out.println(o1);
             o1.setLoad(121);
-            Optional<Integer> i = o.update(o1.getOLIC().toString(), o1);
+            Optional<Integer> i = o.update(o1.getOLIC().get(), o1);
             System.out.println("cargado" + i );
-            System.out.println(o.findByUuid(o1.getOLIC().toString()));
+            System.out.println(o.findByUuid(o1.getOLIC().get()));
 
 
 
@@ -167,7 +167,7 @@ public class HelloApplication extends Application {
         try{
             System.out.println("salvando Article");
             Optional<Article> o2 = o.save(o1);
-            System.out.println(o2);
+            System.out.println(o.findByName(o2.get().getArticle().get()));
 
 
             System.out.println("encontrando una por name");
@@ -175,15 +175,15 @@ public class HelloApplication extends Application {
             System.out.println(o4);
 
             System.out.println("encontrando una por uuid");
-            Optional<Article> o3 = o.findByUuid(o2.get().getPIC().toString());
+            Optional<Article> o3 = o.findByUuid(o2.get().getPIC().get());
             System.out.println(o3);
 
             System.out.println("update una Article");
             System.out.println("antiguo");
             System.out.println(o1);
             o1.setArticle(new SimpleStringProperty("si"));
-            Optional<Integer> i = o.update(o1.getPIC().toString(), o1);
-            System.out.println(o.findByUuid(o1.getPIC().toString()));
+            Optional<Integer> i = o.update(o1.getPIC().get(), o1);
+            System.out.println(o.findByUuid(o1.getPIC().get()));
             System.out.println("cargado" + o1);
 
 
@@ -221,14 +221,14 @@ public class HelloApplication extends Application {
             System.out.println(lista);
 
             System.out.println("encontrando una por uuid");
-            Order o3 = o.findByUUID(o2.get().getOIC());
+            Order o3 = o.findByUUID(o2.get().getOIC().get());
             System.out.println(o3);
 
             System.out.println("update order una por uuid");
             System.out.println("antiguo" +o3);
             o3.setPrice(new SimpleDoubleProperty(11.1D));
-            o.update(o3.getOIC().toString(), o3);
-            System.out.println(o.findByUUID(o3.getOIC().toString()));
+            o.update(o3.getOIC().get(), o3);
+            System.out.println(o.findByUUID(o3.getOIC().get()));
 
 
 
