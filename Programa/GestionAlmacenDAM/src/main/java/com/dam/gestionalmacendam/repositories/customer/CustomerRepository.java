@@ -11,28 +11,34 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-public class CutomerRepository implements ICustomerRepository{
+public class CustomerRepository implements ICustomerRepository {
 
-    private static CutomerRepository instance;
+    private static CustomerRepository instance;
     private final ObservableList<Customer> repository = FXCollections.observableArrayList();
+    DataBaseManager db;
 
-    DataBaseManager db = DataBaseManager.getInstance();
+    private CustomerRepository(DataBaseManager db) {
+        this.db = db;
+    }
 
-
-    public static CutomerRepository getInstance() {
+    public static CustomerRepository getInstance(DataBaseManager db) {
         if (instance == null) {
-            instance = new CutomerRepository();
+            instance = new CustomerRepository(db);
         }
         return instance;
     }
 
+    public DataBaseManager getDb() {
+        return db;
+    }
 
     @Override
     public ObservableList<Customer> findAll() throws SQLException {
         String sql = "SELECT * FROM Customer";
+        db.open();
         ResultSet resultado = db.select(sql).orElseThrow(() -> new SQLException("Error al obtener todos los clientes."));
         repository.clear();
-        while(resultado.next()){
+        while (resultado.next()) {
             repository.add(
                     new Customer(
                             resultado.getString("CIC"),
@@ -40,6 +46,8 @@ public class CutomerRepository implements ICustomerRepository{
                             resultado.getString("surname"),
                             resultado.getString("cif"),
                             resultado.getString("direction"),
+                            resultado.getString("nickname"),
+                            resultado.getString("password"),
                             resultado.getString("telephoneNumber"),
                             resultado.getString("email"),
                             resultado.getString("photo"),
@@ -54,26 +62,30 @@ public class CutomerRepository implements ICustomerRepository{
 
     @Override
     public Optional<Customer> save(Customer customer) throws SQLException {
-        String sql = "INSERT INTO Customer (CIC,name,surname,cif,direction,telephoneNumber,email,photo,createdAt) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Customer (CIC,name,surname,cif,direction,nickname,password,telephoneNumber,email,photo,createdAt) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         db.open();
-        db.insert(sql, customer.getCIC(),customer.getName(),customer.getSurname(),customer.getCif(),customer.getDirection(),customer.getTelephoneNumber(),customer.getEmail(),customer.getPhoto(),customer.getCreatedAt().toString());
+        db.insert(sql, customer.getCIC(), customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getTelephoneNumber(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt().toString());
         db.close();
         return Optional.of(customer);
     }
 
     @Override
     public Optional<Customer> update(UUID uuid, Customer customer) throws SQLException {
-        int index = repository.indexOf(customer);
-        String sql=  "UPDATE Customer SET name = ?, surname = ?, cif = ?, direction = ?, telephoneNumber= ?, email = ?, photo = ?, createdAt = ? WHERE CIC = ?";
+        var c = findByUUID(uuid.toString());
+        var index = repository.indexOf(c);
+        String sql = "UPDATE Customer SET name = ?, surname = ?, cif = ?, direction = ?, nickname= ?, password= ?, telephoneNumber= ?, email = ?, photo = ?, createdAt = ? WHERE CIC = ?";
         db.open();
-        db.update(sql,customer.getName(),customer.getSurname(),customer.getCif(),customer.getDirection(),customer.getTelephoneNumber(),customer.getEmail(),customer.getPhoto(),customer.getCreatedAt(),customer.getCIC());
+        db.update(sql, customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt(), customer.getCIC());
         db.close();
+        repository.set(index, customer);
+
         return Optional.of(customer);
     }
 
 
     @Override
-    public Customer findByUUID(UUID uuid) throws SQLException {
-        return repository.stream().filter(customer -> customer.getCIC().equals(uuid)).findFirst().orElseThrow(()-> new SQLException("No existe el cliente con el UUID: "+ uuid));
+    public Customer findByUUID(String uuid) throws SQLException {
+        var repo = findAll();
+        return repo.stream().filter(customer -> customer.getCIC().equals(uuid)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 }

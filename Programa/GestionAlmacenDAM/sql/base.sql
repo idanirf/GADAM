@@ -1,3 +1,4 @@
+                                         PRIMARY KEY("RIC"));
 CREATE TABLE IF NOT EXISTS "Article" (
                                             "PIC" TEXT  NOT NULL,
                                             "article" TEXT NOT NULL,
@@ -14,6 +15,8 @@ CREATE TABLE IF NOT EXISTS "Customer" (
                                          "surname" TEXT NOT NULL,
                                          "cif" TEXT NOT NULL,
                                          "direction" TEXT NOT NULL,
+                                         "nickname" TEXT NOT NULL,
+                                         "password" TEXT NOT NULL,
                                          "telephoneNumber" String NOT NULL,
                                          "email" TEXT NOT NULL,
                                          "photo" TEXT NOT NULL,
@@ -27,14 +30,15 @@ CREATE TABLE IF NOT EXISTS "Employee" (
                                          "nif" TEXT NOT NULL,
                                          "email" TEXT NOT NULL,
                                          "photo" TEXT NOT NULL,
-					                    "idUser" INTERGER NOT NULL,
+                                         "nickname" TEXT NOT NULL,
+                                         "password" TEXT NOT NULL,
                                          "isManager" BOOLEAN NOT NULL,
                                          "createdAt" TEXT NOT NULL,
                                          PRIMARY KEY("EIC"));
 
 CREATE TABLE IF NOT EXISTS "LineOrder" (
                                          "OLIC" TEXT  NOT NULL,
-                                         "articleº" TEXT NOT NULL,
+                                         "article" TEXT NOT NULL,
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
@@ -42,7 +46,7 @@ CREATE TABLE IF NOT EXISTS "LineOrder" (
 
 CREATE TABLE IF NOT EXISTS "LineReception" (
                                           "RLIC" TEXT  NOT NULL,
-                                         "articleº" TEXT NOT NULL,
+                                         "article" TEXT NOT NULL,
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
@@ -70,11 +74,3 @@ CREATE TABLE IF NOT EXISTS "Supplier" (
                                          "telephoneNumber" TEXT NOT NULL,
 					                    "email" TEXT NOT NULL,
                                          PRIMARY KEY("SIC"));
-
-CREATE TABLE IF NOT EXISTS "User" (
-                                         "idUser" INTERGER  NOT NULL,
-                                         "username" TEXT NOT NULL,   
-                                         "password" TEXT NOT NULL,
-                                         PRIMARY KEY("idUser"),
-                                        FOREIGN KEY ("idUser") REFERENCES "Employee"("idUser") ON DELETE CASCADE
-);
