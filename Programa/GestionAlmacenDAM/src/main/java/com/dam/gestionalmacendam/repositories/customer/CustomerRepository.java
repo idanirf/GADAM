@@ -72,10 +72,12 @@ public class CustomerRepository implements ICustomerRepository {
     @Override
     public Optional<Customer> update(UUID uuid, Customer customer) throws SQLException {
         var c = findByUUID(uuid.toString());
+
         var index = repository.indexOf(c);
+
         String sql = "UPDATE Customer SET name = ?, surname = ?, cif = ?, direction = ?, nickname= ?, password= ?, telephoneNumber= ?, email = ?, photo = ?, createdAt = ? WHERE CIC = ?";
         db.open();
-        db.update(sql, customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt(), customer.getCIC());
+        db.update(sql, customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getTelephoneNumber(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt(), customer.getCIC());
         db.close();
         repository.set(index, customer);
 

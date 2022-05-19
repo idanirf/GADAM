@@ -174,6 +174,7 @@ public class DataBaseManager {
         for (int i = 0; i < params.length; i++) {
             preparedStatement.setObject(i + 1, params[i]);
         }
+
         return preparedStatement.executeUpdate();
     }
 

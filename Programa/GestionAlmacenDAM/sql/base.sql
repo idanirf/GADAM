@@ -1,4 +1,3 @@
-                                         PRIMARY KEY("RIC"));
 CREATE TABLE IF NOT EXISTS "Article" (
                                             "PIC" TEXT  NOT NULL,
                                             "article" TEXT NOT NULL,
@@ -42,7 +41,10 @@ CREATE TABLE IF NOT EXISTS "LineOrder" (
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("OLIC"));
+                                         "BelongsOrder" TEXT NOT NULL,
+                                         PRIMARY KEY("OLIC"),
+                                         FOREIGN KEY ("BelongsOrder") REFERENCES "Order" ("OIC")
+                                         );
 
 CREATE TABLE IF NOT EXISTS "LineReception" (
                                           "RLIC" TEXT  NOT NULL,
@@ -50,7 +52,9 @@ CREATE TABLE IF NOT EXISTS "LineReception" (
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("RLIC")
+                                          "BelongsReception" TEXT NOT NULL,
+                                         PRIMARY KEY("RLIC"),
+                                         FOREIGN KEY("BelongsReception") REFERENCES Reception ("RIC")
                                            );
 
 CREATE TABLE IF NOT EXISTS "Order" (
