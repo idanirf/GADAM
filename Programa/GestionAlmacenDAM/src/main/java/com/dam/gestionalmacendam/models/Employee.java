@@ -19,8 +19,9 @@ public class Employee {
     private StringProperty password;
     private BooleanProperty isManager;
     private ObjectProperty<LocalDateTime> createdAt;
+    private BooleanProperty isActive;
 
-    public Employee(String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt) {
+    public Employee(String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt,Boolean isActive) {
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
         this.nif = new SimpleStringProperty(nif);
@@ -30,9 +31,10 @@ public class Employee {
         this.photo = new SimpleStringProperty(photo);
         this.isManager = new SimpleBooleanProperty(isManager);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
+        this.isActive= new SimpleBooleanProperty(isActive);
     }
 
-    public Employee(String eic, String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt) {
+    public Employee(String eic, String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt, Boolean isActive) {
         this.EIC = eic;
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
@@ -43,6 +45,7 @@ public class Employee {
         this.password = new SimpleStringProperty(password);
         this.isManager = new SimpleBooleanProperty(isManager);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
+        this.isActive= new SimpleBooleanProperty(isActive);
     }
 
     public String getEIC() {
@@ -84,6 +87,7 @@ public class Employee {
     public LocalDateTime getCreatedAt() {
         return createdAt.get();
     }
+    public Boolean isActive(){return isActive.get();}
 
     @Override
     public String toString() {
@@ -98,6 +102,7 @@ public class Employee {
                 ", password=" + password +
                 ", isManager=" + isManager +
                 ", createdAt=" + createdAt +
+                ", isActive=" + isActive +
                 '}';
     }
 }

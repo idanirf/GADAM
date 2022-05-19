@@ -15,7 +15,7 @@ public class CustomerRepository implements ICustomerRepository {
 
     private static CustomerRepository instance;
     private final ObservableList<Customer> repository = FXCollections.observableArrayList();
-    DataBaseManager db;
+    private final DataBaseManager db;
 
     private CustomerRepository(DataBaseManager db) {
         this.db = db;
@@ -51,7 +51,8 @@ public class CustomerRepository implements ICustomerRepository {
                             resultado.getString("telephoneNumber"),
                             resultado.getString("email"),
                             resultado.getString("photo"),
-                            LocalDateTime.parse(resultado.getString("createdAt"))
+                            LocalDateTime.parse(resultado.getString("createdAt")),
+                            resultado.getBoolean("isActive")
 
                     )
             );
@@ -62,9 +63,9 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public Optional<Customer> save(Customer customer) throws SQLException {
-        String sql = "INSERT INTO Customer (CIC,name,surname,cif,direction,nickname,password,telephoneNumber,email,photo,createdAt) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Customer (CIC,name,surname,cif,direction,nickname,password,telephoneNumber,email,photo,createdAt,isActive) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         db.open();
-        db.insert(sql, customer.getCIC(), customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getTelephoneNumber(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt().toString());
+        db.insert(sql, customer.getCIC(), customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getTelephoneNumber(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt().toString(),customer.isActive());
         db.close();
         return Optional.of(customer);
     }
@@ -72,10 +73,12 @@ public class CustomerRepository implements ICustomerRepository {
     @Override
     public Optional<Customer> update(UUID uuid, Customer customer) throws SQLException {
         var c = findByUUID(uuid.toString());
+
         var index = repository.indexOf(c);
-        String sql = "UPDATE Customer SET name = ?, surname = ?, cif = ?, direction = ?, nickname= ?, password= ?, telephoneNumber= ?, email = ?, photo = ?, createdAt = ? WHERE CIC = ?";
+
+        String sql = "UPDATE Customer SET name = ?, surname = ?, cif = ?, direction = ?, nickname= ?, password= ?, telephoneNumber= ?, email = ?, photo = ?, createdAt = ?, isActive= ? WHERE CIC = ?";
         db.open();
-        db.update(sql, customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt(), customer.getCIC());
+        db.update(sql, customer.getName(), customer.getSurname(), customer.getCif(), customer.getDirection(), customer.getNickName(), customer.getPassword(), customer.getTelephoneNumber(), customer.getEmail(), customer.getPhoto(), customer.getCreatedAt(),customer.isActive(), customer.getCIC());
         db.close();
         repository.set(index, customer);
 

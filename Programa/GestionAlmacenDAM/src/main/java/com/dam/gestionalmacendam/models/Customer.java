@@ -1,9 +1,6 @@
 package com.dam.gestionalmacendam.models;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -22,8 +19,9 @@ public class Customer {
     private StringProperty email;
     private StringProperty photo;
     private ObjectProperty<LocalDateTime> createdAt;
+    private BooleanProperty isActive;
 
-    public Customer(String name, String surname, String cif, String direction, String nickName, String password, String telephoneNumber, String email, String photo, LocalDateTime createdAt) {
+    public Customer(String name, String surname, String cif, String direction, String nickName, String password, String telephoneNumber, String email, String photo, LocalDateTime createdAt, Boolean isActive) {
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
         this.cif = new SimpleStringProperty(cif);
@@ -34,11 +32,12 @@ public class Customer {
         this.email = new SimpleStringProperty(email);
         this.photo = new SimpleStringProperty(photo);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
+        this.isActive= new SimpleBooleanProperty(isActive);
 
 
     }
 
-    public Customer(String cic, String name, String surname, String cif, String direction, String nickName, String password, String telephoneNumber, String email, String photo, LocalDateTime createdAt) {
+    public Customer(String cic, String name, String surname, String cif, String direction, String nickName, String password, String telephoneNumber, String email, String photo, LocalDateTime createdAt, Boolean isActive) {
         this.CIC = cic;
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
@@ -50,6 +49,7 @@ public class Customer {
         this.email = new SimpleStringProperty(email);
         this.photo = new SimpleStringProperty(photo);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
+        this.isActive= new SimpleBooleanProperty(isActive);
     }
 
     public String getCIC() {
@@ -102,6 +102,8 @@ public class Customer {
         return createdAt.get();
     }
 
+    public Boolean isActive(){return isActive.get();}
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -116,6 +118,7 @@ public class Customer {
                 ", email=" + email +
                 ", photo=" + photo +
                 ", createdAt=" + createdAt +
+                ", isActive=" + isActive +
                 '}';
     }
 }

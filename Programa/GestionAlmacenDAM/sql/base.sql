@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS "Article" (
                                             "price" REAL NOT NULL,
                                             "stock" INTEGER NOT NULL,
                                             "isActive" BOOLEAN NOT NULL,
+                                            "photo" TEXT NOT NULL,
                                             PRIMARY KEY("PIC"));
 
 CREATE TABLE IF NOT EXISTS "Customer" (
@@ -20,6 +21,7 @@ CREATE TABLE IF NOT EXISTS "Customer" (
                                          "email" TEXT NOT NULL,
                                          "photo" TEXT NOT NULL,
                                          "createdAt" TEXT NOT NULL,
+                                         "isActive" BOOLEAN NOT NULL,
                                          PRIMARY KEY("CIC"));
 
 CREATE TABLE IF NOT EXISTS "Employee" (
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "Employee" (
                                          "password" TEXT NOT NULL,
                                          "isManager" BOOLEAN NOT NULL,
                                          "createdAt" TEXT NOT NULL,
+                                         "isActive" BOOLEAN NOT NULL,
                                          PRIMARY KEY("EIC"));
 
 CREATE TABLE IF NOT EXISTS "LineOrder" (
@@ -41,7 +44,10 @@ CREATE TABLE IF NOT EXISTS "LineOrder" (
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("OLIC"));
+                                         "BelongsOrder" TEXT NOT NULL,
+                                         PRIMARY KEY("OLIC"),
+                                         FOREIGN KEY ("BelongsOrder") REFERENCES "Order" ("OIC")
+                                         );
 
 CREATE TABLE IF NOT EXISTS "LineReception" (
                                           "RLIC" TEXT  NOT NULL,
@@ -49,7 +55,9 @@ CREATE TABLE IF NOT EXISTS "LineReception" (
                                          "load" INTEGER NOT NULL,
                                          "unitPrice" REAL NOT NULL,
                                          "totalPrice" REAL NOT NULL,
-                                         PRIMARY KEY("RLIC")
+                                          "BelongsReception" TEXT NOT NULL,
+                                         PRIMARY KEY("RLIC"),
+                                         FOREIGN KEY("BelongsReception") REFERENCES Reception ("RIC")
                                            );
 
 CREATE TABLE IF NOT EXISTS "Order" (

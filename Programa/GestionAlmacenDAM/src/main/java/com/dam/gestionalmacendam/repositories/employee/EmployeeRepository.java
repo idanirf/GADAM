@@ -15,7 +15,7 @@ public class EmployeeRepository implements IEmployeeRepository {
 
     private static EmployeeRepository instance;
     private final ObservableList<Employee> repository = FXCollections.observableArrayList();
-    DataBaseManager db;
+    private final DataBaseManager db;
 
     private EmployeeRepository(DataBaseManager db) {
         this.db = db;
@@ -50,7 +50,8 @@ public class EmployeeRepository implements IEmployeeRepository {
                             resultado.getString("nickname"),
                             resultado.getString("password"),
                             resultado.getBoolean("isManager"),
-                            LocalDateTime.parse(resultado.getString("createdAt"))
+                            LocalDateTime.parse(resultado.getString("createdAt")),
+                            resultado.getBoolean("isActive")
 
                     )
             );
@@ -61,9 +62,9 @@ public class EmployeeRepository implements IEmployeeRepository {
 
     @Override
     public Optional<Employee> save(Employee employee) throws SQLException {
-        String sql = "INSERT INTO Employee (EIC,name,surname,nif,email,photo,nickname,password,isManager,createdAt) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Employee (EIC,name,surname,nif,email,photo,nickname,password,isManager,createdAt,isActive) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         db.open();
-        db.insert(sql, employee.getEIC(), employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString());
+        db.insert(sql, employee.getEIC(), employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(),employee.isActive());
         db.close();
         return Optional.of(employee);
     }
@@ -72,9 +73,9 @@ public class EmployeeRepository implements IEmployeeRepository {
     public Optional<Employee> update(UUID uuid, Employee employee) throws SQLException {
         var c = findByUUID(uuid.toString());
         var index = repository.indexOf(c);
-        String sql = "UPDATE Employee SET name = ?, surname = ?, nif = ?, email = ?, photo = ?, nickname= ?, password= ?, isManager= ?, createdAt = ? WHERE EIC = ?";
+        String sql = "UPDATE Employee SET name = ?, surname = ?, nif = ?, email = ?, photo = ?, nickname= ?, password= ?, isManager= ?, createdAt = ?, isActive= ? WHERE EIC = ?";
         db.open();
-        db.update(sql, employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(), employee.getEIC());
+        db.update(sql, employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(),employee.isActive() , employee.getEIC());
         db.close();
         repository.set(index, employee);
 

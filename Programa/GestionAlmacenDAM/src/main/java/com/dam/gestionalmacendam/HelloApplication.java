@@ -16,8 +16,10 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
 
         launch();
-//        checkServer();
+        // checkServer();
     }
+
+
 
     private static void checkServer() {
         System.out.println("Comprobamos la conexión al Servidor BD");
@@ -42,7 +44,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
         int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
-        Scene scene = new Scene(fxmlLoader.load(), screenWidth, screenHeight);
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("GADAM S.L");
         stage.setResizable(false);
         stage.setScene(scene);

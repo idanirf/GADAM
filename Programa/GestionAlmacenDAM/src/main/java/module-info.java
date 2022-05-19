@@ -3,6 +3,7 @@ module com.dam.gestionalmacendam {
     requires javafx.fxml;
     requires java.sql;
     requires static lombok;
+    requires com.google.gson;
 
 
     opens com.dam.gestionalmacendam to javafx.fxml;
