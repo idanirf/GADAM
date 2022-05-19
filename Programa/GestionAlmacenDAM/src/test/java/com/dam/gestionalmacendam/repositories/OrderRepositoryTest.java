@@ -5,12 +5,9 @@ import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.sql.SQLException;
 

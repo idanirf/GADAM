@@ -3,7 +3,6 @@ package com.dam.gestionalmacendam.repositories;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineReception;
 import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

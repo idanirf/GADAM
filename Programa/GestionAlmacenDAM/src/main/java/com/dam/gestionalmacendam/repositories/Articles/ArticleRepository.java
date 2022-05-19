@@ -2,7 +2,6 @@ package com.dam.gestionalmacendam.repositories.Articles;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Article;
-import com.dam.gestionalmacendam.models.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -32,24 +31,9 @@ public class ArticleRepository implements ArticleInterface{
     }
 
     @Override
-    public Optional<Article> findByName(String name) throws SQLException {
-        dataBaseManager.open();
-        String query = "select * from Article where article = ? ";
-        ResultSet result = dataBaseManager.select(query, name).get();
-        Article article = null;
-        if (result.next()){
-            article = new Article(
-                    result.getString("PIC"),
-                    result.getString("article"),
-                    result.getString("description"),
-                    result.getString("location"),
-                    result.getDouble("price"),
-                    result.getInt("stock"),
-                    result.getBoolean("isActive"));
-
-        }
-        dataBaseManager.close();
-        return Optional.of(article);
+    public Article findByName(String name) throws SQLException {
+        var repo= findAll();
+        return repo.stream().filter(article-> article.getArticle().get().equals(name)).findFirst().orElseThrow(()-> new SQLException("No existe"));
     }
 
 
@@ -75,7 +59,8 @@ public class ArticleRepository implements ArticleInterface{
                             result.getString("location"),
                             result.getDouble("price"),
                             result.getInt("stock"),
-                            result.getBoolean("isActive")
+                            result.getBoolean("isActive"),
+                            result.getString("photo")
 
                     )
             );
@@ -87,12 +72,12 @@ public class ArticleRepository implements ArticleInterface{
     @Override
     public Optional<Article> save(Article article) throws SQLException {
         dataBaseManager.open();
-        String query = " insert into Article (PIC, article, description, location, stock, price, isActive) " +
-                "values(?, ?, ?, ?, ?, ?, ?) ;";
+        String query = " insert into Article (PIC, article, description, location, stock, price, isActive, photo) " +
+                "values(?, ?, ?, ?, ?, ?,?, ?) ;";
         dataBaseManager.insert(query, article.getPIC(),
                 article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(),
-                article.getIsActive().get());
+                article.getIsActive().get(),article.getPhoto().get());
         dataBaseManager.close();
         return Optional.of(article);
     }
@@ -106,10 +91,10 @@ public class ArticleRepository implements ArticleInterface{
 
         dataBaseManager.open();
         String query = " update Article set article = ?, description= ?, location=?, stock=?, price=?," +
-                " isActive = ? where PIC = ? ;";
+                " isActive = ?, photo = ? where PIC = ? ;";
         dataBaseManager.update(query, article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(), article.getIsActive().get()
-                , pic);
+                ,article.getPhoto().get(), pic);
         dataBaseManager.close();
         repository.set(index,article);
         return Optional.of(article);

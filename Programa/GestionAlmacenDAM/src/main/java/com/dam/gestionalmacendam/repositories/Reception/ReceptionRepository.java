@@ -23,11 +23,11 @@ public class ReceptionRepository implements ReceptionInterface<Reception, String
         return dataBaseManager;
     }
 
-    public static ReceptionRepository getInstance(DataBaseManager instance) {
-        if (ReceptionRepository.instance == null) {
-            ReceptionRepository.instance = new ReceptionRepository(DataBaseManager.getInstance());
+    public static ReceptionRepository getInstance(DataBaseManager dataBaseManager) {
+        if (instance == null) {
+            instance = new ReceptionRepository(dataBaseManager);
         }
-        return ReceptionRepository.instance;
+        return instance;
     }
 
     @Override

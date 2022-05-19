@@ -6,7 +6,6 @@ import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.sql.SQLException;
 

@@ -3,32 +3,32 @@ package com.dam.gestionalmacendam.repositories.Order;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 
 public class OrderRepository implements ICRUDOrder {
     private static OrderRepository instance;
     private final ObservableList<Order> repository = FXCollections.observableArrayList();
-    DataBaseManager bbdd = DataBaseManager.getInstance();
+    private final DataBaseManager bbdd;
 
     public DataBaseManager getDb(){
         return bbdd;
     }
 
-    public static OrderRepository getInstance(DataBaseManager instance) {
-        if (OrderRepository.instance == null) {
-            OrderRepository.instance = new OrderRepository();
+    private OrderRepository(DataBaseManager bbdd) {
+        this.bbdd = bbdd;
+    }
+
+    public static OrderRepository getInstance(DataBaseManager bbdd) {
+        if (instance == null) {
+            instance = new OrderRepository(bbdd);
         }
-        return OrderRepository.instance;
+        return instance;
     }
     @Override
     public ObservableList<Order> findAll() throws SQLException {

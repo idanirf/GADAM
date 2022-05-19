@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS "Article" (
                                             "price" REAL NOT NULL,
                                             "stock" INTEGER NOT NULL,
                                             "isActive" BOOLEAN NOT NULL,
+                                            "photo" TEXT NOT NULL,
                                             PRIMARY KEY("PIC"));
 
 CREATE TABLE IF NOT EXISTS "Customer" (
@@ -20,6 +21,7 @@ CREATE TABLE IF NOT EXISTS "Customer" (
                                          "email" TEXT NOT NULL,
                                          "photo" TEXT NOT NULL,
                                          "createdAt" TEXT NOT NULL,
+                                         "isActive" BOOLEAN NOT NULL,
                                          PRIMARY KEY("CIC"));
 
 CREATE TABLE IF NOT EXISTS "Employee" (
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "Employee" (
                                          "password" TEXT NOT NULL,
                                          "isManager" BOOLEAN NOT NULL,
                                          "createdAt" TEXT NOT NULL,
+                                         "isActive" BOOLEAN NOT NULL,
                                          PRIMARY KEY("EIC"));
 
 CREATE TABLE IF NOT EXISTS "LineOrder" (

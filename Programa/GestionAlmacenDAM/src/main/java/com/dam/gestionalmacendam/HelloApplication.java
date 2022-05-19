@@ -1,18 +1,7 @@
 package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.*;
-import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
-import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
-import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
-import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
-import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
-import com.dam.gestionalmacendam.repositories.customer.CustomerRepository;
-import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import javafx.application.Application;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
@@ -21,9 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 public class HelloApplication extends Application {
     public static void main(String[] args) {

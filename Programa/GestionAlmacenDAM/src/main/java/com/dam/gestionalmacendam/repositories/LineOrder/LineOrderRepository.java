@@ -5,7 +5,6 @@ import com.dam.gestionalmacendam.models.LineOrder;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.shape.Line;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,11 +23,11 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         return dataBaseManager;
     }
 
-    public static LineOrderRepository getInstance(DataBaseManager instance){
-        if(LineOrderRepository.instance ==null){
-            LineOrderRepository.instance = new LineOrderRepository(DataBaseManager.getInstance());
+    public static LineOrderRepository getInstance(DataBaseManager dataBaseManager){
+        if(instance ==null){
+            instance = new LineOrderRepository(dataBaseManager);
         }
-        return LineOrderRepository.instance;
+        return instance;
     }
 
     @Override

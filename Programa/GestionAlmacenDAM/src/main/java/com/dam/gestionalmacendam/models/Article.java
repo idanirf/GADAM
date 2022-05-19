@@ -13,25 +13,28 @@ public class Article {
     private DoubleProperty price;
     private IntegerProperty stock;
     private BooleanProperty isActive;
+    private StringProperty photo;
 
     public Article(String article, String description, String location,
-                   Double price, Integer  stock, Boolean  isActive) {
+                   Double price, Integer  stock, Boolean  isActive,String photo) {
         this.article =new SimpleStringProperty(article);
         this.description = new SimpleStringProperty(description);
         this.location = new SimpleStringProperty(location);
         this.price = new SimpleDoubleProperty(price) ;
         this.stock = new SimpleIntegerProperty(stock);
-        this.isActive = new SimpleBooleanProperty(isActive);;
+        this.isActive = new SimpleBooleanProperty(isActive);
+        this.photo=new SimpleStringProperty(photo);
     }
     public Article(String PIC ,String article, String description, String location,
-                   Double price, Integer  stock, Boolean  isActive) {
+                   Double price, Integer  stock, Boolean  isActive, String photo) {
         this.PIC = PIC;
         this.article =new SimpleStringProperty(article);
         this.description = new SimpleStringProperty(description);
         this.location = new SimpleStringProperty(location);
         this.price = new SimpleDoubleProperty(price) ;
         this.stock = new SimpleIntegerProperty(stock);
-        this.isActive = new SimpleBooleanProperty(isActive);;
+        this.isActive = new SimpleBooleanProperty(isActive);
+        this.photo=new SimpleStringProperty(photo);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class Article {
                 ", price=" + price +
                 ", stock=" + stock +
                 ", isActive=" + isActive +
+                ", photo=" + photo +
                 '}';
     }
 }

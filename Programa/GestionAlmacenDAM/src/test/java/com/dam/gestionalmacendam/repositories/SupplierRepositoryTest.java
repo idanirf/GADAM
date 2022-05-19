@@ -4,9 +4,7 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLException;
 import java.util.UUID;

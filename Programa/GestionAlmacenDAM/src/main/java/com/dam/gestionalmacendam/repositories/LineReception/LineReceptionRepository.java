@@ -1,12 +1,10 @@
 package com.dam.gestionalmacendam.repositories.LineReception;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.models.LineReception;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.shape.Line;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +24,11 @@ public class LineReceptionRepository implements LineReceptionInterface{
         return dataBaseManager;
     }
 
-    public static LineReceptionRepository getInstance(DataBaseManager instance){
-        if(LineReceptionRepository.instance ==null){
-            LineReceptionRepository.instance = new LineReceptionRepository(DataBaseManager.getInstance());
+    public static LineReceptionRepository getInstance(DataBaseManager dataBaseManager){
+        if(instance == null){
+            instance = new LineReceptionRepository(dataBaseManager);
         }
-        return LineReceptionRepository.instance;
+        return instance;
     }
 
     @Override

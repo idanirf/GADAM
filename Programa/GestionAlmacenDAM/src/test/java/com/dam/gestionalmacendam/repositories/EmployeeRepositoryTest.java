@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmployeeRepositoryTest {
-    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDateTime.now());
+    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDateTime.now(),true);
     EmployeeRepository repository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
 
     @BeforeAll

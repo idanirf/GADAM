@@ -13,20 +13,20 @@ import java.util.Optional;
 public class SupplierRepository implements ICRUDSupplier {
     private static SupplierRepository instance;
     private final ObservableList<Supplier> repository = FXCollections.observableArrayList();
-    DataBaseManager bbdd = DataBaseManager.getInstance();
+    private final DataBaseManager bbdd;
 
     public DataBaseManager getBbdd(){
         return bbdd;
     }
-    private SupplierRepository() {
-        //Constructor vacío
+    private SupplierRepository(DataBaseManager bbdd) {
+        this.bbdd=bbdd;
     }
 
-    public static SupplierRepository getInstance(DataBaseManager instance) {
-        if (SupplierRepository.instance == null) {
-            SupplierRepository.instance = new SupplierRepository();
+    public static SupplierRepository getInstance(DataBaseManager bbdd) {
+        if (instance == null) {
+            instance = new SupplierRepository(bbdd);
         }
-        return SupplierRepository.instance;
+        return instance;
     }
 
     @Override

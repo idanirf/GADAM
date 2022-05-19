@@ -8,16 +8,14 @@ import javafx.collections.ObservableList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArticleRepositoryTest {
       ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-      Article a = new Article("delete","Prueba1","grande","sala a",35.50D,5,false);
+      Article a = new Article("delete","Prueba1","grande","sala a",35.50D,5,false,"x");
 
     @BeforeEach
     void initDataTest(){
@@ -59,11 +57,10 @@ public class ArticleRepositoryTest {
      */
     @Test
     void findByNameTest() throws SQLException {
-        Optional<Article> res = repository.findByName(a.getArticle().get());
+        Article res = repository.findByName(a.getArticle().get());
         Article res1 = repository.findByUuid(a.getPIC());
         assertAll(
-                () -> assertNotNull(res.get()),
-                () ->  assertTrue( res.get().getArticle().get().equalsIgnoreCase( res1.getArticle().get()))
+                () ->  assertTrue( res.getArticle().get().equalsIgnoreCase( res1.getArticle().get()))
         );
     }
 
