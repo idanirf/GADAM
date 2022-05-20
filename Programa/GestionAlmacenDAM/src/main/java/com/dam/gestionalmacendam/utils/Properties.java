@@ -13,5 +13,8 @@ public class Properties {
     public static final String BACKUP_FILE = BACKUP + File.separator + "copySecurity.json";
     public static final String IMAGES = DATOS + File.separator + "images";
 
+    public static final int APP_HEIGHT = 720;
+    public static final int APP_WIDTH = 1280;
+
 
 }
