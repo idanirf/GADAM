@@ -48,7 +48,7 @@ public class ArticleRepositoryTest {
         assertAll(
                 () -> assertTrue(res.size()>0),
                 () -> assertFalse(res.size()==0),
-                () -> assertEquals(a.getArticle().get(),article.getArticle().get())
+                () -> assertEquals(a.getArticle(),article.getArticle())
         );
     }
 
@@ -57,10 +57,10 @@ public class ArticleRepositoryTest {
      */
     @Test
     void findByNameTest() throws SQLException {
-        Article res = repository.findByName(a.getArticle().get());
+        Article res = repository.findByName(a.getArticle());
         Article res1 = repository.findByUuid(a.getPIC());
         assertAll(
-                () ->  assertTrue( res.getArticle().get().equalsIgnoreCase( res1.getArticle().get()))
+                () ->  assertTrue( res.getArticle().equalsIgnoreCase( res1.getArticle()))
         );
     }
 
@@ -72,10 +72,10 @@ public class ArticleRepositoryTest {
         var aux = repository.findByUuid(a.getPIC());
         assertAll(
 
-                () -> assertEquals(aux.getArticle().get(),a.getArticle().get()),
+                () -> assertEquals(aux.getArticle(),a.getArticle()),
                 () -> assertEquals(aux.getPIC(),a.getPIC()),
-                () -> assertEquals(aux.getPrice().get(),a.getPrice().get()),
-                () -> assertEquals(aux.getDescription().get(),a.getDescription().get())
+                () -> assertEquals(aux.getPrice(),a.getPrice()),
+                () -> assertEquals(aux.getDescription(),a.getDescription())
                 );
 
     }
@@ -88,10 +88,10 @@ public class ArticleRepositoryTest {
     void saveTest() throws SQLException {
         var a1= repository.findByUuid(a.getPIC());
         assertAll(
-                ()->assertEquals(a1.getArticle().get(),a.getArticle().get()),
-                ()->assertEquals(a1.getPrice().get(),a.getPrice().get()),
-                ()->assertEquals(a1.getDescription().get(),a.getDescription().get()),
-                ()->assertEquals(a1.getStock().get(),a.getStock().get())
+                ()->assertEquals(a1.getArticle(),a.getArticle()),
+                ()->assertEquals(a1.getPrice(),a.getPrice()),
+                ()->assertEquals(a1.getDescription(),a.getDescription()),
+                ()->assertEquals(a1.getStock(),a.getStock())
         );
     }
 
@@ -100,13 +100,13 @@ public class ArticleRepositoryTest {
      */
     @Test
     void updateTest() throws SQLException {
-        a.setArticle(new SimpleStringProperty("mesita"));
+        a.setArticle("mesita");
         var aux=repository.update(a.getPIC(), a);
         assertAll(
-                ()->assertEquals(aux.get().getArticle().get(),a.getArticle().get()),
-                ()->assertEquals(aux.get().getPrice().get(),a.getPrice().get()),
-                ()->assertEquals(aux.get().getDescription().get(),a.getDescription().get()),
-                ()->assertEquals(aux.get().getStock().get(),a.getStock().get())
+                ()->assertEquals(aux.get().getArticle(),a.getArticle()),
+                ()->assertEquals(aux.get().getPrice(),a.getPrice()),
+                ()->assertEquals(aux.get().getDescription(),a.getDescription()),
+                ()->assertEquals(aux.get().getStock(),a.getStock())
         );
     }
 }

@@ -50,4 +50,96 @@ public class Article {
                 ", photo=" + photo +
                 '}';
     }
+
+    public String getPIC() {
+        return PIC;
+    }
+
+    public void setPIC(String PIC) {
+        this.PIC = PIC;
+    }
+
+    public String getArticle() {
+        return article.get();
+    }
+
+    public StringProperty articleProperty() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article.set(article);
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public String getLocation() {
+        return location.get();
+    }
+
+    public StringProperty locationProperty() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location.set(location);
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public int getStock() {
+        return stock.get();
+    }
+
+    public IntegerProperty stockProperty() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock.set(stock);
+    }
+
+    public boolean isIsActive() {
+        return isActive.get();
+    }
+
+    public BooleanProperty isActiveProperty() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive.set(isActive);
+    }
+
+    public String getPhoto() {
+        return photo.get();
+    }
+
+    public StringProperty photoProperty() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo.set(photo);
+    }
 }

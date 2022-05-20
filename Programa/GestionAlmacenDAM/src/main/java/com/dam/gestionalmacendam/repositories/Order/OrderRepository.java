@@ -56,10 +56,10 @@ public class OrderRepository implements ICRUDOrder {
         String sql = "INSERT INTO \"Order\" values (?, ?, ?, ?);";
         bbdd.open();
 
-        bbdd.insert(sql, order.getOIC().get(),
-                order.getCustomer().get(),
-                order.getPrice().get(),
-                order.getMethodPay().get().toString());
+        bbdd.insert(sql, order.getOIC(),
+                order.getCustomer(),
+                order.getPrice(),
+                order.getMethodPay().toString());
 
         bbdd.close();
         return Optional.of(order);
@@ -72,9 +72,9 @@ public class OrderRepository implements ICRUDOrder {
         String sql = "UPDATE \"Order\" SET Customer = ?, Price = ?, Pay = ? WHERE OIC = ? ";
         bbdd.open();
         bbdd.update(sql,
-                order.getCustomer().get(),
-                order.getPrice().get(),
-                order.getMethodPay().get(),
+                order.getCustomer(),
+                order.getPrice(),
+                order.getMethodPay(),
                 uuid);
         repository.set(index,order);
         return Optional.of(order);
@@ -82,6 +82,6 @@ public class OrderRepository implements ICRUDOrder {
 
     public Order findByUUID(String OIC) throws SQLException {
         var repo= findAll();
-        return repo.stream().filter(order-> order.getOIC().get().equals(OIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
+        return repo.stream().filter(order-> order.getOIC().equals(OIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 }

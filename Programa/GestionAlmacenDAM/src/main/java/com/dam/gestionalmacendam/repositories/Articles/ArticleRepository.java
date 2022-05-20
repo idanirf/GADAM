@@ -33,7 +33,7 @@ public class ArticleRepository implements ArticleInterface{
     @Override
     public Article findByName(String name) throws SQLException {
         var repo= findAll();
-        return repo.stream().filter(article-> article.getArticle().get().equals(name)).findFirst().orElseThrow(()-> new SQLException("No existe"));
+        return repo.stream().filter(article-> article.getArticle().equals(name)).findFirst().orElseThrow(()-> new SQLException("No existe"));
     }
 
 
@@ -75,9 +75,9 @@ public class ArticleRepository implements ArticleInterface{
         String query = " insert into Article (PIC, article, description, location, stock, price, isActive, photo) " +
                 "values(?, ?, ?, ?, ?, ?,?, ?) ;";
         dataBaseManager.insert(query, article.getPIC(),
-                article.getArticle().get(), article.getDescription().get(),
-                article.getLocation().get(), article.getStock().get(), article.getPrice().get(),
-                article.getIsActive().get(),article.getPhoto().get());
+                article.getArticle(), article.getDescription(),
+                article.getLocation(), article.getStock(), article.getPrice(),
+                article.getIsActive(),article.getPhoto());
         dataBaseManager.close();
         return Optional.of(article);
     }
@@ -92,9 +92,9 @@ public class ArticleRepository implements ArticleInterface{
         dataBaseManager.open();
         String query = " update Article set article = ?, description= ?, location=?, stock=?, price=?," +
                 " isActive = ?, photo = ? where PIC = ? ;";
-        dataBaseManager.update(query, article.getArticle().get(), article.getDescription().get(),
-                article.getLocation().get(), article.getStock().get(), article.getPrice().get(), article.getIsActive().get()
-                ,article.getPhoto().get(), pic);
+        dataBaseManager.update(query, article.getArticle(), article.getDescription(),
+                article.getLocation(), article.getStock(), article.getPrice(),
+                article.getIsActive(), article.getPhoto(), pic);
         dataBaseManager.close();
         repository.set(index,article);
         return Optional.of(article);

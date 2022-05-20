@@ -58,13 +58,13 @@ public class pedidoManagerViewController implements Initializable {
         @FXML
         void onButonVerDetalle(MouseEvent event) {
 
-            Order  order = tablaPedidos.getSelectionModel().getSelectedItem();
-            try {
-                SceneManager.get().initConsultarUno(order);
+            //Order  order = tablaPedidos.getSelectionModel().getSelectedItem();
+           // try {
+           //     SceneManager.get().initConsultarUno(order);
 
-            }catch (Exception e){
-                System.out.println("no se ha podido consultar uno");
-            }
+           // }catch (Exception e){
+           //     System.out.println("no se ha podido consultar uno");
+            //}
 
         }
 
@@ -72,27 +72,27 @@ public class pedidoManagerViewController implements Initializable {
     private void loadData() throws SQLException {
 
         //logger.info("Cargando datos de Pedidos...");
-        System.out.println("cargando datos de personas");
-        tablaPedidos.setItems(orderRepository.findAll());
+       // System.out.println("cargando datos de personas");
+        //tablaPedidos.setItems(orderRepository.findAll());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         // Cargo la lista de personas en base al observable
-        try {
-            loadData();
-        } catch (SQLException e) {
-            System.out.println("No se ha podido cargar la lista de personas");
-        }
+       // try {
+       //     loadData();
+        //} catch (SQLException e) {
+          //  System.out.println("No se ha podido cargar la lista de personas");
+       // }
 
         // Asigno las columnas de la tabla
-        columnaOIC.setCellValueFactory(cellData -> cellData.getValue().OICProperty());
-        columnaCliente.setCellValueFactory(cellData -> cellData.getValue().customerProperty());
+       // columnaOIC.setCellValueFactory(cellData -> cellData.getValue().OICProperty());
+        //columnaCliente.setCellValueFactory(cellData -> cellData.getValue().customerProperty());
         //columnaPrecio.setCellValueFactory(cellData -> cellData.getValue().priceProperty());
-        columnaMetodoDePago.setCellValueFactory(cellData -> cellData.getValue().methodPayProperty());
+        //columnaMetodoDePago.setCellValueFactory(cellData -> cellData.getValue().methodPayProperty());
 
-        tablaPedidos.getSelectionModel().selectFirst();
+        //tablaPedidos.getSelectionModel().selectFirst();
 
 
     }

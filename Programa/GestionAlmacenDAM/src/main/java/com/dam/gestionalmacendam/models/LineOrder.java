@@ -17,6 +17,30 @@ public class LineOrder {
     private DoubleProperty totalPrice;
     private StringProperty belongsOrder;
 
+    public String getOLIC() {
+        return OLIC.get();
+    }
+
+    public String getArticle() {
+        return article.get();
+    }
+
+    public int getLoad() {
+        return load.get();
+    }
+
+    public double getUnitPrice() {
+        return unitPrice.get();
+    }
+
+    public double getTotalPrice() {
+        return totalPrice.get();
+    }
+
+    public String getBelongsOrder() {
+        return belongsOrder.get();
+    }
+
     public void setLoad(int load) {
         this.load.set(load);
 

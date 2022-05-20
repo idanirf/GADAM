@@ -59,11 +59,11 @@ public class LineReceptionRepository implements LineReceptionInterface{
         String query = "Insert into LineReception values (?, ?, ?, ?, ?, ?);";
         ResultSet resultado = dataBaseManager.insert(query,
                 lineReception.getRLIC(),
-                lineReception.getArticlePIC().get(),
-                lineReception.getLoad().get(),
-                lineReception.getUnitPrice().get(),
-                lineReception.getTotalPrice().get(),
-                lineReception.getBelongsRecepcion().get()
+                lineReception.getArticlePIC(),
+                lineReception.getLoad(),
+                lineReception.getUnitPrice(),
+                lineReception.getTotalPrice(),
+                lineReception.getBelongsRecepcion()
         ).orElseThrow(SQLException::new);
         dataBaseManager.close();
         return Optional.of(lineReception) ;
@@ -77,11 +77,11 @@ public class LineReceptionRepository implements LineReceptionInterface{
         String query = "Update LineReception set article = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, BelongsReception = ? where  RLIC = ? ;";
        dataBaseManager.update(query,
-                lineReception.getArticlePIC().get(),
-                lineReception.getLoad().get(),
-                lineReception.getUnitPrice().get(),
-                lineReception.getTotalPrice().get(),
-                lineReception.getBelongsRecepcion().get(),
+                lineReception.getArticlePIC(),
+                lineReception.getLoad(),
+                lineReception.getUnitPrice(),
+                lineReception.getTotalPrice(),
+                lineReception.getBelongsRecepcion(),
                 rlic);
         dataBaseManager.close();
         repository.set(index,lineReception);

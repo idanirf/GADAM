@@ -1,6 +1,7 @@
 package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,12 +42,10 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-      //  FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pedidoManagerView.fxml"));
-        int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-        int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("GADAM S.L");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
