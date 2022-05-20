@@ -1,0 +1,16 @@
+package com.dam.gestionalmacendam.models;
+
+public enum Views {
+    OrderManager("pedidoManagerViewController.java");
+
+
+    private final String view;
+
+    Views(String view) {
+        this.view = view;
+    }
+
+    public String get() {
+        return view;
+    }
+}

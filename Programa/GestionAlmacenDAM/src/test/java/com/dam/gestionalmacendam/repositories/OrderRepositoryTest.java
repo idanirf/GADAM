@@ -60,7 +60,7 @@ public class OrderRepositoryTest {
         @Test
         void searchByUuidTest() throws SQLException {
 
-            var res = repository.findByUUID(o.getOIC());
+            var res = repository.findByUUID(o.getOIC().get());
 
             assertAll(
                     () -> assertEquals(res.getCustomer().get(),o.getCustomer().get()),
@@ -77,7 +77,7 @@ public class OrderRepositoryTest {
          */
         @Test
         void saveTest() throws SQLException {
-            var o1= repository.findByUUID(o.getOIC());
+            var o1= repository.findByUUID(o.getOIC().get());
             assertAll(
                     ()->assertEquals(o1.getCustomer().get(),o.getCustomer().get()),
                     ()->assertEquals(o1.getOIC(),o.getOIC()),
@@ -93,7 +93,7 @@ public class OrderRepositoryTest {
         @Test
         void updateTest() throws SQLException {
             o.setMethodPay(new SimpleObjectProperty<>(Pay.CARD));
-            var aux=repository.update(o.getOIC(), o);
+            var aux=repository.update(o.getOIC().get(), o);
             assertAll(
                     ()->assertEquals(aux.get().getCustomer().get(),o.getCustomer().get()),
                     ()->assertEquals(aux.get().getOIC(),o.getOIC()),
