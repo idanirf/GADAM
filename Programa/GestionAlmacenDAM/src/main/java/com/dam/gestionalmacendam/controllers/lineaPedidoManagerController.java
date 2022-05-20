@@ -48,12 +48,15 @@ public class lineaPedidoManagerController {
         System.out.println("cargando datos de LineOrder");
         try{
             tablaPedidos.setItems(lineOrderRepository.searchByUuidOrder(order.getOIC().get()));
-            tablaCantidadArticulo.setCellValueFactory(lineOrder -> lineOrder.getValue().loadProperty() );
+          //  tablaCantidadArticulo.setCellValueFactory(lineOrder -> lineOrder.getValue().loadProperty() );
+          //  tablaTotalLinea.setCellValueFactory(lineOrder -> lineOrder.getValue().totalPriceProperty() );
+            // tablaPrecioArticulo.setCellValueFactory(lineOrder -> lineOrder.getValue().unitPriceProperty());
+          tablaPicArticulo.setCellValueFactory(lineOrder -> lineOrder.getValue().OLICProperty());
+
         }catch(Exception e){
             System.out.println("no ha sido posible cargar datos");
         }
 
-        columnaMetodoDePago.setCellValueFactory(cellData -> cellData.getValue().methodPayProperty());
 
     }
 }

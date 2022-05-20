@@ -37,7 +37,7 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
 
         while (result.next()){
-            String OLIC= (result.getString("OLIC"));
+            StringProperty OLIC= new SimpleStringProperty(result.getString("OLIC"));
             StringProperty articlePIC =  new SimpleStringProperty(result.getString("article"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
             DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
@@ -57,7 +57,7 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         String query = "Insert into LineOrder (OLIC, article, load, unitPrice, totalPrice, BelongsOrder) " +
                 "values (?, ?, ?, ?, ?, ?);";
         ResultSet resultado = dataBaseManager.insert(query,
-                lineOrder.getOLIC(),
+                lineOrder.getOLIC().get(),
                 lineOrder.getArticle().get(),
                 lineOrder.getLoad().get(),
                 lineOrder.getUnitPrice().get(),
@@ -100,7 +100,7 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder,String>
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(()-> new SQLException("No existe lineas con el identificador."));
         repository.clear();
         while (result.next()){
-            String OLIC = result.getString("OLIC");
+            StringProperty OLIC = new SimpleStringProperty(result.getString("OLIC"));
             StringProperty articlePIC =  new SimpleStringProperty(result.getString("article"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
             DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;

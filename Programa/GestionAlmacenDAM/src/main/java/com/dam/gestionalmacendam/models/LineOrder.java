@@ -28,9 +28,6 @@ public class LineOrder {
 
     }
 
-    public DoubleProperty totalPriceProperty() {
-        return totalPrice;
-    }
 
     public LineOrder(String OLIC, String article, Integer load,
                      Double unitPrice,  String belongsOrder) {
@@ -64,6 +61,9 @@ public class LineOrder {
                 '}';
     }
 
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
+    }
 
     public StringProperty articleProperty() {
         return article;
@@ -80,5 +80,10 @@ public class LineOrder {
     public StringProperty belongsOrderProperty() {
         return belongsOrder;
     }
+
+    public StringProperty OLICProperty() {
+        return OLIC;
+    }
+
 }
 
