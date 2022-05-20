@@ -1,8 +1,11 @@
 package com.dam.gestionalmacendam.managers;
 
+import com.dam.gestionalmacendam.controllers.lineaPedidoManagerController;
 import com.dam.gestionalmacendam.controllers.pedidoManagerViewController;
+import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Views;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -75,4 +78,20 @@ public class SceneManager {
         stage.show();
     }
 
+    public void initConsultarUno(Order order) throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.OrderDescription.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage); // -importante con windows modal
+        stage.setTitle("Order details");
+        stage.setResizable(false);
+        // Le hacemos los setters a los elementos del controlador
+        lineaPedidoManagerController controller = fxmlLoader.getController();
+        controller.setOederData(order);
+        stage.setScene(scene);
+        //logger.info("Scene Estadisticas loaded");
+        stage.showAndWait();
+    }
 }

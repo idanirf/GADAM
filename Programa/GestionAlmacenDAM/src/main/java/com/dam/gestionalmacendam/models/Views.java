@@ -1,7 +1,8 @@
 package com.dam.gestionalmacendam.models;
 
 public enum Views {
-    OrderManager("pedidoManagerViewController.java");
+    OrderManager("pedidoManagerView.fxml"),
+    OrderDescription("descriptionPedidoManagerView.fxml");
 
 
     private final String view;

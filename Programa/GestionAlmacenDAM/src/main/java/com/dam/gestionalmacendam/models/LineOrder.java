@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 public class LineOrder {
-    private String OLIC = UUID.randomUUID().toString();
+    private StringProperty OLIC ;
     private StringProperty article;
     private IntegerProperty load;
     private DoubleProperty unitPrice;
@@ -34,7 +34,7 @@ public class LineOrder {
 
     public LineOrder(String OLIC, String article, Integer load,
                      Double unitPrice,  String belongsOrder) {
-        this.OLIC = OLIC;
+        this.OLIC = new SimpleStringProperty(OLIC);
         this.article = new SimpleStringProperty(article);
         this.load = new SimpleIntegerProperty(load);
         this.unitPrice = new SimpleDoubleProperty(unitPrice);
@@ -44,6 +44,7 @@ public class LineOrder {
 
     public LineOrder( String article, Integer load,
                       Double unitPrice,  String belongsOrder) {
+        this.OLIC = new SimpleStringProperty(UUID.randomUUID().toString());
         this.article = new SimpleStringProperty(article);
         this.load = new SimpleIntegerProperty(load);
         this.unitPrice = new SimpleDoubleProperty(unitPrice);
@@ -61,6 +62,23 @@ public class LineOrder {
                 ", totalPrice=" + totalPrice +
                 ", belongsOrder=" + belongsOrder +
                 '}';
+    }
+
+
+    public StringProperty articleProperty() {
+        return article;
+    }
+
+    public IntegerProperty loadProperty() {
+        return load;
+    }
+
+    public DoubleProperty unitPriceProperty() {
+        return unitPrice;
+    }
+
+    public StringProperty belongsOrderProperty() {
+        return belongsOrder;
     }
 }
 

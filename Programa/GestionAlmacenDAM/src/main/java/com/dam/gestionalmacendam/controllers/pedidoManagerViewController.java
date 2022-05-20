@@ -1,8 +1,10 @@
 package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
+import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ public class pedidoManagerViewController implements Initializable {
     //todo por que no va el logger
     //Logger logger = LogManager.getLogger(pedidoManagerViewController.class);
     OrderRepository orderRepository = OrderRepository.getInstance(DataBaseManager.getInstance());
+
 
 
 
@@ -55,9 +58,15 @@ public class pedidoManagerViewController implements Initializable {
         @FXML
         void onButonVerDetalle(MouseEvent event) {
 
+            Order  order = tablaPedidos.getSelectionModel().getSelectedItem();
+            try {
+                SceneManager.get().initConsultarUno(order);
 
+            }catch (Exception e){
+                System.out.println("no se ha podido consultar uno");
+            }
 
-    }
+        }
 
     @FXML
     private void loadData() throws SQLException {
@@ -66,7 +75,6 @@ public class pedidoManagerViewController implements Initializable {
         System.out.println("cargando datos de personas");
         tablaPedidos.setItems(orderRepository.findAll());
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,7 +97,20 @@ public class pedidoManagerViewController implements Initializable {
 
     }
 
+    @FXML
     public void onSalirAction() {
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Salir");
+        alert.setContentText("¿Salir de Agenda?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // Hacemos el backup!!
+           // backup();
+            Platform.exit();
+        } else {
+            alert.close();
+        }
     }
 }
