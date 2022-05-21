@@ -21,7 +21,7 @@ public class Employee {
     private ObjectProperty<LocalDateTime> createdAt;
     private BooleanProperty isActive;
 
-    public Employee(String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt,Boolean isActive) {
+    public Employee(String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt, Boolean isActive) {
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
         this.nif = new SimpleStringProperty(nif);
@@ -31,7 +31,7 @@ public class Employee {
         this.photo = new SimpleStringProperty(photo);
         this.isManager = new SimpleBooleanProperty(isManager);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
-        this.isActive= new SimpleBooleanProperty(isActive);
+        this.isActive = new SimpleBooleanProperty(isActive);
     }
 
     public Employee(String eic, String name, String surname, String nif, String email, String photo, String nickName, String password, boolean isManager, LocalDateTime createdAt, Boolean isActive) {
@@ -45,7 +45,7 @@ public class Employee {
         this.password = new SimpleStringProperty(password);
         this.isManager = new SimpleBooleanProperty(isManager);
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
-        this.isActive= new SimpleBooleanProperty(isActive);
+        this.isActive = new SimpleBooleanProperty(isActive);
     }
 
     public String getEIC() {
@@ -87,7 +87,42 @@ public class Employee {
     public LocalDateTime getCreatedAt() {
         return createdAt.get();
     }
-    public Boolean isActive(){return isActive.get();}
+
+    public Boolean isActive() {
+        return isActive.get();
+    }
+
+    public StringProperty photoProperty() {
+        return photo;
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public StringProperty surnameProperty() {
+        return surname;
+    }
+
+    public StringProperty nicknameProperty() {
+        return nickName;
+    }
+
+    public StringProperty nifProperty() {
+        return nif;
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public BooleanProperty isManagerProperty() {
+        return isManager;
+    }
+
+    public ObjectProperty createdAtProperty() {
+        return createdAt;
+    }
 
     @Override
     public String toString() {

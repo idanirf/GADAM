@@ -1,15 +1,17 @@
 package com.dam.gestionalmacendam.managers;
 
+import com.dam.gestionalmacendam.HelloApplication;
+import com.dam.gestionalmacendam.controllers.AcercaDeController;
 import com.dam.gestionalmacendam.utils.Properties;
+import com.dam.gestionalmacendam.utils.Resources;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.Views;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SceneManager {
     private static SceneManager instance;
@@ -19,6 +21,7 @@ public class SceneManager {
 
     private SceneManager(Class<?> appClass) {
         this.appClass = appClass;
+
     }
 
     public static SceneManager getInstance(Class<?> appClass) {
@@ -32,13 +35,36 @@ public class SceneManager {
         return instance;
     }
 
-    public void changeScene(Node node, Views view) throws IOException {
-        Stage stage = (Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(appClass.getResource(view.get())));
-        Scene newScene = new Scene(root, Properties.APP_WIDTH, Properties.APP_HEIGHT);
-        stage.setScene(newScene);
+    public void initAcercaDe() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ACERCA_DE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Acerca de");
+        stage.setResizable(false);
+        fxmlLoader.<AcercaDeController>getController().setDialogStage(stage);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    public void initAPPManager(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/MenuManager.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("GADAM Gestión de Almacenes");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+
+        stage.setScene(scene);
         stage.show();
     }
 
+    public void initAPPEmployee(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/MenuEmployee.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("GADAM Gestión de Almacenes");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

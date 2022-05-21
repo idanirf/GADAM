@@ -5,19 +5,17 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 
 import java.util.Optional;
 
-public class MenuManagerController {
-    @FXML
-    private Label user;
+public class MenuEmployeeController {
 
     @FXML
     public void onSalirAction() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Salir");
         alert.setContentText("¿Está seguro que desea salir?");
+
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             Platform.exit();
@@ -31,13 +29,7 @@ public class MenuManagerController {
         try {
             SceneManager.get().initAcercaDe();
         } catch (Exception e) {
-            System.out.println("Operación No Disponible");
+            System.out.println("no consigue cargar pantalla acerca de");
         }
-    }
-
-    @FXML
-    private void initialize() {
-        user.setText(user.getText());
-
     }
 }
