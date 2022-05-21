@@ -21,7 +21,6 @@ public class SceneManager {
 
     private SceneManager(Class<?> appClass) {
         this.appClass = appClass;
-
     }
 
     public static SceneManager getInstance(Class<?> appClass) {
@@ -67,4 +66,15 @@ public class SceneManager {
         stage.show();
     }
 
+    public void initEmployee() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/EmpleadosVistaManager.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 }

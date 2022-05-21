@@ -5,8 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity"
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16"
       fx:controller="com.dam.gestionalmacendam.controllers.MenuManagerController">
     <children>
@@ -17,7 +16,7 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Salir">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Salir" onAction="#onSalirAction"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onSalirAction" text="Salir"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Herramientas">
@@ -28,7 +27,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Acerca de">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Acerca De" onAction="#onAcercaDe"/>
+                                <MenuItem mnemonicParsing="false" onAction="#onAcercaDe" text="Acerca De"/>
                             </items>
                         </Menu>
                     </menus>
@@ -99,9 +98,10 @@
                         <Font name="System Bold" size="24.0"/>
                     </font>
                 </Button>
-                <Button layoutX="871.0" layoutY="306.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="235.0"
-                        text="Empleados" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="871.0"
-                        AnchorPane.rightAnchor="173.79999999999995" AnchorPane.topAnchor="306.0">
+                <Button layoutX="871.0" layoutY="306.0" mnemonicParsing="false" onAction="#openOperationEmployee"
+                        prefHeight="80.0" prefWidth="235.0" text="Empleados" AnchorPane.bottomAnchor="226.0"
+                        AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="173.79999999999995"
+                        AnchorPane.topAnchor="306.0">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>

@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class MenuManagerController {
+    private Stage dialogStage;
     @FXML
     private Label user;
 
@@ -35,9 +38,15 @@ public class MenuManagerController {
         }
     }
 
+
     @FXML
-    private void initialize() {
-        user.setText(user.getText());
+    public void openOperationEmployee() {
+        try {
+            SceneManager.get().initEmployee();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 }

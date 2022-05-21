@@ -34,16 +34,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16"
-      fx:controller="com.dam.gestionalmacendam.controllers.EmpleadosVistaManager">
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18">
     <children>
         <MenuBar prefHeight="30.0" prefWidth="1280.0" VBox.vgrow="NEVER">
             <menus>
-                <Menu mnemonicParsing="false" text="Salir">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onSalirAction" text="Salir"/>
-                    </items>
-                </Menu>
+                <Menu mnemonicParsing="false" text="Salir"/>
+
             </menus>
         </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="654.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
@@ -63,18 +59,16 @@
                                         prefWidth="141.0" text="Crear nuevo"/>
                                 <TableView layoutX="-1.0" layoutY="59.0" prefHeight="599.0" prefWidth="1280.0">
                                     <columns>
-                                        <TableColumn fx:id="imagenEmpleado" prefWidth="95.99996662139893"
-                                                     text="Imágen"/>
-                                        <TableColumn fx:id="EIC" prefWidth="78.39999389648438" text="EIC"/>
-                                        <TableColumn fx:id="nick" prefWidth="78.39996337890625" text="Nick"/>
-                                        <TableColumn fx:id="name" prefWidth="111.20001220703125" text="Nombre"/>
-                                        <TableColumn fx:id="surname" minWidth="2.4000244140625"
-                                                     prefWidth="232.79998779296875" text="Apellidos"/>
-                                        <TableColumn fx:id="nif" minWidth="0.0" prefWidth="94.4000244140625"
-                                                     text="NIF"/>
-                                        <TableColumn fx:id="email" minWidth="5.60003662109375"
-                                                     prefWidth="252.79998779296875" text="Email"/>
-                                        <TableColumn fx:id="manager" prefWidth="89.60003662109375" text="Manager"/>
+                                        <TableColumn prefWidth="95.99996662139893" text="Imágen"/>
+                                        <TableColumn prefWidth="78.39999389648438" text="EIC"/>
+                                        <TableColumn prefWidth="78.39996337890625" text="Nick"/>
+                                        <TableColumn prefWidth="111.20001220703125" text="Nombre"/>
+                                        <TableColumn minWidth="2.4000244140625" prefWidth="232.79998779296875"
+                                                     text="Apellidos"/>
+                                        <TableColumn minWidth="0.0" prefWidth="94.4000244140625" text="NIF"/>
+                                        <TableColumn minWidth="5.60003662109375" prefWidth="252.79998779296875"
+                                                     text="Email"/>
+                                        <TableColumn prefWidth="89.60003662109375" text="Manager"/>
                                         <TableColumn prefWidth="150.39990234375" text="Fecha de alta"/>
                                     </columns>
                                 </TableView>

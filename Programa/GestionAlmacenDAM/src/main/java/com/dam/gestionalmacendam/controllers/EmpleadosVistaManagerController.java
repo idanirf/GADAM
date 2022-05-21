@@ -10,10 +10,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
-public class EmpleadosVistaManager {
+public class EmpleadosVistaManagerController {
     EmployeeRepository employeeRepository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
 
     @FXML
@@ -37,28 +36,12 @@ public class EmpleadosVistaManager {
     @FXML
     private TableColumn<Employee, String> createdAt;
 
-    @FXML
-    private void initialize() {
-        try {
-            loadData();
-        } catch (SQLException e) {
-        }
-        imagenEmpleado.setCellValueFactory(cellData -> cellData.getValue().photoProperty());
-        nick.setCellValueFactory(cellData -> cellData.getValue().nicknameProperty());
-        name.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        surname.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
-        nif.setCellValueFactory(cellData -> cellData.getValue().nifProperty());
-        email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        manager.setCellValueFactory(cellData -> cellData.getValue().isManagerProperty());
-        createdAt.setCellValueFactory(cellData -> cellData.getValue().createdAtProperty());
-    }
 
     @FXML
     public void onSalirAction() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Salir");
-        alert.setContentText("¿Salir de GADAM Gestion Almacenes?");
-
+        alert.setContentText("¿Está seguro que desea salir?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             Platform.exit();
@@ -66,11 +49,4 @@ public class EmpleadosVistaManager {
             alert.close();
         }
     }
-
-    //LOAD DATA EMPLOYEE
-    @FXML
-    private void loadData() throws SQLException {
-        employeeTable.setItems(employeeRepository.findAll());
-    }
-
 }

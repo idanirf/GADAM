@@ -107,6 +107,7 @@ public class Employee {
     public StringProperty nicknameProperty() {
         return nickName;
     }
+    
 
     public StringProperty nifProperty() {
         return nif;

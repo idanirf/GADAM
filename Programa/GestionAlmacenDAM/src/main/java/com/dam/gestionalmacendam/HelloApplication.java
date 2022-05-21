@@ -15,7 +15,6 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         SceneManager sceneManager = SceneManager.getInstance(HelloApplication.class);
         sceneManager.initAPPManager(stage);
-        sceneManager.initAPPEmployee(stage);
     }
 
 }
