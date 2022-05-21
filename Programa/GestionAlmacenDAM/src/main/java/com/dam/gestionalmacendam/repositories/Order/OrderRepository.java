@@ -84,4 +84,5 @@ public class OrderRepository implements ICRUDOrder {
         var repo= findAll();
         return repo.stream().filter(order-> order.getOIC().equals(OIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
+
 }

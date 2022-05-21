@@ -41,39 +41,9 @@ public class Order {
                 '}';
     }
 
-    public String getOIC() {
-        return OIC.get();
-    }
-
-    public String getCustomer() {
-        return customer.get();
-    }
-
-    public Pay getMethodPay() {
-        return methodPay.get();
-    }
-
-    public double getPrice() {
-        return price.get();
-    }
-
-    public StringProperty OICProperty() {
-        return OIC;
-    }
-
-
-
-    public StringProperty customerProperty() {
-        return customer;
-    }
-
 
     public DoubleProperty priceProperty() {
         return price;
     }
 
-
-    public ObjectProperty<Pay> methodPayProperty() {
-        return methodPay;
-    }
 }

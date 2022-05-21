@@ -43,12 +43,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        SceneManager.getInstance(HelloApplication.class);
+        SceneManager.get().initPantallaHello();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pedidoManagerView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
     }
 
 }

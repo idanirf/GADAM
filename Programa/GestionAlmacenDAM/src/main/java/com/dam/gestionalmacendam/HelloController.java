@@ -1,5 +1,6 @@
 package com.dam.gestionalmacendam;
 
+import com.dam.gestionalmacendam.managers.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -9,6 +10,15 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        try{
+            SceneManager.get().initOrderView();
+        }catch(Exception e){
+            System.out.println("no consigue cargar pantalla order manager");
+            e.printStackTrace();
+
+
+        }
+
     }
+
 }

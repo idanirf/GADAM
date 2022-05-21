@@ -3,6 +3,7 @@ package com.dam.gestionalmacendam.repositories;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +55,7 @@ public class LineOrderRepositoryText {
     }
     @Test
     public void  updateTest() throws SQLException {
-        lineOrder.setLoad(8);
+        lineOrder.setLoad(new SimpleIntegerProperty(8));
         repository.update(lineOrder.getOLIC().get(),lineOrder);
         var li = repository.findByUuid(lineOrder.getOLIC().get());
 

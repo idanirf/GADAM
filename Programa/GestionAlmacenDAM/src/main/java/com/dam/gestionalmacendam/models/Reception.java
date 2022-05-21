@@ -4,7 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 
 import java.util.UUID;
@@ -38,47 +38,5 @@ public class Reception {
         this.cost = new SimpleDoubleProperty(cost);
     }
 
-    public String getRIC() {
-        return RIC;
-    }
 
-    public void setRIC(String RIC) {
-        this.RIC = RIC;
-    }
-
-    public String getSupplierSIC() {
-        return supplierSIC.get();
-    }
-
-    public StringProperty supplierSICProperty() {
-        return supplierSIC;
-    }
-
-    public void setSupplierSIC(String supplierSIC) {
-        this.supplierSIC.set(supplierSIC);
-    }
-
-    public String getCarrier() {
-        return carrier.get();
-    }
-
-    public StringProperty carrierProperty() {
-        return carrier;
-    }
-
-    public void setCarrier(String carrier) {
-        this.carrier.set(carrier);
-    }
-
-    public double getCost() {
-        return cost.get();
-    }
-
-    public DoubleProperty costProperty() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost.set(cost);
-    }
 }
