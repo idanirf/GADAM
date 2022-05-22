@@ -5,7 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
       prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16"
       fx:controller="com.dam.gestionalmacendam.controllers.MenuManagerController">
     <children>
@@ -65,35 +66,36 @@
             <children>
                 <Button layoutX="161.0" layoutY="147.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="235.0"
                         text="Proveedores" AnchorPane.bottomAnchor="385.0" AnchorPane.leftAnchor="161.0"
-                        AnchorPane.rightAnchor="883.8" AnchorPane.topAnchor="147.0">
+                        AnchorPane.rightAnchor="883.8" AnchorPane.topAnchor="147.0" onAction="#openOperationSupplier">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>
                 </Button>
                 <Button alignment="CENTER" layoutX="161.0" layoutY="306.0" mnemonicParsing="false" prefHeight="80.0"
                         prefWidth="235.0" text="Pedidos" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="161.0"
-                        AnchorPane.rightAnchor="883.8" AnchorPane.topAnchor="306.0">
+                        AnchorPane.rightAnchor="883.8" AnchorPane.topAnchor="306.0" onAction="#openOperationOrder">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>
                 </Button>
                 <Button layoutX="522.0" layoutY="147.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="235.0"
                         text="Artículos" AnchorPane.bottomAnchor="385.0" AnchorPane.leftAnchor="522.0"
-                        AnchorPane.rightAnchor="522.8" AnchorPane.topAnchor="147.0">
+                        AnchorPane.rightAnchor="522.8" AnchorPane.topAnchor="147.0" onAction="#openOperationArticle">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>
                 </Button>
                 <Button layoutX="522.0" layoutY="306.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="235.0"
                         text="Clientes" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="522.0"
-                        AnchorPane.rightAnchor="522.8" AnchorPane.topAnchor="306.0">
+                        AnchorPane.rightAnchor="522.8" AnchorPane.topAnchor="306.0" onAction="#openOperationCustumer">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>
                 </Button>
                 <Button layoutX="871.0" layoutY="147.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="235.0"
                         text="Recepciones" AnchorPane.bottomAnchor="385.0" AnchorPane.leftAnchor="871.0"
-                        AnchorPane.rightAnchor="173.79999999999995" AnchorPane.topAnchor="147.0">
+                        AnchorPane.rightAnchor="173.79999999999995" AnchorPane.topAnchor="147.0"
+                        onAction="#openOperationReception">
                     <font>
                         <Font name="System Bold" size="24.0"/>
                     </font>

@@ -38,15 +38,57 @@ public class MenuManagerController {
         }
     }
 
-
     @FXML
     public void openOperationEmployee() {
         try {
             SceneManager.get().initEmployee();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Operación No Disponible");
         }
-
     }
 
+    public void openOperationSupplier() {
+        try {
+            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
+            SceneManager.get().initAcercaDe();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
+
+    public void openOperationOrder() {
+        try {
+            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
+            SceneManager.get().initAcercaDe();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
+
+    public void openOperationArticle() {
+        try {
+            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
+            SceneManager.get().initAcercaDe();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
+
+    public void openOperationCustumer() {
+        try {
+            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
+            SceneManager.get().initAcercaDe();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
+
+    public void openOperationReception() {
+        try {
+            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
+            SceneManager.get().initAcercaDe();
+        } catch (IOException e) {
+            System.out.println();
+        }
+    }
 }
