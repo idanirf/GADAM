@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS "Order" (
                                          "OIC" TEXT  NOT NULL,
                                          "Customer" TEXT NOT NULL,   
                                          "Price" REAL NOT NULL,
-                                         "Pay" String NOT NULL,
+                                         "Pay"  TEXT NOT NULL,
                                          PRIMARY KEY("OIC"));
 
 CREATE TABLE IF NOT EXISTS "Reception" (

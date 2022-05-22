@@ -37,14 +37,21 @@ public class OrderRepository implements ICRUDOrder {
         ResultSet resultado = bbdd.select(sql).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo los datos"));
         repository.clear();
         while(resultado.next()){
-            repository.add(
-                    new Order(
-                            resultado.getString("OIC"),
-                            resultado.getString("Customer"),
-                            resultado.getDouble("price"),
-                            Pay.valueOf(resultado.getString("Pay"))
 
-                    )
+            var oic=resultado.getString("OIC");
+            var customer = resultado.getString("Customer");
+            var res = resultado.getDouble("price");
+            var pay =resultado.getString("Pay");
+            Pay payOk ;
+
+            if(pay.equalsIgnoreCase("CARD")){
+                payOk = Pay.CARD;
+            }else{
+                payOk = Pay.PAYPAL;
+            }
+
+            repository.add(
+                    new Order(oic, customer, res, payOk)
             );
         }
         bbdd.close();
