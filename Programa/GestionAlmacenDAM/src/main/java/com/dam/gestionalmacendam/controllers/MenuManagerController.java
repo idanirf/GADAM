@@ -43,7 +43,7 @@ public class MenuManagerController {
         try {
             SceneManager.get().initEmployee();
         } catch (IOException e) {
-            System.out.println("Operación No Disponible");
+            e.printStackTrace();
         }
     }
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="507.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/16"
+      prefHeight="507.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/18"
       fx:controller="com.dam.gestionalmacendam.controllers.NewEmployeeController">
     <children>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="561.0">
@@ -42,7 +42,7 @@
                         <Font name="System Bold" size="13.0"/>
                     </font>
                 </Label>
-                <Label layoutX="11.0" layoutY="29.0" text="Nuevo Empleado" textAlignment="CENTER" wrapText="true">
+                <Label layoutX="11.0" layoutY="29.0" text="Editar Empleado" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="System Bold" size="36.0"/>
                     </font>
@@ -70,7 +70,7 @@
                         <Image url="@../images/user.png"/>
                     </image>
                 </ImageView>
-                <CheckBox layoutX="132.0" layoutY="378.0" mnemonicParsing="false" text="Activo" fx:id="isActive">
+                <CheckBox fx:id="isActive" layoutX="132.0" layoutY="378.0" mnemonicParsing="false" text="Activo">
                     <font>
                         <Font name="System Bold" size="14.0"/>
                     </font>

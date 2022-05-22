@@ -48,6 +48,10 @@ public class Employee {
         this.isActive = new SimpleBooleanProperty(isActive);
     }
 
+    public Employee() {
+
+    }
+
     public String getEIC() {
         return EIC;
     }
@@ -70,6 +74,10 @@ public class Employee {
 
     public String getPhoto() {
         return photo.get();
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = new SimpleStringProperty(photo);
     }
 
     public String getNickName() {
@@ -107,7 +115,10 @@ public class Employee {
     public StringProperty nicknameProperty() {
         return nickName;
     }
-    
+
+    public String EICProperty() {
+        return EIC;
+    }
 
     public StringProperty nifProperty() {
         return nif;

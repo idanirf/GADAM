@@ -9,14 +9,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmployeeRepositoryTest {
-    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDateTime.now(),true);
+    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDate.now(), true);
     EmployeeRepository repository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
 
     @BeforeAll
