@@ -25,7 +25,6 @@ public class OrderManagerController {
     @FXML
     private TextField textAreaBuscarPorOic;
 
-
     @FXML
     private TableView<Order> tablaPedidos;
 
@@ -40,8 +39,6 @@ public class OrderManagerController {
 
     @FXML
     private TableColumn<Order, Double> columnaPrecio;
-
-
 
     @FXML
     private Button butonVerDetalle;
@@ -62,9 +59,33 @@ public class OrderManagerController {
 
 
     }
+    
+
 
     @FXML
-    void buscaPorOIC(InputMethodEvent event) {
+    void errorDeBudqueda(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Pedido selecionado no existe o incorrecto");
+        alert.setContentText("No ha selecionado ningun pedido o  su pedido selecionado no existe o incorrecto");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        } else {
+            alert.close();
+        }
+    }
+
+    @FXML
+    void buscaPorOIC(InputMethodEvent event) throws SQLException {
+
+            String name = textAreaBuscarPorOic.getText();
+            if(name.isEmpty()){
+                errorDeBudqueda();
+            }else{
+
+                tablaPedidos.setItems(repository.findAll().filtered(x -> x.getOIC().get().contains(name)));
+            }
+            tablaPedidos.refresh();
 
     }
 
@@ -99,4 +120,8 @@ public class OrderManagerController {
 
     }
 
+    public void selecionarAcion(MouseEvent mouseEvent) {
+        Order o = tablaPedidos.getSelectionModel().getSelectedItem();
+        textAreaBuscarPorOic.setText(o.getOIC().getValue());
+    }
 }
