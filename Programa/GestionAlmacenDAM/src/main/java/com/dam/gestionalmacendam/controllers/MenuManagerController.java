@@ -14,7 +14,7 @@ import java.util.Optional;
 public class MenuManagerController {
     private Stage dialogStage;
     @FXML
-    private Label user;
+    private Label nickname;
 
     @FXML
     public void onSalirAction() {

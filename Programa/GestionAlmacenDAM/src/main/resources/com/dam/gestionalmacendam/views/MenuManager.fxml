@@ -45,9 +45,9 @@
                         <Image url="@../images/user.png"/>
                     </image>
                 </ImageView>
-                <Label fx:id="user" disable="true" layoutX="960.0" layoutY="32.0" prefHeight="26.0" prefWidth="202.0"
-                       text="Nombre, Apellido1 Apellido 2" AnchorPane.bottomAnchor="49.6" AnchorPane.leftAnchor="960.0"
-                       AnchorPane.rightAnchor="117.6" AnchorPane.topAnchor="32.0">
+                <Label fx:id="nickname" alignment="CENTER_RIGHT" disable="true" layoutX="960.0" layoutY="32.0"
+                       prefHeight="26.0" prefWidth="202.0" text="NICK" AnchorPane.bottomAnchor="49.6"
+                       AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="117.6" AnchorPane.topAnchor="32.0">
                     <font>
                         <Font name="System Bold" size="14.0"/>
                     </font>

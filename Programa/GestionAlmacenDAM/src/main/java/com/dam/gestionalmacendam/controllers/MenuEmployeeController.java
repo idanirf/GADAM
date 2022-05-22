@@ -5,10 +5,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
 import java.util.Optional;
 
 public class MenuEmployeeController {
+    @FXML
+    private Label nickname;
 
     @FXML
     public void onSalirAction() {
@@ -28,6 +31,49 @@ public class MenuEmployeeController {
     public void onAcercaDe() {
         try {
             SceneManager.get().initAcercaDe();
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+    public void openOperationPedidos() {
+        try {
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+
+    public void openOperationArticles() {
+        try {
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+    public void openOperationClientes() {
+        try {
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+    public void openOperationRecepciones() {
+        try {
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+    public void onImportarAction() {
+        try {
+        } catch (Exception e) {
+            System.out.println("no consigue cargar pantalla acerca de");
+        }
+    }
+
+    public void onExportarAction() {
+        try {
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }
