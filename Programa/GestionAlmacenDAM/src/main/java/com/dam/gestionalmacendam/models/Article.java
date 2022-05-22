@@ -36,7 +36,9 @@ public class Article {
         this.isActive = new SimpleBooleanProperty(isActive);
         this.photo=new SimpleStringProperty(photo);
     }
-
+    public StringProperty imagenProperty() {
+        return photo;
+    }
     @Override
     public String toString() {
         return "Products{" +

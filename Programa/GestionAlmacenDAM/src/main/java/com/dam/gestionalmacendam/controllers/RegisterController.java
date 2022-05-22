@@ -4,6 +4,7 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.repositories.customer.CustomerRepository;
 import com.dam.gestionalmacendam.utils.Patterns;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -63,8 +64,11 @@ public class RegisterController {
     public void btnSaveAction(ActionEvent event) {
         if (checkAcept.isSelected()){
             if (isValid()){
-                saveCustomer();
-                stage.close();
+                if (resumen()){
+                    System.out.println("Guardando nuevo usuario...");
+                    saveCustomer();
+                    stage.close();
+                }
             }
         }else {
             Alert alert= new Alert(Alert.AlertType.ERROR);
@@ -158,13 +162,49 @@ public class RegisterController {
                             txtPassword.getText(),
                             txtPhone.getText(),
                             txtEmail.getText(),
-                            photoView.getImage().getUrl(),
+                            photoView.getImage().getUrl().replaceFirst("file:/",""),
                             LocalDateTime.now(),
                             true
                     )
             );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    public boolean resumen(){
+        var message = "Nombre: "+txtName.getText()+"\n"+
+                "Apellidos: "+txtSurname.getText()+"\n"+
+                "CIF: "+txtCIF.getText()+"\n"+
+                "Dirección: "+txtDirection.getText()+"\n"+
+                "NickUser: "+txtNick.getText()+"\n"+
+                "Teléfono: "+txtPhone.getText()+"\n"+
+                "Email: "+txtEmail.getText();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Datos de Usuario Nuevo.");
+        alert.setHeaderText("Compruebe si todos los datos son correctos.");
+        alert.setContentText("Si desea modificar algo, pulse cancelar.");
+        Label label = new Label("Datos:");
+
+        TextArea textArea = new TextArea(message);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+        alert.getDialogPane().setExpandableContent(expContent);
+        var res=alert.showAndWait();
+        if(res.get()== ButtonType.OK){
+            return true;
+        }else{
+            return false;
         }
     }
 }

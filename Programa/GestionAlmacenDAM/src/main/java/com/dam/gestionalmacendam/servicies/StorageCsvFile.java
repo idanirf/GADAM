@@ -49,13 +49,12 @@ public class StorageCsvFile implements IStorageCSV {
 
     @Override
     public List<Article> load() {
-        List<Article> articles = new ArrayList<>();
+        List<Article> articles;
 
         try {
-            articles= Files.lines(Path.of(articleFile)).skip(1).map(this::getArticle).collect(Collectors.toList());
-
+            articles= Files.lines(Path.of(articleFile)).map(this::getArticle).collect(Collectors.toList());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
         return articles;
     }

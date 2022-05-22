@@ -106,5 +106,6 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
+      <Button fx:id="btnSearch" layoutX="789.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSearchAction" text="Search" />
    </children>
 </AnchorPane>

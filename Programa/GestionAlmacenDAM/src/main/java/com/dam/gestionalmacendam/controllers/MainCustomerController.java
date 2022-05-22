@@ -2,6 +2,7 @@ package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Article;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.utils.Resources;
@@ -18,9 +19,12 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainCustomerController {
@@ -38,7 +42,7 @@ public class MainCustomerController {
     @FXML
     private void initialize(){
         try {
-            initArticles();
+            initArticles(null);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -64,26 +68,30 @@ public class MainCustomerController {
         alert.show();
     }
 
-    private void initArticles() throws SQLException {
+    private void initArticles(String name) throws SQLException {
         System.out.println("Iniciando los articulos.");
+        List<Article> li;
 
-        var li=articleRepository.findAll();
+        if (name == null) {
+            li=articleRepository.findAll();
+        }else{
+            li=articleRepository.findAll().stream().filter(a->a.getArticle().get().contains(name.trim())).toList();
+        }
+        grid.getChildren().clear();
         var k=0;
         for (int i = 0; i < grid.getRowCount() ; i++) {
             for (int j = 0; j < grid.getColumnCount() ; j++) {
                 if (k<li.size()){
-
                     VBox vbox= getItemCell(li,k);
                     grid.add(vbox,j,i);
 //                    grid.setGridLinesVisible(true);
                     k++;
                 }
-
             }
         }
 
     }
-    private VBox getItemCell(ObservableList<Article> list, int pos) throws SQLException {
+    private VBox getItemCell(List<Article> list, int pos) throws SQLException {
         var article= list.get(pos);
         VBox vbox = new VBox();
         vbox.setSpacing(10);
@@ -114,14 +122,24 @@ public class MainCustomerController {
         vbox.getChildren().addAll(iv,hbox);
 
         vbox.setOnMouseClicked(event ->{
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Saliendo...");
-                alert.setHeaderText("¿Esta seguro que desea salir?");
-                alert.setContentText("Pulse aceptar para salir.");
-                alert.showAndWait();
+                SceneManager scene= SceneManager.get();
+            try {
+                System.out.println(list.get(pos));
+                scene.initViewArticle(list.get(pos));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         return vbox;
+    }
+
+    public void btnSearchAction(ActionEvent actionEvent) {
+        try {
+            initArticles(txtSearch.getText());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

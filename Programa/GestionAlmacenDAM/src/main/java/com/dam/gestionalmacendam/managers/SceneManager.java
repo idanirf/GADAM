@@ -2,10 +2,8 @@ package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 
-import com.dam.gestionalmacendam.controllers.LoginController;
-import com.dam.gestionalmacendam.controllers.MainCustomerController;
-import com.dam.gestionalmacendam.controllers.RegisterController;
-import com.dam.gestionalmacendam.controllers.SplashController;
+import com.dam.gestionalmacendam.controllers.*;
+import com.dam.gestionalmacendam.models.Article;
 import com.dam.gestionalmacendam.views.Views;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -136,6 +134,20 @@ public class SceneManager {
                 event.consume();
             }
         });
+
+    }
+    public void initViewArticle(Article article) throws IOException {
+        System.out.println("Viendo resumen del articulo " + article.getArticle().get());
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_ARTICLE.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 560, 520);
+        Stage stage = new Stage();
+        ViewArticleController controller = fxmlLoader.getController();
+        controller.setArticle(article);
+        controller.setDialogStage(stage);
+        stage.setTitle("Producto " + article.getArticle().get());
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
 
     }
 

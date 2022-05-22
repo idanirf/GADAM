@@ -10,6 +10,7 @@ import com.dam.gestionalmacendam.repositories.customer.CustomerRepository;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
 import com.dam.gestionalmacendam.servicies.StorageCsvFile;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
@@ -23,17 +24,10 @@ import java.util.Optional;
 
 public class HelloApplication extends Application {
     public static void main(String[] args) {
-//        ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-//        try {
-//            var li= repository.findAll();
-//            StorageCsvFile storage=  new StorageCsvFile();
-//            storage.save(li);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+        ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
 
         launch();
-        // checkServer();
+
     }
 
 
@@ -58,8 +52,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 540, 550);
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/prueba.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 836, 625);
 //        stage.setTitle("Login");
 //        stage.setResizable(false);
 //        stage.setScene(scene);
