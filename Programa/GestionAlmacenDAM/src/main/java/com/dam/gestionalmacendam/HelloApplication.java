@@ -1,25 +1,29 @@
 package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
+
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class HelloApplication extends Application {
     public static void main(String[] args) {
 
-        launch();
-        // checkServer();
+
+//        checkServer();
+          launch();
     }
-
-
 
     private static void checkServer() {
         System.out.println("Comprobamos la conexión al Servidor BD");
@@ -30,7 +34,7 @@ public class HelloApplication extends Application {
             if (rs.get().next()) {
                 controller.close();
                 System.out.println("Conexión con la Base de Datos realizada con éxito");
-                System.exit(1);
+
             }
         } catch (SQLException e) {
             System.err.println("Error al conectar al servidor de Base de Datos: " + e.getMessage());
@@ -41,11 +45,9 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-        int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        stage.setTitle("GADAM S.L");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("Vistas/article-view.fxml")));
+        Scene scene = new Scene(root, 1280, 720);
+        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

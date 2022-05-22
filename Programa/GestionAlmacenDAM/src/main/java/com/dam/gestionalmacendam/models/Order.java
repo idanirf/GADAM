@@ -1,7 +1,6 @@
 package com.dam.gestionalmacendam.models;
 
 import javafx.beans.property.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.UUID;

@@ -77,7 +77,7 @@ public class ArticleRepository implements ArticleInterface{
         dataBaseManager.insert(query, article.getPIC(),
                 article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(),
-                article.getIsActive().get(),article.getPhoto().get());
+                article.getIsActive().get(),article.getPhoto());
         dataBaseManager.close();
         return Optional.of(article);
     }
@@ -94,7 +94,7 @@ public class ArticleRepository implements ArticleInterface{
                 " isActive = ?, photo = ? where PIC = ? ;";
         dataBaseManager.update(query, article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(), article.getIsActive().get()
-                ,article.getPhoto().get(), pic);
+                ,article.getPhoto(), pic);
         dataBaseManager.close();
         repository.set(index,article);
         return Optional.of(article);

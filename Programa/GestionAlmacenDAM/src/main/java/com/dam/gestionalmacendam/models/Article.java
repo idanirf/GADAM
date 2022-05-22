@@ -13,6 +13,12 @@ public class Article {
     private DoubleProperty price;
     private IntegerProperty stock;
     private BooleanProperty isActive;
+
+    public void setPhoto(String photo) {
+        this.photo=new SimpleStringProperty(photo);
+    }
+
+
     private StringProperty photo;
 
     public Article(String article, String description, String location,
@@ -36,6 +42,47 @@ public class Article {
         this.isActive = new SimpleBooleanProperty(isActive);
         this.photo=new SimpleStringProperty(photo);
     }
+
+    public Article() {
+
+    }
+
+
+    public String getPIC() {
+        return PIC;
+    }
+    public StringProperty articleProperty() {
+        return article;
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public StringProperty locationProperty() {
+        return location;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public IntegerProperty stockProperty() {
+        return stock;
+    }
+
+    public BooleanProperty isActiveProperty() {
+        return isActive;
+    }
+
+    public StringProperty photoProperty() {
+        return photo;
+    }
+
+    public String getPhoto() {
+        return photo.get();
+    }
+
 
     @Override
     public String toString() {
