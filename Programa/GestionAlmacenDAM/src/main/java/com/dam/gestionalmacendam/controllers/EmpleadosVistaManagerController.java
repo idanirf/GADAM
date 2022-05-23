@@ -4,14 +4,14 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class EmpleadosVistaManagerController {
     @FXML
@@ -55,15 +55,13 @@ public class EmpleadosVistaManagerController {
     }
 
     @FXML
-    public void onSalirAction() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Salir");
-        alert.setContentText("¿Está seguro que desea salir?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            Platform.exit();
-        } else {
-            alert.close();
+    private void onModificarAction() throws SQLException {
+        Employee employee = employeeTable.getFocusModel().getFocusedItem();
+        System.out.println(employee);
+        try {
+            SceneManager.get().initModifyEmployee(employee);
+        } catch (Exception e) {
+            System.out.println("No se ha seleccionado el empleado");
         }
     }
 
@@ -83,22 +81,6 @@ public class EmpleadosVistaManagerController {
             } catch (SQLException e) {
                 System.err.println(("Error al crear persona: " + e.getMessage()));
             }
-        }
-    }
-
-    public void onViewDetalles() {
-        try {
-            SceneManager.get().initViewDetalles();
-        } catch (IOException e) {
-            System.out.println();
-        }
-    }
-
-    public void onModifyEmployee() {
-        try {
-            SceneManager.get().initModifyEmployee();
-        } catch (IOException e) {
-            System.out.println();
         }
     }
 

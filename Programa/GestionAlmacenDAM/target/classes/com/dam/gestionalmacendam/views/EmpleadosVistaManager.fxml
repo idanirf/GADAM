@@ -48,7 +48,7 @@
                                 <TextField layoutX="154.0" layoutY="9.0" prefHeight="35.0" prefWidth="330.0"
                                            onAction="#findByUUID" fx:id="buscar"/>
                                 <Button layoutX="881.0" layoutY="5.0" mnemonicParsing="false"
-                                        onAction="#onModifyEmployee" prefHeight="44.0" prefWidth="155.0"
+                                        onAction="#onModificarAction" prefHeight="44.0" prefWidth="155.0"
                                         text="Modificar"/>
                                 <Button layoutX="1045.0" layoutY="5.0" mnemonicParsing="false" onAction="#onNewEmployee"
                                         prefHeight="44.0" prefWidth="141.0" text="Crear nuevo"/>

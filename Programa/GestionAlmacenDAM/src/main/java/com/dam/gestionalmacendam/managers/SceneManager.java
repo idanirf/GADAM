@@ -2,10 +2,12 @@ package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.controllers.AcercaDeController;
+import com.dam.gestionalmacendam.controllers.EditarEmployeeController;
 import com.dam.gestionalmacendam.controllers.NewEmployeeController;
 import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -108,15 +110,15 @@ public class SceneManager {
         stage.showAndWait();
     }
 
-    public void initModifyEmployee() throws IOException {
+    public void initModifyEmployee(Employee employee) throws IOException {
+        System.out.println(employee);
+        EditarEmployeeController.createInstance(employee);
+        Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/EditarEmpleadoVistaManager.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Empleados");
         stage.setResizable(false);
-        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.show();
     }
 }
