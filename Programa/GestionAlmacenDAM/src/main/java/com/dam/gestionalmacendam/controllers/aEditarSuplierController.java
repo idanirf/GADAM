@@ -1,34 +1,37 @@
 package com.dam.gestionalmacendam.controllers;
 
-import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.models.Supplier;
-import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
 
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
+public class aEditarSuplierController {
+    private static aEditarSuplierController instance;
+    private static Supplier suplier;
+    SupplierRepository repository = SupplierRepository.getInstance(DataBaseManager.getInstance());
 
-public class NewSuplierController {
-   SupplierRepository repository = SupplierRepository.getInstance(DataBaseManager.getInstance());
+    public aEditarSuplierController(DataBaseManager instance) {
+    }
+
+    public static aEditarSuplierController createInstance(Supplier s) {
+
+        instance = new aEditarSuplierController(DataBaseManager.getInstance());
+        suplier = s;
+        return instance;
+    }
+
+    public static aEditarSuplierController get() {
+        return instance;
+    }
+
+
 
     @FXML
-    private PasswordField areaDirecion;
+    private TextField areaD;
 
     @FXML
     private TextField areaSIC;
@@ -42,21 +45,23 @@ public class NewSuplierController {
     @FXML
     private TextField areanombre;
 
+
+
     @FXML
     public void onAceptarAction(ActionEvent event) {
-        boolean datosValidos = coprobarDatos();
-        if (datosValidos) {
-            saveSuplier();
+        if (isDataValid()) {
+            saveEmployee();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("");
             alert.setHeaderText("Datos no validos.");
+            alert.setContentText("Seleccione Aceptar los Términos.");
             alert.showAndWait();
         }
     }
 
     @FXML
-    private boolean coprobarDatos() {
+    private boolean isDataValid() {
         String errorMessage = "";
         if (areaSIC.getText() == null || areaSIC.getText().isBlank()) {
             errorMessage += "Debes introducir el sic";
@@ -64,7 +69,7 @@ public class NewSuplierController {
         if (areanombre.getText() == null || areanombre.getText().isBlank()) {
             errorMessage += "Debes introducir nombre";
         }
-        if (areaDirecion.getText() == null || areaDirecion.getText().isBlank()) {
+        if (areaD.getText() == null || areaD.getText().isBlank()) {
             errorMessage += "Debes introducir la direcion";
         }
         if (areaTelefono.getText() == null || areaTelefono.getText().isBlank()) {
@@ -78,19 +83,20 @@ public class NewSuplierController {
     }
 
     @FXML
-    private void saveSuplier() {
-        try {
-            repository.save(
-                    new Supplier(
-                            areaSIC.getText(),
-                            areanombre.getText(),
-                            areaDirecion.getText(),
-                            areaTelefono.getText(),
-                            areaemail.getText()));
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    private void saveEmployee() {
+        suplier.setDirection(areaD.getText());
+        suplier.setEmail(areaemail.getText());
+        suplier.setNameSupplier(areanombre.getText());
+        suplier.setTelephoneNumber(areaTelefono.getText());
+        try{
+            repository.update(suplier.getSIC().get(), suplier);
+        }catch (Exception e){
+            System.out.println("no guarda los datos");
         }
+
     }
 
 
 }
+
+

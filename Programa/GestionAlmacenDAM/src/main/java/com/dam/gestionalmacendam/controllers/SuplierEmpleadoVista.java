@@ -65,24 +65,42 @@ public class SuplierEmpleadoVista {
 
     @FXML
     void onModificarAction(ActionEvent event) {
+
+
         Supplier employee = suplierTable.getFocusModel().getFocusedItem();
         System.out.println(employee);
         try {
-            SceneManager.get().initModificarSuplier(employee);
+            //SceneManager.get().initModificarSuplier(employee);
+            SceneManager.get().initModificarSuplier();
         } catch (Exception e) {
             System.out.println("No se ha seleccionado el empleado");
+            e.printStackTrace();
         }
 
     }
 
     @FXML
     void onNewSuplier(ActionEvent event) {
+        System.out.println("intentando cargar nuevo suplier ");
         try {
             SceneManager.get().initNewSuplier();
         }catch (Exception e) {
             System.out.println("no se ha pordido cargar ");
         }
 
+    }
+
+    private void mensajeProceso() {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("aun no esta operativa está selecion");
+            alert.setContentText("aun no esta operativa está selecion");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                alert.close();
+            } else {
+                alert.close();
+            }
 
     }
 

@@ -3,6 +3,7 @@ package com.dam.gestionalmacendam.managers;
 import com.dam.gestionalmacendam.HelloApplication;
 
 
+import com.dam.gestionalmacendam.controllers.aEditarSuplierController;
 import com.dam.gestionalmacendam.controllers.LineaPedidoControler;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Supplier;
@@ -83,7 +84,20 @@ public class SceneManager {
         stage.show();
     }
 
-    public void initModificarSuplier(Supplier employee) {
+    public void initModificarSuplier() throws IOException {
+
+       // aEditarSuplierController.createInstance(suplier);
+        System.out.println("entra en el instance");
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("update.fxml"));
+        System.out.println("entra en el instance 2");
+        Scene scene = new Scene(fxmlLoader.load());
+        System.out.println("entra en el instance 3 ");
+        Stage stage = new Stage();
+
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void initSuplierView() throws IOException {
@@ -97,12 +111,19 @@ public class SceneManager {
     }
 
     public void initNewSuplier() throws IOException {
-        Platform.setImplicitExit(true);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("suplierNewView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        try{
+            System.out.println("entramos en scene builder en init new");
+            Platform.setImplicitExit(true);
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("suplierNewView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
