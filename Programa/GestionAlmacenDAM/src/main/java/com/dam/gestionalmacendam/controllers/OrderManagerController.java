@@ -1,10 +1,12 @@
 package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -44,17 +46,30 @@ public class OrderManagerController {
     private Button butonVerDetalle;
 
     @FXML
-    void onButonVerDetalle(MouseEvent event) {
+    void onButonVerDetalle(MouseEvent event) throws SQLException {
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Pedido no selecionado");
-        alert.setContentText("No ha selecionado ningun Pedido para ver su detalle");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            alert.close();
-        } else {
-            alert.close();
+        String s = textAreaBuscarPorOic.getText();
+        var lista = repository.findAll().filtered(x -> x.getOIC().get().contains(s));
+
+        if(lista.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Pedido no selecionado");
+            alert.setContentText("No ha selecionado ningun Pedido para ver su detalle");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                alert.close();
+            } else {
+                alert.close();
+            }
+        }else{
+            try{
+                SceneManager.get().initLineOrderView(lista);
+            }catch(Exception e){
+                System.out.println("no se ha podido cargar el line order view");
+            }
         }
+
+
 
 
 
@@ -123,5 +138,20 @@ public class OrderManagerController {
     public void selecionarAcion(MouseEvent mouseEvent) {
         Order o = tablaPedidos.getSelectionModel().getSelectedItem();
         textAreaBuscarPorOic.setText(o.getOIC().getValue());
+    }
+
+    public void botonBuscarPorOic(ActionEvent actionEvent) throws SQLException {
+        String name = textAreaBuscarPorOic.getText();
+        if(name.isEmpty()){
+            errorDeBudqueda();
+        }else{
+            tablaPedidos.setItems(repository.findAll().filtered(x ->x.getOIC().get().contains(name)));
+        }
+
+
+    }
+
+    public void vertodos(ActionEvent actionEvent) throws SQLException {
+        tablaPedidos.setItems(repository.findAll());
     }
 }

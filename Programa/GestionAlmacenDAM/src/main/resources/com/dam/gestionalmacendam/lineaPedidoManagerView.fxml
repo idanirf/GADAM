@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.LineaPedidoControler">
   <children>
     <MenuBar id="opcionSalir" fx:id="optionSalir" prefHeight="30.0" prefWidth="1280.0" VBox.vgrow="NEVER">
       <menus>
@@ -65,8 +65,6 @@
                               <TableColumn fx:id="tablaTotalLinea" maxWidth="571.0" minWidth="100.0" prefWidth="250.0" text="Precio total" />
                           </columns>
                         </TableView>
-                        <Label layoutX="664.0" layoutY="14.0" prefHeight="35.0" prefWidth="135.0" text="Precio total de Pedido" />
-                        <TextField id="textAreaPrecioPedido" fx:id="precioTotalPedido" layoutX="859.0" layoutY="14.0" prefHeight="35.0" prefWidth="330.0" />
                      </children>
                   </AnchorPane>
                   <Label prefHeight="35.0" prefWidth="100.0" text=" OIC de  Pedido" />

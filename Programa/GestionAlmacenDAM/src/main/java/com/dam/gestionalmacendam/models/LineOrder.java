@@ -59,6 +59,18 @@ public class LineOrder {
     }
 
 
+    public IntegerProperty loadProperty() {
+        return load;
+    }
 
+
+    public DoubleProperty unitPriceProperty() {
+        return unitPrice;
+    }
+
+
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
+    }
 }
 

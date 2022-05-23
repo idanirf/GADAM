@@ -42,9 +42,7 @@ public class CarritoItem {
         this.total = price.get() * amount;
     }
 
-    public double getTotal() {
-        return total;
-    }
+    
 
     @Override
     public String toString() {
