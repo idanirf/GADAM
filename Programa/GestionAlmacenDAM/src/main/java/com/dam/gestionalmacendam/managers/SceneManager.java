@@ -98,18 +98,6 @@ public class SceneManager {
         stage.showAndWait();
     }
 
-    public void initViewDetalles() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/EditarEmpleadoVistaManager.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Empleados");
-        stage.setResizable(false);
-        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
-        stage.setScene(scene);
-        stage.showAndWait();
-    }
-
     public void initModifyEmployee(Employee employee) throws IOException {
         System.out.println(employee);
         EditarEmployeeController.createInstance(employee);
@@ -118,6 +106,8 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Editar - Empleados");
         stage.setScene(scene);
         stage.show();
     }

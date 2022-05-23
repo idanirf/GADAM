@@ -37,6 +37,9 @@ public class EmpleadosVistaManagerController {
     private TableColumn<Employee, Boolean> manager;
     @FXML
     private TableColumn<Employee, LocalDateTime> createdAt;
+    @FXML
+    private TableColumn<Employee, Boolean> active;
+
 
     @FXML
     private void initialize() {
@@ -52,6 +55,7 @@ public class EmpleadosVistaManagerController {
         email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         manager.setCellValueFactory(cellData -> cellData.getValue().isManagerProperty());
         createdAt.setCellValueFactory(cellData -> cellData.getValue().createdAtProperty());
+        active.setCellValueFactory(cellData -> cellData.getValue().activeProperty());
     }
 
     @FXML

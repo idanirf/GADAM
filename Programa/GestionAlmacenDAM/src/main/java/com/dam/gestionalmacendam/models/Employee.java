@@ -136,6 +136,10 @@ public class Employee {
         return createdAt;
     }
 
+    public BooleanProperty activeProperty() {
+        return isActive;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -152,4 +156,6 @@ public class Employee {
                 ", isActive=" + isActive +
                 '}';
     }
+
+
 }
