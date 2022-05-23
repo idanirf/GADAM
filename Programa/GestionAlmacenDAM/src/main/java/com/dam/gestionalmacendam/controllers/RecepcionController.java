@@ -4,11 +4,13 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineReception;
 import com.dam.gestionalmacendam.models.Reception;
 import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
+import com.dam.gestionalmacendam.utils.Utils;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -52,17 +54,43 @@ public class RecepcionController {
     }
 
     public void onAcept() {
-        reception.setSupplierName(new SimpleStringProperty(suplierName.getText()));
-        reception.setCarrier(new SimpleStringProperty(carrier.getText()));
-        reception.setCost(new SimpleDoubleProperty(Double.parseDouble(cost.getText())));
-        lineReception = new LineReception(article.getText(),Integer.parseInt(load.getText()),Double.parseDouble(unitPrice.getText()),reception.getRIC());
-        try {
-            repo.save(lineReception);
-        }catch(SQLException e){
-            e.printStackTrace();
+        if(isDataOk()) {
+            reception.setSupplierName(new SimpleStringProperty(suplierName.getText()));
+            reception.setCarrier(new SimpleStringProperty(carrier.getText()));
+            reception.setCost(new SimpleDoubleProperty(Double.parseDouble(cost.getText())));
+            lineReception = new LineReception(article.getText(), Integer.parseInt(load.getText()), Double.parseDouble(unitPrice.getText()), reception.getRIC());
+            try {
+                repo.save(lineReception);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            aceptarClicked = true;
+            dialogStage.close();
         }
-        aceptarClicked = true;
-        dialogStage.close();
+    }
+
+
+
+    private boolean isDataOk() {
+        String errorMessage = "";
+
+        if (suplierName.getText() == null || suplierName.getText().isBlank()) {
+            errorMessage += "El campo suplier no puede estar en blanco\n";
+        }
+        if (carrier.getText() == null || carrier.getText().isBlank()) {
+            errorMessage += "El campo carrier no puede estar en blanco\n";
+        }
+        if (cost.getText() == null || cost.getText().isBlank() || Utils.isNumberInt(cost.getText())) {
+            errorMessage += "El campo cost no puede estar vacío o no has introducido un número\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            Alert alert = Utils.getAlertErrorDetails("Error en datos", "Datos del producto", "Existen problemas al intentar Aceptar.", errorMessage);
+            alert.showAndWait();
+            return false;
+        }
     }
 
     public void onCancel() {
