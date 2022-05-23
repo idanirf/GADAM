@@ -4,6 +4,7 @@ import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Article;
+import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.utils.Resources;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,17 +36,10 @@ public class MainCustomerController {
     private TextField txtSearch;
     @FXML
     private GridPane grid;
+    private Customer customer;
+
     public void setDialogStage(Stage stage) {
         this.stage = stage;
-    }
-
-    @FXML
-    private void initialize(){
-        try {
-            initArticles(null);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @FXML
@@ -60,12 +54,11 @@ public class MainCustomerController {
 
     @FXML
     private void btnMyUserClick(MouseEvent mouseEvent) {
-        System.out.println("Yendo al perfil.");
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Perfil");
-        alert.setHeaderText("Estaria entrando a su perfil");
-        alert.setContentText("Vista de su perfil.");
-        alert.show();
+        try {
+            SceneManager.get().initViewDataCustomer(customer);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void initArticles(String name) throws SQLException {
@@ -142,4 +135,12 @@ public class MainCustomerController {
         }
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        try {
+            initArticles(null);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

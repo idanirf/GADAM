@@ -79,9 +79,16 @@ public class LoginController {
                 if (!customer.isEmpty()){
                     System.out.println("Usuario cliente logueado.");
                     var scene= SceneManager.get();
-                    scene.initMainCustomer(stage);
+                    scene.initMainCustomer(stage,customer.get());
                 }else{
                     System.out.println("Usuario empleado logueado.");
+                    var scene= SceneManager.get();
+                    if (employee.get().isManager()){
+                        scene.initAPPManager(stage,employee.get());
+                    }else {
+                        scene.initAPPEmployee(stage,employee.get());
+                    }
+
                 }
 
             }

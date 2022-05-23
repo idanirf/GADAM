@@ -24,6 +24,7 @@ public class Article {
         this.stock = new SimpleIntegerProperty(stock);
         this.isActive = new SimpleBooleanProperty(isActive);
         this.photo=new SimpleStringProperty(photo);
+        isActive();
     }
     public Article(String PIC ,String article, String description, String location,
                    Double price, Integer  stock, Boolean  isActive, String photo) {
@@ -35,9 +36,14 @@ public class Article {
         this.stock = new SimpleIntegerProperty(stock);
         this.isActive = new SimpleBooleanProperty(isActive);
         this.photo=new SimpleStringProperty(photo);
+        isActive();
     }
     public StringProperty imagenProperty() {
         return photo;
+    }
+    public boolean isActive() {
+        this.isActive = new SimpleBooleanProperty(stock.get()>0);
+        return stock.get()>0;
     }
     @Override
     public String toString() {

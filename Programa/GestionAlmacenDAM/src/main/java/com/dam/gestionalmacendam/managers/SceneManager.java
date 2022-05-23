@@ -4,6 +4,10 @@ import com.dam.gestionalmacendam.HelloApplication;
 
 import com.dam.gestionalmacendam.controllers.*;
 import com.dam.gestionalmacendam.models.Article;
+import com.dam.gestionalmacendam.models.Customer;
+import com.dam.gestionalmacendam.models.Employee;
+import com.dam.gestionalmacendam.utils.Properties;
+import com.dam.gestionalmacendam.utils.Resources;
 import com.dam.gestionalmacendam.views.Views;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
@@ -40,6 +46,52 @@ public class SceneManager {
     public static SceneManager get() {
         return instance;
     }
+    public void initAPPManager(Stage login, Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MENU_MANAGER.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        MenuManagerController controller= fxmlLoader.getController();
+        controller.setEmployee(employee);
+        stage.setTitle("GADAM Gestión de Almacenes");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        login.close();
+        if (!login.isShowing()){
+            splash.close();
+        }
+    }
+
+    public void initAPPEmployee(Stage login,Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MENU_EMPLEADO.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        MenuEmployeeController controller= fxmlLoader.getController();
+        controller.setEmployee(employee);
+        stage.setTitle("GADAM Gestión de Almacenes");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        login.close();
+        if (!login.isShowing()){
+            splash.close();
+        }
+    }
+
+    public void initAcercaDe() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ACERCA_DE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Acerca de");
+        stage.setResizable(false);
+        fxmlLoader.<AcercaDeController>getController().setDialogStage(stage);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 
 
     public void initSplash(Stage stage) throws IOException{
@@ -48,10 +100,9 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         SplashController controller= fxmlLoader.getController();
         controller.setDialogStage(stage);
-//        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, null)));
         stage.setResizable(false);
-        stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
         stage.show();
 
     }
@@ -106,13 +157,14 @@ public class SceneManager {
             }
         });
     }
-    public void initMainCustomer(Stage login) throws IOException {
+    public void initMainCustomer(Stage login, Customer customer) throws IOException {
         System.out.println("Entrando a la vista del cliente.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MAIN_CUSTOMER.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
         MainCustomerController controller= fxmlLoader.getController();
         controller.setDialogStage(stage);
+        controller.setCustomer(customer);
         mainStage=stage;
         stage.setTitle("GADAM S.L.");
         stage.setResizable(false);
@@ -148,6 +200,48 @@ public class SceneManager {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
+    }
+    public void initViewCustomer() throws IOException {
+        System.out.println("Entrando a la vista de clientes.");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_CUSTOMER.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Stage stage = new Stage();
+        stage.setTitle("Consultas Clientes");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initViewDataCustomer(Customer customer) throws IOException {
+        System.out.println("Viendo el perfil del usuario.");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.SHOW_DATA_CUSTOMER.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
+        Stage stage = new Stage();
+        ShowCustomerDataController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.setCustomer(customer);
+        stage.setTitle("Tu perfil");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    public void initViewModifyDataCustomer(Customer customer, Stage view) throws IOException {
+        System.out.println("Modificando el perfil.");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MODIFY_DATA_CUSTOMER.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
+        Stage stage = new Stage();
+        ModifyCustomerDataController controller = fxmlLoader.getController();
+        controller.setCustomer(customer);
+        controller.setStage(stage);
+        view.close();
+        stage.setTitle("Modificar los datos.");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        if (!stage.isShowing()){
+            view.show();
+        }
 
     }
 
