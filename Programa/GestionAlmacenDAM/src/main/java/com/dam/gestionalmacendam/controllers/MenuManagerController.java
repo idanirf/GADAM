@@ -73,8 +73,7 @@ public class MenuManagerController {
 
     public void openOperationArticle() {
         try {
-            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
-            SceneManager.get().initAcercaDe();
+            SceneManager.get().initArticleView();
         } catch (IOException e) {
             System.out.println();
         }

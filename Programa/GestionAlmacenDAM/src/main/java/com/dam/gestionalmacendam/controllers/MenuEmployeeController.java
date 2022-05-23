@@ -52,6 +52,7 @@ public class MenuEmployeeController {
 
     public void openOperationArticles() {
         try {
+            SceneManager.get().initArticleView();
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }
@@ -59,6 +60,7 @@ public class MenuEmployeeController {
 
     public void openOperationClientes() {
         try {
+            SceneManager.get().initViewCustomer();
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }

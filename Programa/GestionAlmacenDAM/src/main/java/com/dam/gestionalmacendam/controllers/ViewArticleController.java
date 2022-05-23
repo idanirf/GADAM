@@ -43,7 +43,7 @@ public class ViewArticleController {
     }
 
     private void initArticle() {
-        Image image = new Image(new File(article.getPhoto().get()).toURI().toString());
+        Image image = new Image(new File(article.getPhoto()).toURI().toString());
         viewArticle.setImage(image);
         viewArticle.setFitWidth(234.0);
         viewArticle.setFitHeight(281.0);

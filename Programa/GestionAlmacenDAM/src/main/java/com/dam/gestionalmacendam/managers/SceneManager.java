@@ -11,6 +11,7 @@ import com.dam.gestionalmacendam.utils.Resources;
 import com.dam.gestionalmacendam.views.Views;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -244,5 +245,30 @@ public class SceneManager {
         }
 
     }
-
+    public boolean initProducto(boolean editarModo, Article producto) throws IOException {
+        System.out.println("Iniciando....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_ARTICLE.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 561, 507);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.setTitle(editarModo ? "Editar Persona" : "Nueva Persona");
+        stage.setResizable(false);
+        ProductoController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setEditarModo(editarModo);
+        controller.setProducto(producto);
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+    public void initArticleView() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.ARTICLE_VIEW.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Stage stage = new Stage();
+        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

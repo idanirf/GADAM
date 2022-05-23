@@ -25,4 +25,15 @@ public class Patterns {
         var regex = "^\\w+@(\\w+\\.)+[a-z]{2,3}$";
         return email.matches(regex);
     }
+    public static boolean  isNumberInt(String num){
+        String regex = "^\\d+$";
+        return regex.matches(num);
+    }
+    public int parseNumber(String campo){
+        return Integer.parseInt(campo);
+    }
+    public static boolean isNumerDouble(String num) {
+        String regex = "^[0-9]+([,][0-9]+)?$";
+        return regex.matches(num);
+    }
 }

@@ -14,6 +14,9 @@ public class Article {
     private IntegerProperty stock;
     private BooleanProperty isActive;
     private StringProperty photo;
+    public Article(){
+
+    }
 
     public Article(String article, String description, String location,
                    Double price, Integer  stock, Boolean  isActive,String photo) {
@@ -40,6 +43,40 @@ public class Article {
     }
     public StringProperty imagenProperty() {
         return photo;
+    }
+    public String getPIC() {
+        return PIC;
+    }
+    public StringProperty articleProperty() {
+        return article;
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public StringProperty locationProperty() {
+        return location;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public IntegerProperty stockProperty() {
+        return stock;
+    }
+
+    public BooleanProperty isActiveProperty() {
+        return isActive;
+    }
+
+    public StringProperty photoProperty() {
+        return photo;
+    }
+
+    public String getPhoto() {
+        return photo.get();
     }
     public boolean isActive() {
         this.isActive = new SimpleBooleanProperty(stock.get()>0);

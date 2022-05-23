@@ -135,7 +135,9 @@ public class ModifyCustomerDataController {
     }
 
     private void saveCustomer() {
+        System.out.println(customer);
         try {
+            System.out.println("custo");
             customer.setName(new SimpleStringProperty(txtName.getText()));
             customer.setSurname(new SimpleStringProperty(txtSurname.getText()));
             customer.setCif(new SimpleStringProperty(txtCif.getText()));

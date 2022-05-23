@@ -16,50 +16,12 @@
       </xmi:Extension>
       <importedPackage href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#/"/>
     </packageImport>
-    <packagedElement xsi:type="uml:Class" xmi:id="__1T6QK65EDqMmprnvsOM6A" name="Users">
-      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-        <eAnnotations xmi:id="__1T6QK65EDqMmprnvsOM6A0" source="genmymodel">
-          <details xmi:id="__1T6QK65EDqMmprnvsOM6A00" key="uuid" value="__1T6QK65EDqMmprnvsOM6A"/>
-        </eAnnotations>
-      </xmi:Extension>
-      <ownedAttribute xmi:id="_Elx_oK66EDqMmprnvsOM6A" name="idUser" visibility="public">
-        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-          <eAnnotations xmi:id="_Elx_oK66EDqMmprnvsOM6A0" source="genmymodel">
-            <details xmi:id="_Elx_oK66EDqMmprnvsOM6A00" key="uuid" value="_Elx_oK66EDqMmprnvsOM6A"/>
-          </eAnnotations>
-        </xmi:Extension>
-        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//Integer"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_CyKs8K66EDqMmprnvsOM6A" name="userName" visibility="public">
-        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-          <eAnnotations xmi:id="_CyKs8K66EDqMmprnvsOM6A0" source="genmymodel">
-            <details xmi:id="_CyKs8K66EDqMmprnvsOM6A00" key="uuid" value="_CyKs8K66EDqMmprnvsOM6A"/>
-          </eAnnotations>
-        </xmi:Extension>
-        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_cwGZIK67EDqMmprnvsOM6A" name="password" visibility="public">
-        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-          <eAnnotations xmi:id="_cwGZIK67EDqMmprnvsOM6A0" source="genmymodel">
-            <details xmi:id="_cwGZIK67EDqMmprnvsOM6A00" key="uuid" value="_cwGZIK67EDqMmprnvsOM6A"/>
-          </eAnnotations>
-        </xmi:Extension>
-        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
-      </ownedAttribute>
-    </packagedElement>
     <packagedElement xsi:type="uml:Class" xmi:id="_hlyVsK67EDqMmprnvsOM6A" name="Employee">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
         <eAnnotations xmi:id="_hlyVsK67EDqMmprnvsOM6A0" source="genmymodel">
           <details xmi:id="_hlyVsK67EDqMmprnvsOM6A00" key="uuid" value="_hlyVsK67EDqMmprnvsOM6A"/>
         </eAnnotations>
       </xmi:Extension>
-      <generalization xmi:id="_WC9WQK68EDqMmprnvsOM6A" general="__1T6QK65EDqMmprnvsOM6A" specific="_hlyVsK67EDqMmprnvsOM6A">
-        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-          <eAnnotations xmi:id="_WC9WQK68EDqMmprnvsOM6A0" source="genmymodel">
-            <details xmi:id="_WC9WQK68EDqMmprnvsOM6A00" key="uuid" value="_WC9WQK68EDqMmprnvsOM6A"/>
-          </eAnnotations>
-        </xmi:Extension>
-      </generalization>
       <ownedAttribute xmi:id="_ioo50K67EDqMmprnvsOM6A" name="EIC" visibility="public" type="_lffLIK67EDqMmprnvsOM6A">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
           <eAnnotations xmi:id="_ioo50K67EDqMmprnvsOM6A0" source="genmymodel">
@@ -122,6 +84,22 @@
           </eAnnotations>
         </xmi:Extension>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_vQ8mwLy0EDqoSdErevBxyw" name="nick" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_vQ8mwLy0EDqoSdErevBxyw0" source="genmymodel">
+            <details xmi:id="_vQ8mwLy0EDqoSdErevBxyw00" key="uuid" value="_vQ8mwLy0EDqoSdErevBxyw"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wrRPsLy0EDqoSdErevBxyw" name="password" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wrRPsLy0EDqoSdErevBxyw0" source="genmymodel">
+            <details xmi:id="_wrRPsLy0EDqoSdErevBxyw00" key="uuid" value="_wrRPsLy0EDqoSdErevBxyw"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xsi:type="uml:Enumeration" xmi:id="_lffLIK67EDqMmprnvsOM6A" name="UUID">
       <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
@@ -143,13 +121,6 @@
           <details xmi:id="_0Xb20K67EDqMmprnvsOM6A00" key="uuid" value="_0Xb20K67EDqMmprnvsOM6A"/>
         </eAnnotations>
       </xmi:Extension>
-      <generalization xmi:id="_VEos0K68EDqMmprnvsOM6A" general="__1T6QK65EDqMmprnvsOM6A" specific="_0Xb20K67EDqMmprnvsOM6A">
-        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
-          <eAnnotations xmi:id="_VEos0K68EDqMmprnvsOM6A0" source="genmymodel">
-            <details xmi:id="_VEos0K68EDqMmprnvsOM6A00" key="uuid" value="_VEos0K68EDqMmprnvsOM6A"/>
-          </eAnnotations>
-        </xmi:Extension>
-      </generalization>
       <ownedAttribute xmi:id="_2AjwwK67EDqMmprnvsOM6A" name="CIC" visibility="public" type="_lffLIK67EDqMmprnvsOM6A">
         <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
           <eAnnotations xmi:id="_2AjwwK67EDqMmprnvsOM6A0" source="genmymodel">
@@ -219,6 +190,22 @@
             <details xmi:id="_wmvhgK69EDqMmprnvsOM6A00" key="uuid" value="_wmvhgK69EDqMmprnvsOM6A"/>
           </eAnnotations>
         </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_rq5tILy0EDqoSdErevBxyw" name="nick" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_rq5tILy0EDqoSdErevBxyw0" source="genmymodel">
+            <details xmi:id="_rq5tILy0EDqoSdErevBxyw00" key="uuid" value="_rq5tILy0EDqoSdErevBxyw"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_t0Lt0Ly0EDqoSdErevBxyw" name="password" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_t0Lt0Ly0EDqoSdErevBxyw0" source="genmymodel">
+            <details xmi:id="_t0Lt0Ly0EDqoSdErevBxyw00" key="uuid" value="_t0Lt0Ly0EDqoSdErevBxyw"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xsi:type="uml:Association" xmi:id="_zAxJYK68EDqMmprnvsOM6A" name="Employee_Employee" memberEnd="_zB9cMK68EDqMmprnvsOM6A _zB-DQa68EDqMmprnvsOM6A" navigableOwnedEnd="_zB9cMK68EDqMmprnvsOM6A _zB-DQa68EDqMmprnvsOM6A">

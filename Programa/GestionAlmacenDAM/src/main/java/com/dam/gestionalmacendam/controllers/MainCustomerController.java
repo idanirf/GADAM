@@ -94,8 +94,8 @@ public class MainCustomerController {
         iv.setFitHeight(130);
         iv.setFitWidth(130);
 
-        if (!article.getPhoto().get().isBlank() && Files.exists(Paths.get(article.getPhoto().get()))) {
-            Image image = new Image(new File(article.getPhoto().get()).toURI().toString());
+        if (!article.getPhoto().isBlank() && Files.exists(Paths.get(article.getPhoto()))) {
+            Image image = new Image(new File(article.getPhoto()).toURI().toString());
             iv.setImage(image);
         } else {
             iv.setImage(new Image(Resources.get(HelloApplication.class, "images/article_default.png")));

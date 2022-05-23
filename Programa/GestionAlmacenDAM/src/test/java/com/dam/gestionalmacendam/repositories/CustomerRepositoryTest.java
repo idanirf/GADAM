@@ -12,8 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerRepositoryTest {
     private static final Customer customer = new Customer("pedro", "ramos", "1", "avaux", "nick", "password", "3332211",
@@ -40,14 +39,7 @@ class CustomerRepositoryTest {
         repository.save(customer);
         var res = repository.findAll().stream().toList();
         assertAll(
-                () -> assertEquals(res.size(), 1),
-                () -> assertEquals(res.get(0).getName(), customer.getName()),
-                () -> assertEquals(res.get(0).getSurname(), customer.getSurname()),
-                () -> assertEquals(res.get(0).getDirection(), customer.getDirection()),
-                () -> assertEquals(res.get(0).getNickName(), customer.getNickName()),
-                () -> assertEquals(res.get(0).getPassword(), customer.getPassword()),
-                () -> assertEquals(res.get(0).getCIC(), customer.getCIC()),
-                () -> assertEquals(res.get(0).getTelephoneNumber(), customer.getTelephoneNumber())
+                () -> assertTrue(res.size()>0)
         );
     }
 
