@@ -73,7 +73,7 @@ public class EmpleadosVistaManagerController {
     public void onNewEmployee() throws IOException {
         System.out.println("Insertando Empleado");
         Employee employee = new Employee();
-        boolean aceptarClicked = SceneManager.initNewEmployee(false, employee);
+        boolean aceptarClicked = SceneManager.NewEmployeeController(false, employee);
         if (aceptarClicked) {
             try {
                 employeeRepository.save(employee);

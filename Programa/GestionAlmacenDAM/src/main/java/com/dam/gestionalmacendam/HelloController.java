@@ -19,7 +19,7 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
-    protected void aonHelloButtonClick() {
+    protected void onHelloButtonClick() {
 
         try{
                     SceneManager.get().initSuplierView();
@@ -31,7 +31,7 @@ public class HelloController {
 
     }
     @FXML
-    protected void onHelloButtonClick() {
+    protected void aonHelloButtonClick() {
 
         try{
             if( repository.findAll().isEmpty()){

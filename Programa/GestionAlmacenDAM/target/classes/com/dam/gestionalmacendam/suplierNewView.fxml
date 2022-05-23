@@ -1,80 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="507.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/16"
-      fx:controller="com.dam.gestionalmacendam.controllers.NewSuplierController">
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.NewSuplierController">
     <children>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="561.0">
             <children>
-                <Label layoutX="42.0" layoutY="117.0" text="Nombre">
+                <Label layoutX="113.0" layoutY="118.0" text="Nombre">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="42.0" layoutY="158.0" text="Apellidos">
+                <Label layoutX="122.0" layoutY="159.0" text="SIC">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="42.0" layoutY="284.0" text="NIF">
+                <Label layoutX="115.0" layoutY="293.0" text="Email">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="41.0" layoutY="326.0" text="Email">
+                <Label layoutX="105.0" layoutY="201.0" text="Teléfono">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="41.0" layoutY="200.0" text="Nick">
+                <Label layoutX="103.0" layoutY="244.0" text="Dirección">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="41.0" layoutY="242.0" text="Password">
+                <Label layoutX="113.0" layoutY="29.0" text="Nuevo Proovedor" textAlignment="CENTER" wrapText="true">
                     <font>
-                        <Font name="System Bold" size="13.0"/>
+                        <Font name="System Bold" size="36.0" />
                     </font>
                 </Label>
-                <Label layoutX="11.0" layoutY="29.0" text="Nuevo Empleado" textAlignment="CENTER" wrapText="true">
+                <TextField fx:id="areanombre" layoutX="242.0" layoutY="114.0" prefHeight="26.0" prefWidth="227.0" />
+                <TextField fx:id="areaSIC" layoutX="242.0" layoutY="155.0" prefHeight="26.0" prefWidth="226.0" />
+                <TextField fx:id="areaTelefono" layoutX="244.0" layoutY="197.0" prefHeight="26.0" prefWidth="223.0" />
+                <PasswordField fx:id="areaDirecion" layoutX="243.0" layoutY="241.0" prefHeight="26.0" prefWidth="224.0" />
+                <TextField fx:id="areaemail" layoutX="243.0" layoutY="289.0" prefHeight="26.0" prefWidth="226.0" />
+                <Button layoutX="211.0" layoutY="364.0" mnemonicParsing="false" onAction="#onAceptarAction" prefHeight="72.0" prefWidth="87.0" text="Aceptar">
                     <font>
-                        <Font name="System Bold" size="36.0"/>
-                    </font>
-                </Label>
-                <TextField fx:id="nombre" layoutX="130.0" layoutY="113.0" prefHeight="26.0" prefWidth="227.0"/>
-                <TextField fx:id="surname" layoutX="131.0" layoutY="154.0" prefHeight="26.0" prefWidth="226.0"/>
-                <TextField fx:id="nick" layoutX="132.0" layoutY="196.0" prefHeight="26.0" prefWidth="223.0"/>
-                <PasswordField fx:id="password" layoutX="132.0" layoutY="238.0" prefHeight="26.0" prefWidth="224.0"/>
-                <TextField fx:id="nif" layoutX="131.0" layoutY="280.0" prefHeight="26.0" prefWidth="225.0"/>
-                <TextField fx:id="email" layoutX="130.0" layoutY="322.0" prefHeight="26.0" prefWidth="226.0"/>
-                <CheckBox fx:id="isManager" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" text="Manager">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </CheckBox>
-                <Button layoutX="390.0" layoutY="442.0" mnemonicParsing="false" onAction="#onAceptarAction"
-                        text="Aceptar">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <ImageView fx:id="imagePerfil" fitHeight="93.0" fitWidth="96.0" layoutX="432.0" layoutY="29.0"
-                           onMouseClicked="#onClickImg" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imagePerfil" fitHeight="93.0" fitWidth="96.0" layoutX="432.0" layoutY="29.0" onMouseClicked="#onClickImg" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/user.png"/>
+                        <Image url="@../images/user.png" />
                     </image>
                 </ImageView>
-                <CheckBox layoutX="132.0" layoutY="378.0" mnemonicParsing="false" text="Activo" fx:id="isActive">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </CheckBox>
             </children>
         </AnchorPane>
     </children>

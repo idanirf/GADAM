@@ -95,4 +95,14 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void initNewSuplier() throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("suplierNewView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

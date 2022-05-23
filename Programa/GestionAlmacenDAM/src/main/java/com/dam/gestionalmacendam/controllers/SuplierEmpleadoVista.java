@@ -65,11 +65,24 @@ public class SuplierEmpleadoVista {
 
     @FXML
     void onModificarAction(ActionEvent event) {
+        Supplier employee = suplierTable.getFocusModel().getFocusedItem();
+        System.out.println(employee);
+        try {
+            SceneManager.get().initModificarSuplier(employee);
+        } catch (Exception e) {
+            System.out.println("No se ha seleccionado el empleado");
+        }
 
     }
 
     @FXML
     void onNewSuplier(ActionEvent event) {
+        try {
+            SceneManager.get().initNewSuplier();
+        }catch (Exception e) {
+            System.out.println("no se ha pordido cargar ");
+        }
+
 
     }
 
@@ -83,6 +96,7 @@ public class SuplierEmpleadoVista {
         try {
             loadData();
         } catch (SQLException e) {
+            System.out.println("error al cargar datos");
         }
         colDireci.setCellValueFactory(cellData -> cellData.getValue().directionProperty());
         colEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -94,24 +108,10 @@ public class SuplierEmpleadoVista {
     }
 
     @FXML
-    private void onModificarAction() throws SQLException {
-        Supplier employee = suplierTable.getFocusModel().getFocusedItem();
-        System.out.println(employee);
-        try {
-            SceneManager.get().initModificarSuplier(employee);
-        } catch (Exception e) {
-            System.out.println("No se ha seleccionado el empleado");
-        }
-    }
-
-    @FXML
     private void loadData() throws SQLException {
         suplierTable.setItems(repository.findAll());
     }
 
-    public void onNewEmployee() throws IOException {
-
-    }
     @FXML
     void errorDeBudqueda(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -137,9 +137,7 @@ public class SuplierEmpleadoVista {
         if(name.isEmpty()){
             errorDeBudqueda();
         }else{
-
-            suplierTable.setItems(repository.findAll().filtered(x -> x.getNameSupplier()
-                    .contains(name) || x.getSIC().get().contains(name)));
+            suplierTable.setItems(repository.findAll().filtered(x -> x.getSIC().get().contains(name)));
         }
         suplierTable.refresh();
     }
