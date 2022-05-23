@@ -6,6 +6,7 @@ import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Pay;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,7 +50,7 @@ public class OrderManagerController {
     void onButonVerDetalle(MouseEvent event) throws SQLException {
 
         String s = textAreaBuscarPorOic.getText();
-        var lista = repository.findAll().filtered(x -> x.getOIC().get().contains(s));
+        var lista = repository.findAll().filtered(x -> x.getOIC().contains(s));
 
         if(lista.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -98,7 +99,7 @@ public class OrderManagerController {
                 errorDeBudqueda();
             }else{
 
-                tablaPedidos.setItems(repository.findAll().filtered(x -> x.getOIC().get().contains(name)));
+                tablaPedidos.setItems(repository.findAll().filtered(x -> x.getOIC().contains(name)));
             }
             tablaPedidos.refresh();
 
@@ -113,7 +114,7 @@ public class OrderManagerController {
              System.out.println("No se ha podido cargar la lista de personas");
          }
 
-        columnaOIC.setCellValueFactory(cellData -> cellData.getValue().getOIC());
+        columnaOIC.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOIC()));
         columnaCliente.setCellValueFactory(cellData -> cellData.getValue().getCustomer());
         columnaMetodoDePago.setCellValueFactory(cellData -> cellData.getValue().getMethodPay());
         columnaPrecio.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
@@ -137,7 +138,7 @@ public class OrderManagerController {
 
     public void selecionarAcion(MouseEvent mouseEvent) {
         Order o = tablaPedidos.getSelectionModel().getSelectedItem();
-        textAreaBuscarPorOic.setText(o.getOIC().getValue());
+        textAreaBuscarPorOic.setText(o.getOIC());
     }
 
     public void botonBuscarPorOic(ActionEvent actionEvent) throws SQLException {
@@ -145,7 +146,7 @@ public class OrderManagerController {
         if(name.isEmpty()){
             errorDeBudqueda();
         }else{
-            tablaPedidos.setItems(repository.findAll().filtered(x ->x.getOIC().get().contains(name)));
+            tablaPedidos.setItems(repository.findAll().filtered(x ->x.getOIC().contains(name)));
         }
 
 

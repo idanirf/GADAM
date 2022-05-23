@@ -1,42 +1,82 @@
-package es.joseluisgs.agenda.controllers.nuevo;
+package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Employee;
+import com.dam.gestionalmacendam.models.Order;
+import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
+import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
-public class EmpleadosVistaManagerController {
+public class SuplierEmpleadoVista {
+    SupplierRepository repository = SupplierRepository.getInstance(DataBaseManager.getInstance());
+
     @FXML
-    public TextField buscar;
-    EmployeeRepository employeeRepository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
+    private Button ButonCrear;
+
     @FXML
-    private TableView<Employee> employeeTable;
+    private Button butoVerTodos;
+
     @FXML
-    private TableColumn<Employee, String> photo;
+    private Button butonBuscar;
+
     @FXML
-    private TableColumn<Employee, String> EIC;
+    private Button butonModificar;
+
     @FXML
-    private TableColumn<Employee, String> nick;
+    private TableColumn<Supplier, String> colDireci;
+
     @FXML
-    private TableColumn<Employee, String> name;
+    private TableColumn<Supplier, String> colEmail;
+
     @FXML
-    private TableColumn<Employee, String> surname;
+    private TableColumn<Supplier, String> colName;
+
     @FXML
-    private TableColumn<Employee, String> nif;
+    private TableColumn<Supplier, String> colSIC;
+
     @FXML
-    private TableColumn<Employee, String> email;
+    private TableColumn<Supplier, String> colTelefo;
+
     @FXML
-    private TableColumn<Employee, Boolean> manager;
+    private TableView<Supplier> suplierTable;
+
     @FXML
-    private TableColumn<Employee, LocalDateTime> createdAt;
+    private TextField textAreaSIC;
+
+    @FXML
+    void findByUUID(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onBuscar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onModificarAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onNewSuplier(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onVerTodos(ActionEvent event) {
+
+    }
 
     @FXML
     private void initialize() {
@@ -44,22 +84,21 @@ public class EmpleadosVistaManagerController {
             loadData();
         } catch (SQLException e) {
         }
-        photo.setCellValueFactory(cellData -> cellData.getValue().photoProperty());
-        nick.setCellValueFactory(cellData -> cellData.getValue().nicknameProperty());
-        name.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        surname.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
-        nif.setCellValueFactory(cellData -> cellData.getValue().nifProperty());
-        email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        manager.setCellValueFactory(cellData -> cellData.getValue().isManagerProperty());
-        createdAt.setCellValueFactory(cellData -> cellData.getValue().createdAtProperty());
+        colDireci.setCellValueFactory(cellData -> cellData.getValue().directionProperty());
+        colEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        colName.setCellValueFactory(cellData -> cellData.getValue().nameSupplierProperty());
+        colSIC.setCellValueFactory(cellData -> cellData.getValue().getSIC());
+        colTelefo.setCellValueFactory(cellData -> cellData.getValue().telephoneNumberProperty());
+
+
     }
 
     @FXML
     private void onModificarAction() throws SQLException {
-        Employee employee = employeeTable.getFocusModel().getFocusedItem();
+        Supplier employee = suplierTable.getFocusModel().getFocusedItem();
         System.out.println(employee);
         try {
-            SceneManager.get().initModifyEmployee(employee);
+            SceneManager.get().initModificarSuplier(employee);
         } catch (Exception e) {
             System.out.println("No se ha seleccionado el empleado");
         }
@@ -67,31 +106,41 @@ public class EmpleadosVistaManagerController {
 
     @FXML
     private void loadData() throws SQLException {
-        employeeTable.setItems(employeeRepository.findAll());
+        suplierTable.setItems(repository.findAll());
     }
 
     public void onNewEmployee() throws IOException {
-        System.out.println("Insertando Empleado");
-        Employee employee = new Employee();
-        boolean aceptarClicked = SceneManager.initNewEmployee(false, employee);
-        if (aceptarClicked) {
-            try {
-                employeeRepository.save(employee);
-                loadData();
-            } catch (SQLException e) {
-                System.err.println(("Error al crear persona: " + e.getMessage()));
-            }
+
+    }
+    @FXML
+    void errorDeBudqueda(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Suplier selecionado no existe o incorrecto");
+        alert.setContentText("No ha selecionado ningun suplier o suplier selecionado no existe o incorrecto");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        } else {
+            alert.close();
         }
     }
 
+    //seleciona y pone en el tex area
+    public void selecionarAcion(MouseEvent mouseEvent) {
+        Supplier o = suplierTable.getSelectionModel().getSelectedItem();
+        textAreaSIC.setText(o.getSIC().getValue());
+    }
+
     public void findByUUID() throws SQLException {
-        String uuid = buscar.getText();
-        if (uuid.isEmpty()) {
-            loadData();
-        } else {
-            employeeTable.setItems(employeeRepository.findAll().filtered(x -> x.getNickName()
-                    .contains(uuid) || x.getEIC().contains(uuid)));
+
+        String name = textAreaSIC.getText();
+        if(name.isEmpty()){
+            errorDeBudqueda();
+        }else{
+
+            suplierTable.setItems(repository.findAll().filtered(x -> x.getNameSupplier()
+                    .contains(name) || x.getSIC().get().contains(name)));
         }
-        employeeTable.refresh();
+        suplierTable.refresh();
     }
 }

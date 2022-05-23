@@ -5,6 +5,7 @@ import com.dam.gestionalmacendam.models.CarritoItem;
 import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
@@ -68,7 +69,7 @@ public class LineaPedidoControler {
         tablaCantidadArticulo.setCellValueFactory(cellData -> cellData.getValue().loadProperty().asObject());
         tablaTotalLinea.setCellValueFactory(cellData -> cellData.getValue().totalPriceProperty().asObject());
         tablaNombreArticulo.setCellValueFactory(cellData -> cellData.getValue().getArticle());
-        tablaPicArticulo.setCellValueFactory(cellData -> cellData.getValue().getOLIC());
+        tablaPicArticulo.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getOLIC()));
         tablaPrecioArticulo.setCellValueFactory(cellData -> cellData.getValue().unitPriceProperty().asObject());
 
 
@@ -77,7 +78,7 @@ public class LineaPedidoControler {
     }
 
     private void loadData() throws SQLException {
-        tablaPedidos.setItems(repository.searchByUuidOrder(o.getOIC().get()));
+        tablaPedidos.setItems(repository.searchByUuidOrder(o.getOIC()));
     }
 
 

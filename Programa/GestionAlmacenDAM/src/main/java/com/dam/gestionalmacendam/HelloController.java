@@ -3,6 +3,7 @@ package com.dam.gestionalmacendam;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
+import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,9 +14,22 @@ import java.util.Optional;
 
 public class HelloController {
     OrderRepository repository = OrderRepository.getInstance(DataBaseManager.getInstance());
+    SupplierRepository repositorySuplier = SupplierRepository.getInstance(DataBaseManager.getInstance());
     @FXML
     private Label welcomeText;
 
+    @FXML
+    protected void aonHelloButtonClick() {
+
+        try{
+                    SceneManager.get().initSuplierView();
+
+        }catch (Exception e){
+            System.out.println("no puede cargarse pantalla suplier");
+        }
+
+
+    }
     @FXML
     protected void onHelloButtonClick() {
 

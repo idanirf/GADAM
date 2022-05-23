@@ -5,6 +5,7 @@ import com.dam.gestionalmacendam.HelloApplication;
 
 import com.dam.gestionalmacendam.controllers.LineaPedidoControler;
 import com.dam.gestionalmacendam.models.Order;
+import com.dam.gestionalmacendam.models.Supplier;
 import javafx.application.Platform;
 
 import javafx.collections.transformation.FilteredList;
@@ -75,6 +76,19 @@ public class SceneManager {
         LineaPedidoControler.createInstance(o);
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("lineaPedidoManagerView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void initModificarSuplier(Supplier employee) {
+    }
+
+    public void initSuplierView() throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SuplierVistaManager.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setResizable(false);

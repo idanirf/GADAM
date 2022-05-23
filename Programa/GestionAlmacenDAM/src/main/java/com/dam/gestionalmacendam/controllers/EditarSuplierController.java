@@ -1,10 +1,10 @@
-package es.joseluisgs.agenda.controllers.nuevo;
+package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
-import com.dam.gestionalmacendam.utils.Resources;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,8 +22,8 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-public class EditarEmployeeController {
-    private static EditarEmployeeController instance;
+public class EditarSuplierController {
+    private static EditarSuplierController instance;
     private static Employee employee;
     private final boolean aceptarClicked = false;
     EmployeeRepository repository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
@@ -48,13 +48,13 @@ public class EditarEmployeeController {
     private boolean editMode = false;
     private Stage dialogStage;
 
-    public static EditarEmployeeController createInstance(Employee emplo) {
-        instance = new EditarEmployeeController();
+    public static EditarSuplierController createInstance(Employee emplo) {
+        instance = new EditarSuplierController();
         employee = emplo;
         return instance;
     }
 
-    public static EditarEmployeeController get() {
+    public static EditarSuplierController get() {
         return instance;
     }
 
@@ -67,7 +67,7 @@ public class EditarEmployeeController {
     }
 
     public void setEmployee(Employee employee) {
-        EditarEmployeeController.employee = employee;
+        EditarSuplierController.employee = employee;
         System.out.println("Producto asociado: " + employee);
         if (editMode) {
             setDataInfo();
@@ -96,8 +96,8 @@ public class EditarEmployeeController {
             imagePerfil.setImage(image);
         } else {
             System.out.println(("No existe la imagen. Usando imagen por defecto"));
-            imagePerfil.setImage(new Image(Resources.get(HelloApplication.class, "images/user.png")));
-            employee.setPhoto(Resources.getPath(HelloApplication.class, "image/user.png"));
+           // imagePerfil.setImage(new Image(Resources.get(HelloApplication.class, "images/user.png")));
+           // employee.setPhoto(Resources.getPath(HelloApplication.class, "image/user.png"));
         }
 
     }
@@ -170,7 +170,7 @@ public class EditarEmployeeController {
         if (file != null) {
             System.out.println(("Seleccion del archivo: " + file.getAbsolutePath()));
             imagePerfil.setImage(new Image(file.toURI().toString()));
-            employee.setPhoto(file.getAbsolutePath());
+           // employee.setPhoto(file.getAbsolutePath());
 
         }
     }

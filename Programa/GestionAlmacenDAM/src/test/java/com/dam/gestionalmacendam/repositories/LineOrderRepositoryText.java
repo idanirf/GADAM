@@ -43,7 +43,7 @@ public class LineOrderRepositoryText {
     }
     @Test
     public void saveTest() throws SQLException {
-        var res= repository.findByUuid(lineOrder.getOLIC().get());
+        var res= repository.findByUuid(lineOrder.getOLIC());
         assertAll(
                 ()-> assertEquals(res.getOLIC(),lineOrder.getOLIC()),
                 ()-> assertEquals(res.getLoad().get(),lineOrder.getLoad().get()),
@@ -56,20 +56,20 @@ public class LineOrderRepositoryText {
     @Test
     public void  updateTest() throws SQLException {
         lineOrder.setLoad(new SimpleIntegerProperty(8));
-        repository.update(lineOrder.getOLIC().get(),lineOrder);
-        var li = repository.findByUuid(lineOrder.getOLIC().get());
+        repository.update(lineOrder.getOLIC(),lineOrder);
+        var li = repository.findByUuid(lineOrder.getOLIC());
 
         assertAll(
-                () ->assertTrue(li.getOLIC().get().equalsIgnoreCase(lineOrder.getOLIC().get())),
+                () ->assertTrue(li.getOLIC().equalsIgnoreCase(lineOrder.getOLIC())),
                 () ->assertEquals(li.getLoad().get(),lineOrder.getLoad().get())
         );
     }
     @Test
     public void  findByUuidTest() throws SQLException {
-       var res= repository.findByUuid(lineOrder.getOLIC().get());
+       var res= repository.findByUuid(lineOrder.getOLIC());
 
        assertAll(
-               ()-> assertEquals(res.getOLIC().get(),lineOrder.getOLIC().get()),
+               ()-> assertEquals(res.getOLIC(),lineOrder.getOLIC()),
                ()-> assertEquals(res.getLoad().get(),lineOrder.getLoad().get()),
                ()-> assertEquals(res.getUnitPrice().get(),lineOrder.getUnitPrice().get()),
                ()-> assertEquals(res.getTotalPrice().get(),lineOrder.getTotalPrice().get())
@@ -80,7 +80,7 @@ public class LineOrderRepositoryText {
         var res= repository.searchByUuidOrder(lineOrder.getBelongsOrder().get());
 
         assertAll(
-                ()-> assertEquals(res.get(0).getOLIC().get(),lineOrder.getOLIC().get()),
+                ()-> assertEquals(res.get(0).getOLIC(),lineOrder.getOLIC()),
                 ()-> assertEquals(res.get(0).getLoad().get(),lineOrder.getLoad().get()),
                 ()-> assertEquals(res.get(0).getUnitPrice().get(),lineOrder.getUnitPrice().get()),
                 ()-> assertEquals(res.get(0).getTotalPrice().get(),lineOrder.getTotalPrice().get())
