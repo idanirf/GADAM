@@ -44,7 +44,6 @@ public class SceneManager {
         Stage stage = new Stage();
         NewEmployeeController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
-        controller.setEmployee(employee);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Empleados");
         stage.setResizable(false);
@@ -100,11 +99,13 @@ public class SceneManager {
 
     public void initModifyEmployee(Employee employee) throws IOException {
         System.out.println(employee);
-        EditarEmployeeController.createInstance(employee);
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/EditarEmpleadoVistaManager.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        EditarEmployeeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setEmployee(employee);
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setTitle("Editar - Empleados");

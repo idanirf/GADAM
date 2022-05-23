@@ -4,10 +4,11 @@ import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
+import com.dam.gestionalmacendam.utils.Patterns;
 import com.dam.gestionalmacendam.utils.Resources;
-import javafx.event.ActionEvent;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,12 +21,13 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class EditarEmployeeController {
     private static EditarEmployeeController instance;
     private static Employee employee;
     private final boolean aceptarClicked = false;
+    private final boolean editMode = false;
     EmployeeRepository repository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
     @FXML
     TextField nombre;
@@ -45,17 +47,15 @@ public class EditarEmployeeController {
     ImageView imagePerfil;
     @FXML
     CheckBox isActive;
-    private boolean editMode = false;
     private Stage dialogStage;
-
-    public static EditarEmployeeController createInstance(Employee emplo) {
-        instance = new EditarEmployeeController();
-        employee = emplo;
-        return instance;
-    }
 
     public static EditarEmployeeController get() {
         return instance;
+    }
+
+    public void setEmployee(Employee emplo) {
+        employee = emplo;
+        setDataInfo();
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -66,20 +66,8 @@ public class EditarEmployeeController {
         return aceptarClicked;
     }
 
-    public void setEmployee(Employee employee) {
-        EditarEmployeeController.employee = employee;
-        System.out.println("Producto asociado: " + employee);
-        if (editMode) {
-            setDataInfo();
-        }
-        nombre.requestFocus();
-    }
-
-    public void setEditarModo(boolean editarModo) {
-        this.editMode = editarModo;
-    }
-
     private void setDataInfo() {
+        System.out.println("Esto es el SET DATA INFO");
         nombre.setText(employee.getName());
         surname.setText(employee.getSurname());
         nick.setText(employee.getNickName());
@@ -99,71 +87,69 @@ public class EditarEmployeeController {
             imagePerfil.setImage(new Image(Resources.get(HelloApplication.class, "images/user.png")));
             employee.setPhoto(Resources.getPath(HelloApplication.class, "image/user.png"));
         }
-
     }
 
-    public void onAceptarAction(ActionEvent event) {
+    public void onAceptarAction() {
         if (isDataValid()) {
             saveEmployee();
             dialogStage.close();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText("Datos no validos.");
-            alert.setContentText("Seleccione Aceptar los Términos.");
-            alert.showAndWait();
+            System.out.println("Error");
         }
     }
 
     private void saveEmployee() {
         try {
-            repository.save(
-                    new Employee(
-                            nombre.getText(),
-                            surname.getText(),
-                            nif.getText(),
-                            email.getText(),
-                            imagePerfil.getImage().getUrl().replaceFirst("file:/", ""),
-                            nick.getText(),
-                            password.getText(),
-                            isManager.isSelected(),
-                            LocalDateTime.now(),
-                            isActive.isSelected())
+            employee.setName(new SimpleStringProperty(nombre.getText()));
+            employee.setSurname(new SimpleStringProperty(surname.getText()));
+            employee.setNickName(new SimpleStringProperty(nick.getText()));
+            employee.setPassword(new SimpleStringProperty(password.getText()));
+            employee.setNif(new SimpleStringProperty(nif.getText()));
+            employee.setEmail(new SimpleStringProperty(email.getText()));
+            employee.setIsManager(new SimpleBooleanProperty(isManager.isSelected()));
+            employee.setIsActive(new SimpleBooleanProperty(isActive.isSelected()));
+            employee.setPhoto(imagePerfil.getImage().getUrl().replaceFirst("file:/", ""));
+            repository.update(
+                    UUID.fromString(employee.getEIC()), employee
             );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-
     private boolean isDataValid() {
         String errorMessage = "";
-        if (nombre.getText() == null || nombre.getText().isBlank()) {
+        if (nombre.getText() == null || nombre.getText().isBlank() || !Patterns.patternName(nombre.getText())) {
             errorMessage += "Debes introducir el nombre";
+            nombre.setText("");
         }
-        if (surname.getText() == null || surname.getText().isBlank()) {
+        if (surname.getText() == null || surname.getText().isBlank() || !Patterns.patternSurnames(surname.getText())) {
             errorMessage += "Debes introducir apellidos";
+            surname.setText("");
         }
         if (nick.getText() == null || nick.getText().isBlank()) {
             errorMessage += "Debes introducir nick de usuario";
+            nick.setText("");
         }
-        if (password.getText() == null || password.getText().isBlank()) {
+        if (password.getText() == null || password.getText().isBlank() || !Patterns.patternPassword(password.getText())) {
             errorMessage += "Debes introducir una contraseña";
+            password.setText("");
         }
-        if (email.getText() == null || email.getText().isBlank()) {
-            errorMessage += "Debes introducir apellidos";
+        if (email.getText() == null || email.getText().isBlank() || !Patterns.patternEmail(email.getText())) {
+            errorMessage += "Debes introducir un email con un formato correcto";
+            email.setText("");
         }
-        if (nif.getText() == null || nif.getText().isBlank()) {
-            errorMessage += "Debes introducir apellidos";
+        if (nif.getText() == null || nif.getText().isBlank() || !Patterns.patternCif(nif.getText())) {
+            errorMessage += "Debes introducir NIF valido";
+            nif.setText("");
         }
         return errorMessage.length() == 0;
-
     }
 
     @FXML
     private void onClickImg() {
         FileChooser buscadorImg = new FileChooser();
-        buscadorImg.setTitle("Selecciona la imagen del producto: ");
+        buscadorImg.setTitle("Selecciona la imagen del employee: ");
         buscadorImg.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png"));
         File file = buscadorImg.showOpenDialog(imagePerfil.getScene().getWindow());
 
@@ -171,7 +157,6 @@ public class EditarEmployeeController {
             System.out.println(("Seleccion del archivo: " + file.getAbsolutePath()));
             imagePerfil.setImage(new Image(file.toURI().toString()));
             employee.setPhoto(file.getAbsolutePath());
-
         }
     }
 }
