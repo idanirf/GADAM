@@ -17,6 +17,9 @@ public class LineReception {
     private DoubleProperty totalPrice;
     private StringProperty belongsRecepcion;
 
+    public LineReception(){
+
+    }
     public LineReception(String articlePIC, Integer load, Double unitPrice,String belongsRecepcion) {
         this.articlePIC = new SimpleStringProperty(articlePIC);
         this.load = new SimpleIntegerProperty(load);
@@ -34,13 +37,33 @@ public class LineReception {
     }
 
     public void setLoad(int load) {
-        this.load.set(load);
+        this.load = new SimpleIntegerProperty(load);
         this.totalPrice = new SimpleDoubleProperty(this.load.intValue()*this.unitPrice.doubleValue());
     }
 
     public void setUnitPrice(double unitPrice) {
-        this.unitPrice.set(unitPrice);
-        this.totalPrice = new SimpleDoubleProperty(this.load.intValue()*this.unitPrice.doubleValue());
+        this.unitPrice = new SimpleDoubleProperty(unitPrice);
+    }
+
+
+    public StringProperty articlePICProperty() {
+        return articlePIC;
+    }
+
+    public DoubleProperty unitPriceProperty() {
+        return unitPrice;
+    }
+
+    public IntegerProperty loadProperty() {
+        return load;
+    }
+
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
+    }
+
+    public StringProperty belongsRecepcionProperty() {
+        return belongsRecepcion;
     }
 
     @Override

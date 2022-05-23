@@ -57,14 +57,13 @@ public class LineReceptionRepository implements LineReceptionInterface{
 
         dataBaseManager.open();
         String query = "Insert into LineReception values (?, ?, ?, ?, ?, ?);";
-        ResultSet resultado = dataBaseManager.insert(query,
+        dataBaseManager.insert(query,
                 lineReception.getRLIC(),
                 lineReception.getArticlePIC().get(),
                 lineReception.getLoad().get(),
                 lineReception.getUnitPrice().get(),
                 lineReception.getTotalPrice().get(),
-                lineReception.getBelongsRecepcion().get()
-        ).orElseThrow(SQLException::new);
+                lineReception.getBelongsRecepcion().get());
         dataBaseManager.close();
         return Optional.of(lineReception) ;
     }

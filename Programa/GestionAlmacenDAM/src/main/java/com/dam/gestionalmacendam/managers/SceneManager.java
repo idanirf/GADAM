@@ -2,14 +2,19 @@ package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.controllers.ProductoController;
+import com.dam.gestionalmacendam.controllers.RecepcionController;
+import com.dam.gestionalmacendam.controllers.ResumenReceptionController;
 import com.dam.gestionalmacendam.controllers.ResusmenController;
 import com.dam.gestionalmacendam.models.Article;
+import com.dam.gestionalmacendam.models.LineReception;
+import com.dam.gestionalmacendam.models.Reception;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SceneManager {
     private static SceneManager instance;
@@ -64,10 +69,39 @@ public class SceneManager {
         stage.setResizable(false);
         stage.setScene(scene);
         ResusmenController controller = fxmlLoader.getController();
-        System.out.println(producto);
         controller.setProducto(producto);
         stage.showAndWait();
 
     }
 
+    public static boolean initReception(Reception recepcion, LineReception lineReception) throws IOException {
+        System.out.println("Iniciando....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Vistas/nuevaReception.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
+        RecepcionController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setReception(recepcion,lineReception);
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+
+    public static void initResumeReception(Reception x) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Vistas/verDetalleReception.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 657, 481);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        ResumenReceptionController controller = fxmlLoader.getController();
+        controller.setRecepcion(x);
+        stage.showAndWait();
+
+
+    }
 }

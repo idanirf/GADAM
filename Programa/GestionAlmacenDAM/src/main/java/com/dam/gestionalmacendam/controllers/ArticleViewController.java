@@ -66,7 +66,6 @@ public class ArticleViewController {
     @FXML
     private void loadProd() throws SQLException {
         System.out.println("Cargando Productos");
-        productosrepository.findAll().forEach(System.out::println);
         productosTable.setItems(productosrepository.findAll());
     }
             private void initColumns() {

@@ -57,7 +57,7 @@ public class ReceptionRepository implements ReceptionInterface<Reception, String
         String query = "Insert into Reception(RIC, Supplier, Carrier, Cost) values (?, ?, ?, ?);";
         dataBaseManager.insert(query,
                 reception.getRIC(),
-                reception.getSupplierSIC().get(),
+                reception.getSupplierName().get(),
                 reception.getCarrier().get(),
                 reception.getCost().get()
         );

@@ -2,6 +2,10 @@ package com.dam.gestionalmacendam;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 
+import com.dam.gestionalmacendam.models.LineReception;
+import com.dam.gestionalmacendam.models.Reception;
+import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
+import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +23,6 @@ import java.util.Optional;
 
 public class HelloApplication extends Application {
     public static void main(String[] args) {
-
 
 //        checkServer();
           launch();
@@ -45,7 +48,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("Vistas/article-view.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("Vistas/receptionview.fxml")));
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);

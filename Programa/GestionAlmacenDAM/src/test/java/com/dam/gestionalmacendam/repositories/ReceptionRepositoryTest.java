@@ -53,7 +53,7 @@ public class ReceptionRepositoryTest {
                 ()-> assertEquals(res1.get(0).getRIC(),o.getRIC()),
                 ()-> assertEquals(res1.get(0).getCarrier().get(),o.getCarrier().get()),
                 ()-> assertEquals(res1.get(0).getCost().get(),o.getCost().get()),
-                ()-> assertEquals(res1.get(0).getSupplierSIC().get(),o.getSupplierSIC().get())
+                ()-> assertEquals(res1.get(0).getSupplierName().get(),o.getSupplierName().get())
 
         );
     }
