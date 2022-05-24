@@ -54,7 +54,7 @@
       <CheckBox fx:id="isActive" layoutX="89.0" layoutY="320.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="24.0" />
       <ImageView fx:id="imageProd" fitHeight="145.0" fitWidth="162.0" layoutX="361.0" layoutY="50.0" onMouseClicked="#onClickImg" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/cajita.png" />
+            <Image url="@../images/cajita.png" />
          </image></ImageView>
       <Button layoutX="382.0" layoutY="468.0" mnemonicParsing="false" onAction="#onAcept" prefHeight="25.0" prefWidth="72.0" text="Aceptar">
          <font>

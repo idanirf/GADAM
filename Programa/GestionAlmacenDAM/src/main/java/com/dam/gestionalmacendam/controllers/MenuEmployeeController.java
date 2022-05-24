@@ -68,6 +68,8 @@ public class MenuEmployeeController {
 
     public void openOperationRecepciones() {
         try {
+            System.out.println("Entra");
+            SceneManager.get().initReception();
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }

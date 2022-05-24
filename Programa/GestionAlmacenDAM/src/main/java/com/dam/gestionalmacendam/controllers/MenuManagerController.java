@@ -89,8 +89,8 @@ public class MenuManagerController {
 
     public void openOperationReception() {
         try {
-            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
-            SceneManager.get().initAcercaDe();
+            System.out.println("Entra");
+            SceneManager.get().initReception();
         } catch (IOException e) {
             System.out.println();
         }

@@ -3,9 +3,7 @@ package com.dam.gestionalmacendam.managers;
 import com.dam.gestionalmacendam.HelloApplication;
 
 import com.dam.gestionalmacendam.controllers.*;
-import com.dam.gestionalmacendam.models.Article;
-import com.dam.gestionalmacendam.models.Customer;
-import com.dam.gestionalmacendam.models.Employee;
+import com.dam.gestionalmacendam.models.*;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
 import com.dam.gestionalmacendam.views.Views;
@@ -266,6 +264,30 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.ARTICLE_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
+        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initResume(Article producto) throws IOException {
+        System.out.println("Viendo el resumen del pedido....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_ARTICLE.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        ResumenController controller = fxmlLoader.getController();
+        controller.setProducto(producto);
+        stage.showAndWait();
+
+    }
+    public void initReception() throws IOException {
+        FXMLLoader fxmlLoader = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Stage stage = new Stage();
+        System.out.println("Estoy aqui");
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
         stage.setScene(scene);

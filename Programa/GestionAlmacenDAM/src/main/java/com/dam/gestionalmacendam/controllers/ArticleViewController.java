@@ -107,7 +107,7 @@ public class ArticleViewController {
     private void onVerDetalleAction() throws IOException {
         System.out.println(("Se ha pulsado ver Detalle"));
         Article producto = productosTable.getSelectionModel().getSelectedItem();
-//        SceneManager.getinitResume(producto);
+        SceneManager.get().initResume(producto);
 
     }
     @FXML

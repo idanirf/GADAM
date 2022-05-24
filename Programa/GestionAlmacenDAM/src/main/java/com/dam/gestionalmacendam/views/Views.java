@@ -8,6 +8,8 @@ public enum Views {
     MODIFY_DATA_CUSTOMER("views/ModifyDataCustomer.fxml"),
     ARTICLE_VIEW("views/article-View.fxml"),
     NEW_ARTICLE("views/nuevoProducto.fxml"),
+    RESUME_ARTICLE("views/verDetalle.fxml"),
+    RECEPTION_VIEW("views/receptionview.fxml"),
     ACERCA_DE("views/AcercaDe.fxml"),
     SPLASH("views/splash.fxml"),
     LOGIN("views/login.fxml"),
