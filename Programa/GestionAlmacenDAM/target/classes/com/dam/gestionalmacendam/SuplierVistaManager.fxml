@@ -40,8 +40,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.dam.gestionalmacendam.controllers.SuplierEmpleadoVista">
+<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.SuplierEmpleadoVista">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="654.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
             <children>
@@ -62,8 +61,6 @@
                                         <TableColumn id="colTelefono" fx:id="colTelefo" minWidth="0.0" prefWidth="322.0" text="Telefono" />
                                     </columns>
                                 </TableView>
-                        <Button id="butonBuscar" fx:id="butonBuscar" layoutX="518.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBuscar" text="Buscar" />
-                        <Button id="butonVerTodos" fx:id="butoVerTodos" layoutX="588.0" layoutY="15.0" mnemonicParsing="false" onAction="#onVerTodos" text="Ver todos" />
                             </children>
                         </AnchorPane>
                     </children>

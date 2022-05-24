@@ -18,7 +18,7 @@ public class SupplierRepository implements ICRUDSupplier {
     public DataBaseManager getBbdd(){
         return bbdd;
     }
-    private SupplierRepository(DataBaseManager bbdd) {
+    public SupplierRepository(DataBaseManager bbdd) {
         this.bbdd=bbdd;
     }
 

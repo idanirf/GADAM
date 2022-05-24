@@ -7,6 +7,7 @@ import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,12 +23,6 @@ public class SuplierEmpleadoVista {
 
     @FXML
     private Button ButonCrear;
-
-    @FXML
-    private Button butoVerTodos;
-
-    @FXML
-    private Button butonBuscar;
 
     @FXML
     private Button butonModificar;
@@ -54,24 +49,26 @@ public class SuplierEmpleadoVista {
     private TextField textAreaSIC;
 
     @FXML
-    void findByUUID(ActionEvent event) {
+    void findByUUID(ActionEvent event) throws SQLException {
 
-    }
-
-    @FXML
-    void onBuscar(ActionEvent event) {
-
+        String name = textAreaSIC.getText();
+        if(name.isEmpty()){
+            loadData();
+        }else{
+            suplierTable.setItems(repository.findAll().filtered(x -> x.getNameSupplier()
+                    .toLowerCase().contains(name)|| x.getSIC().toUpperCase().contains(name)));
+        }
+        suplierTable.refresh();
     }
 
     @FXML
     void onModificarAction(ActionEvent event) {
 
 
-        Supplier employee = suplierTable.getFocusModel().getFocusedItem();
-        System.out.println(employee);
+        Supplier s = suplierTable.getFocusModel().getFocusedItem();
+        System.out.println(s);
         try {
-            //SceneManager.get().initModificarSuplier(employee);
-            SceneManager.get().initModificarSuplier();
+            SceneManager.get().initModificarSuplier(s);
         } catch (Exception e) {
             System.out.println("No se ha seleccionado el empleado");
             e.printStackTrace();
@@ -119,7 +116,7 @@ public class SuplierEmpleadoVista {
         colDireci.setCellValueFactory(cellData -> cellData.getValue().directionProperty());
         colEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         colName.setCellValueFactory(cellData -> cellData.getValue().nameSupplierProperty());
-        colSIC.setCellValueFactory(cellData -> cellData.getValue().getSIC());
+        colSIC.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSIC()));
         colTelefo.setCellValueFactory(cellData -> cellData.getValue().telephoneNumberProperty());
 
 
@@ -146,7 +143,7 @@ public class SuplierEmpleadoVista {
     //seleciona y pone en el tex area
     public void selecionarAcion(MouseEvent mouseEvent) {
         Supplier o = suplierTable.getSelectionModel().getSelectedItem();
-        textAreaSIC.setText(o.getSIC().getValue());
+        textAreaSIC.setText(o.getSIC());
     }
 
     public void findByUUID() throws SQLException {
@@ -155,7 +152,7 @@ public class SuplierEmpleadoVista {
         if(name.isEmpty()){
             errorDeBudqueda();
         }else{
-            suplierTable.setItems(repository.findAll().filtered(x -> x.getSIC().get().contains(name)));
+            suplierTable.setItems(repository.findAll().filtered(x -> x.getSIC().contains(name)));
         }
         suplierTable.refresh();
     }

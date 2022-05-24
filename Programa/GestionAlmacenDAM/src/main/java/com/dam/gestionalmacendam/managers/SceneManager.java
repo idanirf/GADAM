@@ -3,6 +3,7 @@ package com.dam.gestionalmacendam.managers;
 import com.dam.gestionalmacendam.HelloApplication;
 
 
+import com.dam.gestionalmacendam.controllers.EditarSuplierController;
 import com.dam.gestionalmacendam.controllers.aEditarSuplierController;
 import com.dam.gestionalmacendam.controllers.LineaPedidoControler;
 import com.dam.gestionalmacendam.models.Order;
@@ -84,9 +85,9 @@ public class SceneManager {
         stage.show();
     }
 
-    public void initModificarSuplier() throws IOException {
+    public void initModificarSuplier(Supplier s) throws IOException {
 
-       // aEditarSuplierController.createInstance(suplier);
+        EditarSuplierController.createInstance(s);
         System.out.println("entra en el instance");
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("update.fxml"));

@@ -92,20 +92,6 @@ public class OrderManagerController {
     }
 
     @FXML
-    void buscaPorOIC(InputMethodEvent event) throws SQLException {
-
-            String name = textAreaBuscarPorOic.getText();
-            if(name.isEmpty()){
-                errorDeBudqueda();
-            }else{
-
-                tablaPedidos.setItems(repository.findAll().filtered(x -> x.getOIC().contains(name)));
-            }
-            tablaPedidos.refresh();
-
-    }
-
-    @FXML
     private void initialize() {
 
          try {
@@ -141,18 +127,21 @@ public class OrderManagerController {
         textAreaBuscarPorOic.setText(o.getOIC());
     }
 
-    public void botonBuscarPorOic(ActionEvent actionEvent) throws SQLException {
-        String name = textAreaBuscarPorOic.getText();
-        if(name.isEmpty()){
-            errorDeBudqueda();
-        }else{
-            tablaPedidos.setItems(repository.findAll().filtered(x ->x.getOIC().contains(name)));
-        }
 
-
-    }
 
     public void vertodos(ActionEvent actionEvent) throws SQLException {
         tablaPedidos.setItems(repository.findAll());
     }
+
+    public void findByName(ActionEvent actionEvent) throws SQLException {
+        String name = textAreaBuscarPorOic.getText();
+        if(name.isEmpty()){
+            loadData();
+        }else{
+            tablaPedidos.setItems(repository.findAll().filtered(x -> x.getCustomer().get()
+                    .toLowerCase().contains(name)|| x.getOIC().toUpperCase().contains(name)));
+        }
+        tablaPedidos.refresh();
+    }
+
 }

@@ -40,7 +40,7 @@ public class SupplierRepositoryTest {
     @Test
     void findaByUUID() throws SQLException {
             supplierRepository.save(supplierTest);
-       var res = supplierRepository.findByUUID(supplierTest.getSIC().get());
+       var res = supplierRepository.findByUUID(supplierTest.getSIC());
                 assertAll(
                         () -> assertEquals(res.getSIC(), supplierTest.getSIC()),
                         ()-> assertEquals(res.getSIC(), supplierTest.getSIC())
@@ -68,7 +68,7 @@ public class SupplierRepositoryTest {
         supplierTest.setDirection("Calle Madrid N18 Madrid");
         supplierTest.setTelephoneNumber("605203547");
         supplierTest.setEmail("sillafactory.spain@sillafactory.com");
-        var resultado = supplierRepository.update(supplierTest.getSIC().get(), supplierTest);
+        var resultado = supplierRepository.update(supplierTest.getSIC(), supplierTest);
 
         assertAll(
                 () -> assertEquals(resultado.get().getDirection(), supplierTest.getDirection()),

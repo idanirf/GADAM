@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 public class Supplier {
-    private StringProperty SIC;
+    private String SIC;
     private StringProperty nameSupplier;
     private StringProperty direction;
     private StringProperty telephoneNumber;
@@ -17,7 +17,7 @@ public class Supplier {
 
 
     public Supplier(String nameSupplier, String direction, String telephonNumber, String email) {
-        this.SIC = new SimpleStringProperty(UUID.randomUUID().toString());
+        this.SIC =(UUID.randomUUID().toString());
         this.nameSupplier = new SimpleStringProperty(nameSupplier);
         this.direction = new SimpleStringProperty(direction);
         this.telephoneNumber = new SimpleStringProperty(telephonNumber);
@@ -26,7 +26,7 @@ public class Supplier {
 
     //En este constructor se agrega el SIC
     public Supplier(String SIC, String nameSupplier, String direction, String telephonNumber, String email) {
-        this.SIC = new SimpleStringProperty(SIC);
+        this.SIC = SIC;
         this.nameSupplier = new SimpleStringProperty(nameSupplier);
         this.direction = new SimpleStringProperty(direction);
         this.telephoneNumber = new SimpleStringProperty(telephonNumber);

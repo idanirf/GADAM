@@ -63,9 +63,7 @@ public class aEditarSuplierController {
     @FXML
     private boolean isDataValid() {
         String errorMessage = "";
-        if (areaSIC.getText() == null || areaSIC.getText().isBlank()) {
-            errorMessage += "Debes introducir el sic";
-        }
+
         if (areanombre.getText() == null || areanombre.getText().isBlank()) {
             errorMessage += "Debes introducir nombre";
         }
@@ -89,7 +87,7 @@ public class aEditarSuplierController {
         suplier.setNameSupplier(areanombre.getText());
         suplier.setTelephoneNumber(areaTelefono.getText());
         try{
-            repository.update(suplier.getSIC().get(), suplier);
+            repository.update(suplier.getSIC(), suplier);
         }catch (Exception e){
             System.out.println("no guarda los datos");
         }
