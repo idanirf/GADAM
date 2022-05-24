@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="BaseGADAM.db" uuid="4de4ce34-80a1-4838-b942-496402e446e9">
+    <data-source source="LOCAL" name="BaseGADAM.db" uuid="6ad4ae0a-3972-45a8-9c05-0ed4f186c538">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/data/BaseGADAM.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\danii\Desktop\REPOSITORY_GADAM\Programa\GestionAlmacenDAM\data\BaseGADAM.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

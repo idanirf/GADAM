@@ -293,4 +293,44 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+    public void initEmployee() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.TABLA_EMPLYEE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+    public static boolean initNewEmployee(boolean empty, Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_EMPLOYEE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        NewEmployeeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+    public void initModifyEmployee(Employee employee) throws IOException {
+        System.out.println(employee);
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_EMPLOYEE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        EditarEmployeeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setEmployee(employee);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Editar - Empleados");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

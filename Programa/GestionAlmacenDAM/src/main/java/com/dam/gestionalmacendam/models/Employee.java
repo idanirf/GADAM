@@ -47,6 +47,7 @@ public class Employee {
         this.createdAt = new SimpleObjectProperty<LocalDateTime>(createdAt);
         this.isActive= new SimpleBooleanProperty(isActive);
     }
+    public Employee(){};
 
     public String getEIC() {
         return EIC;

@@ -3,6 +3,9 @@ package com.dam.gestionalmacendam.views;
 public enum Views {
     MENU_MANAGER("views/MenuManager.fxml"),
     MENU_EMPLEADO("views/MenuEmployee.fxml"),
+    TABLA_EMPLYEE("views/EmpleadosVistaManager.fxml"),
+    MODIFY_EMPLOYEE("views/EditarEmpleadoVistaManager.fxml"),
+    NEW_EMPLOYEE("views/NuevoEmpleadoVistaManager.fxml"),
     VIEW_CUSTOMER("views/CustomerView.fxml"),
     SHOW_DATA_CUSTOMER("views/ShowCustomerData.fxml"),
     MODIFY_DATA_CUSTOMER("views/ModifyDataCustomer.fxml"),

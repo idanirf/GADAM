@@ -46,11 +46,11 @@ public class MenuManagerController {
 
     @FXML
     public void openOperationEmployee() {
-//        try {
-//            SceneManager.get().initEmployee();
-//        } catch (IOException e) {
-//            System.out.println("Operación No Disponible");
-//        }
+        try {
+            SceneManager.get().initEmployee();
+        } catch (IOException e) {
+            System.out.println("Operación No Disponible");
+        }
     }
 
     public void openOperationSupplier() {
