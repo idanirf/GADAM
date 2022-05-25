@@ -3,12 +3,11 @@ package com.dam.gestionalmacendam.controllers;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
+import com.dam.gestionalmacendam.utils.Patterns;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -97,26 +96,34 @@ public class EditarSuplierController {
     private boolean comprobarDatos() {
         String errorMessage = "";
 
-        if (areanombre.getText() == null || areanombre.getText().isBlank()) {
-            errorMessage += "Debes introducir nombre";
+        if (areanombre.getText() == null || areanombre.getText().isBlank() || !Patterns.patternName(areanombre.getText())) {
+            errorMessage += "Debes introducir nombre correcto. ";
         }
         if (areaD.getText() == null || areaD.getText().isBlank()) {
-            errorMessage += "Debes introducir la direcion";
+            errorMessage += "Debes introducir la direcion correcta. ";
         }
-        if (areaTelefono.getText() == null || areaTelefono.getText().isBlank()) {
-            errorMessage += "Debes introducir un telefono";
+        if (areaTelefono.getText() == null || areaTelefono.getText().isBlank() || !Patterns.patterPhone(areaTelefono.getText())) {
+            errorMessage += "Debes introducir un telefono correcto. ";
 
-        }else{
-
-            //ver Jeremy
-           // errorMessage += "Debes introducir un telefono valido";
         }
         if (areaemail.getText() == null || areaemail.getText().isBlank()) {
-            errorMessage += "Debes introducir email";
-        }else{
-           // errorMessage += "Debes introducir email valido";
+            errorMessage += "Debes introducir email correcto. ";
         }
 
+        if(errorMessage.length()!=0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error en los datos");
+            alert.setHeaderText("Datos introducidos incorrectos");
+            alert.setContentText("Hay datos incorrectos");
+            alert.setContentText(errorMessage);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                alert.close();
+            } else {
+                alert.close();
+            }
+
+        }
         return errorMessage.length() == 0;
     }
 }

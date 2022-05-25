@@ -45,12 +45,13 @@
                 <TextField fx:id="areaSIC" layoutX="242.0" layoutY="155.0" prefHeight="26.0" prefWidth="226.0" />
                 <TextField fx:id="areaTelefono" layoutX="244.0" layoutY="197.0" prefHeight="26.0" prefWidth="223.0" />
                 <TextField fx:id="areaemail" layoutX="243.0" layoutY="289.0" prefHeight="26.0" prefWidth="226.0" />
+                <TextField fx:id="areaD" layoutX="244.0" layoutY="241.0" prefHeight="26.0" prefWidth="223.0" />
                 <Button layoutX="211.0" layoutY="364.0" mnemonicParsing="false" onAction="#onAceptarAction" prefHeight="72.0" prefWidth="87.0" text="Aceptar">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-            <TextField fx:id="areaD" layoutX="244.0" layoutY="241.0" prefHeight="26.0" prefWidth="223.0" />
+
             </children>
         </AnchorPane>
     </children>
