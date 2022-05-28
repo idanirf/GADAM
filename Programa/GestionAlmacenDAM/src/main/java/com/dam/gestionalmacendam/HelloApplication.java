@@ -1,7 +1,13 @@
 package com.dam.gestionalmacendam;
 
+import com.dam.gestionalmacendam.Printers.HtmlPrinterOrder;
+import com.dam.gestionalmacendam.Printers.HtmlPrinterReception;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
+import com.dam.gestionalmacendam.models.Order;
+import com.dam.gestionalmacendam.models.Reception;
+import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
+import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +22,19 @@ import java.util.Optional;
 public class HelloApplication extends Application {
     public static void main(String[] args) {
 
-        launch();
+        OrderRepository o = OrderRepository.getInstance(DataBaseManager.getInstance());
+        try{
+            Order order = o.findAll().get(0);
+            System.out.println(order);
+           // HtmlPrinterOrder h = new HtmlPrinterOrder(order);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        //launch();
         // checkServer();
     }
 
