@@ -26,11 +26,12 @@ public class HelloApplication extends Application {
         try{
             Order order = o.findAll().get(0);
             System.out.println(order);
-           // HtmlPrinterOrder h = new HtmlPrinterOrder(order);
+            HtmlPrinterOrder h = new HtmlPrinterOrder(order);
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+
 
 
 

@@ -29,7 +29,7 @@ public class HtmlPrinterOrder implements IPrinter{
     //para gardar la ruta del fichero
     private final Path relativePath = Paths.get("");
     private final String absolutePath = relativePath.toAbsolutePath().toString();
-    private final String directory = absolutePath + File.separator + "Data";
+    private final String directory = absolutePath + File.separator  + "order";
 
     //para que cada archivo tenga el uuid de el order o reception y si es order o reception
     private String uuid ;
@@ -138,10 +138,12 @@ public class HtmlPrinterOrder implements IPrinter{
         System.out.println("print document");
         //creamos el fichero
         fichero = new File(file);
+        System.out.println("guardado en "+ file);
 
-        //creamso el escritor
+        //creamso el documento fichero
         try {
-            f = new PrintWriter(new FileWriter(fichero,true));
+
+            f = new PrintWriter(new FileWriter(fichero,false));
 
             //escribios lo realizado en el documento
             f.println(document);
