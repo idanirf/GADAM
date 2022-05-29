@@ -1,6 +1,8 @@
 package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.models.Article;
+import com.dam.gestionalmacendam.models.CarritoItem;
+import com.dam.gestionalmacendam.repositories.carrito.CarritoRepository;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Optional;
 
 
 public class ViewArticleController {
+    private CarritoRepository carrito = CarritoRepository.getInstance();
     private Article article;
     private Stage stage;
     @FXML
@@ -30,6 +34,13 @@ public class ViewArticleController {
     private Button btnAddArticle;
     @FXML
     public void btnAddArticleAction(ActionEvent actionEvent) {
+        var aux= findItem();
+        if (aux.isEmpty()){
+            carrito.addItem(setItem());
+        }else{
+            aux.get().setAmount(aux.get().getAmount()+1);
+        }
+
     }
     public void setArticle(Article article) {
         this.article = article;
@@ -44,15 +55,30 @@ public class ViewArticleController {
 
     private void initArticle() {
         Image image = new Image(new File(article.getPhoto()).toURI().toString());
+        viewArticle.setFitHeight(250);
+        viewArticle.setFitWidth(320);
+        viewArticle.setPreserveRatio(false);
         viewArticle.setImage(image);
-        viewArticle.setFitWidth(234.0);
-        viewArticle.setFitHeight(281.0);
+
         txtNameArticle.setText(article.getArticle().get());
         txtStock.setText("Stock: "+article.getStock().get());
         txtPrice.setText("Precio: "+article.getPrice().get() + "€");
         txtDescription.setText(article.getDescription().get());
+        txtDescription.setWrapText(true);
         if (!article.isActive()){
             btnAddArticle.setDisable(true);
         }
+    }
+    private CarritoItem setItem(){
+        System.out.println("Metiendo articulo a la cesta.");
+        return new CarritoItem(
+                article.getArticle().get(),
+                article.imagenProperty().get(),
+                article.getPrice().get(),
+                1
+        );
+    }
+    private Optional<CarritoItem> findItem(){
+        return carrito.getItems().stream().filter(item ->item.getName().equals(article.getArticle().get())).findFirst();
     }
 }

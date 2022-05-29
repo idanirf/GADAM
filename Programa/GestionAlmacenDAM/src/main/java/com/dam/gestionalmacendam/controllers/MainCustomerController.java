@@ -44,12 +44,11 @@ public class MainCustomerController {
 
     @FXML
     private void btnCarritoAction(ActionEvent actionEvent) {
-        System.out.println("Yendo al carrito de compra.");
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Carrito");
-        alert.setHeaderText("Estaria entrando al carrito");
-        alert.setContentText("Vista del carrito.");
-        alert.show();
+        try {
+            SceneManager.get().initCarrito();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -91,9 +90,11 @@ public class MainCustomerController {
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.setStyle("-fx-border-color: transparent gray gray transparent ");
         ImageView iv = new ImageView();
+        iv.setPreserveRatio(true);
         iv.setFitHeight(130);
-        iv.setFitWidth(130);
 
+        System.out.println(Paths.get(article.getPhoto()));
+        System.out.println(Files.exists(Paths.get(article.getPhoto())));
         if (!article.getPhoto().isBlank() && Files.exists(Paths.get(article.getPhoto()))) {
             Image image = new Image(new File(article.getPhoto()).toURI().toString());
             iv.setImage(image);

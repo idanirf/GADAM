@@ -10,7 +10,7 @@ public class CarritoItem {
     private final SimpleStringProperty name;
     private final SimpleStringProperty photo;
     private final SimpleDoubleProperty price;
-    private final SimpleIntegerProperty amount;
+    private SimpleIntegerProperty amount;
     private double total;
 
     public CarritoItem(String nombre, String imagen, double precio, int cantidad) {

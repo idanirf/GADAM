@@ -18,6 +18,7 @@ public enum Views {
     LOGIN("views/login.fxml"),
     REGISTER("views/register.fxml"),
     VIEW_ARTICLE("views/view-article.fxml"),
+    VIEW_CARRITO("views/view-carrito.fxml"),
     MAIN_CUSTOMER("views/main-customer.fxml");
 
     private final String view;

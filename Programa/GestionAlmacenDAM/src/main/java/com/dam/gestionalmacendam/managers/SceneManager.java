@@ -333,4 +333,18 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void initCarrito() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.VIEW_CARRITO.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        ViewCarritoController controller= fxmlLoader.getController();
+        controller.setDialogStage(mainStage);
+        controller.setStage(stage);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Cesta de Productos");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
