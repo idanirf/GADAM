@@ -13,6 +13,12 @@ public enum Views {
     NEW_ARTICLE("views/nuevoProducto.fxml"),
     RESUME_ARTICLE("views/verDetalle.fxml"),
     RECEPTION_VIEW("views/receptionview.fxml"),
+    SUPPLIER_VIEW("views/SuplierVistaManager.fxml"),
+    MODIFY_DATA_SUPPLIER("views/SupplierModifyView.fxml"),
+
+    ORDER_VIEW("views/OrderView.fxml"),
+    LINE_ORDER_VIEW("views/lineaPedidoManagerView.fxml"),
+    NEW_SUPPLIER_VIEW("views/suplierNewView.fxml"),
     ACERCA_DE("views/AcercaDe.fxml"),
     SPLASH("views/splash.fxml"),
     LOGIN("views/login.fxml"),

@@ -4,12 +4,13 @@ import com.dam.gestionalmacendam.HelloApplication;
 
 import com.dam.gestionalmacendam.controllers.*;
 import com.dam.gestionalmacendam.models.*;
+import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
 import com.dam.gestionalmacendam.views.Views;
 import javafx.application.Platform;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -344,6 +346,64 @@ public class SceneManager {
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setTitle("Cesta de Productos");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initSupplierView() throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SUPPLIER_VIEW.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        SupplierVistaController controller= fxmlLoader.getController();
+        controller.setStage(stage);
+        stage.setResizable(false);
+        stage.setTitle("Proveedores");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initNewSuplier() throws IOException {
+        System.out.println("Iniciando vista nuevo supplier");
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_SUPPLIER_VIEW.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setTitle("Nuevo Proveedor");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    public void initModificarSuplier(Supplier supplier) throws IOException {
+        System.out.println("Iniciando vista modificación supplier");
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_DATA_SUPPLIER.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        EditarSuplierController controller= fxmlLoader.getController();
+        controller.setSupplier(supplier);
+        stage.setResizable(false);
+        stage.setTitle("Modificar Proveedor");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initOrderView() throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ORDER_VIEW.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setTitle("Pedidos");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void initLineOrderView(Order order) throws IOException {
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        LineaPedidoControler controller= fxmlLoader.getController();
+        controller.setOrder(order);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

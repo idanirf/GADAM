@@ -55,8 +55,7 @@ public class MenuManagerController {
 
     public void openOperationSupplier() {
         try {
-            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
-            SceneManager.get().initAcercaDe();
+            SceneManager.get().initSupplierView();
         } catch (IOException e) {
             System.out.println();
         }
@@ -64,8 +63,7 @@ public class MenuManagerController {
 
     public void openOperationOrder() {
         try {
-            //TODO SUSTITUYE ESTA LINEA POR TU PANTALLA
-            SceneManager.get().initAcercaDe();
+           SceneManager.get().initOrderView();
         } catch (IOException e) {
             System.out.println();
         }
@@ -89,7 +87,6 @@ public class MenuManagerController {
 
     public void openOperationReception() {
         try {
-            System.out.println("Entra");
             SceneManager.get().initReception();
         } catch (IOException e) {
             System.out.println();
