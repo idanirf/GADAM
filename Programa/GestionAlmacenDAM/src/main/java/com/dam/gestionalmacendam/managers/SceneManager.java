@@ -1,27 +1,22 @@
 package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
-
 import com.dam.gestionalmacendam.controllers.*;
 import com.dam.gestionalmacendam.models.*;
-import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
 import com.dam.gestionalmacendam.views.Views;
 import javafx.application.Platform;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.io.IOException;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Objects;
 
 
@@ -47,11 +42,27 @@ public class SceneManager {
     public static SceneManager get() {
         return instance;
     }
+
+    public static boolean initNewEmployee(boolean empty, Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_EMPLOYEE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        NewEmployeeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+
     public void initAPPManager(Stage login, Employee employee) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MENU_MANAGER.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        MenuManagerController controller= fxmlLoader.getController();
+        MenuManagerController controller = fxmlLoader.getController();
         controller.setEmployee(employee);
         stage.setTitle("GADAM Gestión de Almacenes");
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
@@ -59,16 +70,16 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
         login.close();
-        if (!login.isShowing()){
+        if (!login.isShowing()) {
             splash.close();
         }
     }
 
-    public void initAPPEmployee(Stage login,Employee employee) throws IOException {
+    public void initAPPEmployee(Stage login, Employee employee) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MENU_EMPLEADO.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        MenuEmployeeController controller= fxmlLoader.getController();
+        MenuEmployeeController controller = fxmlLoader.getController();
         controller.setEmployee(employee);
         stage.setTitle("GADAM Gestión de Almacenes");
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
@@ -76,7 +87,7 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
         login.close();
-        if (!login.isShowing()){
+        if (!login.isShowing()) {
             splash.close();
         }
     }
@@ -94,12 +105,11 @@ public class SceneManager {
         stage.showAndWait();
     }
 
-
-    public void initSplash(Stage stage) throws IOException{
+    public void initSplash(Stage stage) throws IOException {
         Platform.setImplicitExit(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SPLASH.get()));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        SplashController controller= fxmlLoader.getController();
+        SplashController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -107,15 +117,16 @@ public class SceneManager {
         stage.show();
 
     }
+
     public void initLogin(Stage splash) throws IOException {
         Platform.setImplicitExit(false);
         System.out.println("Iniciando Login");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.LOGIN.get())));
         Scene scene = new Scene(fxmlLoader.load(), 540, 550);
         Stage stage = new Stage();
-        LoginController controller= fxmlLoader.getController();
+        LoginController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
-        this.splash=splash;
+        this.splash = splash;
         stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);
@@ -126,20 +137,21 @@ public class SceneManager {
             alert.setTitle("Saliendo...");
             alert.setHeaderText("¿Esta seguro que desea salir?");
             alert.setContentText("Pulse aceptar para salir.");
-            var res= alert.showAndWait();
-            if(res.get()== ButtonType.OK){
+            var res = alert.showAndWait();
+            if (res.get() == ButtonType.OK) {
                 Platform.exit();
-            }else{
+            } else {
                 event.consume();
             }
         });
     }
+
     public void initRegister() throws IOException {
         System.out.println("Registrando nuevo usuario.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.REGISTER.get())));
         Scene scene = new Scene(fxmlLoader.load(), 641, 720);
         Stage stage = new Stage();
-        RegisterController controller= fxmlLoader.getController();
+        RegisterController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         stage.setTitle("Registrar Usuario Nuevo");
         stage.setResizable(false);
@@ -150,29 +162,30 @@ public class SceneManager {
             alert.setTitle("Saliendo...");
             alert.setHeaderText("¿Esta seguro que desea salir?");
             alert.setContentText("Pulse aceptar para salir.");
-            var res= alert.showAndWait();
-            if(res.get()== ButtonType.OK){
+            var res = alert.showAndWait();
+            if (res.get() == ButtonType.OK) {
                 stage.close();
-            }else{
+            } else {
                 event.consume();
             }
         });
     }
+
     public void initMainCustomer(Stage login, Customer customer) throws IOException {
         System.out.println("Entrando a la vista del cliente.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MAIN_CUSTOMER.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
-        MainCustomerController controller= fxmlLoader.getController();
+        MainCustomerController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         controller.setCustomer(customer);
-        mainStage=stage;
+        mainStage = stage;
         stage.setTitle("GADAM S.L.");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
         login.close();
-        if (!login.isShowing()){
+        if (!login.isShowing()) {
             splash.close();
         }
         stage.setOnCloseRequest(event -> {
@@ -180,15 +193,16 @@ public class SceneManager {
             alert.setTitle("Saliendo...");
             alert.setHeaderText("¿Esta seguro que desea salir?");
             alert.setContentText("Pulse aceptar para salir.");
-            var res= alert.showAndWait();
-            if(res.get()== ButtonType.OK){
+            var res = alert.showAndWait();
+            if (res.get() == ButtonType.OK) {
                 Platform.exit();
-            }else{
+            } else {
                 event.consume();
             }
         });
 
     }
+
     public void initViewArticle(Article article) throws IOException {
         System.out.println("Viendo resumen del articulo " + article.getArticle().get());
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_ARTICLE.get())));
@@ -203,16 +217,18 @@ public class SceneManager {
         stage.show();
 
     }
+
     public void initViewCustomer() throws IOException {
         System.out.println("Entrando a la vista de clientes.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_CUSTOMER.get())));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle("Consultas Clientes");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
+
     public void initViewDataCustomer(Customer customer) throws IOException {
         System.out.println("Viendo el perfil del usuario.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.SHOW_DATA_CUSTOMER.get())));
@@ -227,6 +243,7 @@ public class SceneManager {
         stage.show();
 
     }
+
     public void initViewModifyDataCustomer(Customer customer, Stage view) throws IOException {
         System.out.println("Modificando el perfil.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MODIFY_DATA_CUSTOMER.get())));
@@ -240,11 +257,12 @@ public class SceneManager {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        if (!stage.isShowing()){
+        if (!stage.isShowing()) {
             view.show();
         }
 
     }
+
     public boolean initProducto(boolean editarModo, Article producto) throws IOException {
         System.out.println("Iniciando....");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_ARTICLE.get()));
@@ -262,6 +280,7 @@ public class SceneManager {
         stage.showAndWait();
         return controller.isAceptarClicked();
     }
+
     public void initArticleView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.ARTICLE_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
@@ -271,6 +290,7 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
     public void initResume(Article producto) throws IOException {
         System.out.println("Viendo el resumen del pedido....");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_ARTICLE.get()));
@@ -285,6 +305,7 @@ public class SceneManager {
         stage.showAndWait();
 
     }
+
     public void initReception() throws IOException {
         FXMLLoader fxmlLoader = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
@@ -295,31 +316,19 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
     public void initEmployee() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.TABLA_EMPLYEE.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL); //TODO ESTO EVITA Q LA VENTANA DE DETRAS NO SE PUEDA TOCAR
         stage.setTitle("Empleados");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.showAndWait();
     }
-    public static boolean initNewEmployee(boolean empty, Employee employee) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_EMPLOYEE.get()));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        NewEmployeeController controller = fxmlLoader.getController();
-        controller.setDialogStage(stage);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Empleados");
-        stage.setResizable(false);
-        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
-        stage.setScene(scene);
-        stage.showAndWait();
-        return controller.isAceptarClicked();
-    }
+
     public void initModifyEmployee(Employee employee) throws IOException {
         System.out.println(employee);
         Platform.setImplicitExit(true);
@@ -340,7 +349,7 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.VIEW_CARRITO.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        ViewCarritoController controller= fxmlLoader.getController();
+        ViewCarritoController controller = fxmlLoader.getController();
         controller.setDialogStage(mainStage);
         controller.setStage(stage);
         stage.setResizable(false);
@@ -349,18 +358,20 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
     public void initSupplierView() throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SUPPLIER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        SupplierVistaController controller= fxmlLoader.getController();
+        SupplierVistaController controller = fxmlLoader.getController();
         controller.setStage(stage);
         stage.setResizable(false);
         stage.setTitle("Proveedores");
         stage.setScene(scene);
         stage.show();
     }
+
     public void initNewSuplier() throws IOException {
         System.out.println("Iniciando vista nuevo supplier");
         Platform.setImplicitExit(true);
@@ -373,19 +384,21 @@ public class SceneManager {
         stage.show();
 
     }
+
     public void initModificarSuplier(Supplier supplier) throws IOException {
         System.out.println("Iniciando vista modificación supplier");
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_DATA_SUPPLIER.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        EditarSuplierController controller= fxmlLoader.getController();
+        EditarSuplierController controller = fxmlLoader.getController();
         controller.setSupplier(supplier);
         stage.setResizable(false);
         stage.setTitle("Modificar Proveedor");
         stage.setScene(scene);
         stage.show();
     }
+
     public void initOrderView() throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ORDER_VIEW.get()));
@@ -396,12 +409,13 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
     }
+
     public void initLineOrderView(Order order) throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        LineaPedidoControler controller= fxmlLoader.getController();
+        LineaPedidoControler controller = fxmlLoader.getController();
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
