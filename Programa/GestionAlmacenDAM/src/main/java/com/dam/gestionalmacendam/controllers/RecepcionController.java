@@ -83,7 +83,6 @@ public class RecepcionController {
         if (cost.getText() == null || cost.getText().isBlank() || Utils.isNumberInt(cost.getText())) {
             errorMessage += "El campo cost no puede estar vacío o no has introducido un número\n";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {

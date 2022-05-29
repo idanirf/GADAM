@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.ArticleViewController">
    <children>
@@ -23,7 +24,7 @@
                <children>
                   <AnchorPane prefHeight="658.0" prefWidth="1280.0">
                      <children>
-                        <TableView fx:id="productosTable" layoutX="3.0" layoutY="65.0" prefHeight="599.0" prefWidth="1280.0">
+                        <TableView fx:id="productosTable" layoutX="3.0" layoutY="65.0" prefHeight="599.0" prefWidth="1280.0" onMouseClicked="#onVerDetalleAction">
                            <columns>
                               <TableColumn fx:id="pic" prefWidth="181.0" text="PIC" />
                               <TableColumn fx:id="producto" prefWidth="167.0" text="Producto" />
@@ -34,11 +35,14 @@
                               <TableColumn fx:id="activo" minWidth="5.60003662109375" prefWidth="221.0" text="Activo" />
                            </columns>
                         </TableView>
-                        <Label layoutX="55.0" layoutY="9.0" prefHeight="35.0" prefWidth="100.0" text="Buscar por PIC" />
+                        <Label layoutX="92.0" layoutY="11.0" prefHeight="35.0" prefWidth="54.0" text="Buscar:">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                         <TextField fx:id="busqueda" layoutX="154.0" layoutY="9.0" onAction="#findByName" prefHeight="35.0" prefWidth="330.0" />
-                        <Button fx:id="btnModi" layoutX="728.0" layoutY="5.0" mnemonicParsing="false" onAction="#onModAction" prefHeight="44.0" prefWidth="155.0" text="Modificar" />
-                        <Button fx:id="resumen" layoutX="910.0" layoutY="6.0" mnemonicParsing="false" onAction="#onVerDetalleAction" prefHeight="44.0" prefWidth="141.0" text="Ver detalles" />
+                        <Button fx:id="btnModi" layoutX="904.0" layoutY="7.0" mnemonicParsing="false" onAction="#onModAction" prefHeight="44.0" prefWidth="155.0" text="Modificar" />
                         <Button fx:id="nuevo" layoutX="1073.0" layoutY="5.0" mnemonicParsing="false" onAction="#onCreateAction" prefHeight="44.0" prefWidth="141.0" text="Crear nuevo" />
+                        <Button fx:id="btnModi1" layoutX="735.0" layoutY="7.0" mnemonicParsing="false" onAction="#onVerDetalleAction" prefHeight="44.0" prefWidth="155.0" text="Ver Detalle" />
                      </children>
                   </AnchorPane>
                </children>

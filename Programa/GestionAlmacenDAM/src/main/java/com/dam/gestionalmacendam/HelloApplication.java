@@ -48,7 +48,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("Vistas/receptionview.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("Vistas/article-view.fxml")));
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);

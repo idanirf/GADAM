@@ -90,12 +90,7 @@
             </CheckBox>
          </children>
       </GridPane>
-      <Button fx:id="onAcept" layoutX="412.0" layoutY="353.0" mnemonicParsing="false" onAction="#onAcept" prefHeight="25.0" prefWidth="72.0" text="Aceptar">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="onCancel" layoutX="488.0" layoutY="353.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="25.0" prefWidth="72.0" text="Cancelar">
+      <Button fx:id="onAcept" layoutX="470.0" layoutY="346.0" mnemonicParsing="false" onAction="#onAcept" prefHeight="40.0" prefWidth="103.0" text="Aceptar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
