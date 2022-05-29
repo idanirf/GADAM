@@ -19,10 +19,6 @@ public class ReceptionRepository implements ReceptionInterface<Reception, String
         this.dataBaseManager = dataBaseManager;
     }
 
-    public DataBaseManager getDb(){
-        return dataBaseManager;
-    }
-
     public static ReceptionRepository getInstance(DataBaseManager dataBaseManager) {
         if (instance == null) {
             instance = new ReceptionRepository(dataBaseManager);
@@ -30,11 +26,15 @@ public class ReceptionRepository implements ReceptionInterface<Reception, String
         return instance;
     }
 
+    public DataBaseManager getDb() {
+        return dataBaseManager;
+    }
+
     @Override
     public ObservableList<Reception> findAll() throws SQLException {
         dataBaseManager.open();
         String query = "select * from Reception";
-        ResultSet result = dataBaseManager.select(query).orElseThrow(()->new SQLException("Error al obtener las recepciones."));
+        ResultSet result = dataBaseManager.select(query).orElseThrow(() -> new SQLException("Error al obtener las recepciones."));
         repository.clear();
         while (result.next()) {
             repository.add(
@@ -57,7 +57,7 @@ public class ReceptionRepository implements ReceptionInterface<Reception, String
         String query = "Insert into Reception(RIC, Supplier, Carrier, Cost) values (?, ?, ?, ?);";
         dataBaseManager.insert(query,
                 reception.getRIC(),
-                reception.getSupplierSIC().get(),
+                reception.getSupplierName().get(),
                 reception.getCarrier().get(),
                 reception.getCost().get()
         );

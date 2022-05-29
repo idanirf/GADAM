@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 
@@ -53,6 +54,21 @@ public class SceneManager {
         stage.setTitle("Empleados");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+
+    public static boolean initNewReception(Reception recepcion, LineReception lineReception) throws IOException {
+        System.out.println("Iniciando....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_RECEPTION.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        NewRecepcionController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setReception(recepcion, lineReception);
         stage.setScene(scene);
         stage.showAndWait();
         return controller.isAceptarClicked();
@@ -307,14 +323,27 @@ public class SceneManager {
     }
 
     public void initReception() throws IOException {
-        FXMLLoader fxmlLoader = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
+        Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        System.out.println("Estoy aqui");
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void initResumeReception(Reception x) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_RECEPTION.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 657, 481);
+        Stage stage = new Stage();
+        ResumenReceptionController controller = fxmlLoader.getController();
+        controller.setRecepcion(x);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+
+        stage.showAndWait();
+
     }
 
     public void initEmployee() throws IOException {

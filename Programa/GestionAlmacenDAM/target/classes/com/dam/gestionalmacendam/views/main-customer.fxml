@@ -22,7 +22,7 @@
             <Image url="@../images/logoApp.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtSearch" layoutX="193.0" layoutY="30.0" prefHeight="25.0" prefWidth="583.0" AnchorPane.topAnchor="30.0">
+      <TextField fx:id="txtSearch" layoutX="193.0" layoutY="30.0" onAction="#findByName" prefHeight="25.0" prefWidth="583.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -106,6 +106,5 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="btnSearch" layoutX="789.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSearchAction" text="Search" />
    </children>
 </AnchorPane>

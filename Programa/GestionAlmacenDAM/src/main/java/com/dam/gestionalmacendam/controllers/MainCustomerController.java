@@ -8,15 +8,17 @@ import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.utils.Resources;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -24,14 +26,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainCustomerController {
+    private final ArticleRepository articleRepository = ArticleRepository.getInstance(DataBaseManager.getInstance());
     private Stage stage;
-    private final ArticleRepository articleRepository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-
     @FXML
     private TextField txtSearch;
     @FXML
@@ -65,17 +65,17 @@ public class MainCustomerController {
         List<Article> li;
 
         if (name == null) {
-            li=articleRepository.findAll();
-        }else{
-            li=articleRepository.findAll().stream().filter(a->a.getArticle().get().contains(name.trim())).toList();
+            li = articleRepository.findAll();
+        } else {
+            li = articleRepository.findAll().stream().filter(a -> a.getArticle().get().toLowerCase().contains(name.toLowerCase().trim())).toList();
         }
         grid.getChildren().clear();
-        var k=0;
-        for (int i = 0; i < grid.getRowCount() ; i++) {
-            for (int j = 0; j < grid.getColumnCount() ; j++) {
-                if (k<li.size()){
-                    VBox vbox= getItemCell(li,k);
-                    grid.add(vbox,j,i);
+        var k = 0;
+        for (int i = 0; i < grid.getRowCount(); i++) {
+            for (int j = 0; j < grid.getColumnCount(); j++) {
+                if (k < li.size()) {
+                    VBox vbox = getItemCell(li, k);
+                    grid.add(vbox, j, i);
 //                    grid.setGridLinesVisible(true);
                     k++;
                 }
@@ -83,8 +83,9 @@ public class MainCustomerController {
         }
 
     }
+
     private VBox getItemCell(List<Article> list, int pos) throws SQLException {
-        var article= list.get(pos);
+        var article = list.get(pos);
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.setAlignment(Pos.TOP_CENTER);
@@ -93,15 +94,13 @@ public class MainCustomerController {
         iv.setPreserveRatio(true);
         iv.setFitHeight(130);
 
-        System.out.println(Paths.get(article.getPhoto()));
-        System.out.println(Files.exists(Paths.get(article.getPhoto())));
         if (!article.getPhoto().isBlank() && Files.exists(Paths.get(article.getPhoto()))) {
             Image image = new Image(new File(article.getPhoto()).toURI().toString());
             iv.setImage(image);
         } else {
             iv.setImage(new Image(Resources.get(HelloApplication.class, "images/article_default.png")));
-            list.get(pos).setPhoto(new SimpleStringProperty(Resources.getPath(HelloApplication.class, "images/article_default.png").replaceFirst("/","")));
-            articleRepository.update(list.get(pos).getPIC(),list.get(pos));
+            list.get(pos).setPhoto(new SimpleStringProperty(Resources.getPath(HelloApplication.class, "images/article_default.png").replaceFirst("/", "")));
+            articleRepository.update(list.get(pos).getPIC(), list.get(pos));
         }
 
         HBox hbox = new HBox();
@@ -110,15 +109,14 @@ public class MainCustomerController {
         Label nombre = new Label(list.get(pos).getArticle().get());
         nombre.setStyle("-fx-font-weight: bold");
         nombre.setStyle("-fx-font-size: 16");
-        Label precio = new Label(list.get(pos).getPrice().get()+" €");
+        Label precio = new Label(list.get(pos).getPrice().get() + " €");
         precio.setStyle("-fx-font-size: 16");
-        hbox.getChildren().addAll(nombre,precio);
-        vbox.getChildren().addAll(iv,hbox);
+        hbox.getChildren().addAll(nombre, precio);
+        vbox.getChildren().addAll(iv, hbox);
 
-        vbox.setOnMouseClicked(event ->{
-                SceneManager scene= SceneManager.get();
+        vbox.setOnMouseClicked(event -> {
+            SceneManager scene = SceneManager.get();
             try {
-                System.out.println(list.get(pos));
                 scene.initViewArticle(list.get(pos));
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -128,7 +126,7 @@ public class MainCustomerController {
         return vbox;
     }
 
-    public void btnSearchAction(ActionEvent actionEvent) {
+    public void findByName(ActionEvent actionEvent) {
         try {
             initArticles(txtSearch.getText());
         } catch (SQLException e) {

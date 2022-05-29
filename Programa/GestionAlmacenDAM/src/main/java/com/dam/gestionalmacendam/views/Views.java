@@ -13,6 +13,8 @@ public enum Views {
     NEW_ARTICLE("views/nuevoProducto.fxml"),
     RESUME_ARTICLE("views/verDetalle.fxml"),
     RECEPTION_VIEW("views/receptionview.fxml"),
+    RESUME_RECEPTION("views/verDetalleReception.fxml"),
+    NEW_RECEPTION("views/nuevaReception.fxml"),
     SUPPLIER_VIEW("views/SuplierVistaManager.fxml"),
     MODIFY_DATA_SUPPLIER("views/SupplierModifyView.fxml"),
 

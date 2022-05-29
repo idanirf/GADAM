@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ReceptionRepositoryTest {
-    ReceptionRepository repository= ReceptionRepository.getInstance(DataBaseManager.getInstance());
-    Reception o = new Reception("delete","ReceptionTest", "ReceptionTest",55D );
+    ReceptionRepository repository = ReceptionRepository.getInstance(DataBaseManager.getInstance());
+    Reception o = new Reception("delete", "ReceptionTest", "ReceptionTest", 55D);
 
 
     @AfterEach
@@ -36,7 +36,7 @@ public class ReceptionRepositoryTest {
         ObservableList<Reception> res = repository.findAll();
 
         assertAll(
-                () -> assertTrue(res.size()>0)
+                () -> assertTrue(res.size() > 0)
 
         );
     }
@@ -50,10 +50,10 @@ public class ReceptionRepositoryTest {
         var res1 = repository.findAll();
 
         assertAll(
-                ()-> assertEquals(res1.get(0).getRIC(),o.getRIC()),
-                ()-> assertEquals(res1.get(0).getCarrier().get(),o.getCarrier().get()),
-                ()-> assertEquals(res1.get(0).getCost().get(),o.getCost().get()),
-                ()-> assertEquals(res1.get(0).getSupplierSIC().get(),o.getSupplierSIC().get())
+                () -> assertEquals(res1.get(0).getRIC(), o.getRIC()),
+                () -> assertEquals(res1.get(0).getCarrier().get(), o.getCarrier().get()),
+                () -> assertEquals(res1.get(0).getCost().get(), o.getCost().get()),
+                () -> assertEquals(res1.get(0).getSupplierName().get(), o.getSupplierName().get())
 
         );
     }

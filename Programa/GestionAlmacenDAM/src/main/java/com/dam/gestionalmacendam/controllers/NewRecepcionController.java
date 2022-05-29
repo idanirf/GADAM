@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class RecepcionController {
+public class NewRecepcionController {
 
     LineReceptionRepository repo = LineReceptionRepository.getInstance(DataBaseManager.getInstance());
 
@@ -37,21 +37,24 @@ public class RecepcionController {
     private Reception reception;
 
     private LineReception lineReception;
+
     public void setReception(Reception recepcion, LineReception lineReception) {
-        this.reception=recepcion;
-        this.lineReception=lineReception;
+        this.reception = recepcion;
+        this.lineReception = lineReception;
     }
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+
 
     public boolean isAceptarClicked() {
         return aceptarClicked;
     }
 
     public void onAcept() {
-        if(isDataOk()) {
-            reception.setSupplierSIC(new SimpleStringProperty(suplierName.getText()));
+        if (isDataOk()) {
+            reception.setSupplierName(new SimpleStringProperty(suplierName.getText()));
             reception.setCarrier(new SimpleStringProperty(carrier.getText()));
             reception.setCost(new SimpleDoubleProperty(Double.parseDouble(cost.getText())));
             lineReception = new LineReception(article.getText(), Integer.parseInt(load.getText()), Double.parseDouble(unitPrice.getText()), reception.getRIC());
@@ -66,7 +69,6 @@ public class RecepcionController {
     }
 
 
-
     private boolean isDataOk() {
         String errorMessage = "";
 
@@ -79,7 +81,6 @@ public class RecepcionController {
         if (cost.getText() == null || cost.getText().isBlank() || Patterns.isNumberInt(cost.getText())) {
             errorMessage += "El campo cost no puede estar vacío o no has introducido un número\n";
         }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
