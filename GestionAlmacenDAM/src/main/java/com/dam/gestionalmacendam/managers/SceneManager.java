@@ -2,6 +2,7 @@ package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
 import com.dam.gestionalmacendam.controllers.*;
+import com.dam.gestionalmacendam.controllers.orders.ResumenOrderController;
 import com.dam.gestionalmacendam.models.*;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
@@ -122,15 +123,19 @@ public class SceneManager {
     }
 
     public void initSplash(Stage stage) throws IOException {
-        Platform.setImplicitExit(false);
+       /* Platform.setImplicitExit(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SPLASH.get()));
+        //Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         SplashController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
+
+       initOrderView();
+
 
     }
 
@@ -322,30 +327,6 @@ public class SceneManager {
 
     }
 
-    public void initReception() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void initResumeReception(Reception x) throws IOException, SQLException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_RECEPTION.get()));
-        Scene scene = new Scene(fxmlLoader.load(), 657, 481);
-        Stage stage = new Stage();
-        ResumenReceptionController controller = fxmlLoader.getController();
-        controller.setRecepcion(x);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        stage.setScene(scene);
-
-        stage.showAndWait();
-
-    }
-
     public void initEmployee() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.TABLA_EMPLYEE.get()));
         Scene scene = new Scene(fxmlLoader.load());
@@ -429,25 +410,47 @@ public class SceneManager {
     }
 
     public void initOrderView() throws IOException {
-        Platform.setImplicitExit(true);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ORDER_VIEW.get()));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(HelloApplication.class.getResource(Views.ORDER_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
         stage.setTitle("Pedidos");
         stage.setScene(scene);
         stage.show();
     }
+    public void initReception() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
 
-    public void initLineOrderView(Order order) throws IOException {
+    public void initLineOrderView(Order order) throws IOException, SQLException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        LineaPedidoControler controller = fxmlLoader.getController();
+        ResumenOrderController controller = fxmlLoader.getController();
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+    public void initResumeReception(Reception x) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_RECEPTION.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 657, 481);
+        Stage stage = new Stage();
+        ResumenReceptionController controller = fxmlLoader.getController();
+        controller.setRecepcion(x);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+
+        stage.showAndWait();
+
     }
 }

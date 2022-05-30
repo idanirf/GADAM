@@ -53,7 +53,6 @@ public class ReceptionViewController {
         tableRecept.setItems(repo.findAll());
     }
 
-
     @FXML
     private void findByName() throws SQLException {
         String name = find.getText().trim().toLowerCase();
@@ -65,7 +64,6 @@ public class ReceptionViewController {
         }
         tableRecept.refresh();
     }
-
 
     @FXML
     private void onCreateAction() throws IOException {

@@ -1,5 +1,6 @@
 package com.dam.gestionalmacendam;
 
+import com.dam.gestionalmacendam.controllers.orders.ResumenOrderController;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import javafx.application.Application;

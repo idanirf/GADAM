@@ -19,7 +19,7 @@ public enum Views {
     MODIFY_DATA_SUPPLIER("views/SupplierModifyView.fxml"),
 
     ORDER_VIEW("views/OrderView.fxml"),
-    LINE_ORDER_VIEW("views/lineaPedidoManagerView.fxml"),
+    LINE_ORDER_VIEW("views/orderLine/LineOrderNewView.fxml"),
     NEW_SUPPLIER_VIEW("views/suplierNewView.fxml"),
     ACERCA_DE("views/AcercaDe.fxml"),
     SPLASH("views/splash.fxml"),
