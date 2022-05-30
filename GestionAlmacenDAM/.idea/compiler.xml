@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GestionAlmacenDAM" target="17" />
+      <module name="GestionAlmacenDAM" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
