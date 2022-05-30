@@ -23,8 +23,6 @@ public class OrderManagerController {
     OrderRepository repository = OrderRepository.getInstance(DataBaseManager.getInstance());
 
 
-
-
     @FXML
     private TextField textAreaBuscarPorOic;
 

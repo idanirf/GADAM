@@ -34,7 +34,7 @@ public class HtmlPrinterOrder implements IPrinter{
     //para que cada archivo tenga el uuid de el order o reception y si es order o reception
     private String uuid ;
     private String title = "Pedido";
-    private final String file = directory + File.separator + title + "." + uuid + ".html";
+    private String file = this.directory + File.separator + this.title + "." + this.uuid + ".html";
 
     //documento
     String document = "";

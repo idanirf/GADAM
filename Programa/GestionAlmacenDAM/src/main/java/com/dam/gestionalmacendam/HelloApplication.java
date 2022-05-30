@@ -6,6 +6,7 @@ import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Reception;
+import com.dam.gestionalmacendam.pruevaBackup.pruevaazaharabackup;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.Reception.ReceptionRepository;
 import javafx.application.Application;
@@ -22,11 +23,15 @@ import java.util.Optional;
 public class HelloApplication extends Application {
     public static void main(String[] args) {
 
-        OrderRepository o = OrderRepository.getInstance(DataBaseManager.getInstance());
+
         try{
+            OrderRepository o = OrderRepository.getInstance(DataBaseManager.getInstance());
             Order order = o.findAll().get(0);
-            System.out.println(order);
             HtmlPrinterOrder h = new HtmlPrinterOrder(order);
+
+           ReceptionRepository r = ReceptionRepository.getInstance(DataBaseManager.getInstance());
+            Reception reception = r.findAll().get(0);
+            HtmlPrinterReception p = new HtmlPrinterReception(reception);
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -35,7 +40,7 @@ public class HelloApplication extends Application {
 
 
 
-        //launch();
+        launch();
         // checkServer();
     }
 

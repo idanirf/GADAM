@@ -32,18 +32,19 @@ public class HtmlPrinterReception implements IPrinter{
     //para gardar la ruta del fichero
     private final Path relativePath = Paths.get("");
     private final String absolutePath = relativePath.toAbsolutePath().toString();
-    private final String directory = absolutePath + File.separator + "Data";
+    private final String directory = absolutePath + File.separator + "Reception";
 
     //para que cada archivo tenga el uuid de el order o reception y si es order o reception
-    private String uuid = o.getRIC();
+    private String uuid ;
     private String title = "Recepcion";
-    private final String file = directory + File.separator + title + "." + uuid + ".html";
+    private  String file = directory + File.separator + title + "." + uuid + ".html";
 
     //documento
     String document = "";
 
     public HtmlPrinterReception(Reception o ) {
        this.o = o;
+       this.uuid = o.getRIC();
         createDocument();
     }
 
@@ -105,10 +106,10 @@ public class HtmlPrinterReception implements IPrinter{
 
     public void  addArticle(LineReception lineReception) {
         document = document + " <p> RLIC  : "+ lineReception.getRLIC() +
-                " PIC  : "+ lineReception.getArticlePIC().getValue().toString()+
-                " Precio" + " : "+ lineReception.getUnitPrice().doubleValue() +
-                " Cantidad : " + lineReception.getLoad().toString() +
-                " Precio total : "+ lineReception.getTotalPrice().getValue() +"</p>";
+                " , PIC Articulo  : "+ lineReception.getArticlePIC().getValue().toString()+
+                " , Precio" + " : "+ lineReception.getUnitPrice().doubleValue() +
+                " , Cantidad : " + lineReception.getLoad().getValue().toString() +
+                " , Precio total : "+ lineReception.getTotalPrice().getValue() +"</p>";
 
 
     }
