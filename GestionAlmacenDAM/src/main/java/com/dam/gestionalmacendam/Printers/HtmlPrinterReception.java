@@ -1,11 +1,8 @@
 package com.dam.gestionalmacendam.Printers;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
-import com.dam.gestionalmacendam.models.LineOrder;
 import com.dam.gestionalmacendam.models.LineReception;
-import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.models.Reception;
-import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
 import javafx.collections.ObservableList;
 
@@ -18,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class HtmlPrinterReception implements IPrinter{
     //Reception a imprimir y sus lineReception
