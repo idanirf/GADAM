@@ -3,38 +3,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.CustomerViewController">
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <MenuBar prefHeight="30.0" prefWidth="1280.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Salir">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
             <AnchorPane prefHeight="696.0" prefWidth="1280.0">
                <children>
-                  <Label layoutX="53.0" layoutY="14.0" prefHeight="35.0" prefWidth="91.0" text="Buscar por CIC" />
-                  <TextField fx:id="busqueda" layoutX="144.0" layoutY="14.0" onAction="#findByCIC" prefHeight="35.0" prefWidth="330.0" />
-                  <ButtonBar layoutX="662.0" layoutY="12.0" prefHeight="40.0" prefWidth="568.0">
+                  <Label layoutX="53.0" layoutY="25.0" prefHeight="35.0" prefWidth="91.0" text="Buscar por CIC" />
+                  <TextField fx:id="busqueda" layoutX="144.0" layoutY="25.0" onAction="#findByCIC" prefHeight="35.0" prefWidth="330.0" />
+                  <ButtonBar layoutX="640.0" layoutY="23.0" prefHeight="40.0" prefWidth="568.0">
                     <buttons>
-                      <Button fx:id="btnMody" mnemonicParsing="false" prefHeight="44.0" prefWidth="155.0" text="Modificar" />
-                        <Button fx:id="btnShow" mnemonicParsing="false" prefHeight="44.0" text="Ver detalles" />
-                        <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="44.0" text="Crear Nuevo" />
+                      <Button fx:id="btnMody" mnemonicParsing="false" onAction="#onModifyAction" prefHeight="44.0" prefWidth="155.0" text="Modificar" />
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#onAddAction" prefHeight="44.0" text="Crear Nuevo" />
                     </buttons>
                   </ButtonBar>
                 <AnchorPane layoutY="92.0" minHeight="0.0" minWidth="0.0" prefHeight="611.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

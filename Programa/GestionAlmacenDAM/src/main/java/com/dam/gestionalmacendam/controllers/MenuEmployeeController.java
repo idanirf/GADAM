@@ -7,13 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
 public class MenuEmployeeController {
+    private Stage dialogStage;
     private Employee employee;
     @FXML
     private Label nickname;
+
     public void setEmployee(Employee employee) {
         this.employee = employee;
         nickname.setText(employee.getNickName());
@@ -52,7 +55,7 @@ public class MenuEmployeeController {
 
     public void openOperationArticles() {
         try {
-            SceneManager.get().initArticleView();
+            SceneManager.get().initArticleView(dialogStage);
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }
@@ -60,7 +63,7 @@ public class MenuEmployeeController {
 
     public void openOperationClientes() {
         try {
-            SceneManager.get().initViewCustomer();
+            SceneManager.get().initViewCustomer(dialogStage);
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }
@@ -69,7 +72,7 @@ public class MenuEmployeeController {
     public void openOperationRecepciones() {
         try {
             System.out.println("Entra");
-            SceneManager.get().initReception();
+            SceneManager.get().initReception(dialogStage);
         } catch (Exception e) {
             System.out.println("no consigue cargar pantalla acerca de");
         }
@@ -90,4 +93,7 @@ public class MenuEmployeeController {
     }
 
 
+    public void setStage(Stage stage) {
+        this.dialogStage = stage;
+    }
 }

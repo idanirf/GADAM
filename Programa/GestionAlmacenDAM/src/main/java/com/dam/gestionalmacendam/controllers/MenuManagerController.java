@@ -23,6 +23,7 @@ public class MenuManagerController {
         this.employee = employee;
         nickname.setText(employee.getNickName());
     }
+
     @FXML
     public void onSalirAction() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -35,6 +36,7 @@ public class MenuManagerController {
             alert.close();
         }
     }
+
     @FXML
     public void onAcercaDe() {
         try {
@@ -47,7 +49,7 @@ public class MenuManagerController {
     @FXML
     public void openOperationEmployee() {
         try {
-            SceneManager.get().initEmployee();
+            SceneManager.get().initEmployee(dialogStage);
         } catch (IOException e) {
             System.out.println("Operación No Disponible");
         }
@@ -55,7 +57,7 @@ public class MenuManagerController {
 
     public void openOperationSupplier() {
         try {
-            SceneManager.get().initSupplierView();
+            SceneManager.get().initSupplierView(dialogStage);
         } catch (IOException e) {
             System.out.println();
         }
@@ -63,7 +65,7 @@ public class MenuManagerController {
 
     public void openOperationOrder() {
         try {
-           SceneManager.get().initOrderView();
+            SceneManager.get().initOrderView(dialogStage);
         } catch (IOException e) {
             System.out.println();
         }
@@ -71,7 +73,7 @@ public class MenuManagerController {
 
     public void openOperationArticle() {
         try {
-            SceneManager.get().initArticleView();
+            SceneManager.get().initArticleView(dialogStage);
         } catch (IOException e) {
             System.out.println();
         }
@@ -79,7 +81,7 @@ public class MenuManagerController {
 
     public void openOperationCustumer() {
         try {
-           SceneManager.get().initViewCustomer();
+            SceneManager.get().initViewCustomer(dialogStage);
         } catch (IOException e) {
             System.out.println();
         }
@@ -87,9 +89,13 @@ public class MenuManagerController {
 
     public void openOperationReception() {
         try {
-            SceneManager.get().initReception();
+            SceneManager.get().initReception(dialogStage);
         } catch (IOException e) {
             System.out.println();
         }
+    }
+
+    public void setStage(Stage stage) {
+        this.dialogStage = stage;
     }
 }

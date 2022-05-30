@@ -30,7 +30,6 @@ public class SceneManager {
 
     private SceneManager(Class<?> appClass) {
         this.appClass = appClass;
-        //System.out.println("SceneManager created");
     }
 
     public static SceneManager getInstance(Class<?> appClass) {
@@ -44,34 +43,27 @@ public class SceneManager {
         return instance;
     }
 
-    public static boolean initNewEmployee(boolean empty, Employee employee) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_EMPLOYEE.get()));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        NewEmployeeController controller = fxmlLoader.getController();
-        controller.setDialogStage(stage);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Empleados");
-        stage.setResizable(false);
-        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
-        stage.setScene(scene);
-        stage.showAndWait();
-        return controller.isAceptarClicked();
-    }
 
-    public static boolean initNewReception(Reception recepcion, LineReception lineReception) throws IOException {
-        System.out.println("Iniciando....");
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_RECEPTION.get()));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+    // Vista de menús principales.
+    public void initMainCustomer(Stage login, Customer customer) throws IOException {
+        System.out.println("Entrando a la vista del cliente.");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MAIN_CUSTOMER.get())));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        NewRecepcionController controller = fxmlLoader.getController();
+        MainCustomerController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
-        controller.setReception(recepcion, lineReception);
+        controller.setCustomer(customer);
+        mainStage = stage;
+        stage.setTitle("GADAM S.L.");
+        stage.setResizable(false);
         stage.setScene(scene);
-        stage.showAndWait();
-        return controller.isAceptarClicked();
+        stage.show();
+        login.close();
+        if (!login.isShowing()) {
+            splash.close();
+        }
+        setOnClose(stage);
+
     }
 
     public void initAPPManager(Stage login, Employee employee) throws IOException {
@@ -80,6 +72,7 @@ public class SceneManager {
         Stage stage = new Stage();
         MenuManagerController controller = fxmlLoader.getController();
         controller.setEmployee(employee);
+        controller.setStage(stage);
         stage.setTitle("GADAM Gestión de Almacenes");
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
@@ -89,6 +82,7 @@ public class SceneManager {
         if (!login.isShowing()) {
             splash.close();
         }
+        setOnClose(stage);
     }
 
     public void initAPPEmployee(Stage login, Employee employee) throws IOException {
@@ -97,6 +91,7 @@ public class SceneManager {
         Stage stage = new Stage();
         MenuEmployeeController controller = fxmlLoader.getController();
         controller.setEmployee(employee);
+        controller.setStage(stage);
         stage.setTitle("GADAM Gestión de Almacenes");
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
@@ -106,8 +101,10 @@ public class SceneManager {
         if (!login.isShowing()) {
             splash.close();
         }
+        setOnClose(stage);
     }
 
+    // Vista de acerca de
     public void initAcercaDe() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ACERCA_DE.get()));
         Scene scene = new Scene(fxmlLoader.load());
@@ -115,12 +112,14 @@ public class SceneManager {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Acerca de");
         stage.setResizable(false);
-        fxmlLoader.<AcercaDeController>getController().setDialogStage(stage);
+        AcercaDeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.showAndWait();
     }
 
+    // Vista del splash
     public void initSplash(Stage stage) throws IOException {
         Platform.setImplicitExit(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SPLASH.get()));
@@ -134,6 +133,7 @@ public class SceneManager {
 
     }
 
+    // Vista del login y sus opciones
     public void initLogin(Stage splash) throws IOException {
         Platform.setImplicitExit(false);
         System.out.println("Iniciando Login");
@@ -148,18 +148,7 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();
 
-        stage.setOnCloseRequest(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Saliendo...");
-            alert.setHeaderText("¿Esta seguro que desea salir?");
-            alert.setContentText("Pulse aceptar para salir.");
-            var res = alert.showAndWait();
-            if (res.get() == ButtonType.OK) {
-                Platform.exit();
-            } else {
-                event.consume();
-            }
-        });
+        setOnClose(stage);
     }
 
     public void initRegister() throws IOException {
@@ -187,38 +176,7 @@ public class SceneManager {
         });
     }
 
-    public void initMainCustomer(Stage login, Customer customer) throws IOException {
-        System.out.println("Entrando a la vista del cliente.");
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MAIN_CUSTOMER.get())));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        Stage stage = new Stage();
-        MainCustomerController controller = fxmlLoader.getController();
-        controller.setDialogStage(stage);
-        controller.setCustomer(customer);
-        mainStage = stage;
-        stage.setTitle("GADAM S.L.");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-        login.close();
-        if (!login.isShowing()) {
-            splash.close();
-        }
-        stage.setOnCloseRequest(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Saliendo...");
-            alert.setHeaderText("¿Esta seguro que desea salir?");
-            alert.setContentText("Pulse aceptar para salir.");
-            var res = alert.showAndWait();
-            if (res.get() == ButtonType.OK) {
-                Platform.exit();
-            } else {
-                event.consume();
-            }
-        });
-
-    }
-
+    // Vista detallada del artículo en el menú del cliente
     public void initViewArticle(Article article) throws IOException {
         System.out.println("Viendo resumen del articulo " + article.getArticle().get());
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_ARTICLE.get())));
@@ -234,17 +192,7 @@ public class SceneManager {
 
     }
 
-    public void initViewCustomer() throws IOException {
-        System.out.println("Entrando a la vista de clientes.");
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_CUSTOMER.get())));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Consultas Clientes");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    // Vista detallada del perfil del cliente en el menú del cliente y sus opciones.
     public void initViewDataCustomer(Customer customer) throws IOException {
         System.out.println("Viendo el perfil del usuario.");
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.SHOW_DATA_CUSTOMER.get())));
@@ -279,35 +227,23 @@ public class SceneManager {
 
     }
 
-    public boolean initProducto(boolean editarModo, Article producto) throws IOException {
-        System.out.println("Iniciando....");
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_ARTICLE.get()));
-        Scene scene = new Scene(fxmlLoader.load(), 561, 507);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(mainStage);
-        stage.setTitle(editarModo ? "Editar Persona" : "Nueva Persona");
-        stage.setResizable(false);
-        ProductoController controller = fxmlLoader.getController();
-        controller.setDialogStage(stage);
-        controller.setEditarModo(editarModo);
-        controller.setProducto(producto);
-        stage.setScene(scene);
-        stage.showAndWait();
-        return controller.isAceptarClicked();
-    }
 
-    public void initArticleView() throws IOException {
+    //  Vista tabla articulos y sus opciones
+    public void initArticleView(Stage init) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.ARTICLE_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
+        init.close();
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
     }
 
-    public void initResume(Article producto) throws IOException {
+    public void initResumeArticle(Article producto) throws IOException {
         System.out.println("Viendo el resumen del pedido....");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.RESUME_ARTICLE.get()));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -322,14 +258,53 @@ public class SceneManager {
 
     }
 
-    public void initReception() throws IOException {
+    public boolean initProducto(boolean editarModo, Article producto) throws IOException {
+        System.out.println("Iniciando....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_ARTICLE.get()));
+        Scene scene = new Scene(fxmlLoader.load(), 561, 507);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.setTitle(editarModo ? "Editar Producto" : "Crear Nuevo Producto");
+        stage.setResizable(false);
+        ProductoController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setEditarModo(editarModo);
+        controller.setProducto(producto);
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
+    }
+
+    // Vista Tabla Recepción y sus opciones
+
+    public void initReception(Stage init) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(HelloApplication.class.getResource(Views.RECEPTION_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
+        init.close();
+        stage.setTitle("Recepciones");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
+    }
+
+    public boolean initNewReception(Reception recepcion, LineReception lineReception) throws IOException {
+        System.out.println("Iniciando....");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_RECEPTION.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        NewRecepcionController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setReception(recepcion, lineReception);
+        stage.setScene(scene);
+        stage.showAndWait();
+        return controller.isAceptarClicked();
     }
 
     public void initResumeReception(Reception x) throws IOException, SQLException {
@@ -341,21 +316,40 @@ public class SceneManager {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.setScene(scene);
-
         stage.showAndWait();
 
     }
+    // Vista tabla empleados y sus opciones
 
-    public void initEmployee() throws IOException {
+    public void initEmployee(Stage init) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.TABLA_EMPLYEE.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        init.close();
         stage.initModality(Modality.APPLICATION_MODAL); //TODO ESTO EVITA Q LA VENTANA DE DETRAS NO SE PUEDA TOCAR
         stage.setTitle("Empleados");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
+    }
+
+    public boolean initNewEmployee(boolean empty, Employee employee) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_EMPLOYEE.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        NewEmployeeController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
         stage.showAndWait();
+        return controller.isAceptarClicked();
     }
 
     public void initModifyEmployee(Employee employee) throws IOException {
@@ -374,31 +368,22 @@ public class SceneManager {
         stage.show();
     }
 
-    public void initCarrito() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.VIEW_CARRITO.get()));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        ViewCarritoController controller = fxmlLoader.getController();
-        controller.setDialogStage(mainStage);
-        controller.setStage(stage);
-        stage.setResizable(false);
-        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
-        stage.setTitle("Cesta de Productos");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void initSupplierView() throws IOException {
+    // Vista tabla Proveedores y sus opciones
+    public void initSupplierView(Stage init) throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SUPPLIER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         SupplierVistaController controller = fxmlLoader.getController();
         controller.setStage(stage);
+        init.close();
         stage.setResizable(false);
         stage.setTitle("Proveedores");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
     }
 
     public void initNewSuplier() throws IOException {
@@ -410,7 +395,7 @@ public class SceneManager {
         stage.setResizable(false);
         stage.setTitle("Nuevo Proveedor");
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
 
     }
 
@@ -425,18 +410,23 @@ public class SceneManager {
         stage.setResizable(false);
         stage.setTitle("Modificar Proveedor");
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
     }
 
-    public void initOrderView() throws IOException {
+    // Vista Tabla Pedidos con sus opciones
+    public void initOrderView(Stage init) throws IOException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        init.close();
         stage.setResizable(false);
         stage.setTitle("Pedidos");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
     }
 
     public void initLineOrderView(Order order) throws IOException {
@@ -448,6 +438,89 @@ public class SceneManager {
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    // Vista tabla customer con sus opciones.
+    public void initViewCustomer(Stage init) throws IOException {
+        System.out.println("Entrando a la vista de clientes.");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_CUSTOMER.get())));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        CustomerViewController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        init.close();
+        stage.setTitle("Consultas Clientes");
+        stage.setResizable(false);
+        stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
+
+    }
+
+    public void initModifyCustomer(Customer customer) throws IOException {
+        System.out.println(customer);
+        Platform.setImplicitExit(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_CUSTOMER.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        EditarCustomerController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        controller.setCustomer(customer);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Editar - Clientes");
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    public void initNewCustomer() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_CUSTOMER.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        NewCustomerController controller = fxmlLoader.getController();
+        controller.setDialogStage(stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Empleados");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    // Vista Carrito
+    public void initCarrito() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.VIEW_CARRITO.get()));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        ViewCarritoController controller = fxmlLoader.getController();
+        controller.setDialogStage(mainStage);
+        controller.setStage(stage);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Cesta de Productos");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Método que muestra un alert de confirmación cuando se pulsa en la X de salir.
+     * @param stage Stage que realiza el evento
+     */
+    private void setOnClose(Stage stage) {
+        stage.setOnCloseRequest(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Saliendo...");
+            alert.setHeaderText("¿Esta seguro que desea salir?");
+            alert.setContentText("Pulse aceptar para salir.");
+            var res = alert.showAndWait();
+            if (res.get() == ButtonType.OK) {
+                Platform.exit();
+            } else {
+                event.consume();
+            }
+        });
     }
 }

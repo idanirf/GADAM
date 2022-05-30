@@ -7,6 +7,8 @@ public enum Views {
     MODIFY_EMPLOYEE("views/EditarEmpleadoVistaManager.fxml"),
     NEW_EMPLOYEE("views/NuevoEmpleadoVistaManager.fxml"),
     VIEW_CUSTOMER("views/CustomerView.fxml"),
+    MODIFY_CUSTOMER("views/EditarCustomerView.fxml"),
+    NEW_CUSTOMER("views/NuevoCustomerView.fxml"),
     SHOW_DATA_CUSTOMER("views/ShowCustomerData.fxml"),
     MODIFY_DATA_CUSTOMER("views/ModifyDataCustomer.fxml"),
     ARTICLE_VIEW("views/article-View.fxml"),

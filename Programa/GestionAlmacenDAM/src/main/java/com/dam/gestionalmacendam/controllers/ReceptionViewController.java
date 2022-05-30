@@ -72,7 +72,7 @@ public class ReceptionViewController {
         System.out.println("Insertando la Recepcion...");
         Reception recepcion = new Reception();
         LineReception lineReception = new LineReception();
-        boolean aceptarClicked = SceneManager.initNewReception(recepcion, lineReception);
+        boolean aceptarClicked = SceneManager.get().initNewReception(recepcion, lineReception);
         if (aceptarClicked) {
             try {
                 repo.save(recepcion);

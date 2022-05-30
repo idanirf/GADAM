@@ -1,6 +1,7 @@
 package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.repositories.customer.CustomerRepository;
 import javafx.beans.property.SimpleObjectProperty;
@@ -8,7 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +20,10 @@ import java.util.Locale;
 
 public class CustomerViewController {
     private final CustomerRepository customerRepository = CustomerRepository.getInstance(DataBaseManager.getInstance());
+
+    private Stage stage;
+    @FXML
+    private TextField busqueda;
     @FXML
     private TableView<Customer> customerTable;
     @FXML
@@ -46,16 +53,41 @@ public class CustomerViewController {
                 .ofLocalizedDate(FormatStyle.FULL).withLocale(locale));
     }
 
-    public void findByCIC(ActionEvent actionEvent) {
+    public void setStage(Stage stage) {
+        this.stage = stage;
+        init();
     }
 
-    @FXML
-    private void initialize() {
+    public void findByCIC(ActionEvent actionEvent) {
+        String name = busqueda.getText().trim().toLowerCase();
+        if (name.isEmpty()) {
+            try {
+                loadData();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            try {
+                customerTable.setItems(customerRepository.findAll()
+                        .filtered(x -> x.getName().toLowerCase().contains(name) || x.getCIC().contains(name)));
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        customerTable.refresh();
+    }
+
+    private void init() {
         try {
             loadData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        initColum();
+
+    }
+
+    private void initColum() {
         tbName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         tbSurname.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSurname()));
         tbCic.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCIC()));
@@ -68,7 +100,6 @@ public class CustomerViewController {
         setCellCreateAt();
         tbActive.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue()));
         setCellActive();
-
     }
 
     private void setCellActive() {
@@ -101,5 +132,26 @@ public class CustomerViewController {
 
     private void loadData() throws SQLException {
         customerTable.setItems(customerRepository.findAll());
+    }
+
+    public void onModifyAction(ActionEvent actionEvent) {
+        Customer customer = customerTable.getFocusModel().getFocusedItem();
+        System.out.println(customer);
+        try {
+            SceneManager.get().initModifyCustomer(customer);
+            customerTable.refresh();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void onAddAction(ActionEvent actionEvent) {
+        System.out.println("Creando Usuario");
+        try {
+            SceneManager.get().initNewCustomer();
+            init();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
