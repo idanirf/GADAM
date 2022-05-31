@@ -99,7 +99,7 @@ public class NewRecepcionController {
 
     private boolean comprobarEsCorrecto(String text) {
         try {
-            return articles.findAll().stream().anyMatch(x ->x.getDescription().getValue().equalsIgnoreCase(text));
+            return articles.findAll().stream().anyMatch(x ->x.getArticle().getValue().equalsIgnoreCase(text));
         }catch(Exception e) {
             return false;
         }

@@ -1,7 +1,9 @@
 package com.dam.gestionalmacendam.controllers;
 
 import com.dam.gestionalmacendam.HelloApplication;
+import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Article;
+import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.utils.AlertInfo;
 import com.dam.gestionalmacendam.utils.Patterns;
 import com.dam.gestionalmacendam.utils.Resources;
@@ -23,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ProductoController {
+    ArticleRepository repository = ArticleRepository.getInstance(DataBaseManager.getInstance());
 
     @FXML
     TextField productName;
@@ -93,8 +96,8 @@ public class ProductoController {
     private boolean isDataOk() {
         String errorMessage = "";
 
-        if (productName.getText() == null || productName.getText().isBlank()) {
-            errorMessage += "El nombre no puede estar en blanco\n";
+        if (productName.getText() == null || productName.getText().isBlank() || notisUnikename()) {
+            errorMessage += "El nombre no puede estar en blanco o no puede ser igual al de otro producto\n";
         }
         if (productStock.getText() == null || productStock.getText().isBlank() || Patterns.isNumberInt(productStock.getText())) {
             errorMessage += "Cantidad Inválida\n";
@@ -118,6 +121,15 @@ public class ProductoController {
             alert.showAndWait();
             return false;
         }
+    }
+
+    private boolean notisUnikename() {
+        try{
+            return repository.findAll().stream().anyMatch(x ->x.getArticle().getValue().equalsIgnoreCase(productName.getText()));
+        }catch(Exception e){
+            return true;
+        }
+
     }
 
     @FXML
