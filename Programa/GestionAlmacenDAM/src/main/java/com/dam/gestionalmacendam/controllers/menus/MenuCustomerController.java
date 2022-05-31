@@ -46,7 +46,7 @@ public class MenuCustomerController {
     @FXML
     private void btnCarritoAction(ActionEvent actionEvent) {
         try {
-            SceneManager.get().initCarrito(customer);
+            SceneManager.get().initCarrito(customer, stage);
             initArticles(null);
         } catch (IOException | SQLException e) {
             System.out.println(e.getMessage());

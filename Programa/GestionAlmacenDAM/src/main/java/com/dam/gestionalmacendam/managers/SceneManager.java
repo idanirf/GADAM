@@ -539,7 +539,7 @@ public class SceneManager {
     }
 
     // Vista Carrito
-    public void initCarrito(Customer customer) throws IOException {
+    public void initCarrito(Customer customer, Stage init) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.CARRITO_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
@@ -552,6 +552,10 @@ public class SceneManager {
         stage.setTitle("Cesta de Productos");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            init.show();
+        });
+
     }
 
     /**

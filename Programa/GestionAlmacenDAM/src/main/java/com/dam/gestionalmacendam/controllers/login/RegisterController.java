@@ -128,6 +128,10 @@ public class RegisterController {
             errorMessage += "Ya existe un usuario con ese nick. Pruebe otro.\n";
             txtNick.setText("");
         }
+        if (isExistCif(txtCIF.getText())) {
+            errorMessage += "Ya existe un usuario con ese CIF.\n";
+            txtCIF.setText("");
+        }
 
 
         if (errorMessage.length() > 0) {
@@ -223,6 +227,20 @@ public class RegisterController {
             customer = repository.findAll().stream().filter(c -> c.getNickName().equals(text)).findFirst();
             employee = employeeRepo.findAll().stream().filter(c -> c.getNickName().equals(text)).findFirst();
             if (customer.isEmpty() && employee.isEmpty()) {
+                ok = false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return ok;
+    }
+    public boolean isExistCif(String text) {
+        Optional<Customer> customer = null;
+        boolean ok = true;
+        try {
+            customer = repository.findAll().stream().filter(c -> c.getCif().equals(text)).findFirst();
+            if (customer.isEmpty()) {
                 ok = false;
             }
         } catch (SQLException e) {

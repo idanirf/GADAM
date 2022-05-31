@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.UUID;
 
 public class ModifyCustomerDataController {
@@ -103,6 +104,10 @@ public class ModifyCustomerDataController {
         if (txtEmail.getText() == null || !Patterns.patternEmail(txtEmail.getText())) {
             errorMessage += "El correo no puede estar vacio o es incorrecto. Ejemplo: ejemplo1@gmail.com\n";
         }
+        if (isExistCif(txtCif.getText())) {
+            errorMessage += "Ya existe un usuario con ese CIF.\n";
+            txtCif.setText("");
+        }
 
         if (errorMessage.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -152,5 +157,19 @@ public class ModifyCustomerDataController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public boolean isExistCif(String text) {
+        Optional<Customer> customer = null;
+        boolean ok = true;
+        try {
+            customer = repository.findAll().stream().filter(c -> c.getCif().equals(text)).findFirst();
+            if (customer.isEmpty()) {
+                ok = false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return ok;
     }
 }

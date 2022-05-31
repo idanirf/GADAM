@@ -3,18 +3,18 @@ package com.dam.gestionalmacendam.controllers.viewMainCustomer;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Customer;
 import com.dam.gestionalmacendam.models.LineOrder;
+import com.dam.gestionalmacendam.models.Order;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
 import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
+import com.dam.gestionalmacendam.servicies.printers.HtmlPrinterOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class ShowCustomerOrderController {
@@ -129,6 +130,23 @@ public class ShowCustomerOrderController {
     }
 
     public void onTicketAction(ActionEvent actionEvent) {
+        var lineOrder=listOrder.getSelectionModel().getSelectedItem();
+        Order order=null;
+        try {
+            order= repository.findByUUID(lineOrder.getBelongsOrder().get());
+            HtmlPrinterOrder printer = new HtmlPrinterOrder(order);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ticket Realizado");
+        alert.setContentText("Puede encontrar su ticket en : GestionAlmacenDAM\\order\\Pedido."+order.getOIC()+"\\html");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        } else {
+            alert.close();
+        }
     }
 
 
