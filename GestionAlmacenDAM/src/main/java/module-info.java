@@ -10,4 +10,6 @@ module com.dam.gestionalmacendam {
     exports com.dam.gestionalmacendam;
     exports com.dam.gestionalmacendam.controllers;
     opens com.dam.gestionalmacendam.controllers to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.orders;
+    opens com.dam.gestionalmacendam.controllers.orders to javafx.fxml;
 }
