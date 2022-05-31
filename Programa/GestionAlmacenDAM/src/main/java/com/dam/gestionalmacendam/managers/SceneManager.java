@@ -1,7 +1,25 @@
 package com.dam.gestionalmacendam.managers;
 
 import com.dam.gestionalmacendam.HelloApplication;
-import com.dam.gestionalmacendam.controllers.*;
+import com.dam.gestionalmacendam.controllers.login.LoginController;
+import com.dam.gestionalmacendam.controllers.login.RegisterController;
+import com.dam.gestionalmacendam.controllers.login.SplashController;
+import com.dam.gestionalmacendam.controllers.menus.MenuCustomerController;
+import com.dam.gestionalmacendam.controllers.menus.MenuEmployeeController;
+import com.dam.gestionalmacendam.controllers.menus.MenuManagerController;
+import com.dam.gestionalmacendam.controllers.viewArticle.ProductoController;
+import com.dam.gestionalmacendam.controllers.viewArticle.ResumenController;
+import com.dam.gestionalmacendam.controllers.viewCustomer.CustomerViewController;
+import com.dam.gestionalmacendam.controllers.viewCustomer.EditarCustomerController;
+import com.dam.gestionalmacendam.controllers.viewCustomer.NewCustomerController;
+import com.dam.gestionalmacendam.controllers.viewEmployee.EditarEmployeeController;
+import com.dam.gestionalmacendam.controllers.viewEmployee.NewEmployeeController;
+import com.dam.gestionalmacendam.controllers.viewMainCustomer.*;
+import com.dam.gestionalmacendam.controllers.viewOrder.LineaPedidoController;
+import com.dam.gestionalmacendam.controllers.viewReception.NewRecepcionController;
+import com.dam.gestionalmacendam.controllers.viewReception.ResumenReceptionController;
+import com.dam.gestionalmacendam.controllers.viewSupplier.EditarSuplierController;
+import com.dam.gestionalmacendam.controllers.viewSupplier.SupplierVistaController;
 import com.dam.gestionalmacendam.models.*;
 import com.dam.gestionalmacendam.utils.Properties;
 import com.dam.gestionalmacendam.utils.Resources;
@@ -47,10 +65,10 @@ public class SceneManager {
     // Vista de menús principales.
     public void initMainCustomer(Stage login, Customer customer) throws IOException {
         System.out.println("Entrando a la vista del cliente.");
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MAIN_CUSTOMER.get())));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.MENU_CUSTOMER.get())));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Stage stage = new Stage();
-        MainCustomerController controller = fxmlLoader.getController();
+        MenuCustomerController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         controller.setCustomer(customer);
         mainStage = stage;
@@ -179,7 +197,7 @@ public class SceneManager {
     // Vista detallada del artículo en el menú del cliente
     public void initViewArticle(Article article) throws IOException {
         System.out.println("Viendo resumen del articulo " + article.getArticle().get());
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_ARTICLE.get())));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.INFO_ARTICLE.get())));
         Scene scene = new Scene(fxmlLoader.load(), 560, 520);
         Stage stage = new Stage();
         ViewArticleController controller = fxmlLoader.getController();
@@ -225,6 +243,21 @@ public class SceneManager {
             view.show();
         }
 
+    }
+
+    // Vista detallada de los pedidos del cliente
+    public void initViewOrderCustomer(Customer customer) throws IOException {
+        System.out.println("Acciendo a Mis Pedidos");
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.SHOW_DATA_CUSTOMER_ORDER.get())));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        ShowCustomerOrderController controller = fxmlLoader.getController();
+        controller.setCustomer(customer);
+        stage.setTitle("Tus Pedidos");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
 
@@ -322,7 +355,7 @@ public class SceneManager {
     // Vista tabla empleados y sus opciones
 
     public void initEmployee(Stage init) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.TABLA_EMPLYEE.get()));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.EMPLOYEE_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         init.close();
@@ -389,7 +422,7 @@ public class SceneManager {
     public void initNewSuplier() throws IOException {
         System.out.println("Iniciando vista nuevo supplier");
         Platform.setImplicitExit(true);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_SUPPLIER_VIEW.get()));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.NEW_SUPPLIER.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setResizable(false);
@@ -402,7 +435,7 @@ public class SceneManager {
     public void initModificarSuplier(Supplier supplier) throws IOException {
         System.out.println("Iniciando vista modificación supplier");
         Platform.setImplicitExit(true);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_DATA_SUPPLIER.get()));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_SUPPLIER.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         EditarSuplierController controller = fxmlLoader.getController();
@@ -434,7 +467,7 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        LineaPedidoControler controller = fxmlLoader.getController();
+        LineaPedidoController controller = fxmlLoader.getController();
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -444,7 +477,7 @@ public class SceneManager {
     // Vista tabla customer con sus opciones.
     public void initViewCustomer(Stage init) throws IOException {
         System.out.println("Entrando a la vista de clientes.");
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.VIEW_CUSTOMER.get())));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource(Views.CUSTOMER_VIEW.get())));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         CustomerViewController controller = fxmlLoader.getController();
@@ -492,7 +525,7 @@ public class SceneManager {
 
     // Vista Carrito
     public void initCarrito() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.VIEW_CARRITO.get()));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.CARRITO_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         ViewCarritoController controller = fxmlLoader.getController();
@@ -507,6 +540,7 @@ public class SceneManager {
 
     /**
      * Método que muestra un alert de confirmación cuando se pulsa en la X de salir.
+     *
      * @param stage Stage que realiza el evento
      */
     private void setOnClose(Stage stage) {

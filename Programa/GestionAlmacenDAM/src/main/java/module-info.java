@@ -8,6 +8,22 @@ module com.dam.gestionalmacendam {
 
     opens com.dam.gestionalmacendam to javafx.fxml;
     exports com.dam.gestionalmacendam;
-    exports com.dam.gestionalmacendam.controllers;
-    opens com.dam.gestionalmacendam.controllers to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.menus;
+    opens com.dam.gestionalmacendam.controllers.menus to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.login;
+    opens com.dam.gestionalmacendam.controllers.login to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewMainCustomer;
+    opens com.dam.gestionalmacendam.controllers.viewMainCustomer to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewArticle;
+    opens com.dam.gestionalmacendam.controllers.viewArticle to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewCustomer;
+    opens com.dam.gestionalmacendam.controllers.viewCustomer to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewOrder;
+    opens com.dam.gestionalmacendam.controllers.viewOrder to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewSupplier;
+    opens com.dam.gestionalmacendam.controllers.viewSupplier to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewEmployee;
+    opens com.dam.gestionalmacendam.controllers.viewEmployee to javafx.fxml;
+    exports com.dam.gestionalmacendam.controllers.viewReception;
+    opens com.dam.gestionalmacendam.controllers.viewReception to javafx.fxml;
 }

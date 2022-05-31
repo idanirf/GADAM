@@ -3,33 +3,42 @@ package com.dam.gestionalmacendam.views;
 public enum Views {
     MENU_MANAGER("views/MenuManager.fxml"),
     MENU_EMPLEADO("views/MenuEmployee.fxml"),
-    TABLA_EMPLYEE("views/EmpleadosVistaManager.fxml"),
-    MODIFY_EMPLOYEE("views/EditarEmpleadoVistaManager.fxml"),
-    NEW_EMPLOYEE("views/NuevoEmpleadoVistaManager.fxml"),
-    VIEW_CUSTOMER("views/CustomerView.fxml"),
-    MODIFY_CUSTOMER("views/EditarCustomerView.fxml"),
-    NEW_CUSTOMER("views/NuevoCustomerView.fxml"),
+    MENU_CUSTOMER("views/MenuCustomer.fxml"),
+
+    SPLASH("views/Splash.fxml"),
+    LOGIN("views/Login.fxml"),
+    REGISTER("views/Register.fxml"),
+    ACERCA_DE("views/AcercaDe.fxml"),
+
+    INFO_ARTICLE("views/InfoArticle.fxml"),
+    CARRITO_VIEW("views/CarritoView.fxml"),
     SHOW_DATA_CUSTOMER("views/ShowCustomerData.fxml"),
-    MODIFY_DATA_CUSTOMER("views/ModifyDataCustomer.fxml"),
-    ARTICLE_VIEW("views/article-View.fxml"),
-    NEW_ARTICLE("views/nuevoProducto.fxml"),
-    RESUME_ARTICLE("views/verDetalle.fxml"),
-    RECEPTION_VIEW("views/receptionview.fxml"),
-    RESUME_RECEPTION("views/verDetalleReception.fxml"),
-    NEW_RECEPTION("views/nuevaReception.fxml"),
-    SUPPLIER_VIEW("views/SuplierVistaManager.fxml"),
-    MODIFY_DATA_SUPPLIER("views/SupplierModifyView.fxml"),
+    MODIFY_DATA_CUSTOMER("views/ModifyCustomerData.fxml"),
+    SHOW_DATA_CUSTOMER_ORDER("views/ShowCustomerOrderData.fxml"),
+
+    EMPLOYEE_VIEW("views/EmployeeView.fxml"),
+    NEW_EMPLOYEE("views/NewEmployeeView.fxml"),
+    MODIFY_EMPLOYEE("views/ModifyEmployeeView.fxml"),
+
+    CUSTOMER_VIEW("views/CustomerView.fxml"),
+    NEW_CUSTOMER("views/NewCustomerView.fxml"),
+    MODIFY_CUSTOMER("views/ModifyCustomerView.fxml"),
+
+    ARTICLE_VIEW("views/ArticleView.fxml"),
+    NEW_ARTICLE("views/NewArticleView.fxml"),
+    RESUME_ARTICLE("views/ResumeArticleView.fxml"),
+
+    RECEPTION_VIEW("views/ReceptionView.fxml"),
+    NEW_RECEPTION("views/NewReceptionView.fxml"),
+    RESUME_RECEPTION("views/ResumeReceptionView.fxml"),
+
+    SUPPLIER_VIEW("views/SupplierView.fxml"),
+    NEW_SUPPLIER("views/NewSupplierView.fxml"),
+    MODIFY_SUPPLIER("views/ModifySupplierView.fxml"),
 
     ORDER_VIEW("views/OrderView.fxml"),
-    LINE_ORDER_VIEW("views/lineaPedidoManagerView.fxml"),
-    NEW_SUPPLIER_VIEW("views/suplierNewView.fxml"),
-    ACERCA_DE("views/AcercaDe.fxml"),
-    SPLASH("views/splash.fxml"),
-    LOGIN("views/login.fxml"),
-    REGISTER("views/register.fxml"),
-    VIEW_ARTICLE("views/view-article.fxml"),
-    VIEW_CARRITO("views/view-carrito.fxml"),
-    MAIN_CUSTOMER("views/main-customer.fxml");
+    LINE_ORDER_VIEW("views/LineOrderView.fxml");
+
 
     private final String view;
 

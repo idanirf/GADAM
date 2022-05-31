@@ -5,10 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
       prefHeight="360.0" prefWidth="640.0" style="-fx-background-color: #ffffff;"
       xmlns="http://javafx.com/javafx/16"
-      fx:controller="com.dam.gestionalmacendam.controllers.AcercaDeController">
+      fx:controller="com.dam.gestionalmacendam.controllers.viewMainCustomer.AcercaDeController">
     <children>
         <AnchorPane prefHeight="156.0" prefWidth="640.0">
             <children>
