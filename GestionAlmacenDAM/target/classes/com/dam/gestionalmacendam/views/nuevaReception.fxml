@@ -26,7 +26,6 @@
         <rowConstraints>
           <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="74.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="72.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
@@ -46,44 +45,31 @@
                </font>
             </Label>
             <TextField fx:id="carrier" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="27.0" prefWidth="142.0" text="Cost: " GridPane.rowIndex="2" GridPane.valignment="TOP">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="4.0" />
-               </GridPane.margin>
-            </Label>
-            <TextField fx:id="cost" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="5.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label prefHeight="27.0" prefWidth="142.0" text="Article:" GridPane.rowIndex="3">
+            <Label prefHeight="27.0" prefWidth="142.0" text="Article:" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label prefHeight="27.0" prefWidth="142.0" text="Load: " GridPane.rowIndex="4">
+            <Label prefHeight="27.0" prefWidth="142.0" text="Load: " GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label prefHeight="27.0" prefWidth="142.0" text="UnitPrice: " GridPane.rowIndex="5">
+            <Label prefHeight="27.0" prefWidth="142.0" text="UnitPrice: " GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="article" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="load" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="unitPrice" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label prefHeight="27.0" prefWidth="152.0" text="Método de Pago: " GridPane.rowIndex="6">
+            <TextField fx:id="article" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="load" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="unitPrice" prefHeight="25.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="27.0" prefWidth="152.0" text="Método de Pago: " GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" text="PAYPAL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <CheckBox mnemonicParsing="false" text="CARD" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <CheckBox mnemonicParsing="false" text="PAYPAL" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <CheckBox mnemonicParsing="false" text="CARD" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="70.0" />
                </GridPane.margin>

@@ -123,7 +123,7 @@ public class SceneManager {
     }
 
     public void initSplash(Stage stage) throws IOException {
-       /* Platform.setImplicitExit(false);
+        Platform.setImplicitExit(false);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.SPLASH.get()));
         //Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
@@ -132,9 +132,9 @@ public class SceneManager {
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
 
-       initOrderView();
+
 
 
     }

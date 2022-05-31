@@ -8,5 +8,17 @@
       <jdbc-url>jdbc:sqlite:C:\Users\danii\Desktop\REPOSITORY_GADAM\Programa\GestionAlmacenDAM\data\BaseGADAM.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="BaseGADAM" uuid="b37a5566-0190-4872-baf6-0045f5c02025">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\blanc\Desktop\Gestion de gadam\GADAM\GestionAlmacenDAM\data\BaseGADAM.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>
