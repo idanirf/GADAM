@@ -80,7 +80,7 @@ public class ResumenReceptionController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Tiket Realizado");
         alert.setContentText("Puede encontrar su tiket en :\n" +
-                " GestionAlmacenDAM\\reception\\Recepcion.uuid_de_la_Recepción.html");
+                " GestionAlmacenDAM\\reception\\ \nRecepcion.uuid_de_la_Recepción.html");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();

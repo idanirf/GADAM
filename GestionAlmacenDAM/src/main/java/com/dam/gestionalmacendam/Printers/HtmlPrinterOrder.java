@@ -26,24 +26,27 @@ public class HtmlPrinterOrder implements IPrinter{
     PrintWriter f = null;
 
     //para gardar la ruta del fichero
-    private final Path relativePath = Paths.get("");
-    private final String absolutePath = relativePath.toAbsolutePath().toString();
-    private final String directory = absolutePath + File.separator  + "order";
+    private final Path relativePath ;
+    private final String absolutePath ;
+    private final String directory ;
 
     //para que cada archivo tenga el uuid de el order o reception y si es order o reception
     private String uuid ;
     private String title = "Pedido";
-    private String file = this.directory + File.separator + this.title + "." + this.uuid + ".html";
+    private String file;
 
     //documento
-    String document = "";
+    String document ="";
 
     public HtmlPrinterOrder(Order o ) {
        this.o = o;
        this.uuid = o.getOIC();
-
+        this.relativePath = Paths.get("");
+        this.absolutePath = relativePath.toAbsolutePath().toString();
+        this.directory = absolutePath + File.separator  + "order";
+        this.file = directory + File.separator + title + "." + uuid + ".html";
         createDocument();
-        System.out.println(file);
+
     }
 
     /**

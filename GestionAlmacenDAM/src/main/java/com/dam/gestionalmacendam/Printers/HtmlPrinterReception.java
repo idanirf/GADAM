@@ -26,14 +26,14 @@ public class HtmlPrinterReception implements IPrinter{
     PrintWriter f = null;
 
     //para gardar la ruta del fichero
-    private final Path relativePath = Paths.get("");
-    private final String absolutePath = relativePath.toAbsolutePath().toString();
-    private final String directory = absolutePath + File.separator + "Reception";
+    private final Path relativePath;
+    private final String absolutePath ;
+    private final String directory ;
 
     //para que cada archivo tenga el uuid de el order o reception y si es order o reception
     private String uuid ;
     private String title = "Recepcion";
-    private  String file = directory + File.separator + title + "." + uuid + ".html";
+    private  String file ;
 
     //documento
     String document = "";
@@ -41,6 +41,11 @@ public class HtmlPrinterReception implements IPrinter{
     public HtmlPrinterReception(Reception o ) {
        this.o = o;
        this.uuid = o.getRIC();
+
+        this.relativePath = Paths.get("");
+        this.absolutePath = relativePath.toAbsolutePath().toString();
+        this.directory = absolutePath + File.separator + "Reception";
+       this.file = directory + File.separator + title + "." + uuid + ".html";
         createDocument();
     }
 

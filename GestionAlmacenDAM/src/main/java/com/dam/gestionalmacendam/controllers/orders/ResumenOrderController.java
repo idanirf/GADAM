@@ -45,7 +45,7 @@ public class ResumenOrderController {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Tiket Realizado");
-        alert.setContentText("Puede encontrar su tiket en : GestionAlmacenDAM\\order\\Pedido.uuid_del_pedido\\html");
+        alert.setContentText("Puede encontrar su tiket en : \n GestionAlmacenDAM\\order\\ \nPedido.uuid_del_pedido\\html");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();
