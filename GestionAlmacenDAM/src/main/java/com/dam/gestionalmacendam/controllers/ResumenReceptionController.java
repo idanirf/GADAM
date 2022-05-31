@@ -1,16 +1,18 @@
 package com.dam.gestionalmacendam.controllers;
 
+import com.dam.gestionalmacendam.Printers.HtmlPrinterOrder;
+import com.dam.gestionalmacendam.Printers.HtmlPrinterReception;
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.LineReception;
 import com.dam.gestionalmacendam.models.Reception;
 import com.dam.gestionalmacendam.repositories.LineReception.LineReceptionRepository;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class ResumenReceptionController {
 
@@ -36,6 +38,8 @@ public class ResumenReceptionController {
     TextField carrier;
     @FXML
     TextField cost;
+    @FXML
+    private Button butoncreartiket;
 
     private Reception reception;
 
@@ -68,6 +72,21 @@ public class ResumenReceptionController {
 
 
     }
+    @FXML
+    void onactioncreartiket(ActionEvent event) {
 
+        HtmlPrinterReception printer = new HtmlPrinterReception(reception);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Tiket Realizado");
+        alert.setContentText("Puede encontrar su tiket en :\n" +
+                " GestionAlmacenDAM\\reception\\Recepcion.uuid_de_la_Recepción.html");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        } else {
+            alert.close();
+        }
+    }
 
 }

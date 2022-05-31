@@ -43,6 +43,7 @@ public class HtmlPrinterOrder implements IPrinter{
        this.uuid = o.getOIC();
 
         createDocument();
+        System.out.println(file);
     }
 
     /**

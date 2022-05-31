@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dam.gestionalmacendam.controllers.orders.ResumenOrderController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dam.gestionalmacendam.controllers.orders.ResumenOrderController">
    <children>
       <Label layoutX="293.0" layoutY="27.0" prefHeight="53.0" prefWidth="205.0" text="Order" underline="true">
          <font>
@@ -52,5 +52,6 @@
             <TableColumn fx:id="totalCol" prefWidth="161.0" text="Precio .Tot" />
         </columns>
       </TableView>
+      <Button fx:id="crearTiketButon" layoutX="31.0" layoutY="27.0" mnemonicParsing="false" onAction="#onCrearTiket" text="CREAR TIKET" />
    </children>
 </AnchorPane>

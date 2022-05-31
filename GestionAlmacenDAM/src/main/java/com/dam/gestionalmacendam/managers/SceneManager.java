@@ -134,7 +134,7 @@ public class SceneManager {
         stage.setScene(scene);
         stage.show();*/
 
-       initOrderView();
+       initReception();
 
 
     }
