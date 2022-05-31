@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerRepositoryTest {
     private static final Customer customer = new Customer("pedro", "ramos", "1", "avaux", "nick", "password", "3332211",
-            "ramos@gmail.com", "x", LocalDateTime.now(),true);
+            "ramos@gmail.com", "x", LocalDateTime.now(), true);
     CustomerRepository repository = CustomerRepository.getInstance(DataBaseManager.getInstance());
 
     @BeforeAll
@@ -39,7 +39,7 @@ class CustomerRepositoryTest {
         repository.save(customer);
         var res = repository.findAll().stream().toList();
         assertAll(
-                () -> assertTrue(res.size()>0)
+                () -> assertTrue(res.size() > 0)
         );
     }
 

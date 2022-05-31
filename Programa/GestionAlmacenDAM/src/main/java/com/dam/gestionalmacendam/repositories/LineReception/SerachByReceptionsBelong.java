@@ -4,6 +4,6 @@ import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 
-interface SerachByReceptionsBelong<T,ID> {
+interface SerachByReceptionsBelong<T, ID> {
     ObservableList<T> SerachByReceptionsBelong(ID identifier) throws SQLException;
 }

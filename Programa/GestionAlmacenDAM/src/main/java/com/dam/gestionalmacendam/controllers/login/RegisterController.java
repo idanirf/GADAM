@@ -2,7 +2,9 @@ package com.dam.gestionalmacendam.controllers.login;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
 import com.dam.gestionalmacendam.models.Customer;
+import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.repositories.customer.CustomerRepository;
+import com.dam.gestionalmacendam.repositories.employee.EmployeeRepository;
 import com.dam.gestionalmacendam.utils.Patterns;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +20,11 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class RegisterController {
     CustomerRepository repository = CustomerRepository.getInstance(DataBaseManager.getInstance());
+    EmployeeRepository employeeRepo = EmployeeRepository.getInstance(DataBaseManager.getInstance());
     @FXML
     TextField txtName;
     @FXML
@@ -120,6 +124,11 @@ public class RegisterController {
             errorMessage += "El correo no puede estar vacio o es incorrecto. Ejemplo: ejemplo1@gmail.com\n";
             txtEmail.setText("");
         }
+        if (isExist(txtNick.getText())) {
+            errorMessage += "Ya existe un usuario con ese nick. Pruebe otro.\n";
+            txtNick.setText("");
+        }
+
 
         if (errorMessage.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -204,5 +213,22 @@ public class RegisterController {
         alert.getDialogPane().setExpandableContent(expContent);
         var res = alert.showAndWait();
         return res.get() == ButtonType.OK;
+    }
+
+    public boolean isExist(String text) {
+        Optional<Customer> customer = null;
+        Optional<Employee> employee = null;
+        boolean ok = true;
+        try {
+            customer = repository.findAll().stream().filter(c -> c.getNickName().equals(text)).findFirst();
+            employee = employeeRepo.findAll().stream().filter(c -> c.getNickName().equals(text)).findFirst();
+            if (customer.isEmpty() && employee.isEmpty()) {
+                ok = false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return ok;
     }
 }

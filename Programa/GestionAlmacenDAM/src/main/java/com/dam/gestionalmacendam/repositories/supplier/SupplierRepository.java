@@ -15,11 +15,8 @@ public class SupplierRepository implements ICRUDSupplier {
     private final ObservableList<Supplier> repository = FXCollections.observableArrayList();
     private final DataBaseManager bbdd;
 
-    public DataBaseManager getBbdd(){
-        return bbdd;
-    }
     private SupplierRepository(DataBaseManager bbdd) {
-        this.bbdd=bbdd;
+        this.bbdd = bbdd;
     }
 
     public static SupplierRepository getInstance(DataBaseManager bbdd) {
@@ -27,6 +24,10 @@ public class SupplierRepository implements ICRUDSupplier {
             instance = new SupplierRepository(bbdd);
         }
         return instance;
+    }
+
+    public DataBaseManager getBbdd() {
+        return bbdd;
     }
 
     @Override

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -45,8 +46,9 @@ public class MenuCustomerController {
     @FXML
     private void btnCarritoAction(ActionEvent actionEvent) {
         try {
-            SceneManager.get().initCarrito();
-        } catch (IOException e) {
+            SceneManager.get().initCarrito(customer);
+            initArticles(null);
+        } catch (IOException | SQLException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -123,11 +125,13 @@ public class MenuCustomerController {
         vbox.getChildren().addAll(iv, hbox);
 
         vbox.setOnMouseClicked(event -> {
-            SceneManager scene = SceneManager.get();
-            try {
-                scene.initViewArticle(list.get(pos));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                SceneManager scene = SceneManager.get();
+                try {
+                    scene.initViewArticle(list.get(pos));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

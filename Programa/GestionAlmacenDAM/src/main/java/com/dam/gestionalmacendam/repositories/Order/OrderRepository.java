@@ -16,10 +16,6 @@ public class OrderRepository implements ICRUDOrder {
     private final ObservableList<Order> repository = FXCollections.observableArrayList();
     private final DataBaseManager bbdd;
 
-    public DataBaseManager getDb(){
-        return bbdd;
-    }
-
     private OrderRepository(DataBaseManager bbdd) {
         this.bbdd = bbdd;
     }
@@ -30,13 +26,18 @@ public class OrderRepository implements ICRUDOrder {
         }
         return instance;
     }
+
+    public DataBaseManager getDb() {
+        return bbdd;
+    }
+
     @Override
     public ObservableList<Order> findAll() throws SQLException {
         String sql = "SELECT * FROM \"Order\"";
         bbdd.open();
-        ResultSet resultado = bbdd.select(sql).orElseThrow(()-> new SQLException("Se ha producido un error obteniendo los datos"));
+        ResultSet resultado = bbdd.select(sql).orElseThrow(() -> new SQLException("Se ha producido un error obteniendo los datos"));
         repository.clear();
-        while(resultado.next()){
+        while (resultado.next()) {
             repository.add(
                     new Order(
                             resultado.getString("OIC"),
@@ -67,8 +68,8 @@ public class OrderRepository implements ICRUDOrder {
 
     @Override
     public Optional<Order> update(String uuid, Order order) throws SQLException {
-        var o= findByUUID(uuid);
-        int index= repository.indexOf(o);
+        var o = findByUUID(uuid);
+        int index = repository.indexOf(o);
         String sql = "UPDATE \"Order\" SET Customer = ?, Price = ?, Pay = ? WHERE OIC = ? ";
         bbdd.open();
         bbdd.update(sql,
@@ -76,12 +77,12 @@ public class OrderRepository implements ICRUDOrder {
                 order.getPrice().get(),
                 order.getMethodPay().get(),
                 uuid);
-        repository.set(index,order);
+        repository.set(index, order);
         return Optional.of(order);
     }
 
     public Order findByUUID(String OIC) throws SQLException {
-        var repo= findAll();
-        return repo.stream().filter(order-> order.getOIC().equals(OIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
+        var repo = findAll();
+        return repo.stream().filter(order -> order.getOIC().equals(OIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 }

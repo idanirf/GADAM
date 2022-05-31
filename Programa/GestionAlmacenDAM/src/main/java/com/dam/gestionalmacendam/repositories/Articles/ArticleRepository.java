@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class ArticleRepository implements ArticleInterface{
+public class ArticleRepository implements ArticleInterface {
     private static ArticleRepository instance;
     private final DataBaseManager dataBaseManager;
 
@@ -20,27 +20,28 @@ public class ArticleRepository implements ArticleInterface{
     }
 
 
-    public static ArticleRepository getInstance(DataBaseManager dataBaseManager){
-        if(instance ==null){
+    public static ArticleRepository getInstance(DataBaseManager dataBaseManager) {
+        if (instance == null) {
             instance = new ArticleRepository(dataBaseManager);
         }
         return instance;
     }
-    public DataBaseManager getDb(){
+
+    public DataBaseManager getDb() {
         return dataBaseManager;
     }
 
     @Override
     public Article findByName(String name) throws SQLException {
-        var repo= findAll();
-        return repo.stream().filter(article-> article.getArticle().get().equals(name)).findFirst().orElseThrow(()-> new SQLException("No existe"));
+        var repo = findAll();
+        return repo.stream().filter(article -> article.getArticle().get().equals(name)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 
 
     @Override
     public Article findByUuid(String PIC) throws SQLException {
-        var repo= findAll();
-        return repo.stream().filter(article-> article.getPIC().equals(PIC)).findFirst().orElseThrow(()-> new SQLException("No existe"));
+        var repo = findAll();
+        return repo.stream().filter(article -> article.getPIC().equals(PIC)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 
 
@@ -48,9 +49,9 @@ public class ArticleRepository implements ArticleInterface{
     public ObservableList<Article> findAll() throws SQLException {
         dataBaseManager.open();
         String querry = "Select * from Article";
-        ResultSet result = dataBaseManager.select(querry).orElseThrow(()-> new SQLException("Error al obtener los articulos."));
+        ResultSet result = dataBaseManager.select(querry).orElseThrow(() -> new SQLException("Error al obtener los articulos."));
         repository.clear();
-        while(result.next()){
+        while (result.next()) {
             repository.add(
                     new Article(
                             result.getString("PIC"),
@@ -77,16 +78,15 @@ public class ArticleRepository implements ArticleInterface{
         dataBaseManager.insert(query, article.getPIC(),
                 article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(),
-                article.getIsActive().get(),article.getPhoto());
+                article.getIsActive().get(), article.getPhoto());
         dataBaseManager.close();
         return Optional.of(article);
     }
 
 
-
     @Override
     public Optional<Article> update(String pic, Article article) throws SQLException {
-        var a= findByUuid(pic);
+        var a = findByUuid(pic);
         var index = repository.indexOf(a);
 
         dataBaseManager.open();
@@ -94,9 +94,9 @@ public class ArticleRepository implements ArticleInterface{
                 " isActive = ?, photo = ? where PIC = ? ;";
         dataBaseManager.update(query, article.getArticle().get(), article.getDescription().get(),
                 article.getLocation().get(), article.getStock().get(), article.getPrice().get(), article.getIsActive().get()
-                ,article.getPhoto(), pic);
+                , article.getPhoto(), pic);
         dataBaseManager.close();
-        repository.set(index,article);
+        repository.set(index, article);
         return Optional.of(article);
     }
 

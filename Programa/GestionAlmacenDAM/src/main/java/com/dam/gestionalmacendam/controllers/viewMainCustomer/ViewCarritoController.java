@@ -1,7 +1,13 @@
 package com.dam.gestionalmacendam.controllers.viewMainCustomer;
 
-import com.dam.gestionalmacendam.models.CarritoItem;
+import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.models.*;
+import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
+import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
+import com.dam.gestionalmacendam.repositories.Order.OrderRepository;
 import com.dam.gestionalmacendam.repositories.carrito.CarritoRepository;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +22,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ViewCarritoController {
     private final ObservableList<Integer> cantidadList = FXCollections.observableArrayList();
     private final CarritoRepository carritoRepository = CarritoRepository.getInstance();
+    private final OrderRepository orderRepository = OrderRepository.getInstance(DataBaseManager.getInstance());
+    private final LineOrderRepository lineOrderRepository = LineOrderRepository.getInstance(DataBaseManager.getInstance());
+    private final ArticleRepository articleRepository = ArticleRepository.getInstance(DataBaseManager.getInstance());
+    private Customer customer;
     private Stage main;
     private Stage viewCarrito;
     @FXML
@@ -37,12 +51,68 @@ public class ViewCarritoController {
     }
 
     public void onPedidoAction(ActionEvent actionEvent) {
-        viewCarrito.close();
-        main.show();
+        Order order = new Order(customer.getName(), Pay.CARD);
+        var list = carritoRepository.getItems();
+        List<LineOrder> lista = new ArrayList<>();
+        int cost = 0;
+        boolean error = false;
+
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                var aux = articleRepository.findByName(list.get(i).getName());
+                if (aux.getStock().get() - list.get(i).getAmount() >= 0) {
+                    lista.add(
+                            new LineOrder(
+                                    list.get(i).getName(),
+                                    list.get(i).getAmount(),
+                                    list.get(i).getPrice(),
+                                    order.getOIC()
+                            )
+                    );
+                    cost += list.get(i).getTotal();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("No hay suficiente stock del producto " + aux.getArticle().get());
+                    alert.showAndWait();
+                    error = true;
+                }
+                System.out.println(list.get(i));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if (!error) {
+            order.setPrice(new SimpleDoubleProperty(cost));
+            try {
+                orderRepository.save(order);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+            lista.forEach(item -> {
+                try {
+                    var aux = articleRepository.findByName(item.getArticle().get());
+                    aux.setStock(new SimpleIntegerProperty(aux.getStock().get() - item.getLoad().get()));
+                    articleRepository.update(aux.getPIC(), aux);
+                    lineOrderRepository.save(item);
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            });
+            viewCarrito.close();
+            main.show();
+        }
+        
     }
 
     public void setDialogStage(Stage stage) {
         this.main = stage;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void setStage(Stage stage) {

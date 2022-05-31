@@ -64,7 +64,7 @@ public class EmployeeRepository implements IEmployeeRepository {
     public Optional<Employee> save(Employee employee) throws SQLException {
         String sql = "INSERT INTO Employee (EIC,name,surname,nif,email,photo,nickname,password,isManager,createdAt,isActive) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         db.open();
-        db.insert(sql, employee.getEIC(), employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(),employee.isActive());
+        db.insert(sql, employee.getEIC(), employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(), employee.isActive());
         db.close();
         return Optional.of(employee);
     }
@@ -75,7 +75,7 @@ public class EmployeeRepository implements IEmployeeRepository {
         var index = repository.indexOf(c);
         String sql = "UPDATE Employee SET name = ?, surname = ?, nif = ?, email = ?, photo = ?, nickname= ?, password= ?, isManager= ?, createdAt = ?, isActive= ? WHERE EIC = ?";
         db.open();
-        db.update(sql, employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(),employee.isActive() , employee.getEIC());
+        db.update(sql, employee.getName(), employee.getSurname(), employee.getNif(), employee.getEmail(), employee.getPhoto(), employee.getNickName(), employee.getPassword(), employee.isManager(), employee.getCreatedAt().toString(), employee.isActive(), employee.getEIC());
         db.close();
         repository.set(index, employee);
 

@@ -8,60 +8,60 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarritoRepositoryTest {
-    private static CarritoItem item= new CarritoItem("Producto","x",10,2);
+    private static final CarritoItem item = new CarritoItem("Producto", "x", 10, 2);
 
-    CarritoRepository repository= CarritoRepository.getInstance();
+    CarritoRepository repository = CarritoRepository.getInstance();
 
     @AfterEach
-    void setUp(){
+    void setUp() {
         repository.clear();
     }
 
     @Test
-    void getItemsTest(){
-        var list= repository.getItems();
+    void getItemsTest() {
+        var list = repository.getItems();
         assertEquals(0, list.size());
 
         repository.addItem(item);
 
-        var lis1= repository.getItems();
+        var lis1 = repository.getItems();
         assertAll(
-                ()-> assertTrue(lis1.size()>0),
-                ()-> assertEquals(lis1.get(0).getName(),item.getName()),
-                ()-> assertEquals(lis1.get(0).getPhoto(),item.getPhoto()),
-                ()-> assertEquals(lis1.get(0).getAmount(),item.getAmount()),
-                ()-> assertEquals(lis1.get(0).getPrice(),item.getPrice()),
-                ()-> assertEquals(lis1.get(0).getTotal(),item.getTotal())
+                () -> assertTrue(lis1.size() > 0),
+                () -> assertEquals(lis1.get(0).getName(), item.getName()),
+                () -> assertEquals(lis1.get(0).getPhoto(), item.getPhoto()),
+                () -> assertEquals(lis1.get(0).getAmount(), item.getAmount()),
+                () -> assertEquals(lis1.get(0).getPrice(), item.getPrice()),
+                () -> assertEquals(lis1.get(0).getTotal(), item.getTotal())
         );
     }
 
     @Test
-    void addItemTest(){
+    void addItemTest() {
         repository.addItem(item);
-        var list= repository.getItems();
+        var list = repository.getItems();
 
         assertTrue(list.contains(item));
     }
 
     @Test
-    void removeItemTest(){
+    void removeItemTest() {
         repository.addItem(item);
         repository.removeItem(item);
-        var list= repository.getItems();
+        var list = repository.getItems();
 
         assertFalse(list.contains(item));
 
     }
 
     @Test
-    void getTotalTest(){
-        var itemNew= new CarritoItem("ProductoNuevo","x",12,1);
+    void getTotalTest() {
+        var itemNew = new CarritoItem("ProductoNuevo", "x", 12, 1);
         repository.addItem(item);
         repository.addItem(itemNew);
 
-        var total= repository.getTotal();
+        var total = repository.getTotal();
 
-        assertEquals(total,32);
+        assertEquals(total, 32);
     }
 
 }

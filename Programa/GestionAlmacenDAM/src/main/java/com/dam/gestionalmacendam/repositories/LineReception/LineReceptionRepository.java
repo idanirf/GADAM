@@ -10,25 +10,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class LineReceptionRepository implements LineReceptionInterface{
+public class LineReceptionRepository implements LineReceptionInterface {
 
     private static LineReceptionRepository instance;
     private final DataBaseManager dataBaseManager;
-    private  ObservableList<LineReception> repository = FXCollections.observableArrayList();
+    private final ObservableList<LineReception> repository = FXCollections.observableArrayList();
 
     private LineReceptionRepository(DataBaseManager dataBaseManager) {
         this.dataBaseManager = dataBaseManager;
     }
 
-    public DataBaseManager getDb(){
-        return dataBaseManager;
-    }
-
-    public static LineReceptionRepository getInstance(DataBaseManager dataBaseManager){
-        if(instance == null){
+    public static LineReceptionRepository getInstance(DataBaseManager dataBaseManager) {
+        if (instance == null) {
             instance = new LineReceptionRepository(dataBaseManager);
         }
         return instance;
+    }
+
+    public DataBaseManager getDb() {
+        return dataBaseManager;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class LineReceptionRepository implements LineReceptionInterface{
         String query = "select * from LineReception";
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
         repository.clear();
-        while (result.next()){
+        while (result.next()) {
             String RLIC = (result.getString("RLIC"));
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("article"));
+            StringProperty articlePIC = new SimpleStringProperty(result.getString("article"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
-            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
-            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
+            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));
+            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));
             StringProperty belongsRecepcion = new SimpleStringProperty(result.getString("belongsReception"));
 
             LineReception lineReception = new LineReception(RLIC, articlePIC, load, unitPrice, totalPrice, belongsRecepcion);
@@ -66,17 +66,17 @@ public class LineReceptionRepository implements LineReceptionInterface{
                 lineReception.getBelongsRecepcion().get()
         ).orElseThrow(SQLException::new);
         dataBaseManager.close();
-        return Optional.of(lineReception) ;
+        return Optional.of(lineReception);
     }
 
     @Override
     public Optional<LineReception> update(String rlic, LineReception lineReception) throws SQLException {
-        var o= findByUUID(rlic);
-        int index= repository.indexOf(o);
+        var o = findByUUID(rlic);
+        int index = repository.indexOf(o);
         dataBaseManager.open();
         String query = "Update LineReception set article = ? , load = ? " +
                 ", unitPrice = ?, totalPrice = ?, BelongsReception = ? where  RLIC = ? ;";
-       dataBaseManager.update(query,
+        dataBaseManager.update(query,
                 lineReception.getArticlePIC().get(),
                 lineReception.getLoad().get(),
                 lineReception.getUnitPrice().get(),
@@ -84,9 +84,9 @@ public class LineReceptionRepository implements LineReceptionInterface{
                 lineReception.getBelongsRecepcion().get(),
                 rlic);
         dataBaseManager.close();
-        repository.set(index,lineReception);
+        repository.set(index, lineReception);
 
-        return  Optional.of(lineReception);
+        return Optional.of(lineReception);
     }
 
     @Override
@@ -95,12 +95,12 @@ public class LineReceptionRepository implements LineReceptionInterface{
         dataBaseManager.open();
         String query = "select * from LineReception where belongsReception = ?";
         ResultSet result = dataBaseManager.select(query, identifier).orElseThrow(SQLException::new);
-        while (result.next()){
+        while (result.next()) {
             String RLIC = result.getString("RLIC");
-            StringProperty articlePIC =  new SimpleStringProperty(result.getString("article"));
+            StringProperty articlePIC = new SimpleStringProperty(result.getString("article"));
             IntegerProperty load = new SimpleIntegerProperty(result.getInt("load"));
-            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));;
-            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));;
+            DoubleProperty unitPrice = new SimpleDoubleProperty(result.getDouble("unitPrice"));
+            DoubleProperty totalPrice = new SimpleDoubleProperty(result.getDouble("totalPrice"));
             StringProperty belongsRecepcion = new SimpleStringProperty(result.getString("belongsReception"));
 
             LineReception lineReception = new LineReception(RLIC, articlePIC, load, unitPrice, totalPrice, belongsRecepcion);
@@ -109,8 +109,9 @@ public class LineReceptionRepository implements LineReceptionInterface{
         dataBaseManager.close();
         return repository;
     }
+
     public LineReception findByUUID(String rlic) throws SQLException {
-        var repo= findAll();
-        return repo.stream().filter(lineReception->lineReception.getRLIC().equals(rlic)).findFirst().orElseThrow(() -> new SQLException("No existe"));
+        var repo = findAll();
+        return repo.stream().filter(lineReception -> lineReception.getRLIC().equals(rlic)).findFirst().orElseThrow(() -> new SQLException("No existe"));
     }
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeRepositoryTest {
-    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDateTime.now(),true);
+    private static final Employee employee = new Employee("pedro", "ramirez", "1", "ramirez@gmail.com", "x", "nick", "password", true, LocalDateTime.now(), true);
     EmployeeRepository repository = EmployeeRepository.getInstance(DataBaseManager.getInstance());
 
     @BeforeAll
@@ -38,7 +38,7 @@ class EmployeeRepositoryTest {
         repository.save(employee);
         var res = repository.findAll().stream().toList();
         assertAll(
-                () -> assertTrue(res.size()>0)
+                () -> assertTrue(res.size() > 0)
         );
     }
 

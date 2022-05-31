@@ -5,6 +5,7 @@ import com.dam.gestionalmacendam.models.CarritoItem;
 import com.dam.gestionalmacendam.repositories.carrito.CarritoRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -37,8 +38,17 @@ public class ViewArticleController {
         var aux = findItem();
         if (aux.isEmpty()) {
             carrito.addItem(setItem());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Añadiendo");
+            alert.setHeaderText("Añadiendo el producto seleccionado a la cesta...");
+            alert.show();
+
         } else {
             aux.get().setAmount(aux.get().getAmount() + 1);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Añadiendo");
+            alert.setHeaderText("Aumentando la cantidad del producto seleccionado en la cesta...");
+            alert.show();
         }
 
     }

@@ -14,14 +14,14 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArticleRepositoryTest {
-      ArticleRepository repository= ArticleRepository.getInstance(DataBaseManager.getInstance());
-      Article a = new Article("Prueba1","grande","sala a",35.50D,5,false,"x");
+    ArticleRepository repository = ArticleRepository.getInstance(DataBaseManager.getInstance());
+    Article a = new Article("Prueba1", "grande", "sala a", 35.50D, 5, false, "x");
 
     @BeforeEach
-    void initDataTest(){
-        try{
+    void initDataTest() {
+        try {
             repository.save(a);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("objeto ya en el repositorio");
         }
@@ -46,9 +46,9 @@ public class ArticleRepositoryTest {
         Article article = res.get(0);
 
         assertAll(
-                () -> assertTrue(res.size()>0),
-                () -> assertFalse(res.size()==0),
-                () -> assertEquals(a.getArticle().get(),article.getArticle().get())
+                () -> assertTrue(res.size() > 0),
+                () -> assertFalse(res.size() == 0),
+                () -> assertEquals(a.getArticle().get(), article.getArticle().get())
         );
     }
 
@@ -60,7 +60,7 @@ public class ArticleRepositoryTest {
         Article res = repository.findByName(a.getArticle().get());
         Article res1 = repository.findByUuid(a.getPIC());
         assertAll(
-                () ->  assertTrue( res.getArticle().get().equalsIgnoreCase( res1.getArticle().get()))
+                () -> assertTrue(res.getArticle().get().equalsIgnoreCase(res1.getArticle().get()))
         );
     }
 
@@ -72,11 +72,11 @@ public class ArticleRepositoryTest {
         var aux = repository.findByUuid(a.getPIC());
         assertAll(
 
-                () -> assertEquals(aux.getArticle().get(),a.getArticle().get()),
-                () -> assertEquals(aux.getPIC(),a.getPIC()),
-                () -> assertEquals(aux.getPrice().get(),a.getPrice().get()),
-                () -> assertEquals(aux.getDescription().get(),a.getDescription().get())
-                );
+                () -> assertEquals(aux.getArticle().get(), a.getArticle().get()),
+                () -> assertEquals(aux.getPIC(), a.getPIC()),
+                () -> assertEquals(aux.getPrice().get(), a.getPrice().get()),
+                () -> assertEquals(aux.getDescription().get(), a.getDescription().get())
+        );
 
     }
 
@@ -86,12 +86,12 @@ public class ArticleRepositoryTest {
      */
     @Test
     void saveTest() throws SQLException {
-        var a1= repository.findByUuid(a.getPIC());
+        var a1 = repository.findByUuid(a.getPIC());
         assertAll(
-                ()->assertEquals(a1.getArticle().get(),a.getArticle().get()),
-                ()->assertEquals(a1.getPrice().get(),a.getPrice().get()),
-                ()->assertEquals(a1.getDescription().get(),a.getDescription().get()),
-                ()->assertEquals(a1.getStock().get(),a.getStock().get())
+                () -> assertEquals(a1.getArticle().get(), a.getArticle().get()),
+                () -> assertEquals(a1.getPrice().get(), a.getPrice().get()),
+                () -> assertEquals(a1.getDescription().get(), a.getDescription().get()),
+                () -> assertEquals(a1.getStock().get(), a.getStock().get())
         );
     }
 
@@ -101,12 +101,12 @@ public class ArticleRepositoryTest {
     @Test
     void updateTest() throws SQLException {
         a.setArticle(new SimpleStringProperty("mesita"));
-        var aux=repository.update(a.getPIC(), a);
+        var aux = repository.update(a.getPIC(), a);
         assertAll(
-                ()->assertEquals(aux.get().getArticle().get(),a.getArticle().get()),
-                ()->assertEquals(aux.get().getPrice().get(),a.getPrice().get()),
-                ()->assertEquals(aux.get().getDescription().get(),a.getDescription().get()),
-                ()->assertEquals(aux.get().getStock().get(),a.getStock().get())
+                () -> assertEquals(aux.get().getArticle().get(), a.getArticle().get()),
+                () -> assertEquals(aux.get().getPrice().get(), a.getPrice().get()),
+                () -> assertEquals(aux.get().getDescription().get(), a.getDescription().get()),
+                () -> assertEquals(aux.get().getStock().get(), a.getStock().get())
         );
     }
 }

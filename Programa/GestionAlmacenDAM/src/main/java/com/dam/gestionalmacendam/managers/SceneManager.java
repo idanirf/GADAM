@@ -75,6 +75,7 @@ public class SceneManager {
         stage.setTitle("GADAM S.L.");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
         login.close();
         if (!login.isShowing()) {
@@ -147,6 +148,7 @@ public class SceneManager {
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
 
     }
@@ -164,6 +166,7 @@ public class SceneManager {
         stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
 
         setOnClose(stage);
@@ -178,6 +181,8 @@ public class SceneManager {
         controller.setDialogStage(stage);
         stage.setTitle("Registrar Usuario Nuevo");
         stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
@@ -206,6 +211,8 @@ public class SceneManager {
         stage.setTitle("Producto " + article.getArticle().get());
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
 
     }
@@ -222,6 +229,8 @@ public class SceneManager {
         stage.setTitle("Tu perfil");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
 
     }
@@ -238,10 +247,15 @@ public class SceneManager {
         stage.setTitle("Modificar los datos.");
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.show();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.showAndWait();
         if (!stage.isShowing()) {
             view.show();
         }
+        stage.setOnCloseRequest(event -> {
+            view.show();
+        });
 
     }
 
@@ -255,6 +269,7 @@ public class SceneManager {
         controller.setCustomer(customer);
         stage.setTitle("Tus Pedidos");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
@@ -524,13 +539,14 @@ public class SceneManager {
     }
 
     // Vista Carrito
-    public void initCarrito() throws IOException {
+    public void initCarrito(Customer customer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.CARRITO_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         ViewCarritoController controller = fxmlLoader.getController();
         controller.setDialogStage(mainStage);
         controller.setStage(stage);
+        controller.setCustomer(customer);
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setTitle("Cesta de Productos");

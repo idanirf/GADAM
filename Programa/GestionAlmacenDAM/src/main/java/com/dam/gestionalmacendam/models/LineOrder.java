@@ -17,23 +17,8 @@ public class LineOrder {
     private DoubleProperty totalPrice;
     private StringProperty belongsOrder;
 
-    public void setLoad(int load) {
-        this.load.set(load);
-
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice.set(unitPrice);
-        this.totalPrice= new SimpleDoubleProperty((this.load.intValue())*(this.unitPrice.doubleValue()));
-
-    }
-
-    public DoubleProperty totalPriceProperty() {
-        return totalPrice;
-    }
-
     public LineOrder(String OLIC, String article, Integer load,
-                     Double unitPrice,  String belongsOrder) {
+                     Double unitPrice, String belongsOrder) {
         this.OLIC = OLIC;
         this.article = new SimpleStringProperty(article);
         this.load = new SimpleIntegerProperty(load);
@@ -42,13 +27,28 @@ public class LineOrder {
         this.belongsOrder = new SimpleStringProperty(belongsOrder);
     }
 
-    public LineOrder( String article, Integer load,
-                      Double unitPrice,  String belongsOrder) {
+    public LineOrder(String article, Integer load,
+                     Double unitPrice, String belongsOrder) {
         this.article = new SimpleStringProperty(article);
         this.load = new SimpleIntegerProperty(load);
         this.unitPrice = new SimpleDoubleProperty(unitPrice);
         this.totalPrice = new SimpleDoubleProperty(unitPrice * load);
         this.belongsOrder = new SimpleStringProperty(belongsOrder);
+    }
+
+    public void setLoad(int load) {
+        this.load.set(load);
+
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice.set(unitPrice);
+        this.totalPrice = new SimpleDoubleProperty((this.load.intValue()) * (this.unitPrice.doubleValue()));
+
+    }
+
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
     }
 
     @Override
