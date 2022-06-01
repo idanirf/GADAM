@@ -39,6 +39,7 @@ public class ResumenController {
         this.producto = producto;
         System.out.println(producto);
         setDataInfo();
+        productActive.setDisable(true);
 
     }
 

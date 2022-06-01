@@ -1,6 +1,7 @@
 package com.dam.gestionalmacendam.controllers.viewMainCustomer;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.*;
 import com.dam.gestionalmacendam.repositories.Articles.ArticleRepository;
 import com.dam.gestionalmacendam.repositories.LineOrder.LineOrderRepository;
@@ -24,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,10 @@ public class ViewCarritoController {
     private final OrderRepository orderRepository = OrderRepository.getInstance(DataBaseManager.getInstance());
     private final LineOrderRepository lineOrderRepository = LineOrderRepository.getInstance(DataBaseManager.getInstance());
     private final ArticleRepository articleRepository = ArticleRepository.getInstance(DataBaseManager.getInstance());
+    @FXML
+    private RadioButton radioPaypal;
+    @FXML
+    private RadioButton radioCard;
     @FXML
     private Button btnRealizarPedido;
     private Customer customer;
@@ -56,10 +62,15 @@ public class ViewCarritoController {
         if (listProducts.getItems().size()==0){
             btnRealizarPedido.setDisable(true);
         }
+        ToggleGroup group = new ToggleGroup();
+        radioCard.setSelected(true);
+        radioCard.setToggleGroup(group);
+        radioPaypal.setToggleGroup(group);
     }
 
     public void onPedidoAction(ActionEvent actionEvent) {
-        Order order = new Order(customer.getName(), Pay.CARD);
+        var pay=setMethodPay();
+        Order order = new Order(customer.getName(), pay);
         var list = carritoRepository.getItems();
         List<LineOrder> lista = new ArrayList<>();
         int cost = 0;
@@ -87,6 +98,14 @@ public class ViewCarritoController {
 
         }
         
+    }
+
+    private Pay setMethodPay() {
+       if (radioPaypal.isSelected()){
+           return Pay.PAYPAL;
+       }else{
+           return Pay.CARD;
+       }
     }
 
     private void addItem(Order order, ObservableList<CarritoItem> list, List<LineOrder> lista, int i) {

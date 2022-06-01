@@ -114,11 +114,11 @@ public class ArticleViewController {
 
     @FXML
     private void findByName() throws SQLException {
-        String name = busqueda.getText();
+        String name = busqueda.getText().toLowerCase();
         if (name.isEmpty()) {
             loadProd();
         } else {
-            productosTable.setItems(productosrepository.findAll().filtered(x -> x.getArticle().get().contains(name) || x.getPIC().contains(name)));
+            productosTable.setItems(productosrepository.findAll().filtered(x -> x.getArticle().get().toLowerCase().contains(name) || x.getPIC().contains(name)));
         }
         productosTable.refresh();
     }

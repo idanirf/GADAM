@@ -15,7 +15,7 @@ import com.dam.gestionalmacendam.controllers.viewCustomer.NewCustomerController;
 import com.dam.gestionalmacendam.controllers.viewEmployee.EditarEmployeeController;
 import com.dam.gestionalmacendam.controllers.viewEmployee.NewEmployeeController;
 import com.dam.gestionalmacendam.controllers.viewMainCustomer.*;
-import com.dam.gestionalmacendam.controllers.viewOrder.LineaPedidoController;
+import com.dam.gestionalmacendam.controllers.viewOrder.LineaOrderController;
 import com.dam.gestionalmacendam.controllers.viewReception.NewRecepcionController;
 import com.dam.gestionalmacendam.controllers.viewReception.ResumenReceptionController;
 import com.dam.gestionalmacendam.controllers.viewSupplier.EditarSuplierController;
@@ -476,13 +476,12 @@ public class SceneManager {
             init.show();
         });
     }
-
-    public void initLineOrderView(Order order) throws IOException {
+    public void initLineOrderView(Order order) throws IOException, SQLException {
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        LineaPedidoController controller = fxmlLoader.getController();
+        LineaOrderController controller = fxmlLoader.getController();
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -557,7 +556,6 @@ public class SceneManager {
         });
 
     }
-
     /**
      * Método que muestra un alert de confirmación cuando se pulsa en la X de salir.
      *
