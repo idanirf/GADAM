@@ -1,0 +1,847 @@
+{
+  "productos": [
+    {
+      "pic": "a15fc365-e5a3-4856-b472-f318c6b5c1b6",
+      "article": "Silla Jardin",
+      "description": "Silla de exterior para jardín o terraza modelo Costa Rica fabricados en aluminio y ratán sintético trenzado de color marrón chocolate. Incorpora apoya brazos para favorecer la comodidad en las largas jornadas al exterior y un respaldo especialmente alargado. Su estructura interior está formada por ligeros y resistentes tubos de aluminio recubiertos por una pintura protectora específica para soportar agentes externos como la humedad. Incorpora cojín desenfundable de poliéster de color beige para mayor comodidad y descanso.",
+      "location": "sala a",
+      "price": 159.0,
+      "stock": 37,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/img/productos/producto1.png"
+    },
+    {
+      "pic": "bb2e0e63-f416-48bf-b9bd-41c52236c245",
+      "article": "Prueba2",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 0,
+      "isActive": false,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "e927de13-3771-4f33-bc79-f565947c93a5",
+      "article": "Prueba3",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 0,
+      "isActive": false,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "f0da01b2-e693-4926-9b0a-7e7fb8a3bc51",
+      "article": "Prueba4",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 0,
+      "isActive": false,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "9c9ec524-d061-405b-94a8-73d53421ab41",
+      "article": "Prueba5",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "eeb6817e-9c80-4bbb-b793-5643ab14459a",
+      "article": "Prueba6",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 4,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "41bc4c63-f5e7-479e-8e39-11f503988e63",
+      "article": "Prueba7",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "153be2d4-ba39-4379-be6c-bd690cc84b73",
+      "article": "Prueba8",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "70f4bb82-d814-4b8c-8f51-c79b69ee39c0",
+      "article": "Prueba9",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "fbbfe59e-f135-4a03-84ff-baa424eb979c",
+      "article": "Prueba10",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "5acd9cd6-82d4-47df-8659-9a1e641c3daa",
+      "article": "Prueba11",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "dfeac34d-b938-4a84-b6f2-85e1866d7be0",
+      "article": "Prueba12",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 4,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "9a189b09-d769-41d2-9cbe-a7dd9c8d0b4e",
+      "article": "Prueba13",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "cb3d9966-ac8c-4e95-b8fc-087aaf4c2847",
+      "article": "Prueba14",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "e678b876-1c79-4362-9f8b-c14a1ecd3ba2",
+      "article": "Prueba15",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "ec0a1348-989d-4aa9-8d9c-17b988192a5a",
+      "article": "Prueba16",
+      "description": "grande",
+      "location": "sala a",
+      "price": 35.5,
+      "stock": 5,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "08ddd581-93c3-4e61-a0df-5efd17656353",
+      "article": "Prueba17",
+      "description": "Es pequeño",
+      "location": "sala c",
+      "price": 12.0,
+      "stock": 4,
+      "isActive": true,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    },
+    {
+      "pic": "ff56b2af-b1bc-432f-b343-836009fcb7c3",
+      "article": "Prueba18",
+      "description": "es grande",
+      "location": "sala c",
+      "price": 10.0,
+      "stock": 0,
+      "isActive": false,
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/article_default.png"
+    }
+  ],
+  "customers": [
+    {
+      "cic": "7bc16f60-77cc-4366-b0a5-a07ec75b246e",
+      "name": "Dani",
+      "surname": "Carmona Rodriguez",
+      "cif": "50583159H",
+      "direction": "Calle del aligustre",
+      "nickname": "Kassius10",
+      "password": "1234",
+      "telephoneNumber": "634651697",
+      "email": "danii@gmail.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "20::may::2022 14::29::20",
+      "isActive": true
+    },
+    {
+      "cic": "51ce38b6-190a-40c4-ae36-0a6f24cafa56",
+      "name": "Nuria",
+      "surname": "Gonzalez Margallo",
+      "cif": "55445645L",
+      "direction": "calle del aligustre",
+      "nickname": "EneGe9",
+      "password": "1234",
+      "telephoneNumber": "687958878",
+      "email": "nuria@gmail.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "21::may::2022 11::31::11",
+      "isActive": false
+    },
+    {
+      "cic": "55606cbb-bfa7-4744-9591-071944d08375",
+      "name": "Prueba",
+      "surname": "Prueba Nueva",
+      "cif": "50583159H",
+      "direction": "calle de prueba",
+      "nickname": "Papasito",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "d@d.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "22::may::2022 10::40::23",
+      "isActive": false
+    },
+    {
+      "cic": "86397cc1-12f9-4eb6-8359-a3d9f2ed81fd",
+      "name": "Prueba",
+      "surname": "Prueba Nueva",
+      "cif": "50583159H",
+      "direction": "ca",
+      "nickname": "ElPepe",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "d@d.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "22::may::2022 10::42::12",
+      "isActive": true
+    },
+    {
+      "cic": "c6db875f-074a-409c-843b-0c876eb6286a",
+      "name": "Jeremy",
+      "surname": "Ramos Segura",
+      "cif": "50583159H",
+      "direction": "calle nueva",
+      "nickname": "OneShotMan",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "jeremy@prueba.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "22::may::2022 13::02::32",
+      "isActive": true
+    },
+    {
+      "cic": "537a1ef8-3453-4411-b7d7-58a993aa77e1",
+      "name": "Aurita",
+      "surname": "Carmona Rodriguez",
+      "cif": "12345678A",
+      "direction": "calle del aligustre",
+      "nickname": "CAT",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "aurita@gmail.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::04::42",
+      "isActive": true
+    },
+    {
+      "cic": "5e34a811-7292-4f64-8fe4-88405318244f",
+      "name": "Pepe",
+      "surname": "Grillo Montera",
+      "cif": "12345678B",
+      "direction": "calle nueva",
+      "nickname": "pepito",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "pepe@gmail.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::08::38",
+      "isActive": true
+    },
+    {
+      "cic": "41feaa11-14af-43d2-add2-cc1f64420703",
+      "name": "Nuevo",
+      "surname": "Nuevo Nuevo",
+      "cif": "12345678A",
+      "direction": "nuevo",
+      "nickname": "Nuevo",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "nuevo@nuevo.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::13::41",
+      "isActive": false
+    },
+    {
+      "cic": "c8e94887-d947-4941-9c07-982effad1ec7",
+      "name": "Pepe",
+      "surname": "P P",
+      "cif": "12345678A",
+      "direction": "pep",
+      "nickname": "p",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "pepe@pepe.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::22::17",
+      "isActive": true
+    },
+    {
+      "cic": "8cfa67ad-fa3a-457c-91e9-c6d5730b51c5",
+      "name": "Pepe",
+      "surname": "P P",
+      "cif": "12324578A",
+      "direction": "p",
+      "nickname": "P",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "p@p.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::23::41",
+      "isActive": false
+    },
+    {
+      "cic": "5d7937b6-bff2-45a7-8f35-54810f67a392",
+      "name": "Pepep",
+      "surname": "P P",
+      "cif": "12345678A",
+      "direction": "P",
+      "nickname": "P",
+      "password": "Informatica-1",
+      "telephoneNumber": "666666666",
+      "email": "p@p.com",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user_default.png",
+      "createdAt": "30::may::2022 21::25::05",
+      "isActive": false
+    }
+  ],
+  "employees": [
+    {
+      "eic": "b3e3b0f9-b7be-402f-ae32-13d6e7bae0bc",
+      "name": "Daniel",
+      "surname": "Rodriguez Fernandez",
+      "nif": "54034501A",
+      "email": "drodriguez@gadam.com",
+      "photo": "C:/Users/danie/Desktop/GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "drodriguez",
+      "password": "Informatica-1",
+      "isManager": true,
+      "createdAt": "21::may::2022 09::52::40",
+      "isActive": true
+    },
+    {
+      "eic": "17f21f62-02fd-4c23-9d6d-bfd30243eb74",
+      "name": "Azahara",
+      "surname": "Blanco Rodríguez",
+      "nif": "56709812W",
+      "email": "ablanco@gadam.com",
+      "photo": "C:/Users/danie/Desktop/GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "ablanco",
+      "password": "Informatica-1",
+      "isManager": true,
+      "createdAt": "31::may::2022 10::24::04",
+      "isActive": true
+    },
+    {
+      "eic": "3655534f-eb4e-4382-b624-0ccaea0485ac",
+      "name": "Jeremy",
+      "surname": "Ramos Segura",
+      "nif": "50947843D",
+      "email": "jramos@gadam.com",
+      "photo": "C:/Users/danie/Desktop/GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "jramos",
+      "password": "Informatica-1",
+      "isManager": true,
+      "createdAt": "31::may::2022 10::24::52",
+      "isActive": true
+    },
+    {
+      "eic": "e949fcaf-a1f9-4f98-9137-f9507b7173cf",
+      "name": "Daniel",
+      "surname": "Carmona Rodríguez",
+      "nif": "57832561S",
+      "email": "dcarmona@gadam.com",
+      "photo": "C:/Users/danie/Desktop/GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "dcarmona",
+      "password": "Informatica-1",
+      "isManager": true,
+      "createdAt": "31::may::2022 10::25::47",
+      "isActive": true
+    },
+    {
+      "eic": "ca18e271-5a6b-4183-9a18-11b061b63204",
+      "name": "Jan",
+      "surname": "Ramos Martinez",
+      "nif": "50871452W",
+      "email": "janramos@gadam.com",
+      "photo": "C:/Users/danie/Desktop/GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "janramos",
+      "password": "Informatica-1",
+      "isManager": false,
+      "createdAt": "31::may::2022 10::26::41",
+      "isActive": true
+    },
+    {
+      "eic": "7a59c4c3-4f87-457c-a3cf-db5ce52c18c9",
+      "name": "Daniel",
+      "surname": "Rodriguez Perez",
+      "nif": "56498747H",
+      "email": "prueba2@gmail.es",
+      "photo": "C:/Users/danii/Desktop/REPOSITORY_GADAM/Programa/GestionAlmacenDAM/target/classes/com/dam/gestionalmacendam/images/user.png",
+      "nickName": "Daniel",
+      "password": "Informatica-1",
+      "isManager": false,
+      "createdAt": "31::may::2022 23::47::39",
+      "isActive": true
+    }
+  ],
+  "lineOrders": [
+    {
+      "olic": "d97bea00-5072-46c9-85bf-248f7e1def96",
+      "article": "Prueba2",
+      "load": 4,
+      "unitPrice": 10.0,
+      "totalPrice": 40.0,
+      "belongsOrder": "f3bb2b8c-8019-46ad-b2f0-0087bb72df53"
+    },
+    {
+      "olic": "ca9217d8-7115-41d3-b346-e34b42e5cb2a",
+      "article": "Silla Jardin",
+      "load": 2,
+      "unitPrice": 24.25,
+      "totalPrice": 48.5,
+      "belongsOrder": "f3bb2b8c-8019-46ad-b2f0-0087bb72df53"
+    },
+    {
+      "olic": "99d13a01-b3ce-44c7-819c-bc5e8d1a1ca9",
+      "article": "Prueba3",
+      "load": 5,
+      "unitPrice": 15.0,
+      "totalPrice": 75.0,
+      "belongsOrder": "d1049496-b069-48b0-ae50-a33825baa8ca"
+    },
+    {
+      "olic": "009bc689-e80c-4936-a101-18b3807cb8b8",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "a748d06f-de97-4921-bb65-64b030e2735f"
+    },
+    {
+      "olic": "52c79c23-061c-4177-bc34-f60d1898c8f7",
+      "article": "Prueba3",
+      "load": 2,
+      "unitPrice": 35.5,
+      "totalPrice": 71.0,
+      "belongsOrder": "a748d06f-de97-4921-bb65-64b030e2735f"
+    },
+    {
+      "olic": "b894f785-fc67-4095-b0a2-1209eaa1690a",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "3a1a51ff-e84d-4665-9f07-36c5de0fb787"
+    },
+    {
+      "olic": "9c88b3d7-0f25-4d00-bac3-62178109d240",
+      "article": "Prueba3",
+      "load": 2,
+      "unitPrice": 35.5,
+      "totalPrice": 71.0,
+      "belongsOrder": "3a1a51ff-e84d-4665-9f07-36c5de0fb787"
+    },
+    {
+      "olic": "5d6f0a86-ae3b-4146-8d8f-cb25055cea32",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "8472dcf6-ccb6-4912-9d68-8fabd49d8afd"
+    },
+    {
+      "olic": "cbe5acd8-b211-4520-a15a-684b831addbb",
+      "article": "Prueba3",
+      "load": 2,
+      "unitPrice": 35.5,
+      "totalPrice": 71.0,
+      "belongsOrder": "8472dcf6-ccb6-4912-9d68-8fabd49d8afd"
+    },
+    {
+      "olic": "d49fbddf-480a-444d-8fcf-6a3041d8dd11",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "3839fad4-9aeb-4674-9815-4aa81cb5e8a1"
+    },
+    {
+      "olic": "f3e4c1a7-126c-4de3-8bda-0d9ca5c54353",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "a4ccf94a-70dd-440d-a1c8-d570818bc049"
+    },
+    {
+      "olic": "97e1ddbd-864d-456e-bc8d-9ac26076e27b",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "6eeaab1f-d078-4143-acff-45f413d96a42"
+    },
+    {
+      "olic": "debda3f9-1992-4fb6-8986-9c209dd8c302",
+      "article": "Prueba4",
+      "load": 1,
+      "unitPrice": 35.5,
+      "totalPrice": 35.5,
+      "belongsOrder": "92845ac2-9117-42d7-b878-2aa7e8fe5f24"
+    },
+    {
+      "olic": "4cf5e1b9-40db-4db9-86c6-538b78d5848d",
+      "article": "Silla Jardin",
+      "load": 2,
+      "unitPrice": 159.0,
+      "totalPrice": 318.0,
+      "belongsOrder": "3e52f9d6-2e02-4944-a79d-43fa6a05f2c6"
+    },
+    {
+      "olic": "cad1b0e3-abb8-4a6a-95f3-de020826f403",
+      "article": "Prueba4",
+      "load": 4,
+      "unitPrice": 35.5,
+      "totalPrice": 142.0,
+      "belongsOrder": "3e52f9d6-2e02-4944-a79d-43fa6a05f2c6"
+    },
+    {
+      "olic": "dbca4c1e-440f-4305-9e6c-897c6dafd465",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "3a1ccb98-fb27-48b3-8e4f-2fa86e8c4356"
+    },
+    {
+      "olic": "79474489-c0f3-4127-9430-7220778c774d",
+      "article": "Silla Jardin",
+      "load": 2,
+      "unitPrice": 159.0,
+      "totalPrice": 318.0,
+      "belongsOrder": "320b55a3-a1d4-4cd8-afdb-d7a98d185c0e"
+    },
+    {
+      "olic": "1dce0f7e-a1c9-45ac-b094-81094411dce9",
+      "article": "Silla Jardin",
+      "load": 2,
+      "unitPrice": 159.0,
+      "totalPrice": 318.0,
+      "belongsOrder": "b9406108-52d7-430d-896e-15bb3b50aed2"
+    },
+    {
+      "olic": "1d4e31e2-a1bf-4a73-815e-1dcda7db4f49",
+      "article": "Prueba6",
+      "load": 1,
+      "unitPrice": 35.5,
+      "totalPrice": 35.5,
+      "belongsOrder": "b9406108-52d7-430d-896e-15bb3b50aed2"
+    },
+    {
+      "olic": "cdb030ea-e75d-4751-b8d9-cd4ae8ecb39a",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "6824fcdc-e546-4ccf-84fe-81474e9397bf"
+    },
+    {
+      "olic": "6e001516-42ef-494f-ab04-fdad77f8fddf",
+      "article": "Silla Jardin",
+      "load": 1,
+      "unitPrice": 159.0,
+      "totalPrice": 159.0,
+      "belongsOrder": "b64be229-c1c3-4608-a467-29fd4bb52b2c"
+    },
+    {
+      "olic": "c6bb963d-44d2-4fa8-ac5b-fd08964f334a",
+      "article": "Prueba12",
+      "load": 1,
+      "unitPrice": 35.5,
+      "totalPrice": 35.5,
+      "belongsOrder": "612c48de-1d1e-4d95-9105-c173a835eb19"
+    }
+  ],
+  "lineReceptions": [
+    {
+      "rlic": "15359603-58bc-401c-9889-ab5746f1cfb3",
+      "articlePIC": "Silla",
+      "load": 20,
+      "unitPrice": 10.85,
+      "totalPrice": 217.0,
+      "belongsRecepcion": "fbbe7bda-7883-4f88-8613-1ff00e11ff0a"
+    },
+    {
+      "rlic": "caebb47b-ba9f-48cf-88ed-9e5c6c8bf56b",
+      "articlePIC": "Lámparas",
+      "load": 50,
+      "unitPrice": 8.75,
+      "totalPrice": 437.5,
+      "belongsRecepcion": "fbbe7bda-7883-4f88-8613-1ff00e11ff0a"
+    },
+    {
+      "rlic": "851e5283-1a51-4945-b67b-c02f65c943b1",
+      "articlePIC": "Sillas",
+      "load": 4,
+      "unitPrice": 10.25,
+      "totalPrice": 41.0,
+      "belongsRecepcion": "248e4c61-a770-4219-a141-263e06fb6b91"
+    },
+    {
+      "rlic": "f4d3f49b-7538-4c13-b122-9a570d802721",
+      "articlePIC": "Silla",
+      "load": 10,
+      "unitPrice": 100.0,
+      "totalPrice": 1000.0,
+      "belongsRecepcion": "632f360e-e0f4-430c-81ed-67c0090c13be"
+    },
+    {
+      "rlic": "93cae3c3-b025-451d-835e-0a9f52eacc91",
+      "articlePIC": "Pollo",
+      "load": 10,
+      "unitPrice": 7.58,
+      "totalPrice": 75.8,
+      "belongsRecepcion": "1b537108-90a9-4796-808b-adf956182577"
+    }
+  ],
+  "orders": [
+    {
+      "oic": "f3bb2b8c-8019-46ad-b2f0-0087bb72df53",
+      "customer": "Dani",
+      "price": 20.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "812c695c-4eac-4a8b-a148-f9382fbf225f",
+      "customer": "Jeremy",
+      "price": 60.0,
+      "methodPay": "PAYPAL"
+    },
+    {
+      "oic": "d1049496-b069-48b0-ae50-a33825baa8ca",
+      "customer": "Dani",
+      "price": 40.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "a748d06f-de97-4921-bb65-64b030e2735f",
+      "customer": "Dani",
+      "price": 230.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "3a1a51ff-e84d-4665-9f07-36c5de0fb787",
+      "customer": "Dani",
+      "price": 230.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "8472dcf6-ccb6-4912-9d68-8fabd49d8afd",
+      "customer": "Dani",
+      "price": 230.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "3839fad4-9aeb-4674-9815-4aa81cb5e8a1",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "a4ccf94a-70dd-440d-a1c8-d570818bc049",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "6eeaab1f-d078-4143-acff-45f413d96a42",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "92845ac2-9117-42d7-b878-2aa7e8fe5f24",
+      "customer": "Dani",
+      "price": 35.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "c140cc3d-0c02-472d-b60d-140e6a589b0b",
+      "customer": "Dani",
+      "price": 0.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "3e52f9d6-2e02-4944-a79d-43fa6a05f2c6",
+      "customer": "Dani",
+      "price": 460.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "3a1ccb98-fb27-48b3-8e4f-2fa86e8c4356",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "320b55a3-a1d4-4cd8-afdb-d7a98d185c0e",
+      "customer": "Dani",
+      "price": 318.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "b9406108-52d7-430d-896e-15bb3b50aed2",
+      "customer": "Dani",
+      "price": 353.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "6824fcdc-e546-4ccf-84fe-81474e9397bf",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "b64be229-c1c3-4608-a467-29fd4bb52b2c",
+      "customer": "Dani",
+      "price": 159.0,
+      "methodPay": "CARD"
+    },
+    {
+      "oic": "612c48de-1d1e-4d95-9105-c173a835eb19",
+      "customer": "Dani",
+      "price": 35.0,
+      "methodPay": "PAYPAL"
+    }
+  ],
+  "receptions": [
+    {
+      "ric": "fbbe7bda-7883-4f88-8613-1ff00e11ff0a",
+      "supplierName": "Ikea",
+      "carrier": "Francisco",
+      "cost": 40.0
+    },
+    {
+      "ric": "21030b99-d148-4a5e-9fce-cf20e6ea633e",
+      "supplierName": "MasMuebles",
+      "carrier": "Lorena",
+      "cost": 82.35
+    },
+    {
+      "ric": "248e4c61-a770-4219-a141-263e06fb6b91",
+      "supplierName": "Ikea",
+      "carrier": "Pepe",
+      "cost": 10.0
+    },
+    {
+      "ric": "632f360e-e0f4-430c-81ed-67c0090c13be",
+      "supplierName": "Ikea",
+      "carrier": "Pepe",
+      "cost": 10.0
+    },
+    {
+      "ric": "1b537108-90a9-4796-808b-adf956182577",
+      "supplierName": "KFC",
+      "carrier": "Dani",
+      "cost": 40.0
+    }
+  ],
+  "suppliers": [
+    {
+      "sic": "b9e8a68e-f8ac-4d0f-b685-997f894cfedd",
+      "nameSupplier": "MESATABLA S.L.",
+      "direction": "Calle Valencia N12",
+      "telephoneNumber": "678908765",
+      "email": "mesatabalavalencia@mesatabla.com"
+    },
+    {
+      "sic": "688d7882-8f79-43a7-888d-207bf838cbf2",
+      "nameSupplier": "SILLATEA",
+      "direction": "Calle Industria 1 Barcelona",
+      "telephoneNumber": "678098241",
+      "email": "info@sillatea.com"
+    },
+    {
+      "sic": "d0742778-ce4c-4c82-ba7b-2599aaabe970",
+      "nameSupplier": "LUSANMOVEL",
+      "direction": "CALLE BAZA 19-21 -ALBOLOTE, Albolote - Granada",
+      "telephoneNumber": "615817909",
+      "email": "info@lusanmovel.com"
+    },
+    {
+      "sic": "44a1f539-75d3-4a0e-bd9e-d6f503cb578d",
+      "nameSupplier": "Global Home",
+      "direction": " Calle de la rosa 4, Griñón - Madrid",
+      "telephoneNumber": "600555024",
+      "email": "info@globalhome.com"
+    },
+    {
+      "sic": "8837d131-e109-4de9-856e-60ce40881e98",
+      "nameSupplier": "El Taller de la Espuma",
+      "direction": "Avenida Doctor Mendiguchia Carriche, Leganés - Madrid",
+      "telephoneNumber": "670450222",
+      "email": "info@tallerespuma.com"
+    },
+    {
+      "sic": "6f4008ec-db8b-4774-974e-737d073d7e5d",
+      "nameSupplier": "Steel Vulcano",
+      "direction": "C/Holanda 2 local Nº6, Griñón - Madrid",
+      "telephoneNumber": "665307482",
+      "email": "info@steelvulcano.com"
+    },
+    {
+      "sic": "4003cbce-0938-4c1a-8cc3-d68fdd15ea9e",
+      "nameSupplier": "IberoDepot ",
+      "direction": "Mas Colomé, 5, Franqueses del Vallès (Les) - Barcelona",
+      "telephoneNumber": "644680743",
+      "email": "info@iberodepot.com"
+    },
+    {
+      "sic": "81e8c268-e5de-475b-be5d-afde97accea2",
+      "nameSupplier": "SillasMesas.es",
+      "direction": " C/ Río Darro, 24, Mijas - Málaga",
+      "telephoneNumber": "608362319",
+      "email": "info@sillasmesas.es"
+    },
+    {
+      "sic": "829ac72f-821d-4f6b-b919-1ebcd1ba6aa3",
+      "nameSupplier": "Ikea",
+      "direction": "Prueba",
+      "telephoneNumber": "666666666",
+      "email": "prueba@prueba.es"
+    }
+  ]
+}
