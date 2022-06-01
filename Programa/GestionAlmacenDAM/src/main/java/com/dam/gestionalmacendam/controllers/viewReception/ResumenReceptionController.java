@@ -34,8 +34,6 @@ public class ResumenReceptionController {
     TextField suplierName;
     @FXML
     TextField carrier;
-    @FXML
-    TextField cost;
 
     private Reception reception;
 
@@ -57,17 +55,13 @@ public class ResumenReceptionController {
     }
 
     private void loadLineReception() throws SQLException {
-        recepcionView.setItems(repo.findAll().filtered(z -> z.getBelongsRecepcion().get().contains(reception.getRIC())));
+        recepcionView.setItems(repo.findAll().filtered(z -> z.getBelongsRecepcion().get().equals(reception.getRIC())));
     }
 
 
     private void setDataInfo() {
         suplierName.setText(reception.getSupplierName().get());
         carrier.setText(reception.getCarrier().get());
-        cost.setText(reception.getCost().asObject().get().toString());
-
 
     }
-
-
 }

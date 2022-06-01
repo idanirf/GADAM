@@ -35,7 +35,7 @@ public class LineOrderRepository implements LineOrderInterface<LineOrder, String
         dataBaseManager.open();
         String query = "select * from LineOrder";
         ResultSet result = dataBaseManager.select(query).orElseThrow(SQLException::new);
-
+        repository.clear();
         while (result.next()) {
             String OLIC = (result.getString("OLIC"));
             StringProperty articlePIC = new SimpleStringProperty(result.getString("article"));

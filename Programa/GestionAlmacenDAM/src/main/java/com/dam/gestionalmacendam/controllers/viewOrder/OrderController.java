@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -38,29 +39,6 @@ public class OrderController {
 
     @FXML
     void onButonVerDetalle(MouseEvent event) throws SQLException {
-
-        String s = textAreaBuscarPorOic.getText();
-        var order = repository.findAll().stream().filter(x -> x.getOIC().contains(s)).findFirst();
-
-        if (order.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Pedido no selecionado");
-            alert.setContentText("No ha selecionado ningun Pedido para ver su detalle");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                alert.close();
-            } else {
-                alert.close();
-            }
-        } else {
-            try {
-                SceneManager.get().initLineOrderView(order.get());
-            } catch (Exception e) {
-                System.out.println("no se ha podido cargar el line order view");
-            }
-        }
-
-
     }
 
     @FXML
@@ -68,6 +46,7 @@ public class OrderController {
 
         try {
             loadData();
+            tablaPedidos.refresh();
         } catch (SQLException e) {
             System.out.println("No se ha podido cargar la lista de personas");
         }
@@ -77,41 +56,26 @@ public class OrderController {
         columnaMetodoDePago.setCellValueFactory(cellData -> cellData.getValue().getMethodPay());
         columnaPrecio.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
 
-        tablaPedidos.getSelectionModel().selectFirst();
-
     }
 
     @FXML
     private void loadData() throws SQLException {
-        System.out.println("Cargando datos...");
-        if (repository.findAll().size() == 0) {
-            System.out.println("Repositorio vacio a 0");
-
-        } else {
-            System.out.println("Repositorio NO vacio");
-            System.out.println(repository.findAll());
-        }
-        tablaPedidos.setItems(repository.findAll());
-
+       tablaPedidos.setItems(repository.findAll());
     }
 
-    public void selecionarAcion(MouseEvent mouseEvent) {
+    public void selecionarAcion() throws SQLException, IOException {
         Order o = tablaPedidos.getSelectionModel().getSelectedItem();
-        textAreaBuscarPorOic.setText(o.getOIC());
-    }
-
-
-    public void vertodos(ActionEvent actionEvent) throws SQLException {
-        tablaPedidos.setItems(repository.findAll());
+        SceneManager.get().initLineOrderView(o);
     }
 
     public void findByName(ActionEvent actionEvent) throws SQLException {
-        String name = textAreaBuscarPorOic.getText();
+        String name = textAreaBuscarPorOic.getText().trim().toLowerCase();
         if (name.isEmpty()) {
             loadData();
         } else {
-            tablaPedidos.setItems(repository.findAll().filtered(x -> x.getCustomer().get()
-                    .toLowerCase().contains(name) || x.getOIC().toUpperCase().contains(name)));
+            tablaPedidos.setItems(repository.findAll()
+                    .filtered(x -> x.getCustomer().get()
+                    .toLowerCase().contains(name) || x.getOIC().contains(name)));
         }
         tablaPedidos.refresh();
     }

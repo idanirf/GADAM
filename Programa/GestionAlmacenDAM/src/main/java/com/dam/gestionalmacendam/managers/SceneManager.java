@@ -284,6 +284,7 @@ public class SceneManager {
         init.close();
         stage.setTitle("VISTA PRODUCTOS MANAGER-EMPLEADO");
         stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
@@ -297,6 +298,8 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Resumen_Producto_GADAM_ " + producto.getArticle().get());
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.initOwner(mainStage);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -312,6 +315,7 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load(), 561, 507);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.initOwner(mainStage);
         stage.setTitle(editarModo ? "Editar Producto" : "Crear Nuevo Producto");
         stage.setResizable(false);
@@ -331,7 +335,8 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         init.close();
-        stage.setTitle("Recepciones");
+        stage.setTitle("Recepciones_GADAM");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
@@ -346,7 +351,9 @@ public class SceneManager {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
+        stage.setTitle("Nueva_Recepcion_GADAM");
         NewRecepcionController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         controller.setReception(recepcion, lineReception);
@@ -361,7 +368,9 @@ public class SceneManager {
         Stage stage = new Stage();
         ResumenReceptionController controller = fxmlLoader.getController();
         controller.setRecepcion(x);
+        stage.setTitle("Resume_Recepcion_GADAM " + x.getSupplierName().get());
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
@@ -375,7 +384,7 @@ public class SceneManager {
         Stage stage = new Stage();
         init.close();
         stage.initModality(Modality.APPLICATION_MODAL); //TODO ESTO EVITA Q LA VENTANA DE DETRAS NO SE PUEDA TOCAR
-        stage.setTitle("Empleados");
+        stage.setTitle("Empleados_GADAM");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
@@ -392,7 +401,7 @@ public class SceneManager {
         NewEmployeeController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Empleados");
+        stage.setTitle("Nuevo_Empleado_GADAM");
         stage.setResizable(false);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
@@ -406,6 +415,7 @@ public class SceneManager {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.MODIFY_EMPLOYEE.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        stage.setTitle("Modificar_Empleado_GADAM " + employee.getName());
         EditarEmployeeController controller = fxmlLoader.getController();
         controller.setDialogStage(stage);
         controller.setEmployee(employee);
@@ -426,7 +436,8 @@ public class SceneManager {
         controller.setStage(stage);
         init.close();
         stage.setResizable(false);
-        stage.setTitle("Proveedores");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
+        stage.setTitle("Proveedores_GADAM");
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
@@ -442,6 +453,7 @@ public class SceneManager {
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.setTitle("Nuevo Proveedor");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.showAndWait();
 
@@ -457,6 +469,7 @@ public class SceneManager {
         controller.setSupplier(supplier);
         stage.setResizable(false);
         stage.setTitle("Modificar Proveedor");
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -469,19 +482,21 @@ public class SceneManager {
         Stage stage = new Stage();
         init.close();
         stage.setResizable(false);
-        stage.setTitle("Pedidos");
+        stage.setTitle("Pedidos_GADAM");
         stage.setScene(scene);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.show();
         stage.setOnCloseRequest(event -> {
             init.show();
         });
     }
     public void initLineOrderView(Order order) throws IOException, SQLException {
-        Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Views.LINE_ORDER_VIEW.get()));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         LineaOrderController controller = fxmlLoader.getController();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         controller.setOrder(order);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -499,6 +514,7 @@ public class SceneManager {
         init.close();
         stage.setTitle("Consultas Clientes");
         stage.setResizable(false);
+        stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
@@ -517,6 +533,7 @@ public class SceneManager {
         controller.setDialogStage(stage);
         controller.setCustomer(customer);
         stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.getIcons().add(new Image(Resources.get(HelloApplication.class, Properties.APP_ICON)));
         stage.setTitle("Editar - Clientes");
         stage.setScene(scene);

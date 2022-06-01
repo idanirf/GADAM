@@ -74,6 +74,7 @@ public class ViewArticleController {
         viewArticle.setImage(image);
 
         txtNameArticle.setText(article.getArticle().get());
+        txtNameArticle.setWrapText(true);
         txtStock.setText("Stock: " + article.getStock().get());
         txtPrice.setText("Precio: " + article.getPrice().get() + "€");
         txtDescription.setText(article.getDescription().get());

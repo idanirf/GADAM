@@ -12,11 +12,9 @@ public class Properties {
     public static final String APLICACION_LICENCIA = "GADAM GROUP - MIT";
     public static final String APP_ICON = "images/logoMini.png";
     private static final String APP_PATH = System.getProperty("user.dir");
-    public static final String DATOS = APP_PATH + File.separator + "datos";
+    public static final String BACKUP = APP_PATH + File.separator + "backup";
 
-    public static final String BACKUP = DATOS + File.separator + "backup";
     public static final String BACKUP_FILE = BACKUP + File.separator + "copySecurity.json";
-    public static final String IMAGES = DATOS + File.separator + "images";
 
 
 }

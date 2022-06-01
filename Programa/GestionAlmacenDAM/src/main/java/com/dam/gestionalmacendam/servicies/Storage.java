@@ -2,14 +2,19 @@ package com.dam.gestionalmacendam.servicies;
 
 import com.dam.gestionalmacendam.models.Backup;
 import com.dam.gestionalmacendam.utils.Properties;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Storage implements IStorageBackup {
@@ -17,8 +22,8 @@ public class Storage implements IStorageBackup {
 
     private final Path currentRelativePath = Paths.get("");
     private final String ruta = currentRelativePath.toAbsolutePath().toString();
-    private final String dir = ruta + File.separator + "BACKUP";
-    private final String backupFile = dir + File.separator + "backup.json";
+    private final String dir = Properties.BACKUP;
+    private final String backupFile = Properties.BACKUP_FILE;
 
 
     private Storage() {
@@ -33,21 +38,26 @@ public class Storage implements IStorageBackup {
     }
 
     private void makeDirectory() {
-        if (!Files.exists(Paths.get(Properties.DATOS))) {
+        if (!Files.exists(Paths.get(Properties.BACKUP))) {
             try {
-                Files.createDirectory(Paths.get(Properties.DATOS));
-                Files.createDirectory(Paths.get(Properties.BACKUP));
-                Files.createDirectory(Paths.get(Properties.IMAGES));
+                Files.createDirectory(Paths.get(dir));
                 // Imagenes
             } catch (IOException e) {
             }
         }
     }
+    class LocalDateTimeSerializer implements JsonSerializer<LocalDateTime> {
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss");
 
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
+            return new JsonPrimitive(formatter.format(localDateTime));
+        }
+    }
 
     @Override
     public boolean save(Backup backup) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDateTime.class,new LocalDateTimeSerializer()).create();
         boolean result = false;
         PrintWriter f = null;
         try {

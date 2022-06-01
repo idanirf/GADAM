@@ -23,7 +23,7 @@
                         <Menu mnemonicParsing="false" text="Herramientas">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Importar"/>
-                                <MenuItem mnemonicParsing="false" text="Exportar"/>
+                                <MenuItem mnemonicParsing="false" text="Exportar" onAction="#onExportarAction"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Acerca de">

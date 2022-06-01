@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class LineaOrderController {
     private Order o;
-    LineOrderRepository repo =  LineOrderRepository.getInstance(DataBaseManager.getInstance());
+    private final LineOrderRepository repo =  LineOrderRepository.getInstance(DataBaseManager.getInstance());
 
     @FXML
     TableColumn<LineOrder, String> articleCol;
@@ -29,8 +29,6 @@ public class LineaOrderController {
     @FXML
     private TextField order;
     @FXML
-    TextField cost;
-    @FXML
     private Button crearTiketButon;
 
     @FXML
@@ -38,8 +36,8 @@ public class LineaOrderController {
         HtmlPrinterOrder printer = new HtmlPrinterOrder(o);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Tiket Realizado");
-        alert.setContentText("Puede encontrar su tiket en : \n GestionAlmacenDAM\\order\\ \nPedido.uuid_del_pedido\\html");
+        alert.setTitle("Ticket Realizado");
+        alert.setContentText("Puede encontrar su ticket en : \n GestionAlmacenDAM\\order\\ \nPedido."+o.getOIC()+"\\html");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();
@@ -60,10 +58,7 @@ public class LineaOrderController {
     }
 
     private void setDataInfo() {
-
         order.setText(o.getOIC());
-        cost.setText(o.getPrice().getValue().toString());
-
     }
 
     public void setOrder(Order order) throws SQLException {

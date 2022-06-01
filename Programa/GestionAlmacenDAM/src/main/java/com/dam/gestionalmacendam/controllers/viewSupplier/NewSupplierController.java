@@ -1,6 +1,8 @@
 package com.dam.gestionalmacendam.controllers.viewSupplier;
 
 import com.dam.gestionalmacendam.managers.DataBaseManager;
+import com.dam.gestionalmacendam.models.Customer;
+import com.dam.gestionalmacendam.models.Employee;
 import com.dam.gestionalmacendam.models.Supplier;
 import com.dam.gestionalmacendam.repositories.supplier.SupplierRepository;
 import com.dam.gestionalmacendam.utils.Patterns;
@@ -69,6 +71,10 @@ public class NewSupplierController {
         if (areaEmail.getText() == null || areaEmail.getText().isBlank() || !Patterns.patternEmail(areaEmail.getText())) {
             errorMessage += "Debes introducir email correcto. ";
         }
+        if (isExist(areaNombre.getText())) {
+            errorMessage += "Ya existe un proveedor con ese nombre. Pruebe otro.\n";
+            areaNombre.setText("");
+        }
 
         if (errorMessage.length() != 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -100,6 +106,20 @@ public class NewSupplierController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public boolean isExist(String text) {
+        Optional<Supplier> supplier = null;
+        boolean ok = true;
+        try {
+            supplier = repository.findAll().stream().filter(c -> c.getNameSupplier().equals(text)).findFirst();
+            if (supplier.isEmpty()) {
+                ok = false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return ok;
     }
 
 

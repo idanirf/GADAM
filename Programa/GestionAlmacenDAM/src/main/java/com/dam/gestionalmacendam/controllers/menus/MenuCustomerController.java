@@ -101,8 +101,9 @@ public class MenuCustomerController {
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.setStyle("-fx-border-color: transparent gray gray transparent ");
         ImageView iv = new ImageView();
-        iv.setPreserveRatio(true);
+        iv.setPreserveRatio(false);
         iv.setFitHeight(130);
+        iv.setFitWidth(130);
 
         if (!article.getPhoto().isBlank() && Files.exists(Paths.get(article.getPhoto()))) {
             Image image = new Image(new File(article.getPhoto()).toURI().toString());

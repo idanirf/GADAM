@@ -1,5 +1,6 @@
 package com.dam.gestionalmacendam.controllers.menus;
 
+import com.dam.gestionalmacendam.controllers.BackUp.BackUpController;
 import com.dam.gestionalmacendam.managers.SceneManager;
 import com.dam.gestionalmacendam.models.Employee;
 import javafx.application.Platform;
@@ -10,9 +11,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class MenuManagerController {
+    BackUpController backup = new BackUpController();
     private Stage dialogStage;
 
     private Employee employee;
@@ -93,6 +96,9 @@ public class MenuManagerController {
         } catch (IOException e) {
             System.out.println();
         }
+    }
+    public void onExportarAction() throws SQLException {
+        backup.exportarDatos();
     }
 
     public void setStage(Stage stage) {

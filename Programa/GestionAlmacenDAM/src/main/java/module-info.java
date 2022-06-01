@@ -26,4 +26,7 @@ module com.dam.gestionalmacendam {
     opens com.dam.gestionalmacendam.controllers.viewEmployee to javafx.fxml;
     exports com.dam.gestionalmacendam.controllers.viewReception;
     opens com.dam.gestionalmacendam.controllers.viewReception to javafx.fxml;
+    opens com.dam.gestionalmacendam.models to com.google.gson;
+    opens com.dam.gestionalmacendam.controllers.BackUp to com.google.gson;
+    opens com.dam.gestionalmacendam.dto to com.google.gson;
 }
